@@ -18,7 +18,7 @@ export default tseslint.config(
       'react-hooks': reactHooks,
     },
     rules: {
-      semi: ['error', 'never'],
+      semi: ['error', 'always'],
       indent: ['error', 2],
       ...eslintPluginReact.configs.flat.recommended.rules,
       ...reactHooks.configs.recommended.rules,
