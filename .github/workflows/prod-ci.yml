@@ -32,7 +32,7 @@ jobs:
           aws-region: ap-northeast-2
 
       - name: Deploy Static Site to S3
-        run: aws s3 sync ./build s3://www.point-of-views.com --delete
+        run: aws s3 sync --region ap-northeast-2 build s3://www.point-of-views.com --delete
 
       - name: Invalidate CloudFront Cache
         run: aws cloudfront create-invalidation --distribution-id ${{ secrets.DEV_AWS_DISTRIBUTION_ID }}
