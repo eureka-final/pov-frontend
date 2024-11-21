@@ -8,7 +8,7 @@ const config: StorybookConfig = {
       url: 'https://673c240da97b5391fe1cbe2f-ftmbvktbuj.chromatic.com',
     },
   },
-  addons: ['@storybook/addon-onboarding', '@storybook/addon-essentials', '@chromatic-com/storybook', '@storybook/addon-interactions'],
+  addons: ['@storybook/addon-onboarding', '@storybook/addon-essentials', '@chromatic-com/storybook', '@storybook/addon-interactions', 'storybook-dark-mode'],
   framework: {
     name: '@storybook/react-vite',
     options: {},

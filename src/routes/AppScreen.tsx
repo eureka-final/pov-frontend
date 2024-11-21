@@ -10,7 +10,6 @@ const ViewArea = styled.div<{ width?: number; height?: number }>`
 
 const AppScreen = () => {
   const windowSize = useWindowSize();
-
   return (
     <ViewArea width={windowSize.width} height={windowSize.height}>
       <AppPages />
