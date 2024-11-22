@@ -1,4 +1,3 @@
-import { useTheme } from 'pov-design-system';
 import ThemeToggle from '../../components/common/ThemeToggle';
 import styled from '@emotion/styled';
 
@@ -9,10 +8,9 @@ const HeaderWrapper = styled.header`
 `;
 
 function Header() {
-  const { toggleStyle, theme } = useTheme();
   return (
     <HeaderWrapper>
-      <ThemeToggle toggleStyle={toggleStyle} theme={theme} />
+      <ThemeToggle />
     </HeaderWrapper>
   );
 }

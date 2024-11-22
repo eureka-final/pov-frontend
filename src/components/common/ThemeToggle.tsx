@@ -1,11 +1,7 @@
-import React from 'react';
+import { useTheme } from 'pov-design-system';
 
-interface ThemeToggleProps {
-  toggleStyle: () => void; // 부모 컴포넌트에서 전달되는 함수
-  theme: string;
-}
-
-const ThemeToggle: React.FC<ThemeToggleProps> = ({ theme, toggleStyle }) => {
+const ThemeToggle = () => {
+  const { toggleStyle, theme } = useTheme();
   return (
     <>
       <h1>Theme is {theme}</h1>
