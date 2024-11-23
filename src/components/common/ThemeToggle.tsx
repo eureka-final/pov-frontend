@@ -1,10 +1,12 @@
 import { useTheme } from 'pov-design-system';
 
 const ThemeToggle = () => {
-  const { toggleStyle, theme } = useTheme();
+  const { toggleStyle, theme } = useTheme(); // theme: ThemeType, themeName: "light" | "dark"
+  const themeName = theme.light ? 'light' : 'dark';
+
   return (
     <>
-      <h1>Theme is {theme}</h1>
+      <h1>Theme is {themeName}</h1>
       <button
         onClick={toggleStyle}
         style={{
@@ -15,7 +17,7 @@ const ThemeToggle = () => {
           background: '#ccc',
         }}
       >
-        {theme === 'light' ? '🌙 Dark Mode' : '☀️ Light Mode'}
+        {themeName === 'light' ? '🌙 Dark Mode' : '☀️ Light Mode'}
       </button>
     </>
   );
