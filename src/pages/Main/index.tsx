@@ -1,4 +1,4 @@
-import { Button, Badge, Heading, Body, Paragraph } from 'pov-design-system';
+import { Button, Badge, Heading, Body, Paragraph, Checkbox, Icon } from 'pov-design-system';
 import Profile from '../../components/common/Profile';
 const index = () => {
   const user = {
@@ -25,6 +25,10 @@ const index = () => {
       <Badge variant="section" click={true}>
         내 리뷰
       </Badge>
+
+      <Checkbox checked label="로맨스" isChecked />
+      <Checkbox label="로맨스" />
+      <Icon icon="heartfill" />
 
       <Heading size="xxLarge">Heading01</Heading>
       <Heading size="xLarge">Heading02</Heading>
