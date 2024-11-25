@@ -1,5 +1,8 @@
 import { Button, Badge, Heading, Body, Paragraph, Checkbox, Icon } from 'pov-design-system';
+import NavigationTabs from '../../components/common/NavigationTabs';
+
 import Profile from '../../components/common/Profile';
+import ReviewToggle from '../../components/common/ReviewToggle';
 const index = () => {
   const user = {
     name: 'Tom Coleman',
@@ -8,11 +11,16 @@ const index = () => {
 
   return (
     <div>
+      <NavigationTabs />
+
+      <ReviewToggle />
+
       <Button variant="primary" size="small">
         버튼
       </Button>
 
       <Profile user={user} />
+
       <Badge variant="keyword" cancel={false}>
         Bedge
       </Badge>
@@ -28,7 +36,12 @@ const index = () => {
 
       <Checkbox checked label="로맨스" isChecked />
       <Checkbox label="로맨스" />
-      <Icon icon="heartfill" />
+      <div style={{ color: '#1BD27D' }}>
+        <Icon icon="heartfill" /> 156
+      </div>
+      <div style={{ color: '#1BD27D' }}>
+        <Icon icon="heartfill" /> 좋아요
+      </div>
 
       <Heading size="xxLarge">Heading01</Heading>
       <Heading size="xLarge">Heading02</Heading>
