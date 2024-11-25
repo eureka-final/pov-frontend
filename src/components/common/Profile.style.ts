@@ -5,8 +5,6 @@ export const Container = styled.div`
   padding: 0.5em;
   display: flex;
   align-items: center;
-  background-color: ${({ theme }) => theme.backgroundElevated};
-  color: ${({ theme }) => theme.secondary};
 `;
 
 export const Name = styled.span`

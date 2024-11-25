@@ -5,6 +5,7 @@
     { "path": "./tsconfig.node.json" }
   ],
   "compilerOptions": {
+    "moduleResolution": "node",
     "typeRoots": ["./node_modules/@types", "./node_modules/pov-design-system"],
     "types": ["@emotion/react"]
   }
