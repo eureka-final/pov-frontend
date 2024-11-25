@@ -1,4 +1,4 @@
-import { Button, Badge, Heading, Body, Paragraph, Checkbox, Icon } from 'pov-design-system';
+import { Button, Badge, Heading, Body, Paragraph, Checkbox, Icon, ShowMoreBtn } from 'pov-design-system';
 import NavigationTabs from '../../components/common/NavigationTabs';
 
 import Profile from '../../components/common/Profile';
@@ -18,6 +18,8 @@ const index = () => {
       <Button variant="primary" size="small">
         버튼
       </Button>
+
+      <ShowMoreBtn />
 
       <Profile user={user} />
 
