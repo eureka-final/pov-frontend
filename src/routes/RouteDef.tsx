@@ -3,8 +3,9 @@ import Movie from '../pages/Movie';
 import Review from '../pages/Review';
 import ReviewWrite from '../pages/ReviewWrite';
 import ClubReview from '../pages/ClubReview';
+import MovieDetail from '../pages/MovieDetail';
 
-const MainScreens = {
+const MovieScreens = {
   Main: {
     path: '/',
     element: <Main />,
@@ -13,10 +14,20 @@ const MainScreens = {
     path: '/movie',
     element: <Movie />,
   },
+  MovieDetail: {
+    path: '/movie/detail',
+    element: <MovieDetail />,
+  },
+};
+
+const ReviewScreens = {
   Review: {
     path: '/review',
     element: <Review />,
   },
+};
+
+const ClubScreens = {
   ReviewWrite: {
     path: '/write',
     element: <ReviewWrite />,
@@ -28,5 +39,7 @@ const MainScreens = {
 };
 
 export const AppRouteDef = {
-  ...MainScreens,
+  ...MovieScreens,
+  ...ReviewScreens,
+  ...ClubScreens,
 };

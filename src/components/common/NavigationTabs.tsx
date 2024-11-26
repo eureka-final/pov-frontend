@@ -1,29 +1,43 @@
 import { Tab, Tabs, useSelect } from 'pov-design-system';
-import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const NavigationTabs = () => {
-  const { selected, handleSelectClick } = useSelect('home');
+  const location = useLocation();
   const navigate = useNavigate();
-  useEffect(() => {
-    if (selected === 'home') {
-      navigate('/');
-    } else if (selected === 'movie') {
-      navigate('/movie');
-    } else if (selected === 'review') {
-      navigate('/review');
-    } else if (selected === 'clubReview') {
-      navigate('/clubReview');
-    }
-  }, [selected, navigate]);
+  const { selected, handleSelectClick } = useSelect(location.pathname.split('/')[1]);
+
+  const navigations = [
+    {
+      text: '홈',
+      tabId: '',
+    },
+    {
+      text: '영화',
+      tabId: 'movie',
+    },
+    {
+      text: '리뷰',
+      tabId: 'review',
+    },
+    {
+      text: '클럽리뷰',
+      tabId: 'clubReview',
+    },
+  ];
+
+  const handleNavigation = (target: string) => {
+    handleSelectClick(target);
+    navigate(target);
+  };
 
   return (
     <nav>
       <Tabs css={{ width: '100%' }}>
-        <Tab text="홈" variant="outline" tabId="home" changeSelect={handleSelectClick} selectedId={selected} />
-        <Tab text="영화" variant="outline" tabId="movie" changeSelect={handleSelectClick} selectedId={selected} />
-        <Tab text="리뷰" variant="outline" tabId="review" changeSelect={handleSelectClick} selectedId={selected} />
-        <Tab text="클럽리뷰" variant="outline" tabId="clubReview" changeSelect={handleSelectClick} selectedId={selected} />
+        {navigations.map((nav) => (
+          <div>
+            <Tab text={nav.text} variant="outline" tabId={nav.tabId} selectedId={selected} onClick={() => handleNavigation(nav.tabId)}></Tab>
+          </div>
+        ))}
       </Tabs>
     </nav>
   );
