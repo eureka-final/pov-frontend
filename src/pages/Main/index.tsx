@@ -3,6 +3,8 @@ import NavigationTabs from '../../components/common/NavigationTabs';
 
 import Profile from '../../components/common/Profile';
 import ReviewToggle from '../../components/common/ReviewToggle';
+import Padded from '../../components/templates/Padded/Padded';
+
 const index = () => {
   const user = {
     name: 'Tom Coleman',
@@ -10,7 +12,7 @@ const index = () => {
   };
 
   return (
-    <div>
+    <Padded>
       <NavigationTabs />
 
       <ReviewToggle />
@@ -59,7 +61,7 @@ const index = () => {
       <Body size="small">Body04</Body>
 
       <Paragraph>Paragraph</Paragraph>
-    </div>
+    </Padded>
   );
 };
 

@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import AppPages from './AppPages';
 import useWindowSize from '../hooks/useWindowSize';
 import Header from '../components/Header/Header';
