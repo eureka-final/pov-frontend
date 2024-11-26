@@ -1,6 +1,6 @@
 import { Tab, Tabs, useSelect } from 'pov-design-system';
 import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom'; // React Router의 useNavigate 사용
+import { useNavigate } from 'react-router-dom';
 
 const NavigationTabs = () => {
   const { selected, handleSelectClick } = useSelect('home');
