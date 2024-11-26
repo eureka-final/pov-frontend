@@ -1,18 +1,8 @@
 import { Button, Badge, Heading, Body, Paragraph, Checkbox, Icon, ShowMoreBtn } from 'pov-design-system';
-import NavigationTabs from '../../components/common/NavigationTabs';
-
-import Profile from '../../components/common/Profile';
 import ReviewToggle from '../../components/common/ReviewToggle';
 const index = () => {
-  const user = {
-    name: 'Tom Coleman',
-    avatarUrl: 'https://avatars2.githubusercontent.com/u/132554', // 임시 avatar URL
-  };
-
   return (
     <div>
-      <NavigationTabs />
-
       <ReviewToggle />
 
       <Button variant="primary" size="small">
@@ -20,8 +10,6 @@ const index = () => {
       </Button>
 
       <ShowMoreBtn />
-
-      <Profile user={user} />
 
       <Badge variant="keyword" cancel={false}>
         Bedge

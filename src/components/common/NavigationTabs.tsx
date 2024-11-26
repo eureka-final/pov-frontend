@@ -1,8 +1,22 @@
 import { Tab, Tabs, useSelect } from 'pov-design-system';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom'; // React Router의 useNavigate 사용
 
 const NavigationTabs = () => {
-  // useSelect 훅으로 선택된 탭 상태 관리
   const { selected, handleSelectClick } = useSelect('home');
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (selected === 'home') {
+      navigate('/');
+    } else if (selected === 'movie') {
+      navigate('/movie');
+    } else if (selected === 'review') {
+      navigate('/review');
+    } else if (selected === 'clubReview') {
+      navigate('/clubReview');
+    }
+  }, [selected, navigate]);
+
   return (
     <nav>
       <Tabs css={{ width: '100%' }}>

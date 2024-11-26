@@ -6,7 +6,6 @@ const ThemeToggle = () => {
 
   return (
     <>
-      <h1>Theme is {themeName}</h1>
       <button
         onClick={toggleStyle}
         style={{
