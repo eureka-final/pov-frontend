@@ -33,10 +33,8 @@ const NavigationTabs = () => {
   return (
     <nav>
       <Tabs css={{ width: '100%' }}>
-        {navigations.map((nav) => (
-          <div>
-            <Tab text={nav.text} variant="outline" tabId={nav.tabId} selectedId={selected} onClick={() => handleNavigation(nav.tabId)}></Tab>
-          </div>
+        {navigations.map((nav, index) => (
+          <Tab key={nav.tabId || index} text={nav.text} variant="outline" tabId={nav.tabId} selectedId={selected} onClick={() => handleNavigation(nav.tabId)} />
         ))}
       </Tabs>
     </nav>
