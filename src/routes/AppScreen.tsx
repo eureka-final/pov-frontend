@@ -1,7 +1,6 @@
 import styled from '@emotion/styled';
 import AppPages from './AppPages';
 import useWindowSize from '../hooks/useWindowSize';
-import Header from '../components/Header/Header';
 
 const ViewArea = styled.div`
   display: flex;
@@ -32,7 +31,6 @@ const AppScreen = () => {
   return (
     <ViewArea>
       <ResponsiveArea width={windowSize.width} height={windowSize.height}>
-        <Header />
         <AppPages />
       </ResponsiveArea>
     </ViewArea>
