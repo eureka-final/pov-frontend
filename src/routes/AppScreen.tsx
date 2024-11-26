@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 import AppPages from './AppPages';
 import useWindowSize from '../hooks/useWindowSize';
+import Header from '../components/Header/Header';
 
 const ViewArea = styled.div`
   display: flex;
   justify-content: center;
-  background: #f9f9f9;
   width: 100vw;
   height: 100%;
   @media (min-width: 0px) and (max-width: 600px) {
@@ -29,10 +29,10 @@ const ResponsiveArea = styled.div<{ width?: number; height?: number }>`
 
 const AppScreen = () => {
   const windowSize = useWindowSize();
-
   return (
     <ViewArea>
       <ResponsiveArea width={windowSize.width} height={windowSize.height}>
+        <Header />
         <AppPages />
       </ResponsiveArea>
     </ViewArea>
