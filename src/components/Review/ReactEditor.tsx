@@ -1,10 +1,13 @@
 import { useMemo, useState, useRef } from 'react';
-import ReactQuill from 'react-quill';
+import ReactQuill, { Quill } from 'react-quill';
+import ImageResize from 'quill-image-resize-module-react';
 import 'react-quill/dist/quill.snow.css';
 import { CustomQuillEditorView } from './ReactEditor.style';
 import ReactModule from './ReactModule';
 import dompurify from 'dompurify';
 import axios from 'axios';
+
+Quill.register('modules/imageResize', ImageResize);
 
 const ReactEditor = () => {
   const [content, setContent] = useState<string>('');
@@ -95,6 +98,11 @@ const ReactEditor = () => {
       toolbar: {
         container: '#toolBar',
         handlers: { image: imageHandler },
+      },
+      imageResize: {
+        // https://www.npmjs.com/package/quill-image-resize-module-react 참고
+        parchment: Quill.import('parchment'),
+        modules: ['Resize', 'DisplaySize', 'Toolbar'],
       },
     }),
     []
