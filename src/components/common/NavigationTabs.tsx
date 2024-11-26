@@ -26,10 +26,10 @@ const NavigationTabs = () => {
         <Tab text="클럽리뷰" variant="outline" tabId="clubReview" changeSelect={handleSelectClick} selectedId={selected} />
       </Tabs>
       <div style={{ marginTop: '20px' }}>
-        {selected === 'home' && <div>홈 페이지 내용</div>}
-        {selected === 'movie' && <div>영화 페이지 내용</div>}
-        {selected === 'review' && <div>리뷰 페이지 내용</div>}
-        {selected === 'clubReview' && <div>클럽리뷰 페이지 내용</div>}
+        {selected === 'home'}
+        {selected === 'movie'}
+        {selected === 'review'}
+        {selected === 'clubReview'}
       </div>
     </nav>
   );
