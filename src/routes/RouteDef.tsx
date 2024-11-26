@@ -25,13 +25,13 @@ const ReviewScreens = {
     path: '/review',
     element: <Review />,
   },
+  ReviewWrite: {
+    path: '/review/write',
+    element: <ReviewWrite />,
+  },
 };
 
 const ClubScreens = {
-  ReviewWrite: {
-    path: '/write',
-    element: <ReviewWrite />,
-  },
   ClubReview: {
     path: '/clubReview',
     element: <ClubReview />,

@@ -20,10 +20,10 @@ function Header() {
     <>
       <HeaderWrapper>
         <div>logo</div>
+        <NavigationTabs />
         <Profile user={user} />
       </HeaderWrapper>
       <ThemeToggle />
-      <NavigationTabs />
     </>
   );
 }
