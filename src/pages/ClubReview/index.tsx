@@ -1,5 +1,11 @@
+import Padded from '../../components/templates/Padded/Padded';
+
 const index = () => {
-  return <div>clubReview</div>;
+  return (
+    <Padded>
+      <div>clubreview</div>
+    </Padded>
+  );
 };
 
 export default index;
