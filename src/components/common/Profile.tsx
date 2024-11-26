@@ -14,7 +14,7 @@ export interface ProfileProps {
 const Profile: React.FC<ProfileProps> = ({ user: { name, avatarUrl } }) => {
   return (
     <Container>
-      <Avatar username={name} src={avatarUrl} />
+      <Avatar size="tiny" username={name} src={avatarUrl} />
       <Name>{name}</Name>
     </Container>
   );

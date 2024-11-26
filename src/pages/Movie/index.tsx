@@ -1,5 +1,11 @@
+import Padded from '../../components/templates/Padded/Padded';
+
 const index = () => {
-  return <div>movie</div>;
+  return (
+    <Padded>
+      <div>movie</div>
+    </Padded>
+  );
 };
 
 export default index;
