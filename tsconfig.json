@@ -7,6 +7,8 @@
   "compilerOptions": {
     "moduleResolution": "node",
     "typeRoots": ["./node_modules/@types", "./node_modules/pov-design-system"],
-    "types": ["@emotion/react"]
+    "types": ["@emotion/react"],
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true
   }
 }
