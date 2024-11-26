@@ -1,12 +1,10 @@
 import Padded from '../../components/templates/Padded/Padded';
-import ReviewWrite from '../ReviewWrite';
+import ReactEditor from '../../components/Review/ReactEditor';
 
 const index = () => {
   return (
     <Padded>
-      <div>
-        <ReviewWrite />
-      </div>
+      <ReactEditor />
     </Padded>
   );
 };

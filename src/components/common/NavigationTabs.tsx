@@ -25,12 +25,6 @@ const NavigationTabs = () => {
         <Tab text="리뷰" variant="outline" tabId="review" changeSelect={handleSelectClick} selectedId={selected} />
         <Tab text="클럽리뷰" variant="outline" tabId="clubReview" changeSelect={handleSelectClick} selectedId={selected} />
       </Tabs>
-      <div style={{ marginTop: '20px' }}>
-        {selected === 'home'}
-        {selected === 'movie'}
-        {selected === 'review'}
-        {selected === 'clubReview'}
-      </div>
     </nav>
   );
 };
