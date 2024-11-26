@@ -1,8 +1,10 @@
 import { Button, Badge, Heading, Body, Paragraph, Checkbox, Icon, ShowMoreBtn } from 'pov-design-system';
 import ReviewToggle from '../../components/common/ReviewToggle';
+import Padded from '../../components/templates/Padded/Padded';
+
 const index = () => {
   return (
-    <div>
+    <Padded>
       <ReviewToggle />
 
       <Button variant="primary" size="small">
@@ -47,7 +49,7 @@ const index = () => {
       <Body size="small">Body04</Body>
 
       <Paragraph>Paragraph</Paragraph>
-    </div>
+    </Padded>
   );
 };
 
