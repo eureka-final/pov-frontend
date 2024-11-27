@@ -25,7 +25,7 @@ function Header() {
         <NavigationTabs />
         <Profile user={user} />
       </HeaderWrapper>
-      <ThemeToggle />
+      {/* <ThemeToggle /> */}
     </>
   );
 }

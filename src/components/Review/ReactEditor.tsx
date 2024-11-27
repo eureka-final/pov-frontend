@@ -6,6 +6,7 @@ import { CustomQuillEditorView } from './ReactEditor.style';
 import ReactModule from './ReactModule';
 import dompurify from 'dompurify';
 import axios from 'axios';
+import { Input } from 'pov-design-system';
 
 Quill.register('modules/imageResize', ImageResize);
 
@@ -107,25 +108,29 @@ const ReactEditor = () => {
   );
 
   return (
-    <CustomQuillEditorView>
-      <div id="toolBar">
-        <ReactModule />
-      </div>
-      <ReactQuill
-        theme="snow"
-        ref={quillRef}
-        modules={modules}
-        formats={formats}
-        id="quillContent"
-        value={content}
-        onChange={setContent}
-        placeholder={'...영화에 대한 리뷰를 남겨주세요!'}
-      />
+    <>
+      <Input id="title" name="title" placeholder="제목을 입력해 주세요" supportingText="40자 내로 입력해주세요" />
 
-      <div id="content">
-        <div dangerouslySetInnerHTML={{ __html: sanitizer(`${content}`) }} />
-      </div>
-    </CustomQuillEditorView>
+      <CustomQuillEditorView>
+        <div id="toolBar">
+          <ReactModule />
+        </div>
+        <ReactQuill
+          theme="snow"
+          ref={quillRef}
+          modules={modules}
+          formats={formats}
+          id="quillContent"
+          value={content}
+          onChange={setContent}
+          placeholder={'...영화에 대한 리뷰를 남겨주세요!'}
+        />
+
+        <div id="content">
+          <div dangerouslySetInnerHTML={{ __html: sanitizer(`${content}`) }} />
+        </div>
+      </CustomQuillEditorView>
+    </>
   );
 };
 

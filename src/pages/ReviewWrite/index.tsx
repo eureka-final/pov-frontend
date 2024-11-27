@@ -1,15 +1,24 @@
 import Padded from '../../components/templates/Padded/Padded';
 import ReactEditor from '../../components/Review/ReactEditor';
-import { Input, Button } from 'pov-design-system';
+import { Heading, Button } from 'pov-design-system';
+import Keyword from '../../components/Review/Keyword';
+import ReviewToggle from '../../components/Review/ReviewToggle';
+import { HeadingContainer, ButtonContainer } from './index.style';
 
 const index = () => {
   return (
     <Padded>
-      <Input label="한줄평을 입력해주세요!" id="title" name="title" placeholder="제목을 입력해 주세요" supportingText="40자 내로 입력해주세요" />
+      <HeadingContainer>
+        <Heading size="large">리뷰쓰기</Heading>
+      </HeadingContainer>
       <ReactEditor />
-      <Button variant="primary" size="large">
-        저장하기
-      </Button>
+      <Keyword />
+      <ReviewToggle />
+      <ButtonContainer>
+        <Button variant="primary" size="large">
+          저장하기
+        </Button>
+      </ButtonContainer>
     </Padded>
   );
 };
