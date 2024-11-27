@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const index = () => {
   const fetchTest = async () => {
-    const response = await axios.get('https://www.point-of-views.com/actuator/health');
+    const response = await axios.get('https://pov-elb-01-1418143664.ap-northeast-2.elb.amazonaws.com/actuator/health');
     console.log(response);
   };
   return (
@@ -11,7 +11,7 @@ const index = () => {
         fetchTest();
       }}
     >
-      연결확인용
+      123123
     </button>
   );
 };
