@@ -1,6 +1,7 @@
 import Main from '../pages/Main';
 import Movie from '../pages/Movie';
 import Review from '../pages/Review';
+import ReviewWrite from '../pages/ReviewWrite';
 import ClubReview from '../pages/ClubReview';
 import MovieDetail from '../pages/MovieDetail';
 
@@ -23,6 +24,10 @@ const ReviewScreens = {
   Review: {
     path: '/review',
     element: <Review />,
+  },
+  ReviewWrite: {
+    path: '/review/write',
+    element: <ReviewWrite />,
   },
 };
 
