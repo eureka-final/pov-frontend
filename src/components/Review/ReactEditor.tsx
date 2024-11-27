@@ -18,8 +18,6 @@ const ReactEditor = () => {
 
   const formats: string[] = [
     'header',
-    'size',
-    'font',
     'bold',
     'italic',
     'underline',
@@ -33,8 +31,6 @@ const ReactEditor = () => {
     'color',
     'background',
     'align',
-    'script',
-    'clean',
   ];
 
   const quillRef = useRef<ReactQuill | null>(null);
@@ -53,6 +49,8 @@ const ReactEditor = () => {
         const range = editor.getSelection();
 
         if (range && file !== null) {
+          // 서버에 올려질때까지 표시할 로딩 placeholder 삽입
+          editor.insertEmbed(range.index, 'image', `/assets/react.svg`);
           const reader = new FileReader();
           for (let i = 0; i < file.length; i++) {
             reader.readAsDataURL(file[i]);
@@ -121,11 +119,10 @@ const ReactEditor = () => {
         id="quillContent"
         value={content}
         onChange={setContent}
-        placeholder={'영화에 대한 리뷰를 남겨주세요!'}
+        placeholder={'...영화에 대한 리뷰를 남겨주세요!'}
       />
 
       <div id="content">
-        {content}
         <div dangerouslySetInnerHTML={{ __html: sanitizer(`${content}`) }} />
       </div>
     </CustomQuillEditorView>

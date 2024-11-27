@@ -11,13 +11,6 @@ const ReactModule = () => {
           <option value="6">Header 6</option>
           <option value="7">Normal</option>
         </select>
-        <select className="ql-size" defaultValue="medium">
-          <option value="small">Small</option>
-          <option value="medium">Medium</option>
-          <option value="large">Large</option>
-          <option value="huge">Huge</option>
-        </select>
-        <select className="ql-font" defaultValue="sans-serif" />
       </div>
       <div className="ql-formats">
         <button className="ql-bold" />
@@ -39,7 +32,6 @@ const ReactModule = () => {
         <select className="ql-align" />
       </div>
       <div className="ql-formats">
-        <button className="ql-code-block" />
         <button className="ql-link" />
         <button className="ql-image" />
       </div>

@@ -3,19 +3,17 @@ import styled from '@emotion/styled';
 export const CustomQuillEditorView = styled.div`
   #toolBar {
     box-sizing: border-box;
-    height: 40px;
+    height: 60%;
     width: 100%;
     border-radius: 8px;
-
-    font-size: 32px;
-
-    .ql-formats {
-      display: inline-block;
-      position: relative;
-      top: -10px;
-    }
+    margin-top: 3%;
   }
 
+  /* .ql-formats {
+      display: inline-block;
+      position: relative;
+      top: 5px;
+  } */
   .ql-toolbar {
     .ql-stroke {
       stroke: ${({ theme }) => theme.primary};
@@ -69,6 +67,11 @@ export const CustomQuillEditorView = styled.div`
 
       & .ql-editor em {
       font-style: italic;
+      }
+
+      .ql-editor::before {
+        color: ${({ theme }) => theme.muted};
+        font-style: italic;
       }
     }
   }
