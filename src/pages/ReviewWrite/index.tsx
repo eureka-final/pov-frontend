@@ -37,7 +37,7 @@ const Index = () => {
     console.log(requestData);
 
     try {
-      const response = await axios.post('/api/review', requestData);
+      const response = await axios.post(`/movies/:id/reviews`, requestData);
       console.log('성공적으로 전송:', response.data);
     } catch (error) {
       console.error('데이터 전송 실패:', error);

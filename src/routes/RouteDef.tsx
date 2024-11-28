@@ -5,6 +5,7 @@ import ReviewWrite from '../pages/ReviewWrite/Index';
 import Club from '../pages/Club';
 import Premieres from '../pages/Premieres';
 import MovieDetail from '../pages/MovieDetail';
+import ReviewDetail from '../pages/ReviewDetail';
 
 const MovieScreens = {
   Main: {
@@ -29,6 +30,10 @@ const ReviewScreens = {
   ReviewWrite: {
     path: '/review/write',
     element: <ReviewWrite />,
+  },
+  ReviewDetail: {
+    path: '/review/:id',
+    element: <ReviewDetail />,
   },
 };
 
