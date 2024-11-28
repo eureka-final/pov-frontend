@@ -1,4 +1,4 @@
-import ThemeToggle from '../../components/common/ThemeToggle';
+// import ThemeToggle from '../../components/common/ThemeToggle';
 import NavigationTabs from '../../components/common/NavigationTabs';
 import Profile from '../common/Profile';
 import { Logo } from 'pov-design-system';
@@ -19,7 +19,7 @@ function Header() {
         </LeftWrapper>
         <Profile user={user} />
       </HeaderWrapper>
-      <ThemeToggle />
+      {/* <ThemeToggle /> */}
     </>
   );
 }

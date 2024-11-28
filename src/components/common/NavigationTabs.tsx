@@ -20,8 +20,12 @@ const NavigationTabs = () => {
       tabId: 'review',
     },
     {
-      text: '클럽리뷰',
-      tabId: 'clubReview',
+      text: '클럽',
+      tabId: 'club',
+    },
+    {
+      text: '시사회',
+      tabId: 'premieres',
     },
   ];
 
