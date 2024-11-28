@@ -23,7 +23,7 @@ export const Item = styled.div<{ isSelected: boolean }>`
   cursor: pointer;
   transition: transform 0.3s ease, color 0.3s ease; /* 애니메이션 효과 */
   color: ${({ isSelected, theme }) =>
-    isSelected ? theme.color.green600 : '#f0f0f0'};
+    isSelected ? theme.color.green600 : theme.primary};
   &:hover {
     transform: scale(1.1); /* 크기 확대 */
     color: ${({ theme }) => theme.color.green600};

@@ -1,15 +1,8 @@
-import ThemeToggle from '../../components/common/ThemeToggle';
+// import ThemeToggle from '../../components/common/ThemeToggle';
 import NavigationTabs from '../../components/common/NavigationTabs';
-import styled from '@emotion/styled';
 import Profile from '../common/Profile';
 import { Logo } from 'pov-design-system';
-
-const HeaderWrapper = styled.header`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem;
-`;
+import { HeaderWrapper, Wrapper } from './Header.style';
 
 function Header() {
   const user = {
@@ -20,9 +13,10 @@ function Header() {
   return (
     <>
       <HeaderWrapper>
-        <Logo icon="logo" style={{ width: '10%', cursor: 'pointer' }} onClick={() => (window.location.href = '/')} />
-
-        <NavigationTabs />
+        <Wrapper>
+          <Logo icon="logo" style={{ width: '40%', cursor: 'pointer' }} onClick={() => (window.location.href = '/')} />
+          <NavigationTabs />
+        </Wrapper>
         <Profile user={user} />
       </HeaderWrapper>
       {/* <ThemeToggle /> */}

@@ -2,7 +2,8 @@ import Main from '../pages/Main';
 import Movie from '../pages/Movie';
 import Review from '../pages/Review';
 import ReviewWrite from '../pages/ReviewWrite/Index';
-import ClubReview from '../pages/ClubReview';
+import Club from '../pages/Club';
+import Premieres from '../pages/Premieres';
 import MovieDetail from '../pages/MovieDetail';
 
 const MovieScreens = {
@@ -32,9 +33,16 @@ const ReviewScreens = {
 };
 
 const ClubScreens = {
-  ClubReview: {
-    path: '/clubReview',
-    element: <ClubReview />,
+  Club: {
+    path: '/club',
+    element: <Club />,
+  },
+};
+
+const PremieresScreens = {
+  Premieres: {
+    path: '/premieres',
+    element: <Premieres />,
   },
 };
 
@@ -42,4 +50,5 @@ export const AppRouteDef = {
   ...MovieScreens,
   ...ReviewScreens,
   ...ClubScreens,
+  ...PremieresScreens,
 };
