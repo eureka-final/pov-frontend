@@ -13,11 +13,11 @@ const index = () => {
 
       <ShowMoreBtn />
 
-      <Badge variant="keyword" cancel={false}>
-        Bedge
-      </Badge>
       <Badge variant="keyword" cancel={true}>
-        로맨스
+        감동적인
+      </Badge>
+      <Badge variant="keyword" cancel={false}>
+        재미있는
       </Badge>
       <Badge variant="section" click={false}>
         모든 리뷰

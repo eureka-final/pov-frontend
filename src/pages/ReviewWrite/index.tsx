@@ -1,8 +1,8 @@
 import Padded from '../../components/templates/Padded/Padded';
-import ReactEditor from '../../components/Review/ReactEditor';
+import ReactEditor from '../../components/ReviewWrite/ReactEditor';
 import { Heading, Body, Button, Modal, useOverlay, Logo } from 'pov-design-system';
-import Keyword from '../../components/Review/Keyword';
-import ReviewToggle from '../../components/Review/ReviewToggle';
+import Keyword from '../../components/ReviewWrite/Keyword';
+import ReviewToggle from '../../components/ReviewWrite/ReviewToggle';
 import { HeadingContainer, ButtonContainer, Vs, Item } from './index.style';
 
 const Index = () => {
