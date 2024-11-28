@@ -2,7 +2,12 @@ import { useState } from 'react';
 import { Heading, Badge } from 'pov-design-system';
 import { Container, Name, Keywords, BadgeContainer } from './Keyword.style';
 
-function Keyword() {
+interface KeywordProps {
+  onKeywordsChange: (keywords: string[]) => void;
+}
+
+// eslint-disable-next-line react/prop-types
+const Keyword: React.FC<KeywordProps> = ({ onKeywordsChange }) => {
   // 초기 키워드 상태 설정: 긍정 5개, 부정 5개
   const [keywords, setKeywords] = useState([
     { text: '감동적인', cancel: false },
@@ -18,7 +23,12 @@ function Keyword() {
   ]);
 
   const handleBadgeClick = (index: number) => {
-    setKeywords((prevKeywords) => prevKeywords.map((keyword, i) => (i === index ? { ...keyword, cancel: !keyword.cancel } : keyword)));
+    const updatedKeywords = keywords.map((keyword, i) => (i === index ? { ...keyword, cancel: !keyword.cancel } : keyword));
+    setKeywords(updatedKeywords);
+
+    const selectedKeywords = updatedKeywords.filter((keyword) => keyword.cancel).map((keyword) => keyword.text);
+
+    onKeywordsChange(selectedKeywords);
   };
 
   return (
@@ -51,6 +61,6 @@ function Keyword() {
       </Keywords>
     </Container>
   );
-}
+};
 
 export default Keyword;

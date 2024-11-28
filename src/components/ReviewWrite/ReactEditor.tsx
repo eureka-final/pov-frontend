@@ -1,26 +1,24 @@
-import { useMemo, useState, useRef } from 'react';
+import { useMemo, useRef } from 'react';
 import ReactQuill, { Quill } from 'react-quill';
 import ImageResize from 'quill-image-resize-module-react';
 import 'react-quill/dist/quill.snow.css';
 import { CustomQuillEditorView } from './ReactEditor.style';
 import ReactModule from './ReactModule';
-import dompurify from 'dompurify';
+// import dompurify from 'dompurify';
 import axios from 'axios';
 import { Input } from 'pov-design-system';
 
 Quill.register('modules/imageResize', ImageResize);
 
-const ReactEditor = () => {
-  const [content, setContent] = useState<string>('');
-  const [title, setTitle] = useState<string>('');
-  console.log(content);
-
-  const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setTitle(e.currentTarget.value);
-  };
+interface ReactEditorProps {
+  onChangeTitle: (title: string) => void;
+  onChangeContent: (content: string) => void;
+}
+// eslint-disable-next-line react/prop-types
+const ReactEditor: React.FC<ReactEditorProps> = ({ onChangeTitle, onChangeContent }) => {
   // 스크립트를 활용하여 javascript와 HTML로 악성 코드를 웹 브라우저에 심어,
   // 사용자 접속시 그 악성코드가 실행되는 것을 XSS, 보안을 위해 sanitize 추가
-  const sanitizer = dompurify.sanitize;
+  //const sanitizer = dompurify.sanitize;
 
   const formats: string[] = [
     'header',
@@ -117,7 +115,13 @@ const ReactEditor = () => {
 
   return (
     <>
-      <Input id="title" name="title" placeholder="제목을 입력해 주세요" supportingText="40자 내로 입력해주세요" onChange={handleTitleChange} />
+      <Input
+        id="title"
+        name="title"
+        placeholder="제목을 입력해 주세요"
+        supportingText="40자 내로 입력해주세요"
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChangeTitle(e.target.value)}
+      />
 
       <CustomQuillEditorView>
         <div id="toolBar">
@@ -129,8 +133,7 @@ const ReactEditor = () => {
           modules={modules}
           formats={formats}
           id="quillContent"
-          value={content}
-          onChange={setContent}
+          onChange={onChangeContent}
           placeholder={'...영화에 대한 리뷰를 남겨주세요!'}
         />
 
