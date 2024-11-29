@@ -26,4 +26,8 @@ dist-ssr
 
 *storybook.log
 
+# .github
 .github
+
+# env
+.env
