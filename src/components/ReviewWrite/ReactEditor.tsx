@@ -42,56 +42,86 @@ const ReactEditor: React.FC<ReactEditorProps> = ({ onChangeTitle, onChangeConten
   const imageHandler = (): void => {
     const input: HTMLInputElement = document.createElement('input');
     input.setAttribute('type', 'file');
-    input.setAttribute('accept', 'image/*');
+    input.setAttribute('accept', 'image/jpg,image/png,image/jpeg');
     input.setAttribute('multiple', 'multiple');
     input.click();
 
     input.onchange = async (): Promise<void> => {
-      // onChange에서 추가한 FileList을 사용해서 formData에 file을 넣어 서버로 전달
-      const file: FileList | null = input.files;
+      const files: FileList | null = input.files;
+      if (!files) return;
+
+      // 단일 파일 크기 제한 검사
+      for (let i = 0; i < files.length; i++) {
+        if (files[i].size > 2 * 1024 * 1024) {
+          // 2MB
+          alert(`파일 사이즈를 2MB 이하로 업로드해주세요.`);
+          return;
+        }
+      }
+
+      // 전체 파일 크기 제한 검사
+      const totalSize = Array.from(files).reduce((acc, file) => acc + file.size, 0);
+      if (totalSize > 10 * 1024 * 1024) {
+        // 10MB
+        alert('전체 파일 크기가 10MB를 초과했습니다.');
+        return;
+      }
+
+      // 최대 업로드 개수 제한 검사
+      if (files.length > 5) {
+        alert('최대 5개의 파일만 업로드할 수 있습니다.');
+        return;
+      }
+
       if (quillRef.current) {
         const editor = quillRef.current.getEditor();
         const range = editor.getSelection();
 
-        if (range && file !== null) {
-          // 서버에 올려질때까지 표시할 로딩 placeholder 삽입
-          // editor.insertEmbed(range.index, 'image', `/assets/react.svg`);
-
-          // 여러개의 이미지를 담아 전송할 file을 만든다
-          const reader = new FileReader();
-          for (let i: number = 0; i < file.length; i++) {
-            // formData 추가
-            const formData = new FormData();
-            formData.append('files', file[i]);
-
-            // 이미지 업로드 시 서버로 전송
-            try {
-              const res = await axios.post('/board/boardUploadImage', formData, {
-                headers: { 'Content-Type': 'multipart/form-data' },
-              });
-              const imgUrl = res.data.imgUrl;
-              reader.onloadend = () => {
-                // 현재 인덱스가 안전하게 설정되었는지 확인
-                const index = range.index !== undefined ? range.index : editor.getLength();
-
-                // 에디터에 이미지 삽입
-                editor.insertEmbed(index, 'image', imgUrl);
-
-                // 커서를 삽입한 이미지 바로 뒤로 설정
-                const newRange = {
-                  index: index + 1, // 이미지를 붙여넣고 나면 커서를 현재 위치의 바로 옆으로 이동시킨다.
-                  length: 0, // 선택 없이 커서만 설정
-                };
-
-                // 새로운 range로 커서 위치 설정
-                editor.setSelection(newRange);
-              };
-            } catch (err) {
-              console.error(err);
-            }
-          }
-        } else {
+        if (!range) {
           console.warn('Editor가 포커스되지 않았거나 선택된 range가 없습니다');
+          return;
+        }
+
+        const formData = new FormData();
+        for (let i = 0; i < files.length; i++) {
+          formData.append('files', files[i]); // 여러 파일 추가
+        }
+
+        try {
+          // Bearer 토큰 설정 (필요 시 동적으로 가져오기)
+          //const accessToken = localStorage.getItem('accessToken'); // 예시: 로컬 스토리지에서 가져옴
+          const res = await axios.post('/api/movies/reviews/images', formData, {
+            headers: {
+              'Content-Type': 'multipart/form-data',
+              // Authorization: `Bearer ${accessToken}`, // 헤더 추가
+            },
+          });
+
+          const { imageUrls } = res.data.data;
+
+          if (imageUrls && Array.isArray(imageUrls)) {
+            imageUrls.forEach((url) => {
+              const index = range.index !== undefined ? range.index : editor.getLength();
+              editor.insertEmbed(index, 'image', url);
+              editor.setSelection(index + 1, 0); // 커서를 이미지 뒤로 이동
+            });
+          }
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        } catch (err: any) {
+          // 에러 처리
+          if (err.response) {
+            const { status, data } = err.response;
+
+            if (status === 400) {
+              alert(data.message || '지원하지 않는 파일 형식입니다.');
+            } else if (status === 413) {
+              alert(data.message || '파일 크기가 제한을 초과했습니다.');
+            } else {
+              alert('이미지 업로드 중 문제가 발생했습니다.');
+            }
+          } else {
+            console.error('요청 중 오류 발생:', err);
+          }
         }
       }
     };

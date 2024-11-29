@@ -56,6 +56,9 @@ const Index = () => {
       <ReviewToggle onSpoilerChange={setSpoiler} />
 
       <ButtonContainer>
+        <Button variant="secondary" size="large" onClick={open}>
+          임시 저장하기
+        </Button>
         <Button variant="primary" size="large" onClick={open}>
           저장하기
         </Button>

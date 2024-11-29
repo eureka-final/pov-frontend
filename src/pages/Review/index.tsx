@@ -34,7 +34,7 @@ const Index = () => {
           </Badge>
         ))}
       </Wrapper>
-      <ReviewList sectionsType={sectionsType} />
+      {/* <ReviewList sectionsType={sectionsType} /> */}
     </Padded>
   );
 };
