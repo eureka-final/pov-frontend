@@ -28,15 +28,23 @@ export default defineConfig({
 
       /* Naver OAuth */
       '/api/naver/token': {
-        target: 'https://nid.naver.com',
+        target: 'https://nid.naver.com/oauth2.0/token',
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api\/naver\/token/, '/oauth2.0/token'),
+        rewrite: (path) => path.replace(/^\/api\/naver\/token/, ''),
         secure: true,
       },
       '/api/naver/userInfo': {
-        target: 'https://openapi.naver.com',
+        target: 'https://openapi.naver.com/v1/nid/me',
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api\/naver\/userInfo/, '/v1/nid/me'),
+        rewrite: (path) => path.replace(/^\/api\/naver\/userInfo/, ''),
+        secure: true,
+      },
+
+      /* Google OAuth */
+      '/api/google/userInfo': {
+        target: 'https://www.googleapis.com/oauth2/v3/userinfo',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api\/google\/userInfo/, ''),
         secure: true,
       },
     },

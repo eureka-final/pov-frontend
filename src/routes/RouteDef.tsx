@@ -7,7 +7,7 @@ import Premieres from '../pages/Premieres';
 import MovieDetail from '../pages/MovieDetail';
 import SignIn from '../pages/SignIn';
 import OauthNaver from '../pages/OauthNaver';
-// import OauthGoogle from '../pages/OauthGoogle';
+import OauthGoogle from '../pages/OauthGoogle';
 
 const MovieScreens = {
   Main: {
@@ -60,7 +60,7 @@ const SignScreens = {
   },
   OauthGoogle: {
     path: '/oauth/google',
-    element: null, // <OauthGoogle />,
+    element: <OauthGoogle />,
   },
 };
 
