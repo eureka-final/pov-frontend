@@ -113,6 +113,7 @@ const ReactEditor: React.FC<ReactEditorProps> = ({ onChangeTitle, onChangeConten
     []
   );
 
+  // TODO: 제목 글자수 제한 설정
   return (
     <>
       <Input

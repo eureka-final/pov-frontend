@@ -17,7 +17,7 @@ function Header() {
           <Logo icon="logo" style={{ width: '40%', cursor: 'pointer' }} onClick={() => (window.location.href = '/')} />
           <NavigationTabs />
         </Wrapper>
-        <Profile user={user} />
+        <Profile name={user.name} avatarUrl={user.avatarUrl} />
       </HeaderWrapper>
       {/* <ThemeToggle /> */}
     </>

@@ -4,7 +4,7 @@ import ReactEditor from '../../components/ReviewWrite/ReactEditor';
 import { Heading, Body, Button, Modal, useOverlay, Logo } from 'pov-design-system';
 import Keyword from '../../components/ReviewWrite/Keyword';
 import ReviewToggle from '../../components/ReviewWrite/ReviewToggle';
-import { HeadingContainer, ButtonContainer, Vs, Item } from './index.style';
+import { HeadingContainer, ButtonContainer, Vs, Item } from './ReviewWrite.style';
 import axios from 'axios';
 
 const Index = () => {
@@ -36,6 +36,7 @@ const Index = () => {
     };
     console.log(requestData);
 
+    // TODO: 영화 id 만들어지면 적용하기
     try {
       const response = await axios.post(`/movies/:id/reviews`, requestData);
       console.log('성공적으로 전송:', response.data);
