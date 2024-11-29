@@ -1,4 +1,4 @@
-import { useMemo, useRef } from 'react';
+import { useState, useMemo, useRef } from 'react';
 import ReactQuill, { Quill } from 'react-quill';
 import ImageResize from 'quill-image-resize-module-react';
 import 'react-quill/dist/quill.snow.css';
@@ -15,7 +15,7 @@ interface ReactEditorProps {
   onChangeContent: (content: string) => void;
 }
 // eslint-disable-next-line react/prop-types
-const ReactEditor: React.FC<ReactEditorProps> = ({ onChangeTitle, onChangeContent }) => {
+const ReactEditor: React.FC<ReactEditorProps> = ({ onChangeTitle }) => {
   // 스크립트를 활용하여 javascript와 HTML로 악성 코드를 웹 브라우저에 심어,
   // 사용자 접속시 그 악성코드가 실행되는 것을 XSS, 보안을 위해 sanitize 추가
   //const sanitizer = dompurify.sanitize;
@@ -36,6 +36,7 @@ const ReactEditor: React.FC<ReactEditorProps> = ({ onChangeTitle, onChangeConten
     'background',
     'align',
   ];
+  const [content, setContent] = useState<string>(''); // 상태 추가
 
   const quillRef = useRef<ReactQuill | null>(null);
 
@@ -164,7 +165,8 @@ const ReactEditor: React.FC<ReactEditorProps> = ({ onChangeTitle, onChangeConten
           modules={modules}
           formats={formats}
           id="quillContent"
-          onChange={onChangeContent}
+          value={content} // 상태와 연결
+          onChange={setContent} // 상태 업데이트
           placeholder={'...영화에 대한 리뷰를 남겨주세요!'}
         />
 
