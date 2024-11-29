@@ -1,4 +1,4 @@
-import { useState, useMemo, useRef } from 'react';
+import { useMemo, useRef, useEffect } from 'react';
 import ReactQuill, { Quill } from 'react-quill';
 import ImageResize from 'quill-image-resize-module-react';
 import 'react-quill/dist/quill.snow.css';
@@ -11,11 +11,13 @@ import { Input } from 'pov-design-system';
 Quill.register('modules/imageResize', ImageResize);
 
 interface ReactEditorProps {
+  title: string;
+  content: string;
   onChangeTitle: (title: string) => void;
   onChangeContent: (content: string) => void;
 }
 // eslint-disable-next-line react/prop-types
-const ReactEditor: React.FC<ReactEditorProps> = ({ onChangeTitle }) => {
+const ReactEditor: React.FC<ReactEditorProps> = ({ title, content, onChangeTitle, onChangeContent }) => {
   // 스크립트를 활용하여 javascript와 HTML로 악성 코드를 웹 브라우저에 심어,
   // 사용자 접속시 그 악성코드가 실행되는 것을 XSS, 보안을 위해 sanitize 추가
   //const sanitizer = dompurify.sanitize;
@@ -36,9 +38,20 @@ const ReactEditor: React.FC<ReactEditorProps> = ({ onChangeTitle }) => {
     'background',
     'align',
   ];
-  const [content, setContent] = useState<string>(''); // 상태 추가
 
   const quillRef = useRef<ReactQuill | null>(null);
+
+  useEffect(() => {
+    if (quillRef.current) {
+      const editor = quillRef.current.getEditor();
+      const currentContent = editor.root.innerHTML;
+
+      // 현재 내용과 상태의 content가 다른 경우에만 업데이트
+      if (currentContent !== content) {
+        editor.setContents(editor.clipboard.convert(content)); // 상태 반영
+      }
+    }
+  }, [content]);
 
   const imageHandler = (): void => {
     const input: HTMLInputElement = document.createElement('input');
@@ -150,6 +163,7 @@ const ReactEditor: React.FC<ReactEditorProps> = ({ onChangeTitle }) => {
       <Input
         id="title"
         name="title"
+        value={title}
         placeholder="제목을 입력해 주세요"
         supportingText="40자 내로 입력해주세요"
         onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChangeTitle(e.target.value)}
@@ -166,7 +180,7 @@ const ReactEditor: React.FC<ReactEditorProps> = ({ onChangeTitle }) => {
           formats={formats}
           id="quillContent"
           value={content} // 상태와 연결
-          onChange={setContent} // 상태 업데이트
+          onChange={(html) => onChangeContent(html)}
           placeholder={'...영화에 대한 리뷰를 남겨주세요!'}
         />
 

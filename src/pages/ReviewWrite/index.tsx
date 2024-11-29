@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Padded from '../../components/templates/Padded/Padded';
 import ReactEditor from '../../components/ReviewWrite/ReactEditor';
 import { Heading, Body, Button, Modal, useOverlay, Logo } from 'pov-design-system';
@@ -45,18 +45,53 @@ const Index = () => {
     }
   };
 
+  // 임시저장
+  const handleTemporary = () => {
+    const tempData = {
+      title,
+      content,
+      preference,
+      keywords,
+      spoiler,
+    };
+
+    try {
+      localStorage.setItem('reviewDraft', JSON.stringify(tempData));
+      alert('임시 저장되었습니다!');
+    } catch (error) {
+      console.error('임시 저장 실패:', error);
+      alert('임시 저장 중 문제가 발생했습니다.');
+    }
+  };
+  // 로컬 스토리지에서 데이터 복원
+  useEffect(() => {
+    const savedDraft = localStorage.getItem('reviewDraft');
+    if (savedDraft) {
+      try {
+        const draftData = JSON.parse(savedDraft);
+        setTitle(draftData.title || '');
+        setContent(draftData.content || '');
+        setKeywords(draftData.keywords || []);
+        setSpoiler(draftData.spoiler || false);
+        setPreference(draftData.preference || '');
+        console.log(draftData.title);
+      } catch (error) {
+        console.error('임시 저장된 데이터를 불러오는 데 실패했습니다:', error);
+      }
+    }
+  }, []);
   return (
     <Padded>
       <HeadingContainer>
         <Heading size="large">리뷰쓰기</Heading>
       </HeadingContainer>
 
-      <ReactEditor onChangeTitle={setTitle} onChangeContent={setContent} />
-      <Keyword onKeywordsChange={setKeywords} />
-      <ReviewToggle onSpoilerChange={setSpoiler} />
+      <ReactEditor title={title} content={content} onChangeTitle={setTitle} onChangeContent={setContent} />
+      <Keyword keywords={keywords} onKeywordsChange={setKeywords} />
+      <ReviewToggle spoiler={spoiler} onSpoilerChange={setSpoiler} />
 
       <ButtonContainer>
-        <Button variant="secondary" size="large" onClick={open}>
+        <Button variant="secondary" size="large" onClick={handleTemporary}>
           임시 저장하기
         </Button>
         <Button variant="primary" size="large" onClick={open}>
