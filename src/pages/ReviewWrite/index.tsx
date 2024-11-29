@@ -15,7 +15,28 @@ const Index = () => {
   const [content, setContent] = useState<string>('');
 
   // Keyword 상태
-  const [keywords, setKeywords] = useState<string[]>([]);
+  const [keywords, setKeywords] = useState([
+    { text: '감동적인', cancel: false },
+    { text: '재미있는', cancel: false },
+    { text: '몰입감 있는', cancel: false },
+    { text: '연기력이 뛰어난', cancel: false },
+    { text: '연출이 뛰어난', cancel: false },
+    { text: '지루한', cancel: false },
+    { text: '연기가 어색한', cancel: false },
+    { text: '연출이 어색한', cancel: false },
+    { text: '전개가 느린', cancel: false },
+    { text: '기대이하의', cancel: false },
+  ]);
+
+  const handleKeywordsChange = (selectedKeywords: string[]) => {
+    // 부모 상태 업데이트
+    setKeywords((prevKeywords) =>
+      prevKeywords.map((keyword) => ({
+        ...keyword,
+        cancel: selectedKeywords.includes(keyword.text),
+      }))
+    );
+  };
 
   // ReviewToggle 상태
   const [spoiler, setSpoiler] = useState<boolean>(false);
@@ -74,7 +95,6 @@ const Index = () => {
         setKeywords(draftData.keywords || []);
         setSpoiler(draftData.spoiler || false);
         setPreference(draftData.preference || '');
-        console.log(draftData.title);
       } catch (error) {
         console.error('임시 저장된 데이터를 불러오는 데 실패했습니다:', error);
       }
@@ -87,7 +107,7 @@ const Index = () => {
       </HeadingContainer>
 
       <ReactEditor title={title} content={content} onChangeTitle={setTitle} onChangeContent={setContent} />
-      <Keyword keywords={keywords} onKeywordsChange={setKeywords} />
+      <Keyword keywords={keywords} onKeywordsChange={handleKeywordsChange} />
       <ReviewToggle spoiler={spoiler} onSpoilerChange={setSpoiler} />
 
       <ButtonContainer>
