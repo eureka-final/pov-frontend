@@ -9,7 +9,7 @@ interface Amount {
 const clientKey = 'test_gck_docs_Ovk5rk1EwkEbP0W43n07xlzm';
 const customerKey = 'gzm1kZ8qFgjhniJitkQPA';
 
-export function CheckoutPage() {
+export default function Payments() {
   const [amount, setAmount] = useState<Amount>({
     currency: 'KRW',
     value: 50_000,

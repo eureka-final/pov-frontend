@@ -1,9 +1,10 @@
 import Main from '../pages/Main';
 import Movie from '../pages/Movie';
-import Review from '../pages/Review/Index';
+import Review from '../pages/Review/index';
 import ReviewWrite from '../pages/Review/ReviewWrite/Index';
 import Club from '../pages/Club';
 import Premieres from '../pages/Premieres';
+import Payments from '../pages/Premieres/Payments/Index';
 import MovieDetail from '../pages/MovieDetail';
 import ReviewDetail from '../pages/Review/ReviewDetail/Index';
 
@@ -48,6 +49,10 @@ const PremieresScreens = {
   Premieres: {
     path: '/premieres',
     element: <Premieres />,
+  },
+  Payments: {
+    path: '/payments',
+    element: <Payments />,
   },
 };
 
