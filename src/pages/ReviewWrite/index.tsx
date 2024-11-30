@@ -1,5 +1,5 @@
 import Padded from '../../components/templates/Padded/Padded';
-import ReactEditor from '../../components/reviews/ReactEditor';
+import ReactEditor from '../../components/Review/ReactEditor';
 import { Input, Button } from 'pov-design-system';
 
 const index = () => {
