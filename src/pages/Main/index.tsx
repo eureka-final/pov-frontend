@@ -15,6 +15,9 @@ const index = () => {
       <SwitchToggle checkedState={false} onChange={handleChange} />
       <SwitchToggle checkedState={true} onChange={handleChange} />
 
+      <div css={[{ width: '350px' }]}>
+        <Input placeholder="검색어를 입력해 주세요" icon={<Icon icon="search" color="#ADACAF" />} />
+      </div>
       <Input placeholder="제목을 입력해 주세요" />
       <Input placeholder="제목을 입력해 주세요" supportingText="40자 내로 입력해주세요" />
       <Input placeholder="제목을 입력해 주세요" supportingText="40자 내로 입력해주세요" isError={true} />
