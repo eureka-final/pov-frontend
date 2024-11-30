@@ -1,5 +1,5 @@
-// import ThemeToggle from '../../components/common/ThemeToggle';
-import NavigationTabs from '../../components/common/NavigationTabs';
+import ThemeToggle from '../../components/common/ThemeToggle';
+import NavigationTabs from '../common/NavigationTabs';
 import Profile from '../common/Profile';
 import { Logo } from 'pov-design-system';
 import { HeaderWrapper, Wrapper } from './Header.style';
@@ -17,9 +17,9 @@ function Header() {
           <Logo icon="logo" style={{ width: '40%', cursor: 'pointer' }} onClick={() => (window.location.href = '/')} />
           <NavigationTabs />
         </Wrapper>
-        <Profile user={user} />
+        <Profile name={user.name} avatarUrl={user.avatarUrl} />
       </HeaderWrapper>
-      {/* <ThemeToggle /> */}
+      <ThemeToggle />
     </>
   );
 }

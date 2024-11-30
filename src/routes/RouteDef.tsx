@@ -1,10 +1,11 @@
 import Main from '../pages/Main';
 import Movie from '../pages/Movie';
-import Review from '../pages/Review';
-import ReviewWrite from '../pages/ReviewWrite/Index';
+import Review from '../pages/Review/Index';
+import ReviewWrite from '../pages/Review/ReviewWrite/Index';
 import Club from '../pages/Club';
 import Premieres from '../pages/Premieres';
 import MovieDetail from '../pages/MovieDetail';
+import ReviewDetail from '../pages/Review/ReviewDetail/Index';
 
 const MovieScreens = {
   Main: {
@@ -29,6 +30,10 @@ const ReviewScreens = {
   ReviewWrite: {
     path: '/review/write',
     element: <ReviewWrite />,
+  },
+  ReviewDetail: {
+    path: '/review/detail/:id',
+    element: <ReviewDetail />,
   },
 };
 
