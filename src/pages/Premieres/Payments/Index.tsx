@@ -9,7 +9,9 @@ interface Amount {
   value: number;
 }
 
+// const clientKey = 'test_gck_docs_Ovk5rk1EwkEbP0W43n07xlzm';
 const clientKey = import.meta.env.VITE_CLIENT_SECRET_KEY;
+console.log(clientKey);
 const customerKey = uuidv4();
 
 function Index() {
