@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
-import Padded from '../../components/templates/Padded/Padded';
-import ReactEditor from '../../components/ReviewWrite/ReactEditor';
+import Padded from '../../../components/templates/Padded/Padded';
+import ReactEditor from '../../../components/review/ReviewWrite/ReactEditor';
 import { Heading, Body, Button, Modal, useOverlay, Logo } from 'pov-design-system';
-import Keyword from '../../components/ReviewWrite/Keyword';
-import ReviewToggle from '../../components/ReviewWrite/ReviewToggle';
+import Keyword from '../../../components/review/ReviewWrite/Keyword';
+import ReviewToggle from '../../../components/review/ReviewWrite/ReviewToggle';
 import { HeadingContainer, ButtonContainer, Vs, Item } from './ReviewWrite.style';
 import axios from 'axios';
 

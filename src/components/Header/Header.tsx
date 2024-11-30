@@ -1,5 +1,5 @@
 // import ThemeToggle from '../../components/common/ThemeToggle';
-import NavigationTabs from '../../components/common/NavigationTabs';
+import NavigationTabs from '../common/NavigationTabs';
 import Profile from '../common/Profile';
 import { Logo } from 'pov-design-system';
 import { HeaderWrapper, Wrapper } from './Header.style';

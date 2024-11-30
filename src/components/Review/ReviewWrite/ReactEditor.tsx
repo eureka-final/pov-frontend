@@ -104,7 +104,7 @@ const ReactEditor: React.FC<ReactEditorProps> = ({ title, content, onChangeTitle
         try {
           // Bearer 토큰 설정 (필요 시 동적으로 가져오기)
           //const accessToken = localStorage.getItem('accessToken'); // 예시: 로컬 스토리지에서 가져옴
-          const res = await axios.post('/api/movies/reviews/images', formData, {
+          const res = await axios.post('https://www.point-of-views.com/api/movies/reviews/images', formData, {
             headers: {
               'Content-Type': 'multipart/form-data',
               // Authorization: `Bearer ${accessToken}`, // 헤더 추가

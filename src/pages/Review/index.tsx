@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Padded from '../../components/templates/Padded/Padded';
 import { Badge } from 'pov-design-system';
 import { Wrapper } from './Review.style';
-import ReviewList from '../../components/Review/ReviewList';
+import ReviewList from '../../components/review/ReviewList';
 
 const Index = () => {
   const [sections, setSections] = useState([

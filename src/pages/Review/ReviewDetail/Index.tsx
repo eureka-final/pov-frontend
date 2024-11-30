@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import Main from '../../components/ReviewDetail/Main';
-import Padded from '../../components/templates/Padded/Padded';
+import Main from '../../../components/review/ReviewDetail/Main';
+import Padded from '../../../components/templates/Padded/Padded';
 import { useParams } from 'react-router-dom';
 
 const Index = () => {

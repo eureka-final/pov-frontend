@@ -4,14 +4,16 @@ import Padded from '../../components/templates/Padded/Padded';
 
 const index = () => {
   const { isOpen, open, close } = useOverlay();
-
+  const handleChange = () => {
+    console.log('switchtoggle');
+  };
   return (
     <Padded>
       <Button variant="primary" size="small">
         버튼
       </Button>
-      <SwitchToggle />
-      <SwitchToggle checkedState={true} />
+      <SwitchToggle checkedState={false} onChange={handleChange} />
+      <SwitchToggle checkedState={true} onChange={handleChange} />
 
       <Input placeholder="제목을 입력해 주세요" />
       <Input placeholder="제목을 입력해 주세요" supportingText="40자 내로 입력해주세요" />

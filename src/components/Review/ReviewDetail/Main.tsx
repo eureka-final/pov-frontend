@@ -1,4 +1,4 @@
-import Profile from '../common/Profile';
+import Profile from '../../common/Profile';
 import { Heading, Body, Paragraph, Icon, Badge } from 'pov-design-system';
 
 interface MainProps {
