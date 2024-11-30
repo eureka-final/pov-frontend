@@ -18,14 +18,6 @@ export default defineConfig({
   },
   server: {
     proxy: {
-      /* Server */
-      '/pov': {
-        target: 'https://www.point-of-views.com',
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/pov/, ''),
-        secure: true,
-      },
-
       /* Naver OAuth */
       '/api/naver/token': {
         target: 'https://nid.naver.com/oauth2.0/token',
