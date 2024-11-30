@@ -8,7 +8,8 @@ import { HeadingContainer, ButtonContainer, Vs, Item } from './ReviewWrite.style
 import axios from 'axios';
 
 const Index = () => {
-  const { isOpen, open, close } = useOverlay();
+  const { isOpen: isSaveOpen, open: saveOpen, close: saveClose } = useOverlay();
+  const { isOpen: isTempOpen, open: tempOpen, close: tempClose } = useOverlay();
 
   // ReactEditor 상태
   const [title, setTitle] = useState<string>('');
@@ -78,7 +79,7 @@ const Index = () => {
 
     try {
       localStorage.setItem('reviewDraft', JSON.stringify(tempData));
-      alert('임시 저장되었습니다!');
+      tempOpen();
     } catch (error) {
       console.error('임시 저장 실패:', error);
       alert('임시 저장 중 문제가 발생했습니다.');
@@ -114,13 +115,23 @@ const Index = () => {
         <Button variant="secondary" size="large" onClick={handleTemporary}>
           임시 저장하기
         </Button>
-        <Button variant="primary" size="large" onClick={open}>
+        <Button variant="primary" size="large" onClick={saveOpen}>
           저장하기
         </Button>
       </ButtonContainer>
 
+      {/* 임시 저장 모달 */}
+      <Modal isOpen={isTempOpen} closeModal={tempClose}>
+        <Heading>임시 저장 되었습니다!</Heading>
+        <ButtonContainer>
+          <Button variant="primary" onClick={tempClose}>
+            확인
+          </Button>
+        </ButtonContainer>
+      </Modal>
+
       {/* 저장하기 버튼 누르면 나오는 모달창 */}
-      <Modal isOpen={isOpen} closeModal={close}>
+      <Modal isOpen={isSaveOpen} closeModal={saveClose}>
         <div>
           <Heading size="medium">영화를 평가해주세요.</Heading>
           <Body>이 영화에 대한 전반적인 평가는 어떠신가요?</Body>
