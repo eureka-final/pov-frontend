@@ -51,7 +51,7 @@ const PremieresScreens = {
     element: <Premieres />,
   },
   Payments: {
-    path: '/payments',
+    path: '/premieres/payments',
     element: <Payments />,
   },
 };
