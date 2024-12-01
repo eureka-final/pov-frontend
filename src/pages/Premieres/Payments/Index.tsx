@@ -1,8 +1,8 @@
 import { loadTossPayments, TossPaymentsInstance, PaymentWidgetsInstance } from '@tosspayments/tosspayments-sdk';
 import { useEffect, useState } from 'react';
 import Padded from '../../../components/templates/Padded/Padded';
-import { Button } from 'pov-design-system';
 import { v4 as uuidv4 } from 'uuid';
+import './style.css';
 
 interface Amount {
   currency: string;
@@ -71,14 +71,12 @@ function Index() {
 
   return (
     <Padded>
-      <div className="wrapper">
-        <div className="box_section">
-          {/* 결제 UI */}
-          <div id="payment-method" />
-          {/* 이용약관 UI */}
-          <div id="agreement" />
-          {/* 쿠폰 체크박스 */}
-          {/* <div>
+      {/* 결제 UI */}
+      <div id="payment-method" />
+      {/* 이용약관 UI */}
+      <div id="agreement" />
+      {/* 쿠폰 체크박스 */}
+      {/* <div>
           <div>
             <label htmlFor="coupon-box">
               <input
@@ -94,35 +92,34 @@ function Index() {
               <span>5,000원 쿠폰 적용</span>
             </label>
           </div>
-        </div> */}
+        </div> 
 
           {/* 결제하기 버튼 */}
-          <Button
-            size="large"
-            onClick={async () => {
-              try {
-                // ------ '결제하기' 버튼 누르면 결제창 띄우기 ------
-                // 결제를 요청하기 전에 orderId, amount를 서버에 저장하세요.
-                // 결제 과정에서 악의적으로 결제 금액이 바뀌는 것을 확인하는 용도입니다.
-                await widgets?.requestPayment({
-                  orderId: 'gcq1VyXgdwusIcTTZnQmq',
-                  orderName: '토스 티셔츠 외 2건',
-                  successUrl: window.location.origin + '/premieres/payments/success',
-                  failUrl: window.location.origin + '/premieres/payments/fail',
-                  customerEmail: 'customer123@gmail.com',
-                  customerName: '김토스',
-                  customerMobilePhone: '01012341234',
-                });
-              } catch (error) {
-                // 에러 처리하기
-                console.error(error);
-              }
-            }}
-          >
-            결제하기
-          </Button>
-        </div>
-      </div>
+      <button
+        className="btn primary w-100"
+        disabled={!ready}
+        onClick={async () => {
+          try {
+            // ------ '결제하기' 버튼 누르면 결제창 띄우기 ------
+            // 결제를 요청하기 전에 orderId, amount를 서버에 저장하세요.
+            // 결제 과정에서 악의적으로 결제 금액이 바뀌는 것을 확인하는 용도입니다.
+            await widgets?.requestPayment({
+              orderId: 'gcq1VyXgdwusIcTTZnQmq',
+              orderName: '토스 티셔츠 외 2건',
+              successUrl: window.location.origin + '/premieres/payments/success',
+              failUrl: window.location.origin + '/premieres/payments/fail',
+              customerEmail: 'customer123@gmail.com',
+              customerName: '김토스',
+              customerMobilePhone: '01012341234',
+            });
+          } catch (error) {
+            // 에러 처리하기
+            console.error(error);
+          }
+        }}
+      >
+        결제하기
+      </button>
     </Padded>
   );
 }

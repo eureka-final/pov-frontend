@@ -6,6 +6,7 @@ import Club from '../pages/Club';
 import Premieres from '../pages/Premieres';
 import Payments from '../pages/Premieres/Payments/Index';
 import Success from '../pages/Premieres/Payments/Success/Index';
+import Fail from '../pages/Premieres/Payments/Fail/Index';
 import MovieDetail from '../pages/MovieDetail';
 import ReviewDetail from '../pages/Review/ReviewDetail/Index';
 
@@ -59,10 +60,10 @@ const PremieresScreens = {
     path: '/premieres/payments/success',
     element: <Success />,
   },
-  // Fail: {
-  //   path: '/premieres/payments/fail',
-  //   element: <Fail />,
-  // },
+  Fail: {
+    path: '/premieres/payments/fail',
+    element: <Fail />,
+  },
 };
 
 export const AppRouteDef = {
