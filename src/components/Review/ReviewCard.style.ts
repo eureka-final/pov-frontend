@@ -14,6 +14,7 @@ export const CardContainer = styled.div`
   gap: 16px;
   border-radius: 8px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
 `;
 
 export const CardFlex = styled.div`
@@ -40,4 +41,14 @@ export const LikeContainer = styled.div`
   align-items: center;
   justify-content: flex-end	;
   gap: 8px; /* 아이콘과 좋아요 수 사이 간격 */
+  color: ${({ theme }) => theme.color.green600};
+`;
+
+export const Spoiler = styled.div`
+  display: flex;
+  gap: 5px;
+`;
+
+export const More  = styled.div`
+  color: ${({ theme }) => theme.color.green600};
 `;

@@ -21,6 +21,7 @@ function ReviewList({ sectionsType }: sectionType) {
       createdAt: '2024.12.01',
       likeAmount: 230,
       isLiked: false,
+      spoiler: false,
     },
     {
       id: 2,
@@ -34,6 +35,7 @@ function ReviewList({ sectionsType }: sectionType) {
       createdAt: '2024.11.29',
       likeAmount: 120,
       isLiked: true,
+      spoiler: true,
     },
     {
       id: 3,
@@ -45,6 +47,7 @@ function ReviewList({ sectionsType }: sectionType) {
       createdAt: '2024.11.29',
       likeAmount: 120,
       isLiked: true,
+      spoiler: false,
     },
   ];
 
@@ -84,6 +87,7 @@ function ReviewList({ sectionsType }: sectionType) {
             createdAt={review.createdAt}
             likeAmount={review.likeAmount}
             isLiked={review.isLiked}
+            spoiler={review.spoiler}
           />
         );
       })}
