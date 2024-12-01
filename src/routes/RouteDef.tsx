@@ -1,6 +1,6 @@
 import Main from '../pages/Main';
 import Movie from '../pages/Movie';
-import Review from '../pages/Review/index';
+import Review from '../pages/Review/Index';
 import ReviewWrite from '../pages/Review/ReviewWrite/Index';
 import Club from '../pages/Club';
 import Premieres from '../pages/Premieres';

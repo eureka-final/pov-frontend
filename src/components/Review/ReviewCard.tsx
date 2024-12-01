@@ -1,12 +1,13 @@
 import { useNavigate } from 'react-router-dom';
-import { Card, Poster } from './ReviewCard.style';
+import { CardContainer, Poster, CardFlex, ReviewCardContainer, LikeContainer } from './ReviewCard.style';
 import { Body, Paragraph, Icon } from 'pov-design-system';
 import Profile from '../common/Profile';
+
 interface ReviewCardProps {
   id: number;
   movieTitle: string;
   title: string;
-  contents: string;
+  contents: string | undefined;
   reviewer: string;
   profileImge: string;
   thumbnail: string;
@@ -19,21 +20,28 @@ function ReviewCard({ id, movieTitle, title, contents, reviewer, profileImge, th
   const navigate = useNavigate();
 
   return (
-    <Card
+    <CardContainer
       onClick={() => {
-        navigate(`/review/${id}`);
+        navigate(`/review/detail/${id}`);
       }}
     >
-      <Poster>
-        <img src={thumbnail} alt={movieTitle} />
-        <Body size="small">{movieTitle}</Body>
-      </Poster>
-      <Profile name={reviewer} avatarUrl={profileImge} />
-      <Paragraph>{title}</Paragraph>
-      <Body size="large">{contents}</Body>
-      <Body>{createdAt}</Body>
-      <Icon icon={isLiked ? 'heartfill' : 'heartline'} /> {likeAmount}
-    </Card>
+      <CardFlex>
+        <Poster>
+          <img src={thumbnail} alt={movieTitle} />
+          <Body size="small">{movieTitle}</Body>
+        </Poster>
+        <ReviewCardContainer>
+          <Profile name={reviewer} avatarUrl={profileImge} />
+          <Paragraph>{title}</Paragraph>
+          <Body size="large">{contents}</Body>
+
+          <Body>{createdAt}</Body>
+          <LikeContainer>
+            <Icon icon={isLiked ? 'heartfill' : 'heartline'} /> {likeAmount}
+          </LikeContainer>
+        </ReviewCardContainer>
+      </CardFlex>
+    </CardContainer>
   );
 }
 
