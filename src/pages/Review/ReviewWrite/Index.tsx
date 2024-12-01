@@ -14,7 +14,7 @@ const Index = () => {
   // ReactEditor 상태
   const [title, setTitle] = useState<string>('');
   const [content, setContent] = useState<string>('');
-
+  // console.log(content);
   // Keyword 상태
   const [keywords, setKeywords] = useState([
     { text: '감동적인', cancel: false },
@@ -80,11 +80,13 @@ const Index = () => {
     try {
       localStorage.setItem('reviewDraft', JSON.stringify(tempData));
       tempOpen();
+      console.log(tempData);
     } catch (error) {
       console.error('임시 저장 실패:', error);
       alert('임시 저장 중 문제가 발생했습니다.');
     }
   };
+
   // 로컬 스토리지에서 데이터 복원
   useEffect(() => {
     const savedDraft = localStorage.getItem('reviewDraft');
@@ -96,11 +98,13 @@ const Index = () => {
         setKeywords(draftData.keywords || []);
         setSpoiler(draftData.spoiler || false);
         setPreference(draftData.preference || '');
+        console.log(draftData.content);
       } catch (error) {
         console.error('임시 저장된 데이터를 불러오는 데 실패했습니다:', error);
       }
     }
   }, []);
+
   return (
     <Padded>
       <HeadingContainer>

@@ -9,9 +9,7 @@ interface Amount {
   value: number;
 }
 
-// const clientKey = 'test_gck_docs_Ovk5rk1EwkEbP0W43n07xlzm';
 const clientKey = import.meta.env.VITE_CLIENT_SECRET_KEY;
-console.log(clientKey);
 const customerKey = uuidv4();
 
 function Index() {
@@ -109,8 +107,8 @@ function Index() {
                 await widgets?.requestPayment({
                   orderId: 'gcq1VyXgdwusIcTTZnQmq',
                   orderName: '토스 티셔츠 외 2건',
-                  successUrl: window.location.origin + '/success',
-                  failUrl: window.location.origin + '/fail',
+                  successUrl: window.location.origin + '/premieres/payments/success',
+                  failUrl: window.location.origin + '/premieres/payments/fail',
                   customerEmail: 'customer123@gmail.com',
                   customerName: '김토스',
                   customerMobilePhone: '01012341234',

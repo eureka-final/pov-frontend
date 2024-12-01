@@ -7,8 +7,10 @@ import ReactModule from './ReactModule';
 // import dompurify from 'dompurify';
 import axios from 'axios';
 import { Input } from 'pov-design-system';
+import Parchment from 'parchment';
 
 Quill.register('modules/imageResize', ImageResize);
+Quill.register('parchment', Parchment);
 
 interface ReactEditorProps {
   title: string;
@@ -150,7 +152,6 @@ const ReactEditor: React.FC<ReactEditorProps> = ({ title, content, onChangeTitle
       },
       imageResize: {
         // https://www.npmjs.com/package/quill-image-resize-module-react 참고
-        parchment: Quill.import('parchment'),
         modules: ['Resize', 'DisplaySize', 'Toolbar'],
       },
     }),

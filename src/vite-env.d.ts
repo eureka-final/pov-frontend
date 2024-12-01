@@ -2,8 +2,8 @@
 
 interface ImportMetaEnv {
     readonly VITE_CLIENT_SECRET_KEY: string;
-  }
+}
   
-  interface ImportMeta {
+interface ImportMeta {
     readonly env: ImportMetaEnv;
-  }
+}

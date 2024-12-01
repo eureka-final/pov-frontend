@@ -5,6 +5,7 @@ import ReviewWrite from '../pages/Review/ReviewWrite/Index';
 import Club from '../pages/Club';
 import Premieres from '../pages/Premieres';
 import Payments from '../pages/Premieres/Payments/Index';
+import Success from '../pages/Premieres/Payments/Success/Index';
 import MovieDetail from '../pages/MovieDetail';
 import ReviewDetail from '../pages/Review/ReviewDetail/Index';
 
@@ -54,6 +55,14 @@ const PremieresScreens = {
     path: '/premieres/payments',
     element: <Payments />,
   },
+  Success: {
+    path: '/premieres/payments/success',
+    element: <Success />,
+  },
+  // Fail: {
+  //   path: '/premieres/payments/fail',
+  //   element: <Fail />,
+  // },
 };
 
 export const AppRouteDef = {
