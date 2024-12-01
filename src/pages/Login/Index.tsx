@@ -1,8 +1,8 @@
 import Padded from '../../components/templates/Padded/Padded';
-import { SignInSection, SignInSectionHeader, SignInButtonWrapper, NaverSignInButton, GoogleSignInButton } from './index.style';
+import { SignInSection, SignInSectionHeader, SignInButtonWrapper, NaverSignInButton, GoogleSignInButton } from './Index.style';
 import { Logo, Heading, Paragraph } from 'pov-design-system';
 
-const index = () => {
+const Index = () => {
   /* 네이버 OAuth 서버 URL로 리디렉션 */
   const redirectToNaverLogin = () => {
     const clientId = import.meta.env.VITE_NAVER_CLIENT_ID;
@@ -58,4 +58,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default Index;

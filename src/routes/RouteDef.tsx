@@ -5,9 +5,9 @@ import ReviewWrite from '../pages/ReviewWrite';
 import Club from '../pages/Club';
 import Premieres from '../pages/Premieres';
 import MovieDetail from '../pages/MovieDetail';
-import SignIn from '../pages/SignIn';
-import OauthNaver from '../pages/OauthNaver';
-import OauthGoogle from '../pages/OauthGoogle';
+import Login from '../pages/Login/Index';
+import OauthNaver from '../pages/Oauth/Naver';
+import OauthGoogle from '../pages/Oauth/Google';
 
 const MovieScreens = {
   Main: {
@@ -49,10 +49,10 @@ const PremieresScreens = {
   },
 };
 
-const SignScreens = {
+const AuthScreens = {
   SignIn: {
-    path: '/signIn',
-    element: <SignIn />,
+    path: '/login',
+    element: <Login />,
   },
   OauthNaver: {
     path: '/oauth/naver',
@@ -69,5 +69,5 @@ export const AppRouteDef = {
   ...ReviewScreens,
   ...ClubScreens,
   ...PremieresScreens,
-  ...SignScreens,
+  ...AuthScreens,
 };
