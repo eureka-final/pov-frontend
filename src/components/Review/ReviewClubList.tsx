@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import ReviewClubCard from './ReviewClubCard';
-import { ClubContainer, ClubReviewListContainer } from './ReviewCard.style';
+import { ClubContainer, ClubReviewListContainer, ClubItem } from './ReviewCard.style';
 import { Avatar } from 'pov-design-system';
 
 function ReviewClubList() {
@@ -114,14 +114,17 @@ function ReviewClubList() {
       <ClubContainer>
         {clubs.map((club) => {
           return (
-            <Avatar
-              key={club.clubId}
-              size="small"
-              username={club.clubName}
-              src={club.clubImge}
-              css={{ cursor: 'pointer' }}
-              onClick={() => setSelectedClubId(club.clubId)}
-            />
+            <ClubItem>
+              <Avatar
+                key={club.clubId}
+                size="medium"
+                username={club.clubName}
+                src={club.clubImge}
+                css={{ cursor: 'pointer' }}
+                selected={club.clubId === selectedClubId}
+                onClick={() => setSelectedClubId(club.clubId)}
+              />
+            </ClubItem>
           );
         })}
       </ClubContainer>

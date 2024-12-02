@@ -30,6 +30,14 @@ export const CardContainer = styled.div`
   cursor: pointer;
 `;
 
+export const ClubItem = styled.div`
+  transition: transform 0.3s ease, color 0.3s ease; /* 애니메이션 효과 */
+  &:hover {
+    transform: scale(1.1); /* 크기 확대 */
+  }
+`;
+
+
 export const CardFlex = styled.div`
   display: flex;
   gap: 32px;
