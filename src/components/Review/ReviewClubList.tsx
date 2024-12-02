@@ -114,9 +114,8 @@ function ReviewClubList() {
       <ClubContainer>
         {clubs.map((club) => {
           return (
-            <ClubItem>
+            <ClubItem key={club.clubId}>
               <Avatar
-                key={club.clubId}
                 size="medium"
                 username={club.clubName}
                 src={club.clubImge}
