@@ -1,4 +1,4 @@
-export interface reviewItem {
+export interface reviewFormData {
     title: string;
     contents: string;
     preference: string;
