@@ -7,7 +7,7 @@ export interface PostReviewItemParams extends reviewFormData {
   movieId: number;
 }
 
-export const postTripItem = ({ movieId, ...information }: PostReviewItemParams) => {
+export const postReviewItem = ({ movieId, ...information }: PostReviewItemParams) => {
   return axios.post<reviewFormData>(END_POINTS.CREATE_REVIEW_ITEM(movieId), {
     ...information,
   });
