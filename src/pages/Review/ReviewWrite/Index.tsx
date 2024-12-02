@@ -5,9 +5,9 @@ import { Heading, Body, Button, Modal, useOverlay, Logo } from 'pov-design-syste
 import Keyword from '../../../components/review/ReviewWrite/Keyword';
 import ReviewToggle from '../../../components/review/ReviewWrite/ReviewToggle';
 import { HeadingContainer, ButtonContainer, Vs, Item } from './ReviewWrite.style';
-import axios from 'axios';
+import { useCreateReviewMutation } from '../../../hooks/queries/useCreateReviewMutation';
 
-const Index = () => {
+const Index = ({ movieId }: { movieId: number }) => {
   const { isOpen: isSaveOpen, open: saveOpen, close: saveClose } = useOverlay();
   const { isOpen: isTempOpen, open: tempOpen, close: tempClose } = useOverlay();
 
@@ -45,26 +45,30 @@ const Index = () => {
   // Modal 상태
   const [preference, setPreference] = useState<string>('');
 
+  const { mutate } = useCreateReviewMutation();
   // 데이터 통합 후 요청 전송
-  const handleSubmit = async () => {
-    // TODO: 리뷰 작성 후 리뷰 상세 페이지로 이동
-    close();
+  const handleSubmit = () => {
+    // 선택된 키워드만 필터링
+    const selectedKeywords = keywords.filter((keyword) => keyword.cancel).map((keyword) => keyword.text);
+
     const requestData = {
       title,
       contents: content,
       preference,
-      keywords,
+      keywords: selectedKeywords,
       spoiler,
     };
     console.log(requestData);
 
-    // TODO: 영화 id 만들어지면 적용하기
-    try {
-      const response = await axios.post(`/movies/:id/reviews`, requestData);
-      console.log('성공적으로 전송:', response.data);
-    } catch (error) {
-      console.error('데이터 전송 실패:', error);
-    }
+    mutate(
+      { movieId, ...requestData },
+      {
+        onSuccess: () => {
+          console.log('리뷰 작성 성공!');
+          saveClose();
+        },
+      }
+    );
   };
 
   // 임시저장
