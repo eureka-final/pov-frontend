@@ -2,23 +2,11 @@ import { useNavigate } from 'react-router-dom';
 import { CardContainer, Poster, CardFlex, ReviewCardContainer, FlexBetween, LikeContainer, Spoiler, SpoMore, ReadMore } from './ReviewCard.style';
 import { Body, Paragraph, Icon } from 'pov-design-system';
 import Profile from '../common/Profile';
+import { useReviews } from '../../hooks/review/useReviews';
 
-interface ReviewCardProps {
-  reviewId: number;
-  movieTitle: string;
-  title: string;
-  contents: string | undefined;
-  reviewer: string;
-  profileImge: string;
-  thumbnail: string;
-  createdAt: string;
-  likeAmount: number;
-  isLiked: boolean;
-  spoiler: boolean;
-}
-
-function ReviewCard({ reviewId, movieTitle, title, contents, reviewer, profileImge, thumbnail, createdAt, likeAmount, isLiked, spoiler }: ReviewCardProps) {
+function ReviewCard() {
   const navigate = useNavigate();
+  const { reviewsData } = useReviews();
 
   const truncateContents = (text: string | undefined, maxLength: number) => {
     if (!text) return '';
@@ -36,40 +24,52 @@ function ReviewCard({ reviewId, movieTitle, title, contents, reviewer, profileIm
   };
 
   return (
-    <CardContainer
-      onClick={() => {
-        navigate(`/review/detail/${reviewId}`);
-      }}
-    >
-      <CardFlex>
-        <Poster>
-          <img src={thumbnail} alt={movieTitle} />
-          <Body size="small">{movieTitle}</Body>
-        </Poster>
-        <ReviewCardContainer>
-          <Profile name={reviewer} avatarUrl={profileImge} />
-          <Paragraph>{title}</Paragraph>
-          {spoiler ? (
-            <Spoiler>
-              <Body size="large">스포일러가 있어요!</Body>
-              <Body size="large">
-                <SpoMore>더보기</SpoMore>
-              </Body>
-            </Spoiler>
-          ) : (
-            <Body size="large">{truncateContents(contents, 380)}</Body>
-          )}
+    <>
+      {reviewsData.map((review) => {
+        return (
+          <CardContainer
+            key={review.reviewId}
+            onClick={() => {
+              navigate(`/review/detail/${review.reviewId}`);
+            }}
+          >
+            <CardFlex>
+              <Poster>
+                <img src={review.thumbnail} alt={review.movieTitle} />
+                <Body size="small">{review.movieTitle}</Body>
+              </Poster>
+              <ReviewCardContainer>
+                <Profile name={review.reviewer} avatarUrl={review.profileImge} />
+                <Paragraph>{review.title}</Paragraph>
+                {review.spoiler ? (
+                  <Spoiler>
+                    <Body size="large">스포일러가 있어요!</Body>
+                    <Body size="large">
+                      <SpoMore>더보기</SpoMore>
+                    </Body>
+                  </Spoiler>
+                ) : (
+                  <Body size="large">{truncateContents(review.contents, 380)}</Body>
+                )}
 
-          <FlexBetween>
-            <Body>{createdAt}</Body>
-            <LikeContainer>
-              <Icon icon={isLiked ? 'heartfill' : 'heartline'} /> {likeAmount}
-            </LikeContainer>
-          </FlexBetween>
-        </ReviewCardContainer>
-      </CardFlex>
-    </CardContainer>
+                <FlexBetween>
+                  <Body>{review.createdAt}</Body>
+                  <LikeContainer>
+                    <Icon icon={review.isLiked ? 'heartfill' : 'heartline'} /> {review.likeAmount}
+                  </LikeContainer>
+                </FlexBetween>
+              </ReviewCardContainer>
+            </CardFlex>
+          </CardContainer>
+        );
+      })}
+    </>
   );
 }
+
+// eslint-disable-next-line react/display-name
+ReviewCard.Empty = () => {
+  return <div>등록된 리뷰가 없습니다.</div>;
+};
 
 export default ReviewCard;
