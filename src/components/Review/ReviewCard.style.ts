@@ -7,6 +7,19 @@ export const ReviewListContainer = styled.div`
   margin-top: 16px;
 `;
 
+export const ClubContainer = styled.div`
+  display: flex;
+  gap: 16px;
+  margin-top: 16px;
+`;
+
+export const ClubReviewListContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3열로 구성 */
+  gap: 16px; /* 카드 간격 */
+  margin-top: 16px;
+`;
+
 export const CardContainer = styled.div`
   background-color: ${({ theme }) => theme.backgroundElevated};
   width: 100%;
@@ -36,10 +49,15 @@ export const ReviewCardContainer = styled.div`
   gap: 16px;
 `;
 
+export const FlexBetween = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
 export const LikeContainer = styled.div`
   display: flex;
   align-items: center;
-  justify-content: flex-end	;
   gap: 8px; /* 아이콘과 좋아요 수 사이 간격 */
   color: ${({ theme }) => theme.color.green600};
 `;
@@ -49,6 +67,10 @@ export const Spoiler = styled.div`
   gap: 5px;
 `;
 
-export const More  = styled.div`
+export const SpoMore  = styled.div`
   color: ${({ theme }) => theme.color.green600};
+`;
+
+export const ReadMore  = styled.div`
+  color: ${({ theme }) => theme.color.gray400};
 `;

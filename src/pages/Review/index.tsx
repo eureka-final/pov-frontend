@@ -3,6 +3,7 @@ import Padded from '../../components/templates/Padded/Padded';
 import { Badge } from 'pov-design-system';
 import { Wrapper } from './Review.style';
 import ReviewList from '../../components/review/ReviewList';
+import ReviewClubList from '../../components/review/ReviewClubList';
 
 const Index = () => {
   const [sections, setSections] = useState([
@@ -34,7 +35,8 @@ const Index = () => {
           </Badge>
         ))}
       </Wrapper>
-      <ReviewList sectionsType={sectionsType} />
+      {sectionsType === '모든 리뷰' && <ReviewList sectionsType={sectionsType} />}
+      {sectionsType === '클럽 리뷰' && <ReviewClubList />}
     </Padded>
   );
 };

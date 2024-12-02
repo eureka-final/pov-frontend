@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { CardContainer, Poster, CardFlex, ReviewCardContainer, FlexBetween, LikeContainer, Spoiler, SpoMore, ReadMore } from './ReviewCard.style';
+import { CardContainer, Poster, CardFlex, ReviewCardContainer, LikeContainer, FlexBetween, Spoiler, SpoMore, ReadMore } from './ReviewCard.style';
 import { Body, Paragraph, Icon } from 'pov-design-system';
 import Profile from '../common/Profile';
 
@@ -17,7 +17,7 @@ interface ReviewCardProps {
   spoiler: boolean;
 }
 
-function ReviewCard({ reviewId, movieTitle, title, contents, reviewer, profileImge, thumbnail, createdAt, likeAmount, isLiked, spoiler }: ReviewCardProps) {
+function ReviewClubCard({ reviewId, movieTitle, title, contents, reviewer, profileImge, thumbnail, createdAt, likeAmount, isLiked, spoiler }: ReviewCardProps) {
   const navigate = useNavigate();
 
   const truncateContents = (text: string | undefined, maxLength: number) => {
@@ -57,7 +57,7 @@ function ReviewCard({ reviewId, movieTitle, title, contents, reviewer, profileIm
               </Body>
             </Spoiler>
           ) : (
-            <Body size="large">{truncateContents(contents, 380)}</Body>
+            <Body size="large">{truncateContents(contents, 145)}</Body>
           )}
 
           <FlexBetween>
@@ -72,4 +72,4 @@ function ReviewCard({ reviewId, movieTitle, title, contents, reviewer, profileIm
   );
 }
 
-export default ReviewCard;
+export default ReviewClubCard;
