@@ -11,4 +11,3 @@ export interface ReviewsData {
     isLiked: boolean;
     spoiler: boolean;
 }
-  

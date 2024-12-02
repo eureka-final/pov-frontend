@@ -35,7 +35,7 @@ const Index = () => {
           </Badge>
         ))}
       </Wrapper>
-      {sectionsType === '모든 리뷰' && <ReviewList sectionsType={sectionsType} />}
+      {sectionsType === '모든 리뷰' && <ReviewList />}
       {sectionsType === '클럽 리뷰' && <ReviewClubList />}
     </Padded>
   );
