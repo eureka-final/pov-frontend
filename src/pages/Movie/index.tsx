@@ -1,22 +1,63 @@
 import Padded from '../../components/templates/Padded/Padded';
-import { Heading, Body, Icon } from 'pov-design-system';
-import { Container, InputContainer, SearchInput, Section, CardContainer, Card, ImageLayer, InfoContainer, Info, Count } from './Movie.styles';
-import { constants } from '../../constants/constants';
+import Section from '../../components/movies/Section/Section';
+import { Container, InputContainer, SearchInput } from './Movie.styles';
 import { useState } from 'react';
+import { constants } from '../../constants/constants';
 
 interface User {
   name: string;
 }
 
+const dummy = [
+  {
+    name: '올드보이',
+    date: '2003.11',
+    likes: '156',
+    reviews: '15',
+  },
+  {
+    name: '올드보이',
+    date: '2003.11',
+    likes: '156',
+    reviews: '15',
+  },
+  {
+    name: '올드보이',
+    date: '2003.11',
+    likes: '156',
+    reviews: '15',
+  },
+  {
+    name: '올드보이',
+    date: '2003.11',
+    likes: '156',
+    reviews: '15',
+  },
+  {
+    name: '올드보이',
+    date: '2003.11',
+    likes: '156',
+    reviews: '15',
+  },
+  {
+    name: '올드보이',
+    date: '2003.11',
+    likes: '156',
+    reviews: '15',
+  },
+];
+
 const Index = () => {
   const [userData, setUserData] = useState<User>({
     name: '혜밍웨이',
   });
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState<string>('');
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
   };
+  
+  const heading = `${userData.name}${constants.movies.main.topic.recommendation}`;
 
   return (
     <Padded>
@@ -24,71 +65,7 @@ const Index = () => {
         <InputContainer>
           <SearchInput id="example-input" type="text" value={value} placeholder="영화 검색하기" onChange={handleSearch} />
         </InputContainer>
-        <Section>
-          <Heading size="large">{`${userData.name}${constants.movies.main.topic.recommendation}`}</Heading>
-          <CardContainer>
-            <Card>
-              <ImageLayer />
-              <Heading size="medium">{'올드보이'}</Heading>
-              <Body size="large">Body02</Body>
-              <Info>
-                <InfoContainer>
-                  <Icon icon="heartline" color="#ffffff" />
-                  <Count>156</Count>
-                </InfoContainer>
-                <InfoContainer>
-                  <Icon icon="reviewline" color="#ffffff" />
-                  <Count>15</Count>
-                </InfoContainer>
-              </Info>
-            </Card>
-            <Card>
-              <ImageLayer />
-              <Heading size="medium">{'올드보이'}</Heading>
-              <Body size="large">Body02</Body>
-              <Info>
-                <InfoContainer>
-                  <Icon icon="heartline" color="#ffffff" />
-                  <Count>156</Count>
-                </InfoContainer>
-                <InfoContainer>
-                  <Icon icon="reviewline" color="#ffffff" />
-                  <Count>15</Count>
-                </InfoContainer>
-              </Info>
-            </Card>
-            <Card>
-              <ImageLayer />
-              <Heading size="medium">{'올드보이'}</Heading>
-              <Body size="large">Body02</Body>
-              <Info>
-                <InfoContainer>
-                  <Icon icon="heartline" color="#ffffff" />
-                  <Count>156</Count>
-                </InfoContainer>
-                <InfoContainer>
-                  <Icon icon="reviewline" color="#ffffff" />
-                  <Count>15</Count>
-                </InfoContainer>
-              </Info>
-            </Card>
-            <Card>
-              <ImageLayer />
-              <Heading size="medium">{'올드보이'}</Heading>
-              <Body size="large">Body02</Body>
-              <Info>
-                <InfoContainer>
-                  <Icon icon="heartline" color="#ffffff" />
-                  <Count>156</Count>
-                </InfoContainer>
-                <InfoContainer>
-                  <Icon icon="reviewline" color="#ffffff" />
-                  <Count>15</Count>
-                </InfoContainer>
-              </Info>
-            </Card>
-          </CardContainer>
-        </Section>
+        <Section items={dummy} heading={heading} />
       </Container>
     </Padded>
   );
