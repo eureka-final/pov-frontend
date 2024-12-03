@@ -18,7 +18,7 @@ const Index = () => {
 
       if (code) {
         const email = await getGoogleUserEmailApi(code);
-        await postAuthLoginApi(email, 'google');
+        await postAuthLoginApi(email, 'GOOGLE');
       }
     };
     loginWithGoogle();
