@@ -13,12 +13,23 @@ export const constants = {
       } as Genres,
       likes: '좋아요',
       reviews: '리뷰 쓰기',
-      bookmark: '북마크'
+      bookmark: '북마크',
+    },
+    detail: {
+      heading: {
+        review: '리뷰',
+        production: '제작 및 출연',
+        steel: '스틸 컷',
+        videos: '관련 영상',
+      },
+      body: {
+        review: '자세히 보기',
+      },
     },
     progress: {
       like: '재밌었어요',
       unlike: '별로에요',
-    }
+    },
   },
 } as const;
 

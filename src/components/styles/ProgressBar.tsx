@@ -13,7 +13,7 @@ const Bar = styled.div`
   border-radius: 12px;
   font-weight: 600;
   font-size: 0.8rem;
-  margin-top: 20px;
+  margin: 8px 0;
   overflow: hidden;
 `;
 
@@ -22,7 +22,7 @@ const Progress = styled.div<{ width?: number }>`
   height: 30px;
   padding: 0;
   text-align: center;
-  background-color: skyblue;
+  background-color: #1bd27d;
   color: #111;
 `;
 
@@ -46,8 +46,10 @@ const ProgressBar = ({ percentage, like, unlike }: Progess) => {
         <Progress width={percentage} />
       </Bar>
       <Count>
-        <Body style={{ color: '#1BD27D' }}>{constants.movies.progress.like + ' ' + like}</Body>
-        <Body>{constants.movies.progress.unlike + ' ' + unlike}</Body>
+        <Body size="large" style={{ color: '#1BD27D' }}>
+          {constants.movies.progress.like + ' ' + like}
+        </Body>
+        <Body size="large">{constants.movies.progress.unlike + ' ' + unlike}</Body>
       </Count>
     </Container>
   );
