@@ -4,28 +4,23 @@ export const Container = styled.div`
   width: 100%;
 `;
 
-export const HeaderContainer = styled.div`
+export const HeaderContainer = styled.div<{ src: string }>`
   width: 100%;
   height: 480px;
   position: relative;
-  background: url('https://s3-alpha-sig.figma.com/img/472e/ae15/f9f6158006f9a9a41457e6b4b6d6154e?Expires=1734307200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=oTRHhPd9IUhqT~UvQ1cAGibItqIX~QP3qmoUvKRw45gi2Gf3cib6HeFLt32GBig2RDYo8xvUVz-Fg0jg78gwaWi6gl2GUmmhFHRGH-P7DW9cWCLDpCjku08nThf3L~-C-gOqL9CjS3322Drr9ZjtJk7GQZ2lMfZjnzF9RMXf~IzEGYOf-cRV-eFxe5GGhx0w2y~Fd32U7E8aIYODKefdq~GNMFVTb0Pr2Rkoi3bWr99Pr8oVEs4d-lvxrH8hn2M2uISXKd-1DBPQ1~yNp8RlNjtC-TlLuYWJN75XjnLJXJPagrjxVYGkgPxtVz5Co7t2CNrGyDB7BxRNf-EODwWw-A__');
+`;
+
+export const BackgroundLayer = styled.div<{ src: string }>`
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background: ${({ src }) => (src ? `url(${src})` : '#ffffff')};
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   overflow: hidden;
-
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 100px;
-    background: linear-gradient(#ededed 10%, #737373 50%);
-    filter: blur(90px);
-    pointer-events: none;
-    z-index: 1;
-  }
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+  z-index: 10;
 `;
 
 export const HeaderInfo = styled.div`
@@ -34,7 +29,7 @@ export const HeaderInfo = styled.div`
   position: absolute;
   bottom: 55px;
   left: 24px;
-  z-index: 10;
+  z-index: 20;
   gap: 16px;
 `;
 
@@ -51,26 +46,45 @@ export const AdditionalsContainer = styled.div`
 
 export const Additionals = styled.div`
   display: flex;
+  justify-content: center;
+  align-items: center;
   gap: 4px;
 `;
 
-export const Count = styled.span`
-  color: #0de781;
+export const Count = styled.span<{ color?: string }>`
+  color: ${({ color }) => (color ? `${color}` : '#FFFFFF')};
 `;
 
-export const InfoContainer = styled.div``;
+export const InfoContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 24px 20px;
+  margin-top: 24px;
+  border-radius: 8px;
+  background: var(--Color-background-background-elevated, #4c494e);
+  @media (max-width: 600px) {
+    flex-direction: column;
+    gap: 16px;
+  }
 
-export const Box = styled.div<{ gap?: number }>`
+  @media (min-width: 600px) {
+    flex-direction: row;
+    gap: 42px;
+    padding: 24px 240px;
+  }
+`;
+
+export const Wrapper = styled.div<{ gap?: number; direction?: string; width?: number }>`
   display: flex;
   gap: ${({ gap }) => (gap ? `${gap}px` : '8px')};
+  flex-direction: ${({ direction }) => direction || 'row'};
+  width: ${({ width }) => (width ? `${width}px` : `100%`)};
 `;
 
-export const Wrapper = styled.div<{ gap?: number }>`
-  display: flex;
-  gap: ${({ gap }) => (gap ? `${gap}px` : '8px')};
+export const ReviewContainer = styled.div`
+  margin-top: 12px;
 `;
-
-export const ReviewContainer = styled.div``;
 
 export const DirectingContainer = styled.div``;
 

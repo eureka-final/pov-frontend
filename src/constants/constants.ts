@@ -11,7 +11,14 @@ export const constants = {
         comedy: '코미디',
         drama: '드라마',
       } as Genres,
+      likes: '좋아요',
+      reviews: '리뷰 쓰기',
+      bookmark: '북마크'
     },
+    progress: {
+      like: '재밌었어요',
+      unlike: '별로에요',
+    }
   },
 } as const;
 
