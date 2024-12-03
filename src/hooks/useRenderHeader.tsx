@@ -1,4 +1,4 @@
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import useWindowSize from './useWindowSize';
 import Header from '../components/Header/Header';
 import DetailHeader from '../components/Header/DetailHeader';
@@ -11,16 +11,24 @@ const detailHeaderRoutes = [
   { path: '/movie/detail', title: '영화 상세정보' },
 ];
 
+const exceptionRoutes = [
+  { path: '/signup' }, // index에서 header 직접 호출
+];
+
 const useRenderHeader = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const windowSize = useWindowSize();
   const windowWidth = windowSize.width ?? 0;
 
-  const matchedRoute = detailHeaderRoutes.find((route) => route.path === location.pathname);
+  // exceptionRoute일 경우 Header 렌더링 X
+  const matchedExceptionRoutes = exceptionRoutes.find((route) => route.path === location.pathname);
+  if (matchedExceptionRoutes && windowWidth <= 600) return;
 
   // detailHeaderRoutes일 경우 DetailHeader 렌더링
-  if (matchedRoute && windowWidth <= 600) {
-    return <DetailHeader headerTitle={matchedRoute.title} />;
+  const matchedDetailHeaderRoute = detailHeaderRoutes.find((route) => route.path === location.pathname);
+  if (matchedDetailHeaderRoute && windowWidth <= 600) {
+    return <DetailHeader headerTitle={matchedDetailHeaderRoute.title} onClick={() => navigate(-1)} />;
   }
 
   return <Header />;
