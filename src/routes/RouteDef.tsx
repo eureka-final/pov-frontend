@@ -3,7 +3,7 @@ import Movie from '../pages/Movie';
 import Review from '../pages/Review';
 import ReviewWrite from '../pages/ReviewWrite';
 import ClubReview from '../pages/ClubReview';
-import MovieDetail from '../pages/MovieDetail';
+import MovieDetail from '../pages/Movie/MovieDetail';
 
 const MovieScreens = {
   Main: {
