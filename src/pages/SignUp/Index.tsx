@@ -5,42 +5,19 @@ import { Controller, useForm } from 'react-hook-form';
 import type { User } from '../../types/user';
 import { postAuthSignUpApi } from '../../apis/auth/singupApi';
 
-import { Heading, Paragraph, Button, Input } from 'pov-design-system';
-import { SignUpSection, SignUpSectionHeader, SignUpSectionBody } from './Index.style';
+import { Heading, Paragraph, Button, Input, Icon } from 'pov-design-system';
+import { SignUpSection, SignUpSectionHeader, SignUpSectionBody, ButtonContainer } from './Index.style';
 import Padded from '../../components/templates/Padded/Padded';
-import DetailHeader from '../../components/Header/DetailHeader';
 import GenreSelect from '../../components/common/GenreSelect/GenreSelect';
 import UploadProfileImgButton from '../../components/common/UploadProfileImgButton/UploadProfileImgButton';
-
-const signInHeaderText = [
-  {
-    header: { firstLine: ['닉네임', '을'], secondLine: '입력해주세요' },
-    paragraph: '어떤 이름으로 불리고 싶으신가요?',
-  },
-  {
-    header: { firstLine: ['생년월일', '을'], secondLine: '입력해주세요' },
-    paragraph: '연령대에 맞는 영화 추천을 위해 사용돼요.',
-  },
-  {
-    header: { firstLine: ['관심있는 장르', '를'], secondLine: '선택해주세요' },
-    paragraph: '최대 3개까지 선택할 수 있어요.',
-  },
-  {
-    header: { firstLine: ['프로필 사진', '을'], secondLine: '등록해주세요' },
-    paragraph: '등록하지 않으면 기본 프로필이 지정돼요.',
-  },
-  {
-    header: { firstLine: ['회원정보', '를'], secondLine: '생성하고 있어요' },
-    paragraph: '잠시만 기다려주세요.',
-  },
-];
+import { SIGN_UP_HEADER_TEXTS } from '../../constants/texts';
 
 const Index = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const [step, setStep] = useState<number>(1);
-  // const userOauthData = location.state; // TODO 연결 후 수정
   const userOauthData = { email: 'shinhm1@naver.com', socialType: 'NAVER' }; // TODO 연결 후 수정
+  // const userOauthData = location.state; // TODO 연결 후 수정
+  const [step, setStep] = useState<number>(1);
 
   const {
     register,
@@ -59,8 +36,15 @@ const Index = () => {
     },
   });
 
-  const onSubmit = (data: User) => {
-    console.table(data);
+  const onSubmit = async (data: User) => {
+    try {
+      await postAuthSignUpApi(data);
+      await new Promise((resolve) => setTimeout(resolve, 3000)); // 최소 3초 로딩
+      navigate('/main'); // 로딩 완료 후 main 페이지로 이동
+    } catch (error) {
+      console.error('회원가입 실패:', error);
+      navigate('/login'); // 회원가입에 실패한 경우 login 페이지로 이동
+    }
   };
 
   // 컴포넌트 렌더링 시 step, userData 초기화
@@ -70,13 +54,15 @@ const Index = () => {
     setValue('socialType', userOauthData.socialType); // socialType 필드에 값 설정
   }, []);
 
+  useEffect(() => {
+    if (step == 5) {
+      handleSubmit(onSubmit)();
+    }
+  }, [step]);
+
   const handleClickNextStep = async () => {
     if (step < 5) {
       setStep((prev) => prev + 1);
-    } else {
-      await handleSubmit(onSubmit)();
-      // const response = await postAuthSignUpApi(userData);
-      // if (response) navigate('/main');
     }
   };
 
@@ -102,23 +88,29 @@ const Index = () => {
   /* 메인 컴포넌트 */
   return (
     <Padded>
-      <DetailHeader headerTitle="" onClick={() => handleClickPrevStep()} />
       <SignUpSection>
         <SignUpSectionHeader>
+          <Icon icon="angleleft" css={{ marginBottom: '32px' }} onClick={handleClickPrevStep} />
           <Heading size="xxLarge">
-            <p style={{ display: 'inline', color: '#AA6FFF' }}>{signInHeaderText[step - 1].header.firstLine[0]}</p>
-            <p style={{ display: 'inline' }}>{signInHeaderText[step - 1].header.firstLine[1]}</p>
+            <p style={{ display: 'inline', color: '#AA6FFF' }}>{SIGN_UP_HEADER_TEXTS[step - 1].header.firstLine[0]}</p>
+            <p style={{ display: 'inline' }}>{SIGN_UP_HEADER_TEXTS[step - 1].header.firstLine[1]}</p>
           </Heading>
-          <Heading size="xxLarge">{signInHeaderText[step - 1].header.secondLine}</Heading>
-          <Paragraph>{signInHeaderText[step - 1].paragraph}</Paragraph>
+          <Heading size="xxLarge">{SIGN_UP_HEADER_TEXTS[step - 1].header.secondLine}</Heading>
+          <Paragraph>{SIGN_UP_HEADER_TEXTS[step - 1].paragraph}</Paragraph>
         </SignUpSectionHeader>
         <SignUpSectionBody>
           {/* 닉네임 입력 단계 */}
-          {step === 1 && <Input size="large" placeholder="닉네임을 입력해주세요" error={errors.nickname} {...register('nickname')}></Input>}
+          {step === 1 && (
+            <div style={{ width: '100%' }}>
+              <Input size="large" placeholder="닉네임을 입력해주세요" error={errors.nickname} {...register('nickname')} />
+            </div>
+          )}
 
           {/* 생년월일 입력 단계 */}
           {step === 2 && (
-            <Input size="large" type="date" placeholder="생년월일을 입력해주세요" max={getTodayDate()} error={errors.nickname} {...register('birth')}></Input>
+            <div style={{ width: '100%' }}>
+              <Input size="large" type="date" placeholder="생년월일을 입력해주세요" max={getTodayDate()} error={errors.nickname} {...register('birth')} />
+            </div>
           )}
 
           {/* 선호 장르 입력 단계 */}
@@ -144,9 +136,13 @@ const Index = () => {
             />
           )}
         </SignUpSectionBody>
-        <Button size="large" onClick={() => handleClickNextStep()}>
-          다음
-        </Button>
+        {step < 5 && (
+          <ButtonContainer>
+            <Button css={{ width: '100%' }} size="large" onClick={() => handleClickNextStep()}>
+              다음
+            </Button>
+          </ButtonContainer>
+        )}
       </SignUpSection>
     </Padded>
   );
