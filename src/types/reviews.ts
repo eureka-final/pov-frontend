@@ -12,7 +12,7 @@ export interface ReviewsData {
     spoiler: boolean;
 }
 
-export interface reviewFormData {
+export interface ReviewFormData {
     title: string;
     contents: string;
     preference: string;
