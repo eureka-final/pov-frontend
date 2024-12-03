@@ -1,4 +1,3 @@
-import './App.css';
 import AppScreen from './routes/AppScreen';
 import { BrowserRouter } from 'react-router-dom';
 
