@@ -3,6 +3,7 @@ import js from '@eslint/js';
 import tseslint from 'typescript-eslint';
 import eslintPluginReact from 'eslint-plugin-react';
 import reactHooks from 'eslint-plugin-react-hooks';
+import pluginQuery from '@tanstack/eslint-plugin-query';
 
 export default tseslint.config(
   { ignores: ['dist', 'node_modules'] },
@@ -16,6 +17,7 @@ export default tseslint.config(
     plugins: {
       react: eslintPluginReact,
       'react-hooks': reactHooks,
+      '@tanstack/query': pluginQuery,
     },
     rules: {
       semi: ['error', 'always'],

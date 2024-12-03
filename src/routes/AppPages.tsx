@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { AppRouteDef } from './RouteDef';
-import Header from '../components/Header/Header';
+import Header from '../components/header/Header';
 import Padded from '../components/templates/Padded/Padded';
 
 const AppPages = () => {

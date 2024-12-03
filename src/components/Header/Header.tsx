@@ -1,8 +1,8 @@
 // import ThemeToggle from '../../components/common/ThemeToggle';
-import NavigationTabs from '../../components/common/NavigationTabs';
+import NavigationTabs from '../common/NavigationTabs';
 import Profile from '../common/Profile';
-import { Logo } from 'pov-design-system';
-import { HeaderWrapper, Wrapper } from './Header.style';
+import { Logo, Input, Icon } from 'pov-design-system';
+import { HeaderWrapper, Wrapper, LogoItem } from './Header.style';
 
 function Header() {
   const user = {
@@ -14,10 +14,14 @@ function Header() {
     <>
       <HeaderWrapper>
         <Wrapper>
-          <Logo icon="logo" style={{ width: '40%', cursor: 'pointer' }} onClick={() => (window.location.href = '/')} />
+          <LogoItem>
+            <Logo icon="logo" onClick={() => (window.location.href = '/')} />
+          </LogoItem>
+
           <NavigationTabs />
+          <Input placeholder="검색어를 입력해 주세요" icon={<Icon icon="search" color="#ADACAF" />} />
         </Wrapper>
-        <Profile user={user} />
+        <Profile name={user.name} avatarUrl={user.avatarUrl} />
       </HeaderWrapper>
       {/* <ThemeToggle /> */}
     </>
