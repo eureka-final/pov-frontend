@@ -1,6 +1,7 @@
 import Profile from '../../common/Profile';
 import { Heading, Body, Paragraph, Icon, Badge } from 'pov-design-system';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useDeleteReviewMutation } from '../../../hooks/queries/useDeleteReviewMutation';
 
 interface MainProps {
   thumbnail: string;
@@ -16,15 +17,27 @@ interface MainProps {
 
 export default function Main({ thumbnail, title, contents, reviewer, profileImge, createdAt, likeAmount, isLiked, keywords }: MainProps) {
   const navigate = useNavigate();
+  const { movieId, reviewId } = useParams<{ movieId: string; reviewId: string }>();
 
   const goToEditPage = () => {
     //navigate(`/${movieId}/review/edit/${reviewId}`);
     navigate(`/review/1/edit/1`);
   };
+  const deleteReviewMutation = useDeleteReviewMutation();
+
+  const handleDelete = () => {
+    deleteReviewMutation.mutate(
+      { movieId: movieId!, reviewId: reviewId! },
+      {
+        onSuccess: () => navigate('/review'),
+      }
+    );
+  };
 
   return (
     <>
       <button onClick={goToEditPage}>수정하기</button>
+      <button onClick={handleDelete}>삭제하기</button>
       <div
         style={{
           background: `linear-gradient(to bottom, rgba(0,0,0,0)

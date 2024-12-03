@@ -3,7 +3,7 @@ import { postReview } from '../../apis/review/postReview';
 
 export const useCreateReviewMutation = () => {
 
-  const newReviewMutation = useMutation({
+  const createReviewMutation = useMutation({
     mutationFn: postReview,
     onSuccess: (data) => {
       console.log('성공적으로 전송:', data);
@@ -15,5 +15,5 @@ export const useCreateReviewMutation = () => {
   }
   );
 
-  return newReviewMutation;
+  return createReviewMutation;
 };

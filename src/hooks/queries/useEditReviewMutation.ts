@@ -4,7 +4,7 @@ import { putReview } from '../../apis/review/putReview';
 export const useEditReviewMutation = () => {
   const queryClient = useQueryClient();
 
-  const reviewMutation = useMutation({
+  const editReviewMutation = useMutation({
     mutationFn: putReview,
     onSuccess: (_, { movieId, reviewId }) => {
       // 변이 성공 시 캐시 무효화로 리뷰 데이터 갱신
@@ -17,5 +17,5 @@ export const useEditReviewMutation = () => {
   }
   );
 
-  return reviewMutation;
+  return editReviewMutation;
 };

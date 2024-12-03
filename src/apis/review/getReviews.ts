@@ -13,6 +13,6 @@ export const getMyReviews = async () => {
 };
 
 export const getDetailReview = async (movieId: string, reviewId: string) => {
-  const { data } = await axios.get<ReviewsData[]>(END_POINTS.DETAIL_REVIEW(movieId, reviewId));
+  const { data } = await axios.get<ReviewsData[]>(END_POINTS.REVIEW(movieId, reviewId));
   return data;
 };

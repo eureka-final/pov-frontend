@@ -9,7 +9,7 @@ export interface PutReviewParams extends ReviewFormData {
 
 export const putReview = async ({ movieId, reviewId,  ...information }: PutReviewParams): Promise<ReviewFormData> => {
   const response = await axios.put<ReviewFormData>(
-    END_POINTS.PUT_REVIEW(movieId, reviewId),
+    END_POINTS.REVIEW(movieId, reviewId),
     information
   );
   return response.data;

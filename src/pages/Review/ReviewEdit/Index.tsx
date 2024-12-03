@@ -11,7 +11,7 @@ import { useEditReviewQuery } from '../../../hooks/queries/useEditReviewQuery';
 
 const Index = () => {
   const { movieId, reviewId } = useParams<{ movieId: string; reviewId: string }>();
-  const { mutate } = useEditReviewMutation();
+  const editReviewMutation = useEditReviewMutation();
   const { existingReview } = useEditReviewQuery(movieId!, reviewId!);
 
   const { isOpen: isSaveOpen, open: saveOpen, close: saveClose } = useOverlay();
@@ -70,7 +70,7 @@ const Index = () => {
     };
     console.log(requestData);
 
-    mutate(
+    editReviewMutation.mutate(
       { movieId: movieId!, reviewId: reviewId!, ...requestData },
       {
         onSuccess: () => {

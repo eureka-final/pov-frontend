@@ -9,7 +9,7 @@ import { HeadingContainer, ButtonContainer, Vs, Item } from './ReviewWrite.style
 import { useCreateReviewMutation } from '../../../hooks/queries/useCreateReviewMutation';
 
 const Index = () => {
-  const { movieId } = useParams<{ movieId: string; reviewId: string }>();
+  const { movieId } = useParams<{ movieId: string }>();
 
   const { isOpen: isSaveOpen, open: saveOpen, close: saveClose } = useOverlay();
   const { isOpen: isTempOpen, open: tempOpen, close: tempClose } = useOverlay();
@@ -48,7 +48,7 @@ const Index = () => {
   // Modal 상태
   const [preference, setPreference] = useState<string>('');
 
-  const { mutate } = useCreateReviewMutation();
+  const createReviewMutation = useCreateReviewMutation();
   // 데이터 통합 후 요청 전송
   const handleSubmit = () => {
     // 선택된 키워드만 필터링
@@ -63,7 +63,7 @@ const Index = () => {
     };
     console.log(requestData);
 
-    mutate(
+    createReviewMutation.mutate(
       { movieId: movieId!, ...requestData },
       {
         onSuccess: () => {
