@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Padded from '../../../components/templates/Padded/Padded';
 import ReactEditor from '../../../components/review/ReviewWrite/ReactEditor';
@@ -92,7 +92,7 @@ const Index = () => {
     };
 
     try {
-      localStorage.setItem('reviewDraft', JSON.stringify(tempData));
+      localStorage.setItem(`${reviewId}`, JSON.stringify(tempData));
       tempOpen();
       console.log(tempData);
     } catch (error) {
@@ -101,6 +101,23 @@ const Index = () => {
     }
   };
 
+  // 로컬 스토리지에서 임시저장 데이터 복원
+  useEffect(() => {
+    const savedDraft = localStorage.getItem(`${reviewId}`);
+    if (savedDraft) {
+      try {
+        const draftData = JSON.parse(savedDraft);
+        setTitle(draftData.title || '');
+        setContent(draftData.content || '');
+        setKeywords(draftData.keywords || []);
+        setSpoiler(draftData.spoiler || false);
+        setPreference(draftData.preference || '');
+        console.log(draftData.content);
+      } catch (error) {
+        console.error('임시 저장된 데이터를 불러오는 데 실패했습니다:', error);
+      }
+    }
+  }, []);
   return (
     <Padded>
       <HeadingContainer>

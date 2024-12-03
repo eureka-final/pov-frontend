@@ -85,7 +85,7 @@ const Index = () => {
     };
 
     try {
-      localStorage.setItem('reviewDraft', JSON.stringify(tempData));
+      localStorage.setItem(`${movieId}`, JSON.stringify(tempData));
       tempOpen();
       console.log(tempData);
     } catch (error) {
@@ -94,9 +94,9 @@ const Index = () => {
     }
   };
 
-  // 로컬 스토리지에서 데이터 복원
+  // 로컬 스토리지에서 임시저장 데이터 복원
   useEffect(() => {
-    const savedDraft = localStorage.getItem('reviewDraft');
+    const savedDraft = localStorage.getItem(`${movieId}`);
     if (savedDraft) {
       try {
         const draftData = JSON.parse(savedDraft);
