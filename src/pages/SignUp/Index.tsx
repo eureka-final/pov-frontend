@@ -1,19 +1,16 @@
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-
-import { SignUpSection, SignUpSectionHeader, SignUpSectionBody } from './Index.style';
-import { Heading, Paragraph, Button } from 'pov-design-system';
+import { Controller, useForm } from 'react-hook-form';
 
 import type { User } from '../../types/user';
 import { postAuthSignUpApi } from '../../apis/auth/singupApi';
 
+import { Heading, Paragraph, Button, Input } from 'pov-design-system';
+import { SignUpSection, SignUpSectionHeader, SignUpSectionBody } from './Index.style';
 import Padded from '../../components/templates/Padded/Padded';
 import DetailHeader from '../../components/Header/DetailHeader';
-import NicknameStep from '../../components/signIn/NicknameStep';
-import BirthStep from '../../components/signIn/BirthStep';
-import GenreStep from '../../components/signIn/GenreStep';
-import ProfileImageStep from '../../components/signIn/ProfileImageStep';
-import { useForm } from 'react-hook-form';
+import GenreSelect from '../../components/common/GenreSelect/GenreSelect';
+import UploadProfileImgButton from '../../components/common/UploadProfileImgButton/UploadProfileImgButton';
 
 const signInHeaderText = [
   {
@@ -32,48 +29,54 @@ const signInHeaderText = [
     header: { firstLine: ['프로필 사진', '을'], secondLine: '등록해주세요' },
     paragraph: '등록하지 않으면 기본 프로필이 지정돼요.',
   },
+  {
+    header: { firstLine: ['회원정보', '를'], secondLine: '생성하고 있어요' },
+    paragraph: '잠시만 기다려주세요.',
+  },
 ];
 
 const Index = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [step, setStep] = useState<number>(1);
-  const userOauthData = location.state;
-  const [userData, setUserData] = useState<User>({
-    email: '',
-    nickname: '',
-    birth: '',
-    favorGenres: [],
-    socialType: '',
-    profileImage: '',
+  // const userOauthData = location.state; // TODO 연결 후 수정
+  const userOauthData = { email: 'shinhm1@naver.com', socialType: 'NAVER' }; // TODO 연결 후 수정
+
+  const {
+    register,
+    setValue,
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm<User>({
+    defaultValues: {
+      email: '',
+      socialType: '',
+      nickname: '',
+      birth: '',
+      favorGenres: [],
+      profileImage: '',
+    },
   });
 
-  const { register, handleSubmit, errors } = useForm();
-
-  const onSubmit = (data) => {
-    console.log(data); // TODO API 수정
+  const onSubmit = (data: User) => {
+    console.table(data);
   };
 
   // 컴포넌트 렌더링 시 step, userData 초기화
   useEffect(() => {
     setStep(1);
-    setUserData({
-      nickname: '',
-      birth: '',
-      profileImage: '',
-      favorGenres: [],
-      email: 'asdf1234@gmail.com', // userOauthData.email, // TODO 로그인 브랜치 변경 후 수정
-      socialType: 'GOOGLE', // userOauthData.socialType, // TODO 로그인 브랜치 변경 후 수정
-    });
+    setValue('email', userOauthData.email); // email 필드에 값 설정
+    setValue('socialType', userOauthData.socialType); // socialType 필드에 값 설정
   }, []);
 
   const handleClickNextStep = async () => {
     if (step < 5) {
       setStep((prev) => prev + 1);
-      console.table(userData);
     } else {
-      const response = await postAuthSignUpApi(userData);
-      if (response) navigate('/main');
+      await handleSubmit(onSubmit)();
+      // const response = await postAuthSignUpApi(userData);
+      // if (response) navigate('/main');
     }
   };
 
@@ -82,42 +85,18 @@ const Index = () => {
     else navigate(-1);
   };
 
-  const handleNicknameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setUserData((prevUserData) => ({
-      ...prevUserData,
-      nickname: event.target.value,
-    }));
-  };
+  const getTodayDate = () => {
+    const today = new Date();
+    const formattedDate = today
+      .toLocaleDateString('ko-KR', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+      })
+      .replace(/\. /g, '-')
+      .replace('.', '');
 
-  const handleBirthChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setUserData((prevUserData) => ({
-      ...prevUserData,
-      birth: event.target.value,
-    }));
-  };
-
-  const addGenre = (genre: string) => {
-    setUserData(
-      (prev) =>
-        ({
-          ...prev,
-          favorGenres: [...(prev.favorGenres || []), genre],
-        }) as User
-    );
-  };
-
-  const removeGenre = (genre: string) => {
-    setUserData((prevUserData) => ({
-      ...prevUserData,
-      favorGenres: prevUserData.favorGenres?.filter((g) => g !== genre) || [],
-    }));
-  };
-
-  const handleChangeProfileImage = (profileImageUrl: string) => {
-    setUserData((prevUserData) => ({
-      ...prevUserData,
-      profileImage: profileImageUrl,
-    }));
+    return formattedDate;
   };
 
   /* 메인 컴포넌트 */
@@ -134,10 +113,36 @@ const Index = () => {
           <Paragraph>{signInHeaderText[step - 1].paragraph}</Paragraph>
         </SignUpSectionHeader>
         <SignUpSectionBody>
-          {step === 1 && <NicknameStep nickname={userData.nickname} handleNicknameChange={handleNicknameChange}></NicknameStep>}
-          {step === 2 && <BirthStep birth={userData.birth} handleBirthChange={handleBirthChange}></BirthStep>}
-          {step === 3 && <GenreStep selectedGenres={userData.favorGenres} addGenre={addGenre} removeGenre={removeGenre}></GenreStep>}
-          {step === 4 && <ProfileImageStep profileImageUrl={userData.profileImage} handleChangeProfileImageUrl={handleChangeProfileImage}></ProfileImageStep>}
+          {/* 닉네임 입력 단계 */}
+          {step === 1 && <Input size="large" placeholder="닉네임을 입력해주세요" error={errors.nickname} {...register('nickname')}></Input>}
+
+          {/* 생년월일 입력 단계 */}
+          {step === 2 && (
+            <Input size="large" type="date" placeholder="생년월일을 입력해주세요" max={getTodayDate()} error={errors.nickname} {...register('birth')}></Input>
+          )}
+
+          {/* 선호 장르 입력 단계 */}
+          {step === 3 && (
+            <Controller
+              name="favorGenres"
+              control={control}
+              render={({ field }) => (
+                <GenreSelect
+                  value={field.value || []} // undefined 방지
+                  onChange={(selectedGenres) => field.onChange(selectedGenres)}
+                />
+              )}
+            />
+          )}
+
+          {/* 프로필 사진 등록 단계 */}
+          {step === 4 && (
+            <Controller
+              name="profileImage"
+              control={control}
+              render={({ field }) => <UploadProfileImgButton profileImageUrl={field.value} handleChangeProfileImage={field.onChange} />}
+            />
+          )}
         </SignUpSectionBody>
         <Button size="large" onClick={() => handleClickNextStep()}>
           다음
