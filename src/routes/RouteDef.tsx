@@ -5,9 +5,10 @@ import ReviewWrite from '../pages/ReviewWrite';
 import Club from '../pages/Club';
 import Premieres from '../pages/Premieres';
 import MovieDetail from '../pages/MovieDetail';
-import Login from '../pages/Login/Index';
+import Login from '../pages/Login';
 import OauthNaver from '../pages/Oauth/Naver';
 import OauthGoogle from '../pages/Oauth/Google';
+import SignUp from '../pages/SignUp/Index';
 
 const MovieScreens = {
   Main: {
@@ -50,9 +51,13 @@ const PremieresScreens = {
 };
 
 const AuthScreens = {
-  SignIn: {
+  Login: {
     path: '/login',
     element: <Login />,
+  },
+  SignUp: {
+    path: '/signup',
+    element: <SignUp />,
   },
   OauthNaver: {
     path: '/oauth/naver',
