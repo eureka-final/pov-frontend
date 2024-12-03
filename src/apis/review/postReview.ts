@@ -3,7 +3,7 @@ import type { ReviewFormData } from '../../types/reviews';
 import { END_POINTS } from '../../constants/api';
 
 export interface PostReviewParams extends ReviewFormData {
-  movieId: number;
+  movieId: string;
 }
 
 export const postReview = async ({ movieId, ...information }: PostReviewParams) => {

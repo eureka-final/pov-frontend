@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import Padded from '../../../components/templates/Padded/Padded';
 import ReactEditor from '../../../components/review/ReviewWrite/ReactEditor';
 import { Heading, Body, Button, Modal, useOverlay, Logo } from 'pov-design-system';
@@ -7,7 +8,9 @@ import ReviewToggle from '../../../components/review/ReviewWrite/ReviewToggle';
 import { HeadingContainer, ButtonContainer, Vs, Item } from './ReviewWrite.style';
 import { useCreateReviewMutation } from '../../../hooks/queries/useCreateReviewMutation';
 
-const Index = ({ movieId }: { movieId: number }) => {
+const Index = () => {
+  const { movieId } = useParams<{ movieId: string; reviewId: string }>();
+
   const { isOpen: isSaveOpen, open: saveOpen, close: saveClose } = useOverlay();
   const { isOpen: isTempOpen, open: tempOpen, close: tempClose } = useOverlay();
 
@@ -61,7 +64,7 @@ const Index = ({ movieId }: { movieId: number }) => {
     console.log(requestData);
 
     mutate(
-      { movieId, ...requestData },
+      { movieId: movieId!, ...requestData },
       {
         onSuccess: () => {
           console.log('리뷰 작성 성공!');

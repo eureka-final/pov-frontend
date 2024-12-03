@@ -18,7 +18,7 @@ export default function Main({ thumbnail, title, contents, reviewer, profileImge
   const navigate = useNavigate();
 
   const goToEditPage = () => {
-    //navigate(`/review/${movieId}/edit/${reviewId}`);
+    //navigate(`/${movieId}/review/edit/${reviewId}`);
     navigate(`/review/1/edit/1`);
   };
 
