@@ -9,6 +9,7 @@ import Success from '../pages/Premieres/Payments/Success/Index';
 import Fail from '../pages/Premieres/Payments/Fail/Index';
 import MovieDetail from '../pages/MovieDetail';
 import ReviewDetail from '../pages/Review/ReviewDetail/Index';
+import ReviewEdit from '../pages/Review/ReviewEdit/Index';
 
 const MovieScreens = {
   Main: {
@@ -31,12 +32,16 @@ const ReviewScreens = {
     element: <Review />,
   },
   ReviewWrite: {
-    path: '/review/write',
+    path: '/review/:movieId/write',
     element: <ReviewWrite />,
   },
   ReviewDetail: {
-    path: '/review/detail/:id',
+    path: '/review/:movieId/detail/:reviewId',
     element: <ReviewDetail />,
+  },
+  ReviewEdit: {
+    path: '/review/:movieId/edit/:reviewId',
+    element: <ReviewEdit />,
   },
 };
 

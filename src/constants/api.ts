@@ -1,7 +1,8 @@
 export const END_POINTS = {
   REVIEWS: 'http://www.point-of-views.com/api/movies/reviews',
   MY_REVIEWS: 'http://www.point-of-views.com/api/movies/reviews/my',
-  CREATE_REVIEW_ITEM: (movieId: number) => `http://www.point-of-views.com/api/movies/${movieId}/reviews`,
+  CREATE_REVIEW: (movieId: string) => `http://www.point-of-views.com/api/movies/${movieId}/reviews`,
+  PUT_REVIEW: (movieId: string, reviewId: string) => `http://www.point-of-views.com/api/movies/${movieId}/reviews/${reviewId}`,
 } as const;
 
 export const NETWORK = {

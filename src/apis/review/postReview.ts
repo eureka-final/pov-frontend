@@ -8,7 +8,7 @@ export interface PostReviewParams extends ReviewFormData {
 
 export const postReview = async ({ movieId, ...information }: PostReviewParams) => {
   const response = await axios.post<ReviewFormData>(
-    END_POINTS.CREATE_REVIEW_ITEM(movieId),
+    END_POINTS.CREATE_REVIEW(movieId),
     information
   );
   return response.data;
