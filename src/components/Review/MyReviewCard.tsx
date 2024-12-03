@@ -1,12 +1,12 @@
 import { useNavigate } from 'react-router-dom';
-import { CardContainer, Poster, CardFlex, ReviewCardContainer, FlexBetween, LikeContainer, Spoiler, SpoMore, ReadMore } from './ReviewCard.style';
+import { CardContainer, Poster, CardFlex, ReviewCardContainer, FlexBetween, LikeContainer, ReadMore } from './ReviewCard.style';
 import { Body, Paragraph, Icon } from 'pov-design-system';
 import Profile from '../common/Profile';
-import { useReviews } from '../../hooks/review/useReviews';
+import { useMyReviewsQuery } from '../../hooks/queries/useReviewsQuery';
 
 function MyReviewCard() {
   const navigate = useNavigate();
-  const { reviewsData } = useReviews();
+  const { reviewsData } = useMyReviewsQuery();
 
   const truncateContents = (text: string | undefined, maxLength: number) => {
     if (!text) return '';

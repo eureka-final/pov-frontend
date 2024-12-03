@@ -16,6 +16,7 @@ interface MainProps {
 export default function Main({ thumbnail, title, contents, reviewer, profileImge, createdAt, likeAmount, isLiked, keywords }: MainProps) {
   return (
     <>
+      <button>수정하기</button>
       <div
         style={{
           background: `linear-gradient(to bottom, rgba(0,0,0,0)

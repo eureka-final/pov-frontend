@@ -16,7 +16,7 @@ export const useMyReviewsQuery = () => {
     queryKey: ['myReviews'],
     queryFn: getMyReviews
   });
-
+  
   return { reviewsData };
 };
-  
+    
