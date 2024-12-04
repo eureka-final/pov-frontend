@@ -22,8 +22,6 @@ const defaultHandlers: DefaultHandlers = {
   401: {
     default: () => {
       console.error('401 Unauthorized - 로그인 필요');
-      sessionStorage.removeItem('ACCESS_TOKEN_KEY');
-      window.location.href = '/signin';
     },
   },
   403: {
