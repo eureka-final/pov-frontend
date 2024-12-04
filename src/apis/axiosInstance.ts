@@ -1,4 +1,5 @@
 import axios, { AxiosInstance, InternalAxiosRequestConfig, AxiosResponse } from 'axios';
+import { ACCESS_TOKEN_KEY } from '../constants/api';
 
 const createInstance = (): AxiosInstance => {
   /* Axios Instance 생성 */
@@ -13,7 +14,7 @@ const createInstance = (): AxiosInstance => {
   /* 요청 Interceptor 설정 */
   instance.interceptors.request.use(
     (config: InternalAxiosRequestConfig) => {
-      const accessToken = sessionStorage.getItem('access-token');
+      const accessToken = sessionStorage.getItem(ACCESS_TOKEN_KEY);
 
       if (accessToken) {
         config.headers.Authorization = `Bearer ${accessToken}`;
@@ -42,7 +43,7 @@ const createInstance = (): AxiosInstance => {
           const { data } = await axios.post(`${import.meta.env.VITE_BASE_URL}/api/auth/reissue`, { withCredentials: true });
 
           const { accessToken } = data;
-          sessionStorage.setItem('accessToken', accessToken);
+          sessionStorage.setItem(ACCESS_TOKEN_KEY, accessToken);
 
           if (originalRequest.headers) {
             originalRequest.headers.Authorization = `Bearer ${accessToken}`;
