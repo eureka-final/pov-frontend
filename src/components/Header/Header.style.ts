@@ -29,7 +29,17 @@ export const LeftWrapper = styled.div`
 
   @media screen and (min-width: 600px) {
     flex-direction: row;
-    align-items: end;
+    align-items: center;
     gap: 48px;
+  }
+`;
+
+export const LogoItem = styled.div`
+  cursor: pointer;
+  transition:
+    transform 0.3s ease,
+    color 0.3s ease; /* 애니메이션 효과 */
+  &:hover {
+    transform: scale(1.1); /* 크기 확대 */
   }
 `;
