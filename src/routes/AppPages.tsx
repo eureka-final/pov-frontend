@@ -1,22 +1,23 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import { AppRouteDef } from './RouteDef';
-import Header from '../components/header/Header';
 import Padded from '../components/templates/Padded/Padded';
 import ToastContainer from '../components/common/ToastContainer/ToastContainer';
+import useRenderHeader from '../hooks/useRenderHeader';
 
 const AppPages = () => {
+  const header = useRenderHeader();
+
   return (
-    <BrowserRouter>
+    <>
       <Padded>
-        <Header />
-        <ToastContainer />
+        {header} <ToastContainer />
       </Padded>
       <Routes>
         {Object.entries({ ...AppRouteDef }).map(([name, { path, element }], index) => (
           <Route key={name + index} path={path} element={element} />
         ))}
       </Routes>
-    </BrowserRouter>
+    </>
   );
 };
 
