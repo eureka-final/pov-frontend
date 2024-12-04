@@ -1,8 +1,8 @@
 import styled from '@emotion/styled';
 
-const Layer = styled.img<{ MobileHeight?: number; PcHeight?: number }>`
+const Layer = styled.img<{ MobileHeight?: number; PcHeight?: number; br: string }>`
   width: 100%;
-  border-radius: 4px;
+  border-radius: ${({ br }) => (br ? `${br}` : `4px`)};
   @media (min-width: 0px) and (max-width: 600px) {
     height: ${({ MobileHeight }) => (MobileHeight ? `${MobileHeight}px` : `100%`)};
   }
@@ -20,11 +20,12 @@ interface LayerProps {
     url: string;
     MobileHeight: number;
     PcHeight: number;
+    br: string;
   };
 }
 
 const ImageLayer = ({ src }: LayerProps) => {
-  return <Layer src={src.url} MobileHeight={src.MobileHeight} PcHeight={src.PcHeight} />;
+  return <Layer src={src.url} MobileHeight={src.MobileHeight} PcHeight={src.PcHeight} br={src.br} />;
 };
 
 export default ImageLayer;

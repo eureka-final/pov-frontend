@@ -2,13 +2,17 @@ import Card from '../Card/Card';
 import { Container, CardContainer } from './Section.styles';
 import { Heading } from 'pov-design-system';
 
-
 interface SectionProps {
   items: {
     name: string;
     date: string;
     likes: string;
     reviews: string;
+    src: {
+      url: string;
+      MobileHeight: number;
+      PcHeight: number;
+    };
   }[];
   heading: string;
 }

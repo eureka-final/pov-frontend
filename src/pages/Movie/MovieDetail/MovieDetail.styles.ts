@@ -136,6 +136,21 @@ export const HeadingContainer = styled.div`
   justify-content: space-between;
 `;
 
-export const DirectingContainer = styled.div``;
+export const ImageContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+`;
 
-export const ImageContainer = styled.div``;
+export const ScrollContainer = styled.div`
+  display: flex;
+  overflow-x: auto;
+  @media (min-width: 0px) and (max-width: 600px) {
+    gap: 16px;
+  }
+
+  @media (min-width: 600px) {
+    width: 100%;
+    gap: 24px;
+  }
+`;

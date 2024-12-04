@@ -10,7 +10,6 @@ import {
   Count,
   InfoContainer,
   ReviewContainer,
-  DirectingContainer,
   ImageContainer,
   AdditionalsContainer,
   BodyContainer,
@@ -21,10 +20,12 @@ import {
   Content,
   Section,
   Div,
+  ScrollContainer,
 } from './MovieDetail.styles';
 import ImageLayer from '../../../components/styles/ImageLayer';
 import ResponsiveContainer from '../../../components/styles/ResponsiveContainer';
 import ProgressBar from '../../../components/styles/ProgressBar';
+import Productions from '../../../components/movies/Productions/Productions';
 
 const index = () => {
   const [movieData, setMovieData] = useState({
@@ -42,6 +43,72 @@ const index = () => {
     url: 'https://s3-alpha-sig.figma.com/img/472e/ae15/f9f6158006f9a9a41457e6b4b6d6154e?Expires=1734307200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=oTRHhPd9IUhqT~UvQ1cAGibItqIX~QP3qmoUvKRw45gi2Gf3cib6HeFLt32GBig2RDYo8xvUVz-Fg0jg78gwaWi6gl2GUmmhFHRGH-P7DW9cWCLDpCjku08nThf3L~-C-gOqL9CjS3322Drr9ZjtJk7GQZ2lMfZjnzF9RMXf~IzEGYOf-cRV-eFxe5GGhx0w2y~Fd32U7E8aIYODKefdq~GNMFVTb0Pr2Rkoi3bWr99Pr8oVEs4d-lvxrH8hn2M2uISXKd-1DBPQ1~yNp8RlNjtC-TlLuYWJN75XjnLJXJPagrjxVYGkgPxtVz5Co7t2CNrGyDB7BxRNf-EODwWw-A__',
     content:
       '내가 여기 왜 들어온 걸까. 영문도 모른 채 감금됐던 남자가 15년 만에 풀려났다. 그리고 시작된 5일간의 추적. 복수를 원하는가? 그렇다면 누가 왜 가뒀는지 비밀을 풀어라.',
+    productions: [
+      {
+        name: '박찬욱',
+        position: '감독',
+        url: 'https://s3-alpha-sig.figma.com/img/410e/fdf9/6b09ca58de170ab847963be44bc7596e?Expires=1734307200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=nMplzcq7FzPTEHwNE-98IjQUACxlApI-ZOD3y16UCo19vYyoGfCQ69amfejV36vwEUpi64TKGai4s6GxrD4alUhQA4fZFLrvF3NMzIYxMGZ8aosotJn2Tan9TK846~oxA4sCzkts5rL2Ou1T~mxOriemcrTPE8vdhDF0RvbqHyt0xg1q7EpGrLX4PGFbo0oUDJT6EM~Usas9ZKHLwJu-q8MMaLcToQUTDMTjspknQ9-GrR1VH6yzyd76pdpx2I9Xgi8Uprwgcr8TLwlPOdQ00QpcX0ZtHLQZzYpoNuYQ7vx1Mw-CPInwG2Qi89VNQo0zDCJbpQFBXHPS3n6NjOl4ew__',
+      },
+      {
+        name: '박찬욱',
+        position: '감독',
+        url: 'https://s3-alpha-sig.figma.com/img/410e/fdf9/6b09ca58de170ab847963be44bc7596e?Expires=1734307200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=nMplzcq7FzPTEHwNE-98IjQUACxlApI-ZOD3y16UCo19vYyoGfCQ69amfejV36vwEUpi64TKGai4s6GxrD4alUhQA4fZFLrvF3NMzIYxMGZ8aosotJn2Tan9TK846~oxA4sCzkts5rL2Ou1T~mxOriemcrTPE8vdhDF0RvbqHyt0xg1q7EpGrLX4PGFbo0oUDJT6EM~Usas9ZKHLwJu-q8MMaLcToQUTDMTjspknQ9-GrR1VH6yzyd76pdpx2I9Xgi8Uprwgcr8TLwlPOdQ00QpcX0ZtHLQZzYpoNuYQ7vx1Mw-CPInwG2Qi89VNQo0zDCJbpQFBXHPS3n6NjOl4ew__',
+      },
+      {
+        name: '박찬욱',
+        position: '감독',
+        url: 'https://s3-alpha-sig.figma.com/img/410e/fdf9/6b09ca58de170ab847963be44bc7596e?Expires=1734307200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=nMplzcq7FzPTEHwNE-98IjQUACxlApI-ZOD3y16UCo19vYyoGfCQ69amfejV36vwEUpi64TKGai4s6GxrD4alUhQA4fZFLrvF3NMzIYxMGZ8aosotJn2Tan9TK846~oxA4sCzkts5rL2Ou1T~mxOriemcrTPE8vdhDF0RvbqHyt0xg1q7EpGrLX4PGFbo0oUDJT6EM~Usas9ZKHLwJu-q8MMaLcToQUTDMTjspknQ9-GrR1VH6yzyd76pdpx2I9Xgi8Uprwgcr8TLwlPOdQ00QpcX0ZtHLQZzYpoNuYQ7vx1Mw-CPInwG2Qi89VNQo0zDCJbpQFBXHPS3n6NjOl4ew__',
+      },
+      {
+        name: '박찬욱',
+        position: '감독',
+        url: 'https://s3-alpha-sig.figma.com/img/410e/fdf9/6b09ca58de170ab847963be44bc7596e?Expires=1734307200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=nMplzcq7FzPTEHwNE-98IjQUACxlApI-ZOD3y16UCo19vYyoGfCQ69amfejV36vwEUpi64TKGai4s6GxrD4alUhQA4fZFLrvF3NMzIYxMGZ8aosotJn2Tan9TK846~oxA4sCzkts5rL2Ou1T~mxOriemcrTPE8vdhDF0RvbqHyt0xg1q7EpGrLX4PGFbo0oUDJT6EM~Usas9ZKHLwJu-q8MMaLcToQUTDMTjspknQ9-GrR1VH6yzyd76pdpx2I9Xgi8Uprwgcr8TLwlPOdQ00QpcX0ZtHLQZzYpoNuYQ7vx1Mw-CPInwG2Qi89VNQo0zDCJbpQFBXHPS3n6NjOl4ew__',
+      },
+    ],
+    steels: [
+      {
+        url: 'https://s3-alpha-sig.figma.com/img/bac4/ff00/0b1bc18b373c3762af61bc5fc1d1dacd?Expires=1734307200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=W0NgL6Sc3C5xnlznF9M1dCltikKDATKhhF3hMWaHsIJYGVtg~pi-U3KL~VsBiW9M3ucXP9ukhdYBJGd2TVrb-ishSXte8YAEWjp0hZ6FZ9D9OHKjva1vAv4tC8ZgEsRamTXthSKmcncIThpBBzkJyoGcu94dGEdMYSa28ZtFJAK2r4JZ3cxx0DDAeBxE2t-PoXUw6FujfWnmwzJb28FlSk2ouVh4WDA7pECwh6YTFI9mMpYVRt09IZHo1Y56wcyTnAyLTelDTVLn5iBtionI1IJYaYy48KayhBpeRexD4LO09--xENEvfyjQAG1Zg9wA-axpDz6KcAhfogz67MTCUA__',
+        MobileHeight: 100,
+        PcHeight: 120,
+        br: '8px',
+      },
+      {
+        url: 'https://s3-alpha-sig.figma.com/img/bac4/ff00/0b1bc18b373c3762af61bc5fc1d1dacd?Expires=1734307200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=W0NgL6Sc3C5xnlznF9M1dCltikKDATKhhF3hMWaHsIJYGVtg~pi-U3KL~VsBiW9M3ucXP9ukhdYBJGd2TVrb-ishSXte8YAEWjp0hZ6FZ9D9OHKjva1vAv4tC8ZgEsRamTXthSKmcncIThpBBzkJyoGcu94dGEdMYSa28ZtFJAK2r4JZ3cxx0DDAeBxE2t-PoXUw6FujfWnmwzJb28FlSk2ouVh4WDA7pECwh6YTFI9mMpYVRt09IZHo1Y56wcyTnAyLTelDTVLn5iBtionI1IJYaYy48KayhBpeRexD4LO09--xENEvfyjQAG1Zg9wA-axpDz6KcAhfogz67MTCUA__',
+        MobileHeight: 100,
+        PcHeight: 120,
+        br: '8px',
+      },
+      {
+        url: 'https://s3-alpha-sig.figma.com/img/bac4/ff00/0b1bc18b373c3762af61bc5fc1d1dacd?Expires=1734307200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=W0NgL6Sc3C5xnlznF9M1dCltikKDATKhhF3hMWaHsIJYGVtg~pi-U3KL~VsBiW9M3ucXP9ukhdYBJGd2TVrb-ishSXte8YAEWjp0hZ6FZ9D9OHKjva1vAv4tC8ZgEsRamTXthSKmcncIThpBBzkJyoGcu94dGEdMYSa28ZtFJAK2r4JZ3cxx0DDAeBxE2t-PoXUw6FujfWnmwzJb28FlSk2ouVh4WDA7pECwh6YTFI9mMpYVRt09IZHo1Y56wcyTnAyLTelDTVLn5iBtionI1IJYaYy48KayhBpeRexD4LO09--xENEvfyjQAG1Zg9wA-axpDz6KcAhfogz67MTCUA__',
+        MobileHeight: 100,
+        PcHeight: 120,
+        br: '8px',
+      },
+      {
+        url: 'https://s3-alpha-sig.figma.com/img/bac4/ff00/0b1bc18b373c3762af61bc5fc1d1dacd?Expires=1734307200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=W0NgL6Sc3C5xnlznF9M1dCltikKDATKhhF3hMWaHsIJYGVtg~pi-U3KL~VsBiW9M3ucXP9ukhdYBJGd2TVrb-ishSXte8YAEWjp0hZ6FZ9D9OHKjva1vAv4tC8ZgEsRamTXthSKmcncIThpBBzkJyoGcu94dGEdMYSa28ZtFJAK2r4JZ3cxx0DDAeBxE2t-PoXUw6FujfWnmwzJb28FlSk2ouVh4WDA7pECwh6YTFI9mMpYVRt09IZHo1Y56wcyTnAyLTelDTVLn5iBtionI1IJYaYy48KayhBpeRexD4LO09--xENEvfyjQAG1Zg9wA-axpDz6KcAhfogz67MTCUA__',
+        MobileHeight: 100,
+        PcHeight: 120,
+        br: '8px',
+      },
+      {
+        url: 'https://s3-alpha-sig.figma.com/img/bac4/ff00/0b1bc18b373c3762af61bc5fc1d1dacd?Expires=1734307200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=W0NgL6Sc3C5xnlznF9M1dCltikKDATKhhF3hMWaHsIJYGVtg~pi-U3KL~VsBiW9M3ucXP9ukhdYBJGd2TVrb-ishSXte8YAEWjp0hZ6FZ9D9OHKjva1vAv4tC8ZgEsRamTXthSKmcncIThpBBzkJyoGcu94dGEdMYSa28ZtFJAK2r4JZ3cxx0DDAeBxE2t-PoXUw6FujfWnmwzJb28FlSk2ouVh4WDA7pECwh6YTFI9mMpYVRt09IZHo1Y56wcyTnAyLTelDTVLn5iBtionI1IJYaYy48KayhBpeRexD4LO09--xENEvfyjQAG1Zg9wA-axpDz6KcAhfogz67MTCUA__',
+        MobileHeight: 100,
+        PcHeight: 120,
+        br: '8px',
+      },
+      {
+        url: 'https://s3-alpha-sig.figma.com/img/bac4/ff00/0b1bc18b373c3762af61bc5fc1d1dacd?Expires=1734307200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=W0NgL6Sc3C5xnlznF9M1dCltikKDATKhhF3hMWaHsIJYGVtg~pi-U3KL~VsBiW9M3ucXP9ukhdYBJGd2TVrb-ishSXte8YAEWjp0hZ6FZ9D9OHKjva1vAv4tC8ZgEsRamTXthSKmcncIThpBBzkJyoGcu94dGEdMYSa28ZtFJAK2r4JZ3cxx0DDAeBxE2t-PoXUw6FujfWnmwzJb28FlSk2ouVh4WDA7pECwh6YTFI9mMpYVRt09IZHo1Y56wcyTnAyLTelDTVLn5iBtionI1IJYaYy48KayhBpeRexD4LO09--xENEvfyjQAG1Zg9wA-axpDz6KcAhfogz67MTCUA__',
+        MobileHeight: 100,
+        PcHeight: 120,
+        br: '8px',
+      },
+      {
+        url: 'https://s3-alpha-sig.figma.com/img/bac4/ff00/0b1bc18b373c3762af61bc5fc1d1dacd?Expires=1734307200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=W0NgL6Sc3C5xnlznF9M1dCltikKDATKhhF3hMWaHsIJYGVtg~pi-U3KL~VsBiW9M3ucXP9ukhdYBJGd2TVrb-ishSXte8YAEWjp0hZ6FZ9D9OHKjva1vAv4tC8ZgEsRamTXthSKmcncIThpBBzkJyoGcu94dGEdMYSa28ZtFJAK2r4JZ3cxx0DDAeBxE2t-PoXUw6FujfWnmwzJb28FlSk2ouVh4WDA7pECwh6YTFI9mMpYVRt09IZHo1Y56wcyTnAyLTelDTVLn5iBtionI1IJYaYy48KayhBpeRexD4LO09--xENEvfyjQAG1Zg9wA-axpDz6KcAhfogz67MTCUA__',
+        MobileHeight: 100,
+        PcHeight: 120,
+        br: '8px',
+      },
+    ],
   });
   const [reviewers, setReviewers] = useState({
     name: '혜밍웨이',
@@ -140,19 +207,26 @@ const index = () => {
             <HeadingContainer>
               <Heading>{constants.movies.detail.heading.production}</Heading>
             </HeadingContainer>
-            <DirectingContainer></DirectingContainer>
+            <ImageContainer>
+              {movieData.productions.map((item, index) => (
+                <Productions productions={item} key={item.url + index} />
+              ))}
+            </ImageContainer>
           </Section>
           <Section>
             <HeadingContainer>
               <Heading>{constants.movies.detail.heading.steel}</Heading>
             </HeadingContainer>
-            <ImageContainer></ImageContainer>
+            <ScrollContainer>
+              {movieData.steels.map((item, index) => (
+                <ImageLayer src={item} key={item.url + index} />
+              ))}
+            </ScrollContainer>
           </Section>
           <Section>
             <HeadingContainer>
               <Heading>{constants.movies.detail.heading.videos}</Heading>
             </HeadingContainer>
-            <ImageContainer></ImageContainer>
           </Section>
         </PaddedContainer>
       </Container>
