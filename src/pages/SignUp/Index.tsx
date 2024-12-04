@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { Controller, useForm } from 'react-hook-form';
 
 import type { User } from '../../types/user';
-import { postAuthSignUpApi } from '../../apis/auth/singupApi';
+import { postSignUpApi } from '../../apis/auth/signupApi';
 
 import { Heading, Paragraph, Button, Input, Icon } from 'pov-design-system';
 import { SignUpSection, SignUpSectionHeader, SignUpSectionBody, ButtonContainer } from './Index.style';
@@ -38,7 +38,7 @@ const Index = () => {
 
   const onSubmit = async (data: User) => {
     try {
-      await postAuthSignUpApi(data);
+      await postSignUpApi(data);
       await new Promise((resolve) => setTimeout(resolve, 3000)); // 최소 3초 로딩
       navigate('/main'); // 로딩 완료 후 main 페이지로 이동
     } catch (error) {

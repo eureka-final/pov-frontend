@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { getNaverUserEmailApi } from '../../../apis/auth/oauthApi';
-import { postAuthLoginApi } from '../../../apis/auth/loginApi';
+import { postLoginApi } from '../../../apis/auth/loginApi';
 import Padded from '../../../components/templates/Padded/Padded';
 
 const Index = () => {
@@ -20,7 +20,7 @@ const Index = () => {
 
       if (code && state) {
         const email = await getNaverUserEmailApi(code, state);
-        await postAuthLoginApi(email, 'NAVER');
+        await postLoginApi(email, 'NAVER');
       }
     };
 

@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import Padded from '../../../components/templates/Padded/Padded';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { getGoogleUserEmailApi } from '../../../apis/auth/oauthApi';
-import { postAuthLoginApi } from '../../../apis/auth/loginApi';
+import { postLoginApi } from '../../../apis/auth/loginApi';
 
 const Index = () => {
   const navigate = useNavigate();
@@ -18,7 +18,7 @@ const Index = () => {
 
       if (code) {
         const email = await getGoogleUserEmailApi(code);
-        await postAuthLoginApi(email, 'GOOGLE');
+        await postLoginApi(email, 'GOOGLE');
       }
     };
     loginWithGoogle();
