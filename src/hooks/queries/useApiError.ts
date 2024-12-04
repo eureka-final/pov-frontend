@@ -1,4 +1,5 @@
 import { useCallback } from 'react';
+import { HTTP_STATUS_CODE } from '../../constants/api';
 
 interface DefaultHandlers {
   common: () => void;
@@ -19,22 +20,22 @@ const defaultHandlers: DefaultHandlers = {
   default: () => {
     console.error('정의되지 않은 에러입니다.');
   },
-  401: {
+  [HTTP_STATUS_CODE.UNAUTHORIZED]: {
     default: () => {
       console.error('401 Unauthorized - 로그인 필요');
     },
   },
-  403: {
+  [HTTP_STATUS_CODE.FORBIDDEN]: {
     default: () => {
       console.error('403 Forbidden - 접근 권한 없음');
     },
   },
-  404: {
+  [HTTP_STATUS_CODE.NOT_FOUND]: {
     default: () => {
       console.error('404 Not Found - 존재하지 않는 URL');
     },
   },
-  409: {
+  [HTTP_STATUS_CODE.CONFLICT]: {
     10001: () => {
       console.error('409 - 리소스 충돌: 특정 케이스 10001');
     },
@@ -42,7 +43,7 @@ const defaultHandlers: DefaultHandlers = {
       console.error('409 - 리소스 충돌: 특정 케이스 10002');
     },
   },
-  500: {
+  [HTTP_STATUS_CODE.INTERNAL_SERVER_ERROR]: {
     default: () => {
       console.error('500 Internal Server Error');
     },
