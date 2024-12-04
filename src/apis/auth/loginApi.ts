@@ -1,4 +1,3 @@
-import { useNavigate } from 'react-router-dom';
 import { instance } from '../axiosInstance';
 import axios from 'axios';
 

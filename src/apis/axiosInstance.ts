@@ -1,8 +1,11 @@
 import axios, { AxiosInstance, InternalAxiosRequestConfig, AxiosResponse } from 'axios';
 import { ACCESS_TOKEN_KEY, HTTP_STATUS_CODE } from '../constants/api';
+import { useApiError } from '../hooks/queries/useApiError';
+
+// eslint-disable-next-line react-hooks/rules-of-hooks
+const { handleError } = useApiError();
 
 const createInstance = (): AxiosInstance => {
-  /* Axios Instance 생성 */
   const instance = axios.create({
     baseURL: import.meta.env.VITE_BASE_URL,
     timeout: 5000,
@@ -11,7 +14,7 @@ const createInstance = (): AxiosInstance => {
     },
   });
 
-  /* 요청 Interceptor 설정 */
+  // 요청 Interceptor
   instance.interceptors.request.use(
     (config: InternalAxiosRequestConfig) => {
       const accessToken = sessionStorage.getItem(ACCESS_TOKEN_KEY);
@@ -23,24 +26,28 @@ const createInstance = (): AxiosInstance => {
       return config;
     },
     (error) => {
-      // Request Error 처리
       console.error('Request error:', error);
       return Promise.reject(error);
     }
   );
 
-  /* 응답 Interceptor 설정 */
+  // 응답 Interceptor
   instance.interceptors.response.use(
-    (response: AxiosResponse) => {
-      return response;
-    },
+    (response: AxiosResponse) => response,
     async (error) => {
       const originalRequest = error.config;
 
-      /* 401 : Access Token Unauthorized */
       if (error.response?.status === HTTP_STATUS_CODE.UNAUTHORIZED) {
+        // handleError로 401 처리 위임
+        handleError(error);
+
+        // 토큰 재발급 요청
         try {
-          const { data } = await axios.post(`${import.meta.env.VITE_BASE_URL}/api/auth/reissue`, { withCredentials: true });
+          const { data } = await axios.post(
+            `${import.meta.env.VITE_BASE_URL}/api/auth/reissue`,
+            {},
+            { withCredentials: true }
+          );
 
           const { accessToken } = data;
           sessionStorage.setItem(ACCESS_TOKEN_KEY, accessToken);
@@ -48,14 +55,20 @@ const createInstance = (): AxiosInstance => {
           if (originalRequest.headers) {
             originalRequest.headers.Authorization = `Bearer ${accessToken}`;
           }
+
           return instance(originalRequest); // 실패한 요청 재실행
         } catch (refreshError) {
-          console.warn('Token refresh failed. Redirecting to signin...');
-          window.location.href = '/signin'; // refresh token도 만료된 경우 로그인 페이지로 이동
+          // 토큰 갱신 실패 시 handleError 사용
+          handleError({
+            response: { status: HTTP_STATUS_CODE.UNAUTHORIZED },
+          });
+
           return Promise.reject(refreshError);
         }
       }
 
+      // 기타 에러에 대한 처리
+      handleError(error);
       return Promise.reject(error);
     }
   );
