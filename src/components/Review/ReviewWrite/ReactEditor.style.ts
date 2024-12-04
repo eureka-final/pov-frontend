@@ -37,7 +37,7 @@ export const CustomQuillEditorView = styled.div`
 
     .ql-container {
       box-sizing: border-box;
-      height: 500px;
+      height: 400px;
       width: 100%;
       padding: 5px 10px;
       border: none;

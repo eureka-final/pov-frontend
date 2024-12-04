@@ -2,16 +2,12 @@ import React from 'react';
 import { Avatar } from 'pov-design-system';
 import { Container, Name } from './Profile.style';
 
-interface User {
+interface UserProps {
   name: string;
   avatarUrl: string;
 }
 
-export interface ProfileProps {
-  user: User;
-}
-
-const Profile: React.FC<ProfileProps> = ({ user: { name, avatarUrl } }) => {
+const Profile: React.FC<UserProps> = ({ name, avatarUrl }) => {
   return (
     <Container>
       <Avatar size="tiny" username={name} src={avatarUrl} />

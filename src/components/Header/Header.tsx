@@ -1,15 +1,8 @@
-import ThemeToggle from '../../components/common/ThemeToggle';
-import NavigationTabs from '../../components/common/NavigationTabs';
-import styled from '@emotion/styled';
+// import ThemeToggle from '../../components/common/ThemeToggle';
+import NavigationTabs from '../common/NavigationTabs';
 import Profile from '../common/Profile';
-import { Icon } from 'pov-design-system';
-
-const HeaderWrapper = styled.header`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem;
-`;
+import { Logo, Input, Icon } from 'pov-design-system';
+import { HeaderWrapper, LeftWrapper, LogoItem } from './Header.style';
 
 function Header() {
   const user = {
@@ -20,12 +13,16 @@ function Header() {
   return (
     <>
       <HeaderWrapper>
-        <Icon icon="logo" style={{ width: '10%', cursor: 'pointer' }} onClick={() => (window.location.href = '/')} />
-
-        <NavigationTabs />
-        <Profile user={user} />
+        <LeftWrapper>
+          <LogoItem>
+            <Logo icon="logo" onClick={() => (window.location.href = '/')} />
+          </LogoItem>
+          <NavigationTabs />
+          <Input placeholder="검색어를 입력해 주세요" icon={<Icon icon="search" color="#ADACAF" />} />
+        </LeftWrapper>
+        <Profile name={user.name} avatarUrl={user.avatarUrl} />
       </HeaderWrapper>
-      <ThemeToggle />
+      {/* <ThemeToggle /> */}
     </>
   );
 }
