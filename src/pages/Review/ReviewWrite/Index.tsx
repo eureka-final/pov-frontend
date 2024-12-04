@@ -69,6 +69,7 @@ const Index = () => {
         onSuccess: () => {
           console.log('리뷰 작성 성공!');
           saveClose();
+          localStorage.remove(`${movieId}`);
         },
       }
     );
