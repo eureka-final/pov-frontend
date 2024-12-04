@@ -3,7 +3,7 @@ import type { User } from '../../types/user';
 import axios from 'axios';
 
 /* 회원가입 요청 API */
-export const postAuthSignUpApi = async (user: User) => {
+export const postSignUpApi = async (user: User) => {
   try {
     const response = await instance.post('/api/auth/signup', user);
     return response.data;

@@ -3,7 +3,7 @@ import { instance } from '../axiosInstance';
 import axios from 'axios';
 
 /* 로그인 요청 API */
-export const postAuthLoginApi = async (email: string, socialType: string) => {
+export const postLoginApi = async (email: string, socialType: string) => {
   try {
     const response = await instance.post('/api/auth/login', {
       email: email,
