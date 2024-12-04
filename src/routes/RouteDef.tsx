@@ -1,17 +1,18 @@
 import Main from '../pages/Main';
 import Movie from '../pages/Movie';
 import Review from '../pages/Review';
-import ReviewWrite from '../pages/Review/ReviewWrite';
+import MovieDetail from '../pages/Movie/MovieDetail';
+import MovieReviews from '../pages/Movie/MovieReviews/Index';
+import ReviewWrite from '../pages/Review/ReviewWrite/Index';
 import Club from '../pages/Club';
 import Premieres from '../pages/Premieres';
 import Payments from '../pages/Premieres/Payments/Index';
 import Success from '../pages/Premieres/Payments/Success/Index';
 import Fail from '../pages/Premieres/Payments/Fail/Index';
-import MovieDetail from '../pages/MovieDetail';
 import ReviewDetail from '../pages/Review/ReviewDetail/Index';
 import Login from '../pages/Login/Index';
-import OauthNaver from '../pages/Oauth/Naver';
-import OauthGoogle from '../pages/Oauth/Google';
+import OauthNaver from '../pages/Oauth/Naver/Index';
+import OauthGoogle from '../pages/Oauth/Google/Index';
 
 const MovieScreens = {
   Main: {
@@ -25,6 +26,10 @@ const MovieScreens = {
   MovieDetail: {
     path: '/movie/detail',
     element: <MovieDetail />,
+  },
+  MovieReviews: {
+    path: '/movie/reviews',
+    element: <MovieReviews />,
   },
 };
 
