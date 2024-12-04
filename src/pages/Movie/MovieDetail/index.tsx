@@ -9,7 +9,6 @@ import {
   HeaderInfo,
   Count,
   InfoContainer,
-  ReviewContainer,
   ImageContainer,
   AdditionalsContainer,
   BodyContainer,
@@ -26,6 +25,7 @@ import ImageLayer from '../../../components/styles/ImageLayer';
 import ResponsiveContainer from '../../../components/styles/ResponsiveContainer';
 import ProgressBar from '../../../components/styles/ProgressBar';
 import Productions from '../../../components/movies/Productions/Productions';
+import Review from '../../../components/movies/Review/Review';
 
 const index = () => {
   const [movieData, setMovieData] = useState({
@@ -111,6 +111,7 @@ const index = () => {
     ],
   });
   const [reviewers, setReviewers] = useState({
+    profile: '/public/avatar.svg',
     name: '혜밍웨이',
     content: '박찬욱은 신이야! 박찬욱은 신이야! 박찬욱은 신이야! 박찬욱은 신이야!',
     date: '2024.11.28',
@@ -188,20 +189,7 @@ const index = () => {
                 <Icon icon="angleright" color="#ADACAF" style={{ width: '16px', height: '16px' }} />
               </Div>
             </HeadingContainer>
-            <ReviewContainer>
-              <Div>
-                <img src="/public/avatar.svg" />
-                <Heading size="small">{reviewers.name}</Heading>
-              </Div>
-              <Content>{reviewers.content}</Content>
-              <Body size="small" style={{ color: '#ADACAF' }}>
-                {reviewers.date}
-              </Body>
-              <Additionals justify="flex-end">
-                <Icon icon="heartline" color="#ADACAF" />
-                <Count color="#ADACAF">{reviewers.likes}</Count>
-              </Additionals>
-            </ReviewContainer>
+            <Review reviewers={reviewers} />
           </Section>
           <Section>
             <HeadingContainer>

@@ -4,6 +4,7 @@ import Review from '../pages/Review';
 import ReviewWrite from '../pages/ReviewWrite';
 import ClubReview from '../pages/ClubReview';
 import MovieDetail from '../pages/Movie/MovieDetail';
+import MovieReviews from '../pages/Movie/MovieReviews/Index';
 
 const MovieScreens = {
   Main: {
@@ -17,6 +18,10 @@ const MovieScreens = {
   MovieDetail: {
     path: '/movie/detail',
     element: <MovieDetail />,
+  },
+  MovieReviews: {
+    path: '/movie/reviews',
+    element: <MovieReviews />,
   },
 };
 
