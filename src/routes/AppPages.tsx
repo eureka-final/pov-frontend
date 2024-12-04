@@ -1,7 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 import { AppRouteDef } from './RouteDef';
 import Padded from '../components/templates/Padded/Padded';
-import useRenderHeader from '../hooks/useRenderHeader';
+import useRenderHeader from '../hooks/utils/useRenderHeader';
 
 const AppPages = () => {
   const header = useRenderHeader();
