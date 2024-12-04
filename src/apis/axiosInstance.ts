@@ -1,6 +1,5 @@
 import axios, { AxiosInstance, InternalAxiosRequestConfig, AxiosResponse } from 'axios';
-import { ACCESS_TOKEN_KEY } from '../constants/api';
-import { HTTP_STATUS_CODE } from '../constants/api';
+import { ACCESS_TOKEN_KEY, HTTP_STATUS_CODE } from '../constants/api';
 
 const createInstance = (): AxiosInstance => {
   /* Axios Instance 생성 */
