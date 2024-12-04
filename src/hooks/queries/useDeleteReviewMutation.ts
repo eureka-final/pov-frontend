@@ -1,16 +1,18 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { deleteReview } from '../../apis/review/deleteReview';
 import { useToast } from '../common/useToast';
-
-export interface ErrorResponseData {
-  statusCode?: number;
-  message?: string;
-  code?: number;
-}
+import { useApiError } from './useApiError';
 
 export const useDeleteReviewMutation = () => {
   const queryClient = useQueryClient();
   const { createToast } = useToast();
+  const { handleError } = useApiError({
+    404: {
+      default: () => {
+        createToast('페이지를 찾을 수 없습니다.');
+      },
+    },
+  });
 
   const deleteReviewMutation = useMutation({
     mutationFn: deleteReview,
@@ -18,10 +20,9 @@ export const useDeleteReviewMutation = () => {
       // 변이 성공 시 캐시 무효화로 리뷰 데이터 갱신
       queryClient.invalidateQueries({ queryKey: ['reviews'] });
     },
-    onError: (error: ErrorResponseData) => {
-      console.error('데이터 전송 실패:', error);
-
-      createToast('리뷰 삭제에 실패했습니다. 잠시 후 다시 시도해 주세요.');
+    onError: (error) => {
+      // 에러 핸들링
+      handleError(error);
     },
   }
   );

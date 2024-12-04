@@ -1,5 +1,5 @@
 import Profile from '../../common/Profile';
-import { Heading, Body, Paragraph, Icon, Badge } from 'pov-design-system';
+import { Heading, Body, Paragraph, Icon } from 'pov-design-system';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDeleteReviewMutation } from '../../../hooks/queries/useDeleteReviewMutation';
 
@@ -15,7 +15,7 @@ interface MainProps {
   keywords: string;
 }
 
-export default function Main({ thumbnail, title, contents, reviewer, profileImge, createdAt, likeAmount, isLiked, keywords }: MainProps) {
+export default function Main({ thumbnail, title, contents, reviewer, profileImge, createdAt, likeAmount, isLiked }: MainProps) {
   const navigate = useNavigate();
   const { movieId, reviewId } = useParams<{ movieId: string; reviewId: string }>();
 
@@ -65,9 +65,9 @@ export default function Main({ thumbnail, title, contents, reviewer, profileImge
             <Body>{createdAt}</Body>
             <Icon icon={isLiked ? 'heartfill' : 'heartline'} /> {likeAmount}
             {/* TODO: 배열로 map 처리하기  */}
-            <Badge variant="keyword" cancel={true}>
+            {/* <Badge variant="keyword" cancel={true}>
               {keywords}
-            </Badge>
+            </Badge> */}
           </div>
         </div>
       </div>
