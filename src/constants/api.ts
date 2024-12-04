@@ -10,7 +10,7 @@ export const END_POINTS = {
 
 export const NETWORK = {
   RETRY_COUNT: 2,
-  TIMEOUT: 10000,
+  TIMEOUT: 5000,
 } as const;
 
 export const HTTP_STATUS_CODE = {
