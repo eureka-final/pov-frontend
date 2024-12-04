@@ -1,5 +1,6 @@
 import axios, { AxiosInstance, InternalAxiosRequestConfig, AxiosResponse } from 'axios';
 import { ACCESS_TOKEN_KEY } from '../constants/api';
+import { HTTP_STATUS_CODE } from '../constants/api';
 
 const createInstance = (): AxiosInstance => {
   /* Axios Instance 생성 */
@@ -38,7 +39,7 @@ const createInstance = (): AxiosInstance => {
       const originalRequest = error.config;
 
       /* 401 : Access Token Unauthorized */
-      if (error.response?.status === 401) {
+      if (error.response?.status === HTTP_STATUS_CODE.UNAUTHORIZED) {
         try {
           const { data } = await axios.post(`${import.meta.env.VITE_BASE_URL}/api/auth/reissue`, { withCredentials: true });
 
