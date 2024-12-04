@@ -1,8 +1,11 @@
+export const BASE_URL = import.meta.env.VITE_BASE_URL;
+
 export const END_POINTS = {
-  REVIEWS: 'http://www.point-of-views.com/api/movies/reviews',
-  MY_REVIEWS: 'http://www.point-of-views.com/api/movies/reviews/my',
-  REVIEW: (movieId: string, reviewId: string) =>  `http://www.point-of-views.com/api/movies/${movieId}/reviews/${reviewId}`,
-  CREATE_REVIEW: (movieId: string) => `http://www.point-of-views.com/api/movies/${movieId}/reviews`,
+  REVIEWS: '/api/movies/reviews',
+  MY_REVIEWS: '/api/movies/reviews/my',
+  REVIEW: (movieId: string, reviewId: string) =>  `/api/movies/${movieId}/reviews/${reviewId}`,
+  CREATE_REVIEW: (movieId: string) => `/api/movies/${movieId}/reviews`,
+  TOKEN: `/api/auth/reissue`,
 } as const;
 
 export const NETWORK = {
