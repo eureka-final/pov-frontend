@@ -1,87 +1,79 @@
 import { useCallback } from 'react';
 import { HTTP_STATUS_CODE } from '../../constants/api';
-
-interface DefaultHandlers {
-  common: () => void;
-  default: () => void;
-  [key: string]:
-    | {
-        default?: () => void;
-        [serviceCode: string]: (() => void) | undefined;
-      }
-    | (() => void);
-}
+import { useToast } from '../common/useToast';
 
 // 기본 핸들러 정의
-const defaultHandlers: DefaultHandlers = {
-  common: () => {
-    console.log('공통 처리 로직 수행');
-  },
+const defaultHandlers = {
+  
+  // common: () => {
+  //   console.log('공통 처리 로직 수행');
+  // },
   default: () => {
     console.error('정의되지 않은 에러입니다.');
   },
+  [HTTP_STATUS_CODE.BAD_REQUEST]: {
+    default: () => {
+      console.error('400 bad validation - 올바르지 않은 데이터 형식');
+      defaultHandlers.createToast?.('올바르지 않은 데이터 형식입니다.');
+    },
+  },
   [HTTP_STATUS_CODE.UNAUTHORIZED]: {
     default: () => {
-      console.error('401 Unauthorized - 로그인 필요');
+      console.error('401 Unauthorized - 로그인 인증 필요');
+      defaultHandlers.createToast?.('로그인을 다시 해주세요.');
     },
   },
   [HTTP_STATUS_CODE.FORBIDDEN]: {
     default: () => {
       console.error('403 Forbidden - 접근 권한 없음');
+      defaultHandlers.createToast?.('접근 권한이 없습니다.');
     },
   },
   [HTTP_STATUS_CODE.NOT_FOUND]: {
     default: () => {
       console.error('404 Not Found - 존재하지 않는 URL');
+      defaultHandlers.createToast?.('페이지를 찾을 수 없습니다.');
     },
   },
   [HTTP_STATUS_CODE.CONFLICT]: {
-    10001: () => {
-      console.error('409 - 리소스 충돌: 특정 케이스 10001');
+    default: () => {
+      console.error('409 Conflict - 리소스 충돌');
+      defaultHandlers.createToast?.('특정 케이스에서 리소스가 충돌했습니다.');
     },
-    10002: () => {
-      console.error('409 - 리소스 충돌: 특정 케이스 10002');
+  },
+  [HTTP_STATUS_CODE.INTERNAL_SERVER_LOGIC_ERROR]: {
+    default: () => {
+      console.error('500 Internal Server Logic Error');
+      defaultHandlers.createToast?.('서버 로직에서 문제가 발생했습니다.');
     },
   },
   [HTTP_STATUS_CODE.INTERNAL_SERVER_ERROR]: {
     default: () => {
-      console.error('500 Internal Server Error');
+      console.error('502 Internal Server Error');
+      defaultHandlers.createToast?.('서버가 터졌습니다.');
     },
   },
-};
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+} as Record<string, any>;
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const useApiError = (handlers: Record<string, any> = {}) => {
+  const { createToast } = useToast();
+  defaultHandlers.createToast = createToast;
+
   const handleError = useCallback(
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (error: any) => {
       const httpStatus = String(error.status || 'default'); // HTTP 상태 코드 (문자열 변환)
-      const serviceCode = String(error.response?.meta?.code || 'default'); // 서비스 에러 코드 (문자열 변환)
 
-      if (
-        handlers[httpStatus] &&
-        typeof handlers[httpStatus] === 'object' && 
-        serviceCode in handlers[httpStatus]
-      ) {
-        // 우선순위 1: 컴포넌트에서 재정의한 (HTTP 상태 + 서비스 코드)
-        handlers[httpStatus][serviceCode]();
-      } else if (handlers[httpStatus]?.default) {
-        // 우선순위 2: 컴포넌트에서 재정의한 (HTTP 상태)
+      if (handlers[httpStatus]?.default) {
+        // 우선순위 1: 컴포넌트에서 재정의한 (HTTP 상태)
         handlers[httpStatus].default();
-      } else if (
-        defaultHandlers[httpStatus] &&
-        typeof defaultHandlers[httpStatus] === 'object' &&
-        serviceCode in defaultHandlers[httpStatus]
-      ) {
-        // 우선순위 3: 기본 핸들러의 (HTTP 상태 + 서비스 코드)
-        (defaultHandlers[httpStatus] as Record<string, () => void>)[
-          serviceCode
-        ]();
       } else if (typeof defaultHandlers[httpStatus] === 'object') {
-        // 우선순위 4: 기본 핸들러의 (HTTP 상태)
+        // 우선순위 2: 기본 핸들러의 (HTTP 상태)
         (defaultHandlers[httpStatus] as { default: () => void }).default();
       } else {
-        // 우선순위 5: 정의되지 않은 에러
+        // 우선순위 3: 정의되지 않은 에러
         defaultHandlers.default();
       }
 

@@ -1,13 +1,13 @@
 import { useMutation } from '@tanstack/react-query';
-import { postReview } from '../../apis/review/postReview';
+import { postClub } from '../../apis/club/postClub';
 import { useApiError } from './useApiError';
 
-export const useCreateReviewMutation = () => {
+export const useCreateClubMutation = () => {
 
   const { handleError } = useApiError();
 
-  const createReviewMutation = useMutation({
-    mutationFn: postReview,
+  const createClubMutation = useMutation({
+    mutationFn: postClub,
     onSuccess: (data) => {
       console.log('성공적으로 전송:', data);
     },
@@ -17,5 +17,5 @@ export const useCreateReviewMutation = () => {
   }
   );
 
-  return createReviewMutation;
+  return createClubMutation;
 };

@@ -1,18 +1,10 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { deleteReview } from '../../apis/review/deleteReview';
-import { useToast } from '../common/useToast';
 import { useApiError } from './useApiError';
 
 export const useDeleteReviewMutation = () => {
   const queryClient = useQueryClient();
-  const { createToast } = useToast();
-  const { handleError } = useApiError({
-    404: {
-      default: () => {
-        createToast('페이지를 찾을 수 없습니다.');
-      },
-    },
-  });
+  const { handleError } = useApiError();
 
   const deleteReviewMutation = useMutation({
     mutationFn: deleteReview,

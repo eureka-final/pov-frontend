@@ -5,6 +5,7 @@ export const END_POINTS = {
   MY_REVIEWS: '/api/movies/reviews/my',
   REVIEW: (movieId: string, reviewId: string) =>  `/api/movies/${movieId}/reviews/${reviewId}`,
   CREATE_REVIEW: (movieId: string) => `/api/movies/${movieId}/reviews`,
+  CLUB: '/clubs',
   TOKEN: `/api/auth/reissue`,
 } as const;
 
@@ -22,7 +23,8 @@ export const HTTP_STATUS_CODE = {
   FORBIDDEN: 403,
   NOT_FOUND: 404,
   CONFLICT: 409,
-  INTERNAL_SERVER_ERROR: 500,
+  INTERNAL_SERVER_LOGIC_ERROR: 500,
+  INTERNAL_SERVER_ERROR: 502,
 } as const;
 
 

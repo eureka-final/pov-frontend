@@ -6,7 +6,7 @@ import Keyword from '../../../components/review/ReviewWrite/Keyword';
 import PublicToggle from '../../../components/club/ClubCreate/PublicToggle';
 import { HeadingContainer, ButtonContainer } from '../../Review/ReviewWrite/ReviewWrite.style';
 import { SettingClubImage } from '../../../components/club/ClubCreate/SettingClubImage';
-// import { useCreateClubMutation } from '../../../hooks/queries/useCreateClubMutation';
+import { useCreateClubMutation } from '../../../hooks/queries/useCreateClubMutation';
 
 const Index = () => {
   const { isOpen: isSaveOpen, open: saveOpen, close: saveClose } = useOverlay();
@@ -15,6 +15,7 @@ const Index = () => {
   const [name, setName] = useState<string>('');
   const [description, setDescription] = useState<string>('');
   const [maxParticipants, setMaxParticipants] = useState<string>('');
+  const [uploadImgUrl, setUploadImgUrl] = useState('');
 
   // publicToggle 상태
   const [isPublic, setIsPublic] = useState<boolean>(true);
@@ -43,7 +44,7 @@ const Index = () => {
     );
   };
 
-  //   const createClubMutation = useCreateClubMutation();
+  const createClubMutation = useCreateClubMutation();
   // 데이터 통합 후 요청 전송
   const handleSubmit = () => {
     // 선택된 키워드만 필터링
@@ -58,15 +59,15 @@ const Index = () => {
     };
     console.log(requestData);
 
-    // createClubMutation.mutate(
-    //   { ...requestData },
-    //   {
-    //     onSuccess: () => {
-    //       console.log('클럽 생성 성공!');
-    //       saveClose();
-    //     },
-    //   }
-    // );
+    createClubMutation.mutate(
+      { ...requestData },
+      {
+        onSuccess: () => {
+          console.log('클럽 생성 성공!');
+          saveClose();
+        },
+      }
+    );
   };
 
   return (
@@ -75,7 +76,7 @@ const Index = () => {
         <Heading size="large">클럽 만들기</Heading>
       </HeadingContainer>
 
-      <SettingClubImage />
+      <SettingClubImage uploadImgUrl={uploadImgUrl} onUploadImgUrl={setUploadImgUrl} />
       <ClubInfo
         name={name}
         description={description}
