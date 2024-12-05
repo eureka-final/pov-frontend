@@ -1,17 +1,18 @@
 import { Heading, SwitchToggle } from 'pov-design-system';
-import { Container, Name } from './ReviewToggle.style';
+import { Container, Label } from '../../styles/InputLabel';
 import { useEffect } from 'react';
 
 interface ReviewToggleProps {
   spoiler: boolean;
   onSpoilerChange: (spoiler: boolean) => void;
+  movieId: string;
 }
 
 // eslint-disable-next-line react/prop-types
-const ReviewToggle: React.FC<ReviewToggleProps> = ({ spoiler, onSpoilerChange }) => {
+const ReviewToggle: React.FC<ReviewToggleProps> = ({ spoiler, onSpoilerChange, movieId }) => {
   // 로컬스토리지에서 리뷰 스포일러 상태 동기화
   useEffect(() => {
-    const savedData = localStorage.getItem('reviewDraft');
+    const savedData = localStorage.getItem(`${movieId}`);
 
     try {
       const parsedData = savedData ? JSON.parse(savedData) : null; // JSON 파싱
@@ -30,9 +31,9 @@ const ReviewToggle: React.FC<ReviewToggleProps> = ({ spoiler, onSpoilerChange })
 
   return (
     <Container>
-      <Name>
+      <Label>
         <Heading size="small">스포일러</Heading>
-      </Name>
+      </Label>
       <SwitchToggle onChange={handleChange} checkedState={spoiler} />
     </Container>
   );

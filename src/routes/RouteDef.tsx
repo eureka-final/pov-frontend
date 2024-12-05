@@ -4,7 +4,9 @@ import Review from '../pages/Review';
 import MovieDetail from '../pages/Movie/MovieDetail';
 import MovieReviews from '../pages/Movie/MovieReviews/Index';
 import ReviewWrite from '../pages/Review/ReviewWrite/Index';
+import ReviewEdit from '../pages/Review/ReviewEdit/Index';
 import Club from '../pages/Club';
+import ClubCreate from '../pages/Club/ClubCreate/Index';
 import Premieres from '../pages/Premieres';
 import Payments from '../pages/Premieres/Payments/Index';
 import Success from '../pages/Premieres/Payments/Success/Index';
@@ -13,7 +15,6 @@ import ReviewDetail from '../pages/Review/ReviewDetail/Index';
 import Login from '../pages/Login/Index';
 import OauthNaver from '../pages/Oauth/Naver';
 import OauthGoogle from '../pages/Oauth/Google';
-import ReviewEdit from '../pages/Review/ReviewEdit/Index';
 
 const MovieScreens = {
   Main: {
@@ -57,6 +58,10 @@ const ClubScreens = {
   Club: {
     path: '/club',
     element: <Club />,
+  },
+  ClubCreate: {
+    path: '/club/create',
+    element: <ClubCreate />,
   },
 };
 

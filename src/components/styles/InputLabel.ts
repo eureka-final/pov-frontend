@@ -2,15 +2,19 @@ import styled from '@emotion/styled';
 
 export const Container = styled.div`
   display: flex;
-  margin-top: 1.6rem;
+  align-items: center;
+  margin-top: 2rem;
 `;
 
-export const Name = styled.span`
-  margin-right: 40px;
+export const Label = styled.div`
+  flex: 0 0 6%; /* Label의 고정 너비 */
+  text-align: left;
+  margin-right: 20px;
 `;
+
 export const Keywords = styled.span`
-  display: flex; /* Flexbox 사용 */
-  flex-direction: column; /* 세로 방향 정렬 */
+  display: flex;
+  flex-direction: column;
   gap: 10px;
 `;
 
