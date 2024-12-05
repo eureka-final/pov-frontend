@@ -3,9 +3,15 @@ import { BrowserRouter } from 'react-router-dom';
 
 function App() {
   return (
-    <BrowserRouter>
-      <AppScreen />
-    </BrowserRouter>
+    <QueryErrorResetBoundary>
+      {({ reset }) => (
+        <ErrorBoundary onReset={reset} FallbackComponent={FallbackUI}>
+          <BrowserRouter>
+            <AppScreen />
+          </BrowserRouter>
+        </ErrorBoundary>
+      )}
+    </QueryErrorResetBoundary>
   );
 }
 
