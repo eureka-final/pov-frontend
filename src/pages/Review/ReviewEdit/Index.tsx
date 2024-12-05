@@ -5,32 +5,37 @@ import ReactEditor from '../../../components/review/ReviewWrite/ReactEditor';
 import { Heading, Body, Button, Modal, useOverlay, Logo } from 'pov-design-system';
 import Keyword from '../../../components/review/ReviewWrite/Keyword';
 import ReviewToggle from '../../../components/review/ReviewWrite/ReviewToggle';
-import { HeadingContainer, ButtonContainer, Vs, Item } from './ReviewWrite.style';
-import { useCreateReviewMutation } from '../../../hooks/queries/useCreateReviewMutation';
+import { HeadingContainer, ButtonContainer, Vs, Item } from '../ReviewWrite/ReviewWrite.style';
+import { useEditReviewMutation } from '../../../hooks/queries/useEditReviewMutation';
+import { useEditReviewQuery } from '../../../hooks/queries/useEditReviewQuery';
 
 const Index = () => {
-  const { movieId } = useParams<{ movieId: string }>();
+  const { movieId, reviewId } = useParams<{ movieId: string; reviewId: string }>();
+  const editReviewMutation = useEditReviewMutation();
+  const { existingReview } = useEditReviewQuery(movieId!, reviewId!);
 
   const { isOpen: isSaveOpen, open: saveOpen, close: saveClose } = useOverlay();
   const { isOpen: isTempOpen, open: tempOpen, close: tempClose } = useOverlay();
 
   // ReactEditor 상태
-  const [title, setTitle] = useState<string>('');
-  const [content, setContent] = useState<string>('');
-  // console.log(content);
+  const [title, setTitle] = useState(existingReview?.title || '');
+  const [content, setContent] = useState(existingReview?.content || '');
+
   // Keyword 상태
-  const [keywords, setKeywords] = useState([
-    { text: '감동적인', cancel: false },
-    { text: '재미있는', cancel: false },
-    { text: '몰입감 있는', cancel: false },
-    { text: '연기력이 뛰어난', cancel: false },
-    { text: '연출이 뛰어난', cancel: false },
-    { text: '지루한', cancel: false },
-    { text: '연기가 어색한', cancel: false },
-    { text: '연출이 어색한', cancel: false },
-    { text: '전개가 느린', cancel: false },
-    { text: '기대이하의', cancel: false },
-  ]);
+  const [keywords, setKeywords] = useState(
+    existingReview?.keywords || [
+      { text: '감동적인', cancel: false },
+      { text: '재미있는', cancel: false },
+      { text: '몰입감 있는', cancel: false },
+      { text: '연기력이 뛰어난', cancel: false },
+      { text: '연출이 뛰어난', cancel: false },
+      { text: '지루한', cancel: false },
+      { text: '연기가 어색한', cancel: false },
+      { text: '연출이 어색한', cancel: false },
+      { text: '전개가 느린', cancel: false },
+      { text: '기대이하의', cancel: false },
+    ]
+  );
 
   const handleKeywordsChange = (selectedKeywords: string[]) => {
     // 부모 상태 업데이트
@@ -43,17 +48,19 @@ const Index = () => {
   };
 
   // ReviewToggle 상태
-  const [spoiler, setSpoiler] = useState<boolean>(false);
+  const [spoiler, setSpoiler] = useState(existingReview?.spoiler || false);
 
   // Modal 상태
-  const [preference, setPreference] = useState<string>('');
+  const [preference, setPreference] = useState(existingReview?.preference || '');
 
-  const createReviewMutation = useCreateReviewMutation();
+  interface Keyword {
+    text: string;
+    cancel: boolean;
+  }
   // 데이터 통합 후 요청 전송
   const handleSubmit = () => {
     // 선택된 키워드만 필터링
-    const selectedKeywords = keywords.filter((keyword) => keyword.cancel).map((keyword) => keyword.text);
-
+    const selectedKeywords = keywords.filter((keyword: Keyword) => keyword.cancel).map((keyword) => keyword.text);
     const requestData = {
       title,
       contents: content,
@@ -63,13 +70,12 @@ const Index = () => {
     };
     console.log(requestData);
 
-    createReviewMutation.mutate(
-      { movieId: movieId!, ...requestData },
+    editReviewMutation.mutate(
+      { movieId: movieId!, reviewId: reviewId!, ...requestData },
       {
         onSuccess: () => {
-          console.log('리뷰 작성 성공!');
+          console.log('리뷰 수정 성공!');
           saveClose();
-          localStorage.removeItem(`${movieId}`);
         },
       }
     );
@@ -112,11 +118,10 @@ const Index = () => {
       }
     }
   }, []);
-
   return (
     <Padded>
       <HeadingContainer>
-        <Heading size="large">리뷰쓰기</Heading>
+        <Heading size="large">리뷰 수정하기</Heading>
       </HeadingContainer>
 
       <ReactEditor title={title} content={content} onChangeTitle={setTitle} onChangeContent={setContent} />

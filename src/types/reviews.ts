@@ -1,5 +1,5 @@
 export interface ReviewsData {
-    reviewId: number;
+    reviewId: string;
     movieTitle: string;
     title: string;
     contents: string;
