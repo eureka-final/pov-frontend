@@ -1,17 +1,14 @@
 import AppScreen from './routes/AppScreen';
 import { BrowserRouter } from 'react-router-dom';
+import { ErrorBoundary } from 'react-error-boundary';
 
 function App() {
   return (
-    <QueryErrorResetBoundary>
-      {({ reset }) => (
-        <ErrorBoundary onReset={reset} FallbackComponent={FallbackUI}>
-          <BrowserRouter>
-            <AppScreen />
-          </BrowserRouter>
-        </ErrorBoundary>
-      )}
-    </QueryErrorResetBoundary>
+    <ErrorBoundary FallbackComponent={FallbackUI}>
+      <BrowserRouter>
+        <AppScreen />
+      </BrowserRouter>
+    </ErrorBoundary>
   );
 }
 
