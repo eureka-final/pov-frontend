@@ -1,5 +1,4 @@
-import { useEffect, useState } from 'react';
-import axios from 'axios';
+import { useState } from 'react';
 import ReviewClubCard from './ReviewClubCard';
 import { ClubContainer, ClubReviewListContainer, ClubItem } from './ReviewCard.style';
 import { Avatar } from 'pov-design-system';
@@ -131,7 +130,6 @@ function ReviewClubList() {
         {selectedClubReviews.map((review) => (
           <ReviewClubCard
             key={review.reviewId}
-            reviewId={review.reviewId}
             movieTitle={review.movieTitle}
             title={review.title}
             contents={review.contents}
