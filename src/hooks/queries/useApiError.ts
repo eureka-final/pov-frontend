@@ -1,6 +1,5 @@
 import { useCallback, useState } from 'react';
 import { HTTP_STATUS_CODE } from '../../constants/api';
-import { useToast } from '../common/useToast';
 
 // 기본 핸들러 정의
 const defaultHandlers = {
@@ -14,43 +13,36 @@ const defaultHandlers = {
   [HTTP_STATUS_CODE.BAD_REQUEST]: {
     default: () => {
       console.error('400 bad validation - 올바르지 않은 데이터 형식');
-      defaultHandlers.createToast?.('올바르지 않은 데이터 형식입니다.');
     },
   },
   [HTTP_STATUS_CODE.UNAUTHORIZED]: {
     default: () => {
       console.error('401 Unauthorized - 로그인 인증 필요');
-      defaultHandlers.createToast?.('로그인을 다시 해주세요.');
     },
   },
   [HTTP_STATUS_CODE.FORBIDDEN]: {
     default: () => {
       console.error('403 Forbidden - 접근 권한 없음');
-      defaultHandlers.createToast?.('접근 권한이 없습니다.');
     },
   },
   [HTTP_STATUS_CODE.NOT_FOUND]: {
     default: () => {
       console.error('404 Not Found - 존재하지 않는 URL');
-      defaultHandlers.createToast?.('페이지를 찾을 수 없습니다.');
     },
   },
   [HTTP_STATUS_CODE.CONFLICT]: {
     default: () => {
       console.error('409 Conflict - 리소스 충돌');
-      defaultHandlers.createToast?.('특정 케이스에서 리소스가 충돌했습니다.');
     },
   },
   [HTTP_STATUS_CODE.INTERNAL_SERVER_LOGIC_ERROR]: {
     default: () => {
       console.error('500 Internal Server Logic Error');
-      defaultHandlers.createToast?.('서버 로직에서 문제가 발생했습니다.');
     },
   },
   [HTTP_STATUS_CODE.INTERNAL_SERVER_ERROR]: {
     default: () => {
       console.error('502 Internal Server Error');
-      defaultHandlers.createToast?.('서버가 터졌습니다.');
     },
   },
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -59,8 +51,6 @@ const defaultHandlers = {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const useApiError = (handlers: Record<string, any> = {}) => {
   const [error, setError] = useState<Error | null>(null);
-  const { createToast } = useToast();
-  defaultHandlers.createToast = createToast;
 
   const handleError = useCallback(
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -79,7 +69,7 @@ export const useApiError = (handlers: Record<string, any> = {}) => {
       }
 
       // 공통 처리 로직
-      defaultHandlers.common(error);
+      // defaultHandlers.common(error);
 
       // ErrorBoundary로 에러를 전파
       setError(error as Error);

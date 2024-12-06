@@ -27,27 +27,32 @@ export const HTTP_STATUS_CODE = {
   INTERNAL_SERVER_ERROR: 502,
 } as const;
 
+interface HttpErrorMessage {
+  HEADING: string;
+  BODY: string;
+  BUTTON: string;
+}
 
-export const HTTP_ERROR_MESSAGE = {
+export const HTTP_ERROR_MESSAGE: Record<number, HttpErrorMessage> = {
   [HTTP_STATUS_CODE.NOT_FOUND]: {
     HEADING: '페이지를 다시 탐색해주세요.',
     BODY: '요청하신 페이지를 찾을 수 없습니다.',
     BUTTON: '홈으로 가기',
   },
-  [HTTP_STATUS_CODE.INTERNAL_SERVER_ERROR]: {
-    HEADING: '현재 페이지를 표시할 수 없습니다.',
-    BODY: `잠시 후 다시 시도해주세요.`,
-    BUTTON: '새로고침',
+  [HTTP_STATUS_CODE.UNAUTHORIZED]: {
+    HEADING: '인증이 만료되었습니다.',
+    BODY: '로그인을 해주세요',
+    BUTTON: '로그인',
   },
   [HTTP_STATUS_CODE.FORBIDDEN]: {
     HEADING: '접근 권한이 없습니다.',
     BODY: '로그인을 해주세요',
     BUTTON: '로그인',
   },
-  [HTTP_STATUS_CODE.BAD_REQUEST]: {
-    HEADING: '잘못된 요청입니다.',
-    BODY: '확인 후 다시 시도해주세요.',
-    BUTTON: '홈으로 가기',
+  [HTTP_STATUS_CODE.INTERNAL_SERVER_ERROR]: {
+    HEADING: '현재 페이지를 표시할 수 없습니다.',
+    BODY: `잠시 후 다시 시도해주세요.`,
+    BUTTON: '새로고침',
   },
 } as const;
 
