@@ -1,7 +1,7 @@
 export const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 export const END_POINTS = {
-  REVIEWS: '/api/movies/reviews',
+  REVIEWS: 'https://www.point-of-views.com/api/movies/reviews',
   MY_REVIEWS: '/api/movies/reviews/my',
   REVIEW: (movieId: string, reviewId: string) =>  `/api/movies/${movieId}/reviews/${reviewId}`,
   CREATE_REVIEW: (movieId: string) => `/api/movies/${movieId}/reviews`,
@@ -38,6 +38,11 @@ export const HTTP_ERROR_MESSAGE = {
     HEADING: '현재 페이지를 표시할 수 없습니다.',
     BODY: `잠시 후 다시 시도해주세요.`,
     BUTTON: '새로고침',
+  },
+  [HTTP_STATUS_CODE.FORBIDDEN]: {
+    HEADING: '접근 권한이 없습니다.',
+    BODY: '로그인을 해주세요',
+    BUTTON: '로그인',
   },
   [HTTP_STATUS_CODE.BAD_REQUEST]: {
     HEADING: '잘못된 요청입니다.',

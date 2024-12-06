@@ -1,13 +1,13 @@
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 import { HTTP_STATUS_CODE } from '../../constants/api';
 import { useToast } from '../common/useToast';
 
 // 기본 핸들러 정의
 const defaultHandlers = {
   
-  // common: () => {
-  //   console.log('공통 처리 로직 수행');
-  // },
+  common: () => {
+    console.log('공통 처리 로직 수행');
+  },
   default: () => {
     console.error('정의되지 않은 에러입니다.');
   },
@@ -58,6 +58,7 @@ const defaultHandlers = {
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const useApiError = (handlers: Record<string, any> = {}) => {
+  const [error, setError] = useState<Error | null>(null);
   const { createToast } = useToast();
   defaultHandlers.createToast = createToast;
 
@@ -78,10 +79,18 @@ export const useApiError = (handlers: Record<string, any> = {}) => {
       }
 
       // 공통 처리 로직
-      defaultHandlers.common();
+      defaultHandlers.common(error);
+
+      // ErrorBoundary로 에러를 전파
+      setError(error as Error);
+
     },
     [handlers]
   );
 
+  // J.E 실행 컨텍스트에 에러 전파
+  if(error) {
+    throw error;
+  }
   return { handleError };
 };
