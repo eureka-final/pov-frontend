@@ -11,20 +11,23 @@ const AppPages = () => {
   const header = useRenderHeader();
 
   return (
-    <QueryErrorResetBoundary>
-      {({ reset }) => (
-        <ErrorBoundary onReset={reset} FallbackComponent={FallbackUI}>
-          <Padded>
-            {header} <ToastContainer />
-          </Padded>
-          <Routes>
-            {Object.entries({ ...AppRouteDef }).map(([name, { path, element }], index) => (
-              <Route key={name + index} path={path} element={element} />
-            ))}
-          </Routes>
-        </ErrorBoundary>
-      )}
-    </QueryErrorResetBoundary>
+    <Padded>
+      {' '}
+      {header}
+      <QueryErrorResetBoundary>
+        {({ reset }) => (
+          <ErrorBoundary onReset={reset} FallbackComponent={FallbackUI}>
+            <ToastContainer />
+
+            <Routes>
+              {Object.entries({ ...AppRouteDef }).map(([name, { path, element }], index) => (
+                <Route key={name + index} path={path} element={element} />
+              ))}
+            </Routes>
+          </ErrorBoundary>
+        )}
+      </QueryErrorResetBoundary>
+    </Padded>
   );
 };
 

@@ -13,10 +13,8 @@ export const useDeleteReviewMutation = () => {
       queryClient.invalidateQueries({ queryKey: ['reviews'] });
     },
     onError: (error) => {
-      console.error('Mutation Error:', error);
       // 에러 핸들링
       handleError(error);
-
     },
   }
   );
