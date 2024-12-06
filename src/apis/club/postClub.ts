@@ -4,7 +4,7 @@ import { END_POINTS } from '../../constants/api';
 
 export const postClub = async ({ ...information }) => {
   const response = await axiosInstance.post<ClubFormData>(
-    END_POINTS.CLUB,
+    END_POINTS.CLUBS,
     information
   );
   return response.data;

@@ -1,6 +1,6 @@
 import Main from '../pages/Main';
 import Movie from '../pages/Movie';
-import Review from '../pages/Review';
+import Review from '../pages/Review/Index';
 import MovieDetail from '../pages/Movie/MovieDetail';
 import MovieReviews from '../pages/Movie/MovieReviews/Index';
 import ReviewWrite from '../pages/Review/ReviewWrite/Index';
