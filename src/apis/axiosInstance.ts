@@ -17,4 +17,5 @@ export const axiosInstance = axios.create({
 /* 요청 Interceptor */
 axiosInstance.interceptors.request.use(checkSetToken);
 /* 응답 Interceptor */
-axiosInstance.interceptors.response.use((response) => response, handleRefreshToken);
+axiosInstance.interceptors.response.use((response) => response);
+// axiosInstance.interceptors.response.use((response) => response, handleRefreshToken); // TODO 테스트 후 삭제
