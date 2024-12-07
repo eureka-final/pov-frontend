@@ -5,4 +5,5 @@ export interface User {
   favorGenres: string[];
   socialType: string;
   profileImage: string;
+  role: string;
 }
