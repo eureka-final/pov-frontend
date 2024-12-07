@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-
+import { css } from '@emotion/react';
 export const Container = styled.div`
   display: flex;
   align-items: center;
@@ -23,3 +23,7 @@ export const BadgeContainer = styled.span`
   gap: 8px; 
   cursor: pointer;
 `;
+
+export const inputStyling = css({
+  width: '750px',
+});

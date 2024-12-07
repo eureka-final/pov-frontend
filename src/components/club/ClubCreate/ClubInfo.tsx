@@ -1,6 +1,6 @@
 import React from 'react';
 import { Heading, Input } from 'pov-design-system';
-import { Container, Label } from '../../styles/InputLabel';
+import { Container, Label, inputStyling } from '../../styles/InputLabel';
 
 interface ClubInfoProps {
   name: string;
@@ -23,6 +23,7 @@ const ClubInfo: React.FC<ClubInfoProps> = ({ name, description, maxParticipants,
           required={true}
           value={name}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => onNameChange(e.target.value)}
+          css={inputStyling}
         />
       </Container>
       <Container>
@@ -35,6 +36,7 @@ const ClubInfo: React.FC<ClubInfoProps> = ({ name, description, maxParticipants,
           isError={!description.trim()}
           value={description}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => onDescriptionChange(e.target.value)}
+          css={inputStyling}
         />
       </Container>
       <Container>
@@ -47,6 +49,7 @@ const ClubInfo: React.FC<ClubInfoProps> = ({ name, description, maxParticipants,
           isError={!maxParticipants.trim()}
           value={maxParticipants}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => onMaxParticipantsChange(e.target.value)}
+          css={inputStyling}
         />
       </Container>
     </>
