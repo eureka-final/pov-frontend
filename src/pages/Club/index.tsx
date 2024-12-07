@@ -3,7 +3,7 @@ import Padded from '../../components/templates/Padded/Padded';
 import { Badge } from 'pov-design-system';
 import { Wrapper } from '../Review/Review.style';
 import ClubList from '../../components/club/ClubList';
-import ReviewMyList from '../../components/review/MyReviewList';
+import MyClubList from '../../components/club/MyClubList';
 
 const Index = () => {
   const [sections, setSections] = useState([
@@ -11,7 +11,7 @@ const Index = () => {
     { text: '내 클럽', click: false },
   ]);
 
-  const [sectionsType, setSectionsType] = useState('모든 리뷰');
+  const [sectionsType, setSectionsType] = useState('모든 클럽');
 
   const handleBadgeClick = (index: number) => {
     const updatedSections = sections.map((section, i) => ({
@@ -35,7 +35,7 @@ const Index = () => {
         ))}
       </Wrapper>
       {sectionsType === '모든 클럽' && <ClubList />}
-      {sectionsType === '내 클럽' && <ReviewMyList />}
+      {sectionsType === '내 클럽' && <MyClubList />}
     </Padded>
   );
 };

@@ -3,7 +3,7 @@ import Padded from '../../components/templates/Padded/Padded';
 import { Badge } from 'pov-design-system';
 import { Wrapper } from './Review.style';
 import ReviewList from '../../components/review/ReviewList';
-import ReviewMyList from '../../components/review/MyReviewList';
+import MyReviewList from '../../components/review/MyReviewList';
 import ReviewClubList from '../../components/review/ReviewClubList';
 
 const Index = () => {
@@ -37,7 +37,7 @@ const Index = () => {
         ))}
       </Wrapper>
       {sectionsType === '모든 리뷰' && <ReviewList />}
-      {sectionsType === '내 리뷰' && <ReviewMyList />}
+      {sectionsType === '내 리뷰' && <MyReviewList />}
       {sectionsType === '클럽 리뷰' && <ReviewClubList />}
     </Padded>
   );

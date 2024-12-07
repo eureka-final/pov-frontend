@@ -15,7 +15,8 @@ const Index = () => {
   const [name, setName] = useState<string>('');
   const [description, setDescription] = useState<string>('');
   const [maxParticipants, setMaxParticipants] = useState<string>('');
-  const [uploadImgUrl, setUploadImgUrl] = useState('');
+  const [imgUrl, setImgUrl] = useState<string | null>('');
+  const [uploadImgUrl, setUploadImgUrl] = useState<string | null>('');
 
   // publicToggle 상태
   const [isPublic, setIsPublic] = useState<boolean>(true);
@@ -56,6 +57,7 @@ const Index = () => {
       maxParticipants,
       clubFavorGenre: selectedKeywords,
       isPublic,
+      imgUrl,
     };
     console.log(requestData);
 
@@ -76,7 +78,7 @@ const Index = () => {
         <Heading size="large">클럽 만들기</Heading>
       </HeadingContainer>
 
-      <SettingClubImage uploadImgUrl={uploadImgUrl} onUploadImgUrl={setUploadImgUrl} />
+      <SettingClubImage onImgUrl={setImgUrl} uploadImgUrl={uploadImgUrl} onUploadImgUrl={setUploadImgUrl} />
       <ClubInfo
         name={name}
         description={description}

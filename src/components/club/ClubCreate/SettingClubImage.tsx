@@ -4,16 +4,17 @@ import { HiddenInput, UploadButton, ImageBox, PreviewImage } from './SettingClub
 import axios from 'axios';
 
 interface ClubImageProps {
-  uploadImgUrl: string;
+  onImgUrl: (value: string) => void;
+  uploadImgUrl: string | null;
   onUploadImgUrl: (value: string) => void;
 }
 
 // eslint-disable-next-line react/prop-types
-export const SettingClubImage: React.FC<ClubImageProps> = ({ uploadImgUrl, onUploadImgUrl }) => {
+export const SettingClubImage: React.FC<ClubImageProps> = ({ onImgUrl, uploadImgUrl, onUploadImgUrl }) => {
   const inputRef = useRef<HTMLInputElement | null>(null);
 
   const onUploadImage = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
+    async (e: React.ChangeEvent<HTMLInputElement>) => {
       if (!e.target.files) {
         return;
       }
@@ -23,21 +24,19 @@ export const SettingClubImage: React.FC<ClubImageProps> = ({ uploadImgUrl, onUpl
 
       // FormData 객체 api 전송
       const formData = new FormData();
-      formData.append('image', uploadFile);
-      axios({
-        url: '/images/:username/thumbnail',
-        method: 'POST',
-        data: formData,
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      })
-        .then((response) => {
-          console.log(response.data);
-        })
-        .catch((error) => {
-          console.error(error);
-        });
+      formData.append('files', uploadFile);
+      // console.log('업로드 파일:', uploadFile);
+      // console.log('FormData 내용:', Array.from(formData.entries()));
+
+      try {
+        const res = await axios.post('http://www.point-of-views.com/api/clubs/images', formData);
+        console.log(res.data);
+        onImgUrl(res.data);
+
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      } catch (err: any) {
+        console.error('요청 중 오류 발생:', err);
+      }
 
       // 미리보기를 위한 base64 처리
       const reader = new FileReader();
