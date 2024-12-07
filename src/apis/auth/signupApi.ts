@@ -6,6 +6,7 @@ import axios from 'axios';
 export const postSignUpApi = async (user: User) => {
   try {
     const response = await axiosInstance.post('/api/auth/signup', user);
+    console.log(response);
     return response.data;
   } catch (error) {
     console.error(error);

@@ -75,8 +75,9 @@ const getGoogleUserInfo = async (accessToken: string) => {
         Authorization: `Bearer ${accessToken}`,
       },
     });
+
     const email = userInfoResponse.data.email;
-    const profileImage = userInfoResponse.data.profileImage;
+    const profileImage = userInfoResponse.data.picture;
 
     return { email: email, profileImage: profileImage };
   } catch (error) {
