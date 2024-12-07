@@ -29,14 +29,12 @@ const Index = () => {
           try {
             const response = await postLoginApi(data.email, 'NAVER');
 
-            if (response) {
+            if (response.data.exists) {
               setLoggedIn(true);
-              setUser(response.data);
+              setUser(response.data.memberInfo);
               alert('로그인 성공');
               navigate('/main');
-            }
-          } catch (error: any) {
-            if (error.status == '404') {
+            } else {
               alert('최초 로그인, 회원가입으로 이동');
               navigate('/signup', {
                 state: {
@@ -45,12 +43,12 @@ const Index = () => {
                   socialType: 'NAVER',
                 },
               });
-              return;
-            } else {
-              alert('로그인 실패');
-              navigate('/login');
-              return;
             }
+          } catch (error: any) {
+            console.error(error);
+            alert('로그인 실패');
+            navigate('/login');
+            return;
           }
         }
       }
