@@ -22,7 +22,9 @@ const NicknameStep = ({ onNext, onPrev }: NicknameStepProps) => {
       description={SIGN_UP_HEADER_TEXTS.nickname.description}
       onPrev={onPrev}
     >
-      <Input size="large" placeholder="닉네임을 입력해주세요" error={errors.nickname} {...register('nickname')} />
+      <div style={{ width: '100%' }}>
+        <Input size="large" placeholder="닉네임을 입력해주세요" error={errors.nickname} {...register('nickname')} />
+      </div>
       <ButtonContainer>
         <Button css={{ width: '100%' }} size="large" onClick={onNext}>
           다음으로

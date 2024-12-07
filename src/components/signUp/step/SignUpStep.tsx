@@ -12,20 +12,18 @@ interface SignUpStepProps {
 
 const SignUpStep = ({ firstLine, secondLine, description, onPrev, children }: SignUpStepProps) => {
   return (
-    <Padded>
-      <SignUpSection>
-        <SignUpSectionHeader>
-          <Icon icon="angleleft" css={{ marginBottom: '32px' }} onClick={onPrev} />
-          <Heading size="xxLarge">
-            <p style={{ display: 'inline', color: '#AA6FFF' }}>{firstLine.keyword}</p>
-            <p style={{ display: 'inline' }}>{firstLine.particle}</p>
-          </Heading>
-          <Heading size="xxLarge">{secondLine}</Heading>
-          <Paragraph>{description}</Paragraph>
-        </SignUpSectionHeader>
-        <SignUpSectionBody>{children}</SignUpSectionBody>
-      </SignUpSection>
-    </Padded>
+    <SignUpSection>
+      <SignUpSectionHeader>
+        <Icon icon="angleleft" css={{ marginBottom: '32px' }} onClick={onPrev} />
+        <Heading size="xxLarge">
+          <p style={{ display: 'inline', color: '#AA6FFF' }}>{firstLine.keyword}</p>
+          <p style={{ display: 'inline' }}>{firstLine.particle}</p>
+        </Heading>
+        <Heading size="xxLarge">{secondLine}</Heading>
+        <Paragraph>{description}</Paragraph>
+      </SignUpSectionHeader>
+      <SignUpSectionBody>{children}</SignUpSectionBody>
+    </SignUpSection>
   );
 };
 

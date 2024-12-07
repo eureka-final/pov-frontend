@@ -23,7 +23,9 @@ const BirthStep = ({ onNext, onPrev }: BirthStepProps) => {
       description={SIGN_UP_HEADER_TEXTS.birth.description}
       onPrev={onPrev}
     >
-      <Input size="large" type="date" placeholder="생년월일을 입력해주세요" max={getTodayDate()} error={errors.nickname} {...register('birth')} />
+      <div style={{ width: '100%' }}>
+        <Input size="large" type="date" placeholder="생년월일을 입력해주세요" max={getTodayDate()} error={errors.nickname} {...register('birth')} />
+      </div>
       <ButtonContainer>
         <Button css={{ width: '100%' }} size="large" onClick={onNext}>
           다음으로
