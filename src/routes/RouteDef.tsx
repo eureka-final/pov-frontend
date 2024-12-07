@@ -1,17 +1,19 @@
 import Main from '../pages/Main';
 import Movie from '../pages/Movie';
 import Review from '../pages/Review';
-import ReviewWrite from '../pages/Review/ReviewWrite';
+import MovieDetail from '../pages/Movie/MovieDetail';
+import MovieReviews from '../pages/Movie/MovieReviews/Index';
+import ReviewWrite from '../pages/Review/ReviewWrite/Index';
 import Club from '../pages/Club';
 import Premieres from '../pages/Premieres';
 import Payments from '../pages/Premieres/Payments/Index';
 import Success from '../pages/Premieres/Payments/Success/Index';
 import Fail from '../pages/Premieres/Payments/Fail/Index';
-import MovieDetail from '../pages/MovieDetail';
 import ReviewDetail from '../pages/Review/ReviewDetail/Index';
 import Login from '../pages/Login';
 import OauthNaver from '../pages/Oauth/Naver';
 import OauthGoogle from '../pages/Oauth/Google';
+import ReviewEdit from '../pages/Review/ReviewEdit/Index';
 import SignUp from '../pages/SignUp/Index';
 
 const MovieScreens = {
@@ -27,6 +29,10 @@ const MovieScreens = {
     path: '/movie/detail',
     element: <MovieDetail />,
   },
+  MovieReviews: {
+    path: '/movie/reviews',
+    element: <MovieReviews />,
+  },
 };
 
 const ReviewScreens = {
@@ -35,12 +41,16 @@ const ReviewScreens = {
     element: <Review />,
   },
   ReviewWrite: {
-    path: '/review/write',
+    path: '/review/:movieId/write',
     element: <ReviewWrite />,
   },
   ReviewDetail: {
-    path: '/review/detail/:id',
+    path: '/review/:movieId/detail/:reviewId',
     element: <ReviewDetail />,
+  },
+  ReviewEdit: {
+    path: '/review/:movieId/edit/:reviewId',
+    element: <ReviewEdit />,
   },
 };
 

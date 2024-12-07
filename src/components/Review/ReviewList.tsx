@@ -1,9 +1,9 @@
 import ReviewCard from './ReviewCard';
 import { ReviewListContainer } from './ReviewCard.style';
-import { useReviews } from '../../hooks/review/useReviews';
+import { useReviewsQuery } from '../../hooks/queries/useReviewsQuery';
 
 function ReviewList() {
-  const { reviewsData } = useReviews();
+  const { reviewsData } = useReviewsQuery();
 
   return (
     <>

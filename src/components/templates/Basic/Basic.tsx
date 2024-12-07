@@ -1,12 +1,12 @@
 import { ReactNode } from 'react';
 import { Container } from './Basic.styled';
 
-interface PaddedProps {
+interface BasicProps {
   children: ReactNode;
 }
 
-const Padded = ({ children }: PaddedProps) => {
+const Basic = ({ children }: BasicProps) => {
   return <Container>{children}</Container>;
 };
 
-export default Padded;
+export default Basic;

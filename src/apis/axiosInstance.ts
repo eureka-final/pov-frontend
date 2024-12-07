@@ -1,65 +1,20 @@
-import axios, { AxiosInstance, InternalAxiosRequestConfig, AxiosResponse } from 'axios';
+import axios from 'axios';
 
-const createInstance = (): AxiosInstance => {
-  /* Axios Instance 생성 */
-  const instance = axios.create({
-    baseURL: import.meta.env.VITE_BASE_URL,
-    timeout: 5000,
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  });
+import { checkSetToken, handleRefreshToken } from './intersceptors';
 
-  /* 요청 Interceptor 설정 */
-  instance.interceptors.request.use(
-    (config: InternalAxiosRequestConfig) => {
-      const accessToken = sessionStorage.getItem('access-token');
+import { BASE_URL, NETWORK } from '../constants/api';
 
-      if (accessToken) {
-        config.headers.Authorization = `Bearer ${accessToken}`;
-      }
+/* Axios Instance 생성 */
+export const axiosInstance = axios.create({
+  baseURL: BASE_URL,
+  timeout: NETWORK.TIMEOUT,
+  withCredentials: true,
+  headers: {
+    'Content-Type': 'application/json',
+  },
+});
 
-      return config;
-    },
-    (error) => {
-      // Request Error 처리
-      console.error('Request error:', error);
-      return Promise.reject(error);
-    }
-  );
-
-  /* 응답 Interceptor 설정 */
-  instance.interceptors.response.use(
-    (response: AxiosResponse) => {
-      return response;
-    },
-    async (error) => {
-      const originalRequest = error.config;
-
-      /* 401 : Access Token Unauthorized */
-      if (error.response?.status === 401) {
-        try {
-          const { data } = await axios.post(`${import.meta.env.VITE_BASE_URL}/api/auth/reissue`, { withCredentials: true });
-
-          const { accessToken } = data;
-          sessionStorage.setItem('accessToken', accessToken);
-
-          if (originalRequest.headers) {
-            originalRequest.headers.Authorization = `Bearer ${accessToken}`;
-          }
-          return instance(originalRequest); // 실패한 요청 재실행
-        } catch (refreshError) {
-          console.warn('Token refresh failed. Redirecting to signin...');
-          window.location.href = '/login'; // refresh token도 만료된 경우 로그인 페이지로 이동
-          return Promise.reject(refreshError);
-        }
-      }
-
-      return Promise.reject(error);
-    }
-  );
-
-  return instance;
-};
-
-export const instance = createInstance();
+/* 요청 Interceptor */
+axiosInstance.interceptors.request.use(checkSetToken);
+/* 응답 Interceptor */
+axiosInstance.interceptors.response.use((response) => response, handleRefreshToken);
