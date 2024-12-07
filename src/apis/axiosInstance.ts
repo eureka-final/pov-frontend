@@ -50,7 +50,7 @@ const createInstance = (): AxiosInstance => {
           return instance(originalRequest); // 실패한 요청 재실행
         } catch (refreshError) {
           console.warn('Token refresh failed. Redirecting to signin...');
-          window.location.href = '/signin'; // refresh token도 만료된 경우 로그인 페이지로 이동
+          window.location.href = '/login'; // refresh token도 만료된 경우 로그인 페이지로 이동
           return Promise.reject(refreshError);
         }
       }
