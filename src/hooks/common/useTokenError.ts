@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
 
-import { useAuthStore } from  '../../stores/useAuthStore';
+import { useAuthStore } from '../../stores/useAuthStore';
 import { useToast } from './useToast';
 
 export const useTokenError = () => {
@@ -13,7 +13,7 @@ export const useTokenError = () => {
   const handleTokenError = () => {
     queryClient.clear(); // React Query 캐시 초기화
     clearSession(); // Zustand를 통해 세션 초기화
-    navigate('/signin'); //로그인 페이지로 이동
+    navigate('/login'); //로그인 페이지로 이동
 
     createToast('다시 로그인해 주세요.');
   };

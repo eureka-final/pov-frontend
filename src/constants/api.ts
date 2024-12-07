@@ -3,7 +3,7 @@ export const BASE_URL = import.meta.env.VITE_BASE_URL;
 export const END_POINTS = {
   REVIEWS: '/api/movies/reviews',
   MY_REVIEWS: '/api/movies/reviews/my',
-  REVIEW: (movieId: string, reviewId: string) =>  `/api/movies/${movieId}/reviews/${reviewId}`,
+  REVIEW: (movieId: string, reviewId: string) => `/api/movies/${movieId}/reviews/${reviewId}`,
   CREATE_REVIEW: (movieId: string) => `/api/movies/${movieId}/reviews`,
   TOKEN: `/api/auth/reissue`,
 } as const;
@@ -24,7 +24,6 @@ export const HTTP_STATUS_CODE = {
   CONFLICT: 409,
   INTERNAL_SERVER_ERROR: 500,
 } as const;
-
 
 export const HTTP_ERROR_MESSAGE = {
   [HTTP_STATUS_CODE.NOT_FOUND]: {

@@ -1,10 +1,8 @@
 {
   "files": [],
-  "references": [
-    { "path": "./tsconfig.app.json" },
-    { "path": "./tsconfig.node.json" }
-  ],
+  "references": [{ "path": "./tsconfig.app.json" }, { "path": "./tsconfig.node.json" }],
   "compilerOptions": {
+    "strict": true,
     "moduleResolution": "node",
     "typeRoots": ["./node_modules/@types", "./node_modules/pov-design-system"],
     "types": ["@emotion/react"],
