@@ -1,11 +1,11 @@
-import { instance } from '../axiosInstance';
+import { axiosInstance } from '../axiosInstance';
 import type { User } from '../../types/user';
 import axios from 'axios';
 
 /* 회원가입 요청 API */
 export const postSignUpApi = async (user: User) => {
   try {
-    const response = await instance.post('/api/auth/signup', user);
+    const response = await axiosInstance.post('/api/auth/signup', user);
     return response.data;
   } catch (error) {
     console.error(error);
