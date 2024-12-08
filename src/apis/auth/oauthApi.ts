@@ -34,9 +34,9 @@ const getNaverUserInfo = async (accessToken: string) => {
         },
       });
 
-      console.log('네이버 회원 정보 =', userResponse.data);
       const email = userResponse.data.response.email;
-      return email;
+      const profileImage = userResponse.data.response.profile_image;
+      return { email: email, profileImage: profileImage };
     }
   } catch (error) {
     console.error('error occured during get user info :', error);
@@ -70,29 +70,30 @@ const getGoogleAccessToken = async (code: string) => {
 // Google 사용자 정보 요청
 const getGoogleUserInfo = async (accessToken: string) => {
   try {
-    // Access Token 발급 API 호출
-    const response = await axios.get('/api/google/userInfo', {
+    const userInfoResponse = await axios.get('/api/google/userInfo', {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
     });
 
-    const email = response.data.email;
-    return email;
+    const email = userInfoResponse.data.email;
+    const profileImage = userInfoResponse.data.picture;
+
+    return { email: email, profileImage: profileImage };
   } catch (error) {
     console.error('error occured during get google user info :', error);
   }
 };
 
 /* -------- export APIs --------- */
-export const getNaverUserEmailApi = async (code: string, state: string) => {
+export const getNaverUserInfoApi = async (code: string, state: string) => {
   const naverAccessToken = await getNaverAccessToken(code, state);
-  const naverEmail = await getNaverUserInfo(naverAccessToken);
-  return naverEmail;
+  const naverUserInfo = await getNaverUserInfo(naverAccessToken);
+  return naverUserInfo;
 };
 
-export const getGoogleUserEmailApi = async (code: string) => {
+export const getGoogleUserInfoApi = async (code: string) => {
   const googleAccessToken = await getGoogleAccessToken(code);
-  const googleEmail = await getGoogleUserInfo(googleAccessToken);
-  return googleEmail;
+  const googleUserInfo = await getGoogleUserInfo(googleAccessToken);
+  return googleUserInfo;
 };

@@ -1,24 +1,16 @@
-// import NavigationTabs from '../../components/common/NavigationTabs';
-// import Profile from '../common/Profile';
-import { useNavigate } from 'react-router-dom';
 import { DetailHeaderWrapper, IconContainer } from './DetailHeader.style';
 import { Icon, Body } from 'pov-design-system';
 
 interface DetailHeaderProps {
   headerTitle: string;
+  onClick: () => void;
 }
 
-const DetailHeader = ({ headerTitle }: DetailHeaderProps) => {
-  const navigate = useNavigate();
-
-  const handleGoBack = () => {
-    navigate(-1);
-  };
-
+const DetailHeader = ({ headerTitle, onClick }: DetailHeaderProps) => {
   return (
     <>
       <DetailHeaderWrapper>
-        <IconContainer onClick={() => handleGoBack}>
+        <IconContainer onClick={() => onClick()}>
           <Icon icon="angleleft" />
         </IconContainer>
         <Body size="xLarge">{headerTitle}</Body>
