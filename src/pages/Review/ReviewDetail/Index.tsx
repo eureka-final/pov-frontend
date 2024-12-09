@@ -23,7 +23,7 @@ const Index = () => {
         <HeaderContainer src={reviewData.url}>
           <BackgroundLayer src={reviewData.url}></BackgroundLayer>
           <TitleInfo>
-            <Heading size="large">{reviewData.title}</Heading>
+            <Heading size="xLarge">{reviewData.title}</Heading>
           </TitleInfo>
           <ReviewInfo>
             <Profile name={reviewData.reviewer} avatarUrl={reviewData.profileImge} />

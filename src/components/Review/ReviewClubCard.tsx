@@ -6,6 +6,7 @@ import { Body, Paragraph, Icon } from 'pov-design-system';
 import Profile from '../common/Profile';
 
 interface ReviewCardProps {
+  key: number;
   movieTitle: string;
   title: string;
   contents: string | undefined;
