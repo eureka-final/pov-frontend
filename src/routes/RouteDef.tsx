@@ -16,7 +16,6 @@ import ReviewDetail from '../pages/Review/ReviewDetail/Index';
 import Login from '../pages/Login';
 import OauthNaver from '../pages/Oauth/Naver';
 import OauthGoogle from '../pages/Oauth/Google';
-import ReviewEdit from '../pages/Review/ReviewEdit/Index';
 import SignUp from '../pages/SignUp/Index';
 
 const MovieScreens = {
