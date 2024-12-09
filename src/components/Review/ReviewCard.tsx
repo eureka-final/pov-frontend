@@ -56,16 +56,6 @@ function ReviewCard({ review }: ReviewsData) {
 }
 
 // eslint-disable-next-line react/display-name
-ReviewCard.Loading = () => {
-  return (
-    <TitleInfo>
-      <Heading size="xxLarge">로딩중..</Heading>
-      <Logo icon="type1" />
-    </TitleInfo>
-  );
-};
-
-// eslint-disable-next-line react/display-name
 ReviewCard.Empty = () => {
   return (
     <TitleInfo>

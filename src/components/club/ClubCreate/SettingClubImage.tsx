@@ -24,7 +24,7 @@ export const SettingClubImage: React.FC<ClubImageProps> = ({ onImgUrl, uploadImg
 
       // FormData 객체 api 전송
       const formData = new FormData();
-      formData.append('files', uploadFile);
+      formData.append('file', uploadFile);
       // console.log('업로드 파일:', uploadFile);
       // console.log('FormData 내용:', Array.from(formData.entries()));
 
@@ -60,7 +60,7 @@ export const SettingClubImage: React.FC<ClubImageProps> = ({ onImgUrl, uploadImg
   return (
     <>
       {/* 파일 입력 */}
-      <HiddenInput type="file" accept="image/png" ref={inputRef} onChange={onUploadImage} />
+      <HiddenInput type="file" accept="image/*" ref={inputRef} onChange={onUploadImage} />
 
       {/* 업로드 버튼 */}
       {!uploadImgUrl && <UploadButton src={fileUpload} alt="File Upload" onClick={onUploadImageButtonClick} />}

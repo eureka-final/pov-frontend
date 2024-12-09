@@ -18,6 +18,9 @@ import OauthNaver from '../pages/Oauth/Naver';
 import OauthGoogle from '../pages/Oauth/Google';
 import SignUp from '../pages/SignUp/Index';
 
+import { Suspense } from 'react';
+import ReviewPageSkeleton from '../pages/Review/ReviewPageSkeleton';
+
 const MovieScreens = {
   Main: {
     path: '/',
@@ -40,7 +43,11 @@ const MovieScreens = {
 const ReviewScreens = {
   Review: {
     path: '/review',
-    element: <Review />,
+    element: (
+      <Suspense fallback={<ReviewPageSkeleton />}>
+        <Review />
+      </Suspense>
+    ),
   },
   ReviewWrite: {
     path: '/review/:movieId/write',

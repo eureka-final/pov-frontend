@@ -2,6 +2,7 @@ import { useRef, useEffect } from 'react';
 import ReviewCard from './ReviewCard';
 import { ReviewListContainer } from './ReviewCard.style';
 import { useReviewsQuery } from '../../hooks/queries/useReviewsQuery';
+import ReviewPageSkeleton from '../../pages/Review/ReviewPageSkeleton';
 
 function ReviewList() {
   const { reviewsData, fetchNextPage, hasNextPage, isFetching } = useReviewsQuery();
@@ -26,7 +27,7 @@ function ReviewList() {
 
   // 데이터 로딩 및 빈 상태 처리
   if (isFetching && reviewsData.length === 0) {
-    return <ReviewCard.Loading />;
+    return <ReviewPageSkeleton />;
   }
 
   if (!isFetching && reviewsData.length === 0) {
@@ -42,7 +43,7 @@ function ReviewList() {
       </ReviewListContainer>
 
       {/* 로딩 및 스크롤 감지 컴포넌트 */}
-      {isFetching && <ReviewCard.Loading />}
+      {isFetching && <ReviewPageSkeleton />}
       <div ref={observerRef} />
     </>
   );
