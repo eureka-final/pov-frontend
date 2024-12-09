@@ -1,6 +1,6 @@
 import Basic from '../../../components/templates/Basic/Basic';
 import { useState } from 'react';
-import { Heading, Badge, Body, AvatarList } from 'pov-design-system';
+import { Heading, Badge, Body, AvatarList, ShowMoreBtn } from 'pov-design-system';
 import {
   Container,
   HeaderContainer,
@@ -215,7 +215,7 @@ const Index = () => {
               {clubData.clubReviewList.reviews.content.length}
             </Body>
           </SectionHeading>
-          <Body>자세히 보기 &nbsp; &gt;</Body>
+          <ShowMoreBtn />
         </SectionWrapper>
 
         <ClubReviewListContainer>
@@ -245,7 +245,7 @@ const Index = () => {
               {clubData.clubReviewList.reviews.content.length}
             </Body>
           </SectionHeading>
-          <Body>자세히 보기 &nbsp; &gt;</Body>
+          <ShowMoreBtn />
         </SectionWrapper>
 
         <ClubBookMarkContainer>
