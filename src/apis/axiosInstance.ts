@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { checkSetToken, handleRefreshToken } from './intersceptors';
+import { checkSetToken } from './intersceptors';
 
 import { BASE_URL, NETWORK } from '../constants/api';
 
@@ -17,4 +17,4 @@ export const axiosInstance = axios.create({
 /* 요청 Interceptor */
 axiosInstance.interceptors.request.use(checkSetToken);
 /* 응답 Interceptor */
-axiosInstance.interceptors.response.use((response) => response, handleRefreshToken);
+axiosInstance.interceptors.response.use((response) => response);
