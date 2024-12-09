@@ -5,7 +5,7 @@ import 'react-quill/dist/quill.snow.css';
 import { CustomQuillEditorView } from './ReactEditor.style';
 import ReactModule from './ReactModule';
 // import dompurify from 'dompurify';
-import axios from 'axios';
+import { axiosInstance } from '../../../apis/axiosInstance';
 import { Input } from 'pov-design-system';
 import Parchment from 'parchment';
 
@@ -106,7 +106,7 @@ const ReactEditor: React.FC<ReactEditorProps> = ({ title, content, onChangeTitle
         try {
           // Bearer 토큰 설정 (필요 시 동적으로 가져오기)
           //const accessToken = localStorage.getItem('accessToken'); // 예시: 로컬 스토리지에서 가져옴
-          const res = await axios.post('https://www.point-of-views.com/api/movies/1/reviews/images', formData, {
+          const res = await axiosInstance.post('https://www.point-of-views.com/api/movies/1/reviews/images', formData, {
             headers: {
               'Content-Type': 'multipart/form-data',
               // Authorization: `Bearer ${accessToken}`, // 헤더 추가

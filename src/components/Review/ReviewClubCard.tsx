@@ -4,6 +4,7 @@ import axios from 'axios';
 import { CardContainer, Poster, CardFlex, ReviewCardContainer, LikeContainer, FlexBetween, Spoiler, SpoMore, ReadMore } from './ReviewCard.style';
 import { Body, Paragraph, Icon } from 'pov-design-system';
 import Profile from '../common/Profile';
+import dompurify from 'dompurify';
 
 interface ReviewCardProps {
   key: number;
@@ -25,6 +26,7 @@ function ReviewClubCard({ movieTitle, title, contents, reviewer, profileImge, th
   const [likeAction, setLikeAction] = useState<boolean | null>(isLiked);
 
   //const { movieId, reviewId } = useParams<{ movieId: string; reviewId: string }>();
+  const sanitizer = dompurify.sanitize;
 
   const truncateContents = (text: string | undefined, maxLength: number) => {
     if (!text) return '';
@@ -32,13 +34,13 @@ function ReviewClubCard({ movieTitle, title, contents, reviewer, profileImge, th
       const truncatedText = text.substring(0, maxLength);
       return (
         <>
-          {truncatedText}
+          <div dangerouslySetInnerHTML={{ __html: sanitizer(truncatedText) }} />
           <span>...</span>
           <ReadMore>더보기</ReadMore>
         </>
       );
     }
-    return text;
+    return <div dangerouslySetInnerHTML={{ __html: sanitizer(text) }} />;
   };
 
   const onLike = () => {

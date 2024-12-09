@@ -1,7 +1,7 @@
 import { useRef, useCallback } from 'react';
 import fileUpload from '/fileUpload.svg';
 import { HiddenInput, UploadButton, ImageBox, PreviewImage } from './SettingClubImage.style';
-import axios from 'axios';
+import { axiosInstance } from '../../../apis/axiosInstance';
 
 interface ClubImageProps {
   onImgUrl: (value: string) => void;
@@ -29,7 +29,7 @@ export const SettingClubImage: React.FC<ClubImageProps> = ({ onImgUrl, uploadImg
       // console.log('FormData 내용:', Array.from(formData.entries()));
 
       try {
-        const res = await axios.post('http://www.point-of-views.com/api/clubs/images', formData);
+        const res = await axiosInstance.post('http://www.point-of-views.com/api/clubs/images', formData);
         console.log(res.data);
         onImgUrl(res.data);
 
@@ -60,7 +60,7 @@ export const SettingClubImage: React.FC<ClubImageProps> = ({ onImgUrl, uploadImg
   return (
     <>
       {/* 파일 입력 */}
-      <HiddenInput type="file" accept="image/*" ref={inputRef} onChange={onUploadImage} />
+      <HiddenInput type="file" accept="image/png" ref={inputRef} onChange={onUploadImage} />
 
       {/* 업로드 버튼 */}
       {!uploadImgUrl && <UploadButton src={fileUpload} alt="File Upload" onClick={onUploadImageButtonClick} />}

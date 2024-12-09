@@ -75,6 +75,11 @@ export const Section = styled.div`
   margin-bottom: 46px;
 `;
 
+export const SectionWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
 export const SectionHeading = styled.div`
   display: flex;
   align-items: center;
