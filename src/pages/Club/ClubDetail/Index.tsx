@@ -11,9 +11,11 @@ import {
   SectionHeading,
   numberStyling,
   SectionWrapper,
+  ClubBookMarkContainer,
 } from './ClubDetail.styles';
 import { ClubReviewListContainer } from '../../../components/review/ReviewCard.style';
 import ReviewClubCard from '../../../components/review/ReviewClubCard';
+import Card from '../../../components/club/ClubDetail/Card';
 
 const Index = () => {
   const [clubData, setClubData] = useState({
@@ -120,6 +122,52 @@ const Index = () => {
         ],
       },
     },
+    clubMovieList: {
+      clubMovies: [
+        {
+          title: 'Inception',
+          poster: 'http://image.tmdb.org/t/p/w92/1E5baAaEse26fej7uHcjOgEE2t2.jpg',
+          released: 0,
+          movieLikeCount: 156,
+          movieReviewCount: 156,
+        },
+        {
+          title: 'Inception',
+          poster: 'http://image.tmdb.org/t/p/w92/1E5baAaEse26fej7uHcjOgEE2t2.jpg',
+          released: 0,
+          movieLikeCount: 156,
+          movieReviewCount: 156,
+        },
+        {
+          title: 'Inception',
+          poster: 'http://image.tmdb.org/t/p/w92/1E5baAaEse26fej7uHcjOgEE2t2.jpg',
+          released: 0,
+          movieLikeCount: 156,
+          movieReviewCount: 156,
+        },
+        {
+          title: 'Inception',
+          poster: 'http://image.tmdb.org/t/p/w92/1E5baAaEse26fej7uHcjOgEE2t2.jpg',
+          released: 0,
+          movieLikeCount: 156,
+          movieReviewCount: 156,
+        },
+        {
+          title: 'Inception',
+          poster: 'http://image.tmdb.org/t/p/w92/1E5baAaEse26fej7uHcjOgEE2t2.jpg',
+          released: 0,
+          movieLikeCount: 156,
+          movieReviewCount: 156,
+        },
+        {
+          title: 'Inception',
+          poster: 'http://image.tmdb.org/t/p/w92/1E5baAaEse26fej7uHcjOgEE2t2.jpg',
+          released: 0,
+          movieLikeCount: 156,
+          movieReviewCount: 156,
+        },
+      ],
+    },
   });
 
   return (
@@ -187,6 +235,24 @@ const Index = () => {
             />
           ))}
         </ClubReviewListContainer>
+      </Section>
+
+      <Section>
+        <SectionWrapper>
+          <SectionHeading>
+            <Heading size="large">이 클럽의 북마크</Heading>
+            <Body size="large" css={numberStyling}>
+              {clubData.clubReviewList.reviews.content.length}
+            </Body>
+          </SectionHeading>
+          <Body>자세히 보기 &nbsp; &gt;</Body>
+        </SectionWrapper>
+
+        <ClubBookMarkContainer>
+          {clubData.clubMovieList.clubMovies.slice(-6).map((item, index) => (
+            <Card key={item.title + index} item={item} />
+          ))}
+        </ClubBookMarkContainer>
       </Section>
     </Basic>
   );

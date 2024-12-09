@@ -90,3 +90,10 @@ export const SectionHeading = styled.div`
 export const numberStyling = css({
   color: themes.dark.color.green600,
 });
+
+export const ClubBookMarkContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(6, 1fr); /* 6열로 구성 */
+  gap: 24px; /* 카드 간격 */
+  margin-top: 16px;
+`;
