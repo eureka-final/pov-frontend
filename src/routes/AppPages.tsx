@@ -14,11 +14,10 @@ const AppPages = () => {
     <Padded>
       {' '}
       {header}
+      <ToastContainer />
       <QueryErrorResetBoundary>
         {({ reset }) => (
           <ErrorBoundary onReset={reset} FallbackComponent={FallbackUI}>
-            <ToastContainer />
-
             <Routes>
               {Object.entries({ ...AppRouteDef }).map(([name, { path, element }], index) => (
                 <Route key={name + index} path={path} element={element} />

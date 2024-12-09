@@ -12,7 +12,7 @@ const FallbackUI = ({ error, resetErrorBoundary }: { error: any; resetErrorBound
   const onClickHandler = () => {
     if (status === HTTP_STATUS_CODE.UNAUTHORIZED || status === HTTP_STATUS_CODE.FORBIDDEN) {
       // 인증 에러일 경우 로그인 페이지로 이동
-      navigate('/signin');
+      navigate('/login');
       resetErrorBoundary();
     } else if (status === HTTP_STATUS_CODE.NOT_FOUND) {
       // 404 에러일 경우 홈 페이지로 이동

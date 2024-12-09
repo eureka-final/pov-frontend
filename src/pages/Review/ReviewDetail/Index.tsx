@@ -1,8 +1,10 @@
 import Basic from '../../../components/templates/Basic/Basic';
 import { useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Heading, Body, Paragraph, Icon, Badge } from 'pov-design-system';
 import { Container, HeaderContainer, Additionals, TitleInfo, ReviewInfo, Count, BodyContainer, BackgroundLayer } from './ReviewDetail.styles';
 import Profile from '../../../components/common/Profile';
+import { useDeleteReviewMutation } from '../../../hooks/queries/useDeleteReviewMutation';
 
 const Index = () => {
   const [reviewData, setReviewData] = useState({
@@ -17,6 +19,23 @@ const Index = () => {
     url: 'https://s3-alpha-sig.figma.com/img/472e/ae15/f9f6158006f9a9a41457e6b4b6d6154e?Expires=1734307200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=oTRHhPd9IUhqT~UvQ1cAGibItqIX~QP3qmoUvKRw45gi2Gf3cib6HeFLt32GBig2RDYo8xvUVz-Fg0jg78gwaWi6gl2GUmmhFHRGH-P7DW9cWCLDpCjku08nThf3L~-C-gOqL9CjS3322Drr9ZjtJk7GQZ2lMfZjnzF9RMXf~IzEGYOf-cRV-eFxe5GGhx0w2y~Fd32U7E8aIYODKefdq~GNMFVTb0Pr2Rkoi3bWr99Pr8oVEs4d-lvxrH8hn2M2uISXKd-1DBPQ1~yNp8RlNjtC-TlLuYWJN75XjnLJXJPagrjxVYGkgPxtVz5Co7t2CNrGyDB7BxRNf-EODwWw-A__',
   });
 
+  const navigate = useNavigate();
+  const { movieId, reviewId } = useParams<{ movieId: string; reviewId: string }>();
+
+  const goToEditPage = () => {
+    //navigate(`/${movieId}/review/edit/${reviewId}`);
+    navigate(`/review/1/edit/1`);
+  };
+  const deleteReviewMutation = useDeleteReviewMutation();
+
+  const handleDelete = () => {
+    deleteReviewMutation.mutate(
+      { movieId: movieId!, reviewId: reviewId! },
+      {
+        onSuccess: () => navigate('/review'),
+      }
+    );
+  };
   return (
     <Basic>
       <Container>
@@ -46,6 +65,8 @@ const Index = () => {
       </Container>
 
       <Paragraph>{reviewData.contents}</Paragraph>
+      <button onClick={goToEditPage}>수정하기</button>
+      <button onClick={handleDelete}>삭제하기</button>
     </Basic>
   );
 };
