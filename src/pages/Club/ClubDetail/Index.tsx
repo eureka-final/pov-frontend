@@ -219,7 +219,7 @@ const Index = () => {
         </SectionWrapper>
 
         <ClubReviewListContainer>
-          {clubData.clubReviewList.reviews.content.slice(-3).map((review) => (
+          {clubData.clubReviewList.reviews.content.slice(0, 3).map((review) => (
             <ReviewClubCard
               key={review.reviewId}
               movieTitle={review.movieTitle}
@@ -249,7 +249,7 @@ const Index = () => {
         </SectionWrapper>
 
         <ClubBookMarkContainer>
-          {clubData.clubMovieList.clubMovies.slice(-6).map((item, index) => (
+          {clubData.clubMovieList.clubMovies.slice(0, 6).map((item, index) => (
             <Card key={item.title + index} item={item} />
           ))}
         </ClubBookMarkContainer>
