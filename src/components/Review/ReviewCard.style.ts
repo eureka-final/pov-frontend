@@ -48,6 +48,7 @@ export const Poster = styled.div`
   flex-direction: column; 
   gap: 5px;
   align-items: center;
+  text-align: center;
 `;
 
 export const ReviewCardContainer = styled.div`
@@ -81,4 +82,11 @@ export const SpoMore  = styled.div`
 
 export const ReadMore  = styled.div`
   color: ${({ theme }) => theme.color.gray400};
+`;
+
+export const TitleInfo = styled.div`
+  display: flex;
+  flex-direction: column; 
+  align-items: center;
+  margin-top: 15%;
 `;

@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
-import { CardContainer, CardFlex, ReviewCardContainer } from './ClubCard.style';
-import { Body, Paragraph, Input, Icon } from 'pov-design-system';
+import { CardContainer, CardFlex, ReviewCardContainer, TitleInfo } from './ClubCard.style';
+import { Body, Paragraph, Input, Icon, Heading, Logo } from 'pov-design-system';
 import { useClubs } from '../../hooks/club/useClubs';
 
 function ClubCard() {
@@ -38,7 +38,12 @@ function ClubCard() {
 
 // eslint-disable-next-line react/display-name
 ClubCard.Empty = () => {
-  return <div>등록된 클럽이 없습니다.</div>;
+  return (
+    <TitleInfo>
+      <Heading size="xxLarge">등록된 클럽이 없습니다.</Heading>
+      <Logo icon="type3" />
+    </TitleInfo>
+  );
 };
 
 export default ClubCard;
