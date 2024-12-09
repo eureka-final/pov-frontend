@@ -1,14 +1,25 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useInfiniteQuery } from '@tanstack/react-query';
+
 import type { ReviewsData } from '../../types/reviews';
 import { getReviews, getMyReviews } from '../../apis/review/getReviews';
 
 export const useReviewsQuery = () => {
-  const { data: reviewsData } = useQuery<ReviewsData[]>({
+  const {
+    data,
+    isFetching,
+    hasNextPage,
+    fetchNextPage,
+  } = useInfiniteQuery({
     queryKey: ['reviews'],
-    queryFn: getReviews
+    queryFn: ({ pageParam = 1 }) => getReviews(pageParam),
+    getNextPageParam: (lastPage) => (lastPage.last ? undefined : lastPage.pageNumber + 1),
+    initialPageParam: 1,
   });
 
-  return { reviewsData };
+  // 모든 페이지의 리뷰를 평탄화
+  const reviewsData = data?.pages.flatMap((page) => page.reviews) || [];
+
+  return { reviewsData, isFetching, hasNextPage, fetchNextPage };
 };
 
 export const useMyReviewsQuery = () => {
