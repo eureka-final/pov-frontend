@@ -1,15 +1,17 @@
 export interface ReviewsData {
+  review: {
     reviewId: string;
     movieTitle: string;
     title: string;
     contents: string;
     reviewer: string;
-    profileImge: string;
+    profileImage: string;
     thumbnail: string;
     createdAt: string;
     likeAmount: number;
     isLiked: boolean;
     spoiler: boolean;
+  }
 }
 
 export interface ReviewFormData {

@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
-import { CardContainer, Poster, CardFlex, ReviewCardContainer, FlexBetween, LikeContainer, ReadMore } from './ReviewCard.style';
-import { Body, Paragraph, Icon } from 'pov-design-system';
+import { CardContainer, Poster, CardFlex, ReviewCardContainer, FlexBetween, LikeContainer, ReadMore, TitleInfo } from './ReviewCard.style';
+import { Body, Paragraph, Icon, Heading, Logo } from 'pov-design-system';
 import Profile from '../common/Profile';
 import { useReviews } from '../../hooks/review/useReviews';
 
@@ -61,7 +61,12 @@ function MyReviewCard() {
 
 // eslint-disable-next-line react/display-name
 MyReviewCard.Empty = () => {
-  return <div>등록된 리뷰가 없습니다.</div>;
+  return (
+    <TitleInfo>
+      <Heading size="xxLarge">등록된 리뷰가 없습니다.</Heading>
+      <Logo icon="type2" />
+    </TitleInfo>
+  );
 };
 
 export default MyReviewCard;

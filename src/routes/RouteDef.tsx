@@ -1,10 +1,13 @@
 import Main from '../pages/Main';
 import Movie from '../pages/Movie';
-import Review from '../pages/Review';
+import Review from '../pages/Review/Index';
 import MovieDetail from '../pages/Movie/MovieDetail';
 import MovieReviews from '../pages/Movie/MovieReviews/Index';
 import ReviewWrite from '../pages/Review/ReviewWrite/Index';
-import Club from '../pages/Club';
+import ReviewEdit from '../pages/Review/ReviewEdit/Index';
+import Club from '../pages/Club/Index';
+import ClubCreate from '../pages/Club/ClubCreate/Index';
+import ClubDetail from '../pages/Club/ClubDetail/Index';
 import Premieres from '../pages/Premieres';
 import PremiereDetail from '../pages/Premieres/PremiereDetail';
 import Payments from '../pages/Premieres/Payments/Index';
@@ -15,8 +18,10 @@ import Login from '../pages/Login';
 import OauthNaver from '../pages/Oauth/Naver';
 import OauthGoogle from '../pages/Oauth/Google';
 // import Alarm from '../pages/Alarm';
-import ReviewEdit from '../pages/Review/ReviewEdit/Index';
 import SignUp from '../pages/SignUp/Index';
+
+// import React, { lazy, Suspense } from 'react';
+// import ReviewPageSkeleton from '../pages/Review/ReviewPageSkeleton';
 
 const MovieScreens = {
   Main: {
@@ -40,7 +45,11 @@ const MovieScreens = {
 const ReviewScreens = {
   Review: {
     path: '/review',
-    element: <Review />,
+    element: (
+      // <Suspense fallback={<ReviewPageSkeleton />}>
+      <Review />
+      // </Suspense>
+    ),
   },
   ReviewWrite: {
     path: '/review/:movieId/write',
@@ -60,6 +69,14 @@ const ClubScreens = {
   Club: {
     path: '/club',
     element: <Club />,
+  },
+  ClubCreate: {
+    path: '/club/create',
+    element: <ClubCreate />,
+  },
+  ClubDetail: {
+    path: '/club/:clubId/detail',
+    element: <ClubDetail />,
   },
 };
 

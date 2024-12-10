@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { Heading, Badge } from 'pov-design-system';
-import { Container, Name, Keywords, BadgeContainer } from './Keyword.style';
+import { Container, Label, Keywords, BadgeContainer } from '../../styles/InputLabel';
 
 interface KeywordProps {
   keywords: { text: string; cancel: boolean }[];
@@ -19,9 +19,9 @@ const Keyword: React.FC<KeywordProps> = ({ keywords, onKeywordsChange }) => {
 
   return (
     <Container>
-      <Name>
+      <Label>
         <Heading size="small">키워드</Heading>
-      </Name>
+      </Label>
 
       <Keywords>
         <BadgeContainer>

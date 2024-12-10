@@ -1,10 +1,13 @@
 export const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 export const END_POINTS = {
-  REVIEWS: '/api/movies/reviews',
-  MY_REVIEWS: '/api/movies/reviews/my',
-  REVIEW: (movieId: string, reviewId: string) => `/api/movies/${movieId}/reviews/${reviewId}`,
-  CREATE_REVIEW: (movieId: string) => `/api/movies/${movieId}/reviews`,
+  REVIEWS: (pageParam: number) => `https://www.point-of-views.com/api/movies/reviews?_limit=10&_page=${pageParam}`,
+  MY_REVIEWS: 'https://www.point-of-views.com/api/movies/reviews/my',
+  REVIEW: (movieId: string, reviewId: string) =>  `https://www.point-of-views.com/api/movies/${movieId}/reviews/${reviewId}`,
+  CREATE_REVIEW: (movieId: string) => `https://www.point-of-views.com/api/movies/${movieId}/reviews`,
+  CLUBS: '/api/clubs',
+  MY_CLUBS: 'https://www.point-of-views.com/api/clubs/myclub',
+  CLUB: (clubId: string) =>  `https://www.point-of-views.com/api/clubs/${clubId}`,
   TOKEN: `/api/auth/reissue`,
 } as const;
 
@@ -22,24 +25,36 @@ export const HTTP_STATUS_CODE = {
   FORBIDDEN: 403,
   NOT_FOUND: 404,
   CONFLICT: 409,
-  INTERNAL_SERVER_ERROR: 500,
+  INTERNAL_SERVER_LOGIC_ERROR: 500,
+  INTERNAL_SERVER_ERROR: 502,
 } as const;
 
-export const HTTP_ERROR_MESSAGE = {
+interface HttpErrorMessage {
+  HEADING: string;
+  BODY: string;
+  BUTTON: string;
+}
+
+export const HTTP_ERROR_MESSAGE: Record<number, HttpErrorMessage> = {
   [HTTP_STATUS_CODE.NOT_FOUND]: {
     HEADING: '페이지를 다시 탐색해주세요.',
     BODY: '요청하신 페이지를 찾을 수 없습니다.',
     BUTTON: '홈으로 가기',
   },
+  [HTTP_STATUS_CODE.UNAUTHORIZED]: {
+    HEADING: '인증이 만료되었습니다.',
+    BODY: '로그인을 해주세요',
+    BUTTON: '로그인',
+  },
+  [HTTP_STATUS_CODE.FORBIDDEN]: {
+    HEADING: '접근 권한이 없습니다.',
+    BODY: '로그인을 해주세요',
+    BUTTON: '로그인',
+  },
   [HTTP_STATUS_CODE.INTERNAL_SERVER_ERROR]: {
     HEADING: '현재 페이지를 표시할 수 없습니다.',
     BODY: `잠시 후 다시 시도해주세요.`,
     BUTTON: '새로고침',
-  },
-  [HTTP_STATUS_CODE.BAD_REQUEST]: {
-    HEADING: '잘못된 요청입니다.',
-    BODY: '확인 후 다시 시도해주세요.',
-    BUTTON: '홈으로 가기',
   },
 } as const;
 

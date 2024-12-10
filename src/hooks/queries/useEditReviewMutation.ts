@@ -1,8 +1,10 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { putReview } from '../../apis/review/putReview';
+import { useApiError } from './useApiError';
 
 export const useEditReviewMutation = () => {
   const queryClient = useQueryClient();
+  const { handleError } = useApiError();
 
   const editReviewMutation = useMutation({
     mutationFn: putReview,
@@ -11,8 +13,7 @@ export const useEditReviewMutation = () => {
       queryClient.invalidateQueries({ queryKey: ['movies', movieId, 'reviews', reviewId] });
     },
     onError: (error) => {
-      console.error('데이터 전송 실패:', error);
-      alert('리뷰 변경 저장에 실패했습니다.');
+      handleError(error);
     },
   }
   );

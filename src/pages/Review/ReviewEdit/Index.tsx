@@ -126,7 +126,7 @@ const Index = () => {
 
       <ReactEditor title={title} content={content} onChangeTitle={setTitle} onChangeContent={setContent} />
       <Keyword keywords={keywords} onKeywordsChange={handleKeywordsChange} />
-      <ReviewToggle spoiler={spoiler} onSpoilerChange={setSpoiler} />
+      <ReviewToggle spoiler={spoiler} onSpoilerChange={setSpoiler} movieId={movieId!} />
 
       <ButtonContainer>
         <Button variant="secondary" size="large" onClick={handleTemporary}>
