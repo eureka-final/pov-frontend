@@ -105,7 +105,7 @@ export interface ClubMovieList {
 export interface ClubFormData {
     name: string;
     description: string;
-    maxParticipants: number;
+    maxParticipants: number | null;
     clubFavorGenre: string[];
     isPublic: boolean;
 }

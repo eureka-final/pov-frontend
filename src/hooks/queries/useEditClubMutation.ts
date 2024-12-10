@@ -1,22 +1,22 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { putReview } from '../../apis/review/putReview';
-import { useApiError } from './useApiError';
+import { putClub } from '../../apis/club/putClub';
+import { useToast } from '../common/useToast';
 
-export const useEditReviewMutation = () => {
+export const useEditClubMutation = () => {
   const queryClient = useQueryClient();
-  const { handleError } = useApiError();
+  const { createToast } = useToast();
 
-  const editReviewMutation = useMutation({
-    mutationFn: putReview,
-    onSuccess: (_, { movieId, reviewId }) => {
-      // 변이 성공 시 캐시 무효화로 리뷰 데이터 갱신
-      queryClient.invalidateQueries({ queryKey: ['movies', movieId, 'reviews', reviewId] });
+  const editClubMutation = useMutation({
+    mutationFn: putClub,
+    onSuccess: (_, { clubId }) => {
+      // 변이 성공 시 캐시 무효화로 클럽 데이터 갱신
+      queryClient.invalidateQueries({ queryKey: ['clubs', clubId] });
     },
-    onError: (error) => {
-      handleError(error);
+    onError: () => {
+      createToast('올바른 형식을 입력하세요.');
     },
   }
   );
 
-  return editReviewMutation;
+  return editClubMutation;
 };

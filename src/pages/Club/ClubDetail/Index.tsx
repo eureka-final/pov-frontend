@@ -1,5 +1,5 @@
 import Basic from '../../../components/templates/Basic/Basic';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Icon, Heading, Badge, Body, AvatarList, ShowMoreBtn } from 'pov-design-system';
 import {
   Container,
@@ -21,6 +21,7 @@ import { useClubDetailQuery } from '../../../hooks/queries/useClubsQuery';
 
 const Index = () => {
   const { clubId } = useParams<{ clubId: string }>();
+  const navigate = useNavigate();
 
   const { clubsData } = useClubDetailQuery(clubId!);
 
@@ -45,7 +46,7 @@ const Index = () => {
               </ReviewInfo>
               <Wrapper>
                 <div>
-                  <Icon icon="edit" />
+                  <Icon icon="edit" onClick={() => navigate(`/club/${clubId}/edit`)} />
                   <Body>수정</Body>
                 </div>
                 <div>

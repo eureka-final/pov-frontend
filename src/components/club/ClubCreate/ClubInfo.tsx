@@ -46,7 +46,8 @@ const ClubInfo: React.FC<ClubInfoProps> = ({ name, description, maxParticipants,
         <Input
           placeholder="클럽 최대 인원 수를 입력해 주세요"
           required={true}
-          isError={!maxParticipants}
+          isError={maxParticipants === null || maxParticipants < 2}
+          supportingText="2명 이상 입력해주세요"
           value={maxParticipants}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => onMaxParticipantsChange(Number(e.target.value))}
           css={inputStyling}
