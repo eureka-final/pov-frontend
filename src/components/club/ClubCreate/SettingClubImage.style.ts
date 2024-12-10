@@ -10,7 +10,7 @@ export const UploadButton = styled.img`
 `;
 
 export const ImageBox = styled.div`
-  width: 70%;
+  width: 90%;
   height: 70%;
   border: 1px solid #ddd;
   border-radius: 8px;

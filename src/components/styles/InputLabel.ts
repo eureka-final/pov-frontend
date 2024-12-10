@@ -25,5 +25,5 @@ export const BadgeContainer = styled.span`
 `;
 
 export const inputStyling = css({
-  width: '750px',
+  width: '890px',
 });

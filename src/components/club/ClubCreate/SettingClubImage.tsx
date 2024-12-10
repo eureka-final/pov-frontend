@@ -1,7 +1,7 @@
 import { useRef, useCallback } from 'react';
 import fileUpload from '/fileUpload.svg';
 import { HiddenInput, UploadButton, ImageBox, PreviewImage } from './SettingClubImage.style';
-import { axiosInstance } from '../../../apis/axiosInstance';
+import { axiosInstanceMulipart } from '../../../apis/axiosInstance';
 
 interface ClubImageProps {
   onImgUrl: (value: string) => void;
@@ -25,13 +25,10 @@ export const SettingClubImage: React.FC<ClubImageProps> = ({ onImgUrl, uploadImg
       // FormData 객체 api 전송
       const formData = new FormData();
       formData.append('file', uploadFile);
-      // console.log('업로드 파일:', uploadFile);
-      // console.log('FormData 내용:', Array.from(formData.entries()));
 
       try {
-        const res = await axiosInstance.post('http://www.point-of-views.com/api/clubs/images', formData);
-        console.log(res.data);
-        onImgUrl(res.data);
+        const res = await axiosInstanceMulipart.post('http://www.point-of-views.com/api/clubs/images', formData);
+        onImgUrl(res.data.data.imageUrl);
 
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } catch (err: any) {

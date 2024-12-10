@@ -5,10 +5,10 @@ import { Container, Label, inputStyling } from '../../styles/InputLabel';
 interface ClubInfoProps {
   name: string;
   description: string;
-  maxParticipants: string;
+  maxParticipants: number | null;
   onNameChange: (value: string) => void;
   onDescriptionChange: (value: string) => void;
-  onMaxParticipantsChange: (value: string) => void;
+  onMaxParticipantsChange: (value: number) => void;
 }
 
 const ClubInfo: React.FC<ClubInfoProps> = ({ name, description, maxParticipants, onNameChange, onDescriptionChange, onMaxParticipantsChange }) => {
@@ -46,9 +46,9 @@ const ClubInfo: React.FC<ClubInfoProps> = ({ name, description, maxParticipants,
         <Input
           placeholder="클럽 최대 인원 수를 입력해 주세요"
           required={true}
-          isError={!maxParticipants.trim()}
+          isError={!maxParticipants}
           value={maxParticipants}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => onMaxParticipantsChange(e.target.value)}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => onMaxParticipantsChange(Number(e.target.value))}
           css={inputStyling}
         />
       </Container>

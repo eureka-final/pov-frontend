@@ -1,63 +1,42 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Padded from '../../../components/templates/Padded/Padded';
 import { Heading, Button, Modal, useOverlay } from 'pov-design-system';
 import ClubInfo from '../../../components/club/ClubCreate/ClubInfo';
-import Keyword from '../../../components/review/ReviewWrite/Keyword';
 import PublicToggle from '../../../components/club/ClubCreate/PublicToggle';
 import { HeadingContainer, ButtonContainer } from '../../Review/ReviewWrite/ReviewWrite.style';
 import { SettingClubImage } from '../../../components/club/ClubCreate/SettingClubImage';
 import { useCreateClubMutation } from '../../../hooks/queries/useCreateClubMutation';
+import GenreSelect from '../../../components/common/GenreSelect/GenreSelect';
+import { Container, Label } from '../../../components/styles/InputLabel';
 
 const Index = () => {
   const { isOpen: isSaveOpen, open: saveOpen, close: saveClose } = useOverlay();
+  const navigate = useNavigate();
 
   // 클럽 정보 상태
   const [name, setName] = useState<string>('');
   const [description, setDescription] = useState<string>('');
-  const [maxParticipants, setMaxParticipants] = useState<string>('');
+  const [maxParticipants, setMaxParticipants] = useState<number | null>(null);
   const [imgUrl, setImgUrl] = useState<string | null>('');
   const [uploadImgUrl, setUploadImgUrl] = useState<string | null>('');
 
   // publicToggle 상태
   const [isPublic, setIsPublic] = useState<boolean>(true);
 
-  // Keyword 상태
-  const [keywords, setKeywords] = useState([
-    { text: '감동적인', cancel: false },
-    { text: '재미있는', cancel: false },
-    { text: '몰입감 있는', cancel: false },
-    { text: '연기력이 뛰어난', cancel: false },
-    { text: '연출이 뛰어난', cancel: false },
-    { text: '지루한', cancel: false },
-    { text: '연기가 어색한', cancel: false },
-    { text: '연출이 어색한', cancel: false },
-    { text: '전개가 느린', cancel: false },
-    { text: '기대이하의', cancel: false },
-  ]);
-
-  const handleKeywordsChange = (selectedKeywords: string[]) => {
-    // 부모 상태 업데이트
-    setKeywords((prevKeywords) =>
-      prevKeywords.map((keyword) => ({
-        ...keyword,
-        cancel: selectedKeywords.includes(keyword.text),
-      }))
-    );
-  };
+  // 장르 상태
+  const [genres, setGenres] = useState<string[]>([]);
 
   const createClubMutation = useCreateClubMutation();
   // 데이터 통합 후 요청 전송
   const handleSubmit = () => {
-    // 선택된 키워드만 필터링
-    const selectedKeywords = keywords.filter((keyword) => keyword.cancel).map((keyword) => keyword.text);
-
     const requestData = {
       name,
       description,
       maxParticipants,
-      clubFavorGenre: selectedKeywords,
+      clubFavorGenre: genres,
       isPublic,
-      imgUrl,
+      clubImage: imgUrl,
     };
     console.log(requestData);
 
@@ -65,11 +44,15 @@ const Index = () => {
       { ...requestData },
       {
         onSuccess: () => {
-          console.log('클럽 생성 성공!');
-          saveClose();
+          saveOpen();
         },
       }
     );
+  };
+
+  const handleClose = () => {
+    saveClose();
+    navigate(`/club`);
   };
 
   return (
@@ -79,6 +62,7 @@ const Index = () => {
       </HeadingContainer>
 
       <SettingClubImage onImgUrl={setImgUrl} uploadImgUrl={uploadImgUrl} onUploadImgUrl={setUploadImgUrl} />
+
       <ClubInfo
         name={name}
         description={description}
@@ -87,8 +71,16 @@ const Index = () => {
         onDescriptionChange={setDescription}
         onMaxParticipantsChange={setMaxParticipants}
       />
-      <Keyword keywords={keywords} onKeywordsChange={handleKeywordsChange} />
+
+      <Container>
+        <Label>
+          <Heading size="small">장르</Heading>
+        </Label>
+        <GenreSelect value={genres || []} onChange={(selectedGenres) => setGenres(selectedGenres)} />
+      </Container>
+
       <PublicToggle isPublic={isPublic} onIsPublicChange={setIsPublic} />
+
       <ButtonContainer>
         <Button variant="primary" size="large" onClick={handleSubmit}>
           클럽 만들기
@@ -98,7 +90,7 @@ const Index = () => {
       <Modal isOpen={isSaveOpen} closeModal={saveOpen}>
         <Heading>클럽이 생성되었습니다!</Heading>
         <ButtonContainer>
-          <Button variant="primary" onClick={saveOpen}>
+          <Button variant="primary" onClick={handleClose}>
             확인
           </Button>
         </ButtonContainer>
