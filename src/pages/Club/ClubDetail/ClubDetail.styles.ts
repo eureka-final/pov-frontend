@@ -29,6 +29,23 @@ export const BackgroundLayer = styled.div<{ src: string }>`
 `;
 
 
+export const Layar = styled.div`
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  bottom: 55px;
+  left: 24px;
+  z-index: 20;
+  gap: 16px;
+  @media (min-width: 0px) and (max-width: 600px) {
+    left: 24px;
+  }
+
+  @media (min-width: 600px) {
+    left: 76px;
+  }
+`;
+
 export const ReviewInfo = styled.div`
   display: flex;
   flex-direction: column;
@@ -46,13 +63,21 @@ export const ReviewInfo = styled.div`
   }
 `;
 
+export const Wrapper = styled.div`
+  display: flex;
+  gap: 15px;
+  position: absolute;
+  bottom: 35px;
+  right: 54px;
+  z-index: 10;
+  cursor: pointer;
+`;
 
 export const Additionals = styled.div<{ justify?: string }>`
   display: flex;
   justify-content: ${({ justify }) => (justify ? `${justify}` : 'flex-start')};
   align-items: center;
   gap: 4px;
-  cursor: pointer;
 `;
 
 
@@ -65,10 +90,6 @@ export const ReviewContainer = styled.div`
   padding: 20px;
 `;
 
-export const HeadingContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
 
 export const Section = styled.div`
   gap: 10px;

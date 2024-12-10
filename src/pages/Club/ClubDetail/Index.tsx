@@ -1,9 +1,10 @@
 import Basic from '../../../components/templates/Basic/Basic';
 import { useParams } from 'react-router-dom';
-import { Heading, Badge, Body, AvatarList, ShowMoreBtn } from 'pov-design-system';
+import { Icon, Heading, Badge, Body, AvatarList, ShowMoreBtn } from 'pov-design-system';
 import {
   Container,
   HeaderContainer,
+  Wrapper,
   Additionals,
   ReviewInfo,
   BackgroundLayer,
@@ -42,6 +43,16 @@ const Index = () => {
                   ))}
                 </Additionals>
               </ReviewInfo>
+              <Wrapper>
+                <div>
+                  <Icon icon="edit" />
+                  <Body>수정</Body>
+                </div>
+                <div>
+                  <Icon icon="delete" />
+                  <Body>삭제</Body>
+                </div>
+              </Wrapper>
             </HeaderContainer>
           </Container>
 
