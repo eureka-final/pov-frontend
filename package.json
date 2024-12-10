@@ -14,6 +14,7 @@
   "dependencies": {
     "@emotion/react": "^11.13.5",
     "@emotion/styled": "^11.13.5",
+    "@hookform/resolvers": "^3.9.1",
     "@tanstack/react-query": "^5.60.5",
     "@tanstack/react-query-devtools": "^5.62.0",
     "@tosspayments/tosspayments-sdk": "^2.3.2",
@@ -25,10 +26,12 @@
     "quill-image-resize-module-react": "^3.0.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-hook-form": "^7.53.2",
     "react-quill": "^2.0.0",
     "react-router-dom": "^6.28.0",
     "styled-components": "^6.1.13",
     "uuid": "^11.0.3",
+    "zod": "^3.23.8",
     "zustand": "^5.0.1"
   },
   "devDependencies": {

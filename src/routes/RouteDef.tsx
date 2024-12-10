@@ -10,10 +10,11 @@ import Payments from '../pages/Premieres/Payments/Index';
 import Success from '../pages/Premieres/Payments/Success/Index';
 import Fail from '../pages/Premieres/Payments/Fail/Index';
 import ReviewDetail from '../pages/Review/ReviewDetail/Index';
-import Login from '../pages/Login/Index';
+import Login from '../pages/Login';
 import OauthNaver from '../pages/Oauth/Naver';
 import OauthGoogle from '../pages/Oauth/Google';
 import ReviewEdit from '../pages/Review/ReviewEdit/Index';
+import SignUp from '../pages/SignUp/Index';
 
 const MovieScreens = {
   Main: {
@@ -80,9 +81,13 @@ const PremieresScreens = {
 };
 
 const AuthScreens = {
-  SignIn: {
+  Login: {
     path: '/login',
     element: <Login />,
+  },
+  SignUp: {
+    path: '/signup',
+    element: <SignUp />,
   },
   OauthNaver: {
     path: '/oauth/naver',

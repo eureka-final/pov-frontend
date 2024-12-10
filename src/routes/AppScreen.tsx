@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import AppPages from './AppPages';
-import useWindowSize from '../hooks/useWindowSize';
+import useWindowSize from '../hooks/utils/useWindowSize';
 
 const ViewArea = styled.div`
   display: flex;
