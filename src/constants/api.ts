@@ -6,7 +6,7 @@ export const END_POINTS = {
   REVIEW: (movieId: string, reviewId: string) =>  `https://www.point-of-views.com/api/movies/${movieId}/reviews/${reviewId}`,
   CREATE_REVIEW: (movieId: string) => `https://www.point-of-views.com/api/movies/${movieId}/reviews`,
   CLUBS: '/api/clubs',
-  MY_CLUBS: 'https://www.point-of-views.com/api/clubs/myclub',
+  MY_CLUBS: '/api/clubs/myclub',
   CLUB: (clubId: string) =>  `/api/clubs/${clubId}`,
   TOKEN: `/api/auth/reissue`,
 } as const;
