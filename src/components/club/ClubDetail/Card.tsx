@@ -1,17 +1,8 @@
 import { Container, InfoContainer, Info, Count } from './Card.styles';
 import { Heading, Body, Icon } from 'pov-design-system';
+import { Movie } from '../../../types/movie';
 
-interface CardProps {
-  item: {
-    title: string;
-    poster: string;
-    released: number;
-    movieLikeCount: number;
-    movieReviewCount: number;
-  };
-}
-
-const Card = ({ item }: CardProps) => {
+const Card = ({ item }: Movie) => {
   return (
     <Container>
       <img src={item.poster} />
