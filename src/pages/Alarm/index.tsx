@@ -1,7 +1,6 @@
 import Padded from '../../components/templates/Padded/Padded';
 import { Body, Icon } from 'pov-design-system';
-import { AlarmCardContainer, AlarmTitleWrapper, TimeText } from './index.style';
-
+import { AlarmCardWrapper, AlarmCardContainer, TimeText } from './index.style';
 interface AlarmCardProps {
   content: string;
   time: string;
@@ -17,12 +16,10 @@ const dummyAlarm = [
 const AlarmCard = ({ content, time }: AlarmCardProps) => {
   return (
     <AlarmCardContainer>
-      <AlarmTitleWrapper>
-        <Body size="large">{content}</Body>
-        <TimeText>
-          <Body size="medium">{time}</Body>
-        </TimeText>
-      </AlarmTitleWrapper>
+      <Body size="large">{content}</Body>
+      <TimeText>
+        <Body size="medium">{time}</Body>
+      </TimeText>
     </AlarmCardContainer>
   );
 };
@@ -30,9 +27,11 @@ const AlarmCard = ({ content, time }: AlarmCardProps) => {
 const index = () => {
   return (
     <Padded>
-      {dummyAlarm.map((data, index) => (
-        <AlarmCard key={index} content={data.content} time={data.time} />
-      ))}
+      <AlarmCardWrapper>
+        {dummyAlarm.map((data, index) => (
+          <AlarmCard key={index} content={data.content} time={data.time} />
+        ))}
+      </AlarmCardWrapper>
     </Padded>
   );
 };

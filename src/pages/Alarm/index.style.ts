@@ -1,10 +1,17 @@
 import styled from '@emotion/styled';
 
+export const AlarmCardWrapper = styled.div`
+  @media (min-width: 600px) {
+    padding: 0 192px;
+  }
+`;
+
 export const AlarmCardContainer = styled.div`
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+  gap: 4px;
 
   width: 100%;
   height: 80px;
@@ -12,13 +19,6 @@ export const AlarmCardContainer = styled.div`
   border-radius: 8px;
 
   background-color: ${({ theme }) => theme.backgroundElevated};
-`;
-
-export const AlarmTitleWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: start;
-  gap: 4px;
 `;
 
 export const TimeText = styled.div`
