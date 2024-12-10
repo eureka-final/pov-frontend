@@ -43,6 +43,12 @@ export const CardFlex = styled.div`
   gap: 32px;
 `;
 
+export const GenreWrapper = styled.span`
+  display: flex;
+  margin-top: 16px;
+  gap: 8px; 
+`;
+
 export const Poster = styled.div`
   display: flex;
   flex-direction: column; 

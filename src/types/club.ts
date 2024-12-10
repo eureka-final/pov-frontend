@@ -1,14 +1,20 @@
-export interface ClubsData {
+export interface ClubsResponse {
+    message: string;
+    data: {
+      clubs: Club[];
+    };
+  }
+  
+export interface Club {
     clubId: string;
     clubName: string;
-    description: string; 
-    createdAt: string; 
+    clubDescription: string;
     participant: number;
     maxParticipant: number;
-    collections: number;
-    keywords: string[];
-}
-
+    clubMovieCount: number;
+    clubFavorGenres: string[];
+  }
+  
 
 export interface ClubFormData {
     name: string;

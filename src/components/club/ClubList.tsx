@@ -5,11 +5,7 @@ import { useClubsQuery } from '../../hooks/queries/useClubsQuery';
 function ClubList() {
   const { clubsData } = useClubsQuery();
 
-  return (
-    <>
-      <ReviewListContainer>{clubsData && clubsData.length > 0 ? <ClubCard /> : <ClubCard.Empty />}</ReviewListContainer>
-    </>
-  );
+  return <ReviewListContainer>{clubsData && clubsData.data.clubs.length > 0 ? <ClubCard /> : <ClubCard.Empty />}</ReviewListContainer>;
 }
 
 export default ClubList;
