@@ -17,7 +17,7 @@ const Index = () => {
   // 클럽 정보 상태
   const [name, setName] = useState<string>('');
   const [description, setDescription] = useState<string>('');
-  const [maxParticipants, setMaxParticipants] = useState<number | null>(null);
+  const [maxParticipants, setMaxParticipants] = useState<number>();
   const [imgUrl, setImgUrl] = useState<string | null>('');
   const [uploadImgUrl, setUploadImgUrl] = useState<string | null>('');
 
@@ -66,7 +66,7 @@ const Index = () => {
       <ClubInfo
         name={name}
         description={description}
-        maxParticipants={maxParticipants}
+        maxParticipants={maxParticipants!}
         onNameChange={setName}
         onDescriptionChange={setDescription}
         onMaxParticipantsChange={setMaxParticipants}
