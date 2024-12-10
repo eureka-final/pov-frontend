@@ -12,7 +12,10 @@ interface FavorGenreStepProps {
 }
 
 const FavorGenreStep = ({ onSubmit, onPrev }: FavorGenreStepProps) => {
-  const { control } = useFormContext();
+  const {
+    control,
+    formState: { errors },
+  } = useFormContext();
 
   return (
     <SignUpStep
@@ -32,7 +35,7 @@ const FavorGenreStep = ({ onSubmit, onPrev }: FavorGenreStepProps) => {
         )}
       />
       <ButtonContainer>
-        <Button css={{ width: '100%' }} size="large" onClick={onSubmit}>
+        <Button css={{ width: '100%' }} size="large" onClick={onSubmit} disabled={errors.favorGenre}>
           다음으로
         </Button>
       </ButtonContainer>
