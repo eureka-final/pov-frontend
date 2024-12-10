@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { CardContainer, CardFlex, ReviewCardContainer, TitleInfo, GenreWrapper } from './ClubCard.style';
+import { CardContainer, CardFlex, ReviewCardContainer, TitleInfo, FlexWrapper } from './ClubCard.style';
 import { Body, Input, Icon, Heading, Logo, Badge } from 'pov-design-system';
 import { useClubsQuery } from '../../hooks/queries/useClubsQuery';
 
@@ -24,19 +24,22 @@ function ClubCard() {
                 <ReviewCardContainer>
                   <Heading size="large">{club.clubName}</Heading>
                   <Body size="large">{club.clubDescription}</Body>
-                  <Body>
-                    {club.participant}/{club.maxParticipant}
-                  </Body>
-                  <Body>북마크 {club.clubMovieCount}개</Body>
+                  <FlexWrapper>
+                    <Body>
+                      {club.participant}/{club.maxParticipant}
+                    </Body>
+                    <Body>·</Body>
+                    <Body>북마크 {club.clubMovieCount}개</Body>
+                  </FlexWrapper>
                 </ReviewCardContainer>
               </CardFlex>
-              <GenreWrapper>
+              <FlexWrapper>
                 {club.clubFavorGenres.map((genre, index) => (
                   <Badge key={index} variant="keyword" cancel={true}>
                     {genre}
                   </Badge>
                 ))}
-              </GenreWrapper>
+              </FlexWrapper>
             </CardContainer>
           );
         })}

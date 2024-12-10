@@ -43,7 +43,7 @@ export const CardFlex = styled.div`
   gap: 32px;
 `;
 
-export const GenreWrapper = styled.span`
+export const FlexWrapper = styled.span`
   display: flex;
   margin-top: 16px;
   gap: 8px; 
