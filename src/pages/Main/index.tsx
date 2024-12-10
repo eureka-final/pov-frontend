@@ -10,7 +10,7 @@ const index = () => {
   return (
     <Padded>
       <Button variant="primary" size="small">
-        버튼
+        버튼2
       </Button>
       <SwitchToggle checkedState={false} onChange={handleChange} />
       <SwitchToggle checkedState={true} onChange={handleChange} />
