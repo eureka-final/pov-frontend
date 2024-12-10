@@ -12,7 +12,6 @@ const AppPages = () => {
 
   return (
     <Padded>
-      {' '}
       {header}
       <ToastContainer />
       <QueryErrorResetBoundary>

@@ -51,7 +51,7 @@ const Index = () => {
           <ReviewInfo>
             <Profile name={reviewData.reviewer} avatarUrl={reviewData.profileImage} />
             <BodyContainer>
-              <Body size="large">{reviewData.createdAt}</Body>
+              <Body size="large">{new Date(reviewData.createdAt).toLocaleDateString()}</Body>
             </BodyContainer>
             <Additionals>
               <Icon icon="heartfill" color="#0DE781" />

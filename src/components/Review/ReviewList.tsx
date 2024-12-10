@@ -27,7 +27,7 @@ function ReviewList() {
 
   // 데이터 로딩 및 빈 상태 처리
   if (isFetching && reviewsData.length === 0) {
-    return <ReviewPageSkeleton />;
+    return <ReviewCard.Loading />;
   }
 
   if (!isFetching && reviewsData.length === 0) {
@@ -43,7 +43,7 @@ function ReviewList() {
       </ReviewListContainer>
 
       {/* 로딩 및 스크롤 감지 컴포넌트 */}
-      {isFetching && <ReviewPageSkeleton />}
+      {isFetching && <ReviewCard.Loading />}
       <div ref={observerRef} />
     </>
   );

@@ -96,7 +96,7 @@ function ReviewClubCard({ movieTitle, title, contents, reviewer, profileImge, th
           </div>
 
           <FlexBetween>
-            <Body>{createdAt}</Body>
+            <Body>{new Date(createdAt).toLocaleDateString()}</Body>
             <LikeContainer onClick={onLike}>
               <Icon icon={likeAction ? 'heartfill' : 'heartline'} /> {likes}
             </LikeContainer>
