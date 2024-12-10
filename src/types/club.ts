@@ -32,6 +32,7 @@ export interface ClubDetailData {
         memberList: ClubMember[];
     };
     participant: number;
+    maxParticipants: number;
     isPublic: boolean;
     clubReviewList: ClubReviewList;
     clubFavorGenres: string[];

@@ -21,7 +21,7 @@ const Index = () => {
   const { clubsData } = useClubDetailQuery(clubId!);
   const [name, setName] = useState<string>(clubsData ? clubsData.data.clubName : '');
   const [description, setDescription] = useState<string>(clubsData ? clubsData.data.clubDescription : '');
-  const [maxParticipants, setMaxParticipants] = useState<number | null>(clubsData ? clubsData.data.participant : null);
+  const [maxParticipants, setMaxParticipants] = useState<number | null>(clubsData ? clubsData.data.maxParticipants : null);
   const [imgUrl, setImgUrl] = useState<string | null>('');
   const [uploadImgUrl, setUploadImgUrl] = useState<string | null>(clubsData ? clubsData.data.clubImage : null);
   const [genres, setGenres] = useState<string[]>(clubsData ? clubsData.data.clubFavorGenres : []);
@@ -86,7 +86,7 @@ const Index = () => {
           클럽 수정하기
         </Button>
       </ButtonContainer>
-      {/* 클럽 생성 모달 */}
+
       <Modal isOpen={isSaveOpen} closeModal={saveOpen}>
         <Heading>클럽이 수정되었습니다!</Heading>
         <ButtonContainer>

@@ -1,6 +1,6 @@
 import Basic from '../../../components/templates/Basic/Basic';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Icon, Heading, Badge, Body, AvatarList, ShowMoreBtn } from 'pov-design-system';
+import { Icon, Button, Heading, Badge, Body, AvatarList, ShowMoreBtn, useOverlay, Modal } from 'pov-design-system';
 import {
   Container,
   HeaderContainer,
@@ -18,12 +18,28 @@ import { ClubReviewListContainer } from '../../../components/review/ReviewCard.s
 import ReviewClubCard from '../../../components/review/ReviewClubCard';
 import Card from '../../../components/club/ClubDetail/Card';
 import { useClubDetailQuery } from '../../../hooks/queries/useClubsQuery';
+import { useDeleteClubMutation } from '../../../hooks/queries/useDeleteClubMutation';
 
 const Index = () => {
   const { clubId } = useParams<{ clubId: string }>();
   const navigate = useNavigate();
+  const { isOpen: isSaveOpen, open: saveOpen, close: saveClose } = useOverlay();
 
   const { clubsData } = useClubDetailQuery(clubId!);
+
+  const deleteClubMutation = useDeleteClubMutation();
+
+  const handleDelete = () => {
+    deleteClubMutation.mutate(
+      { clubId: clubId! },
+      {
+        onSuccess: () => {
+          saveClose();
+          navigate('/club');
+        },
+      }
+    );
+  };
 
   return (
     <Basic>
@@ -50,7 +66,7 @@ const Index = () => {
                   <Body>수정</Body>
                 </div>
                 <div>
-                  <Icon icon="delete" />
+                  <Icon icon="delete" onClick={saveOpen} />
                   <Body>삭제</Body>
                 </div>
               </Wrapper>
@@ -121,6 +137,14 @@ const Index = () => {
               ))}
             </ClubBookMarkContainer>
           </Section>
+
+          {/* 삭제 버튼 누르면 나오는 모달창 */}
+          <Modal isOpen={isSaveOpen} closeModal={saveClose}>
+            <Heading size="medium">정말 삭제하시겠습니까?</Heading>
+            <Button variant="primary" onClick={handleDelete} css={{ width: '100%' }}>
+              삭제하기
+            </Button>
+          </Modal>
         </>
       )}
     </Basic>
