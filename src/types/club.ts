@@ -5,7 +5,7 @@ export interface ClubsResponse {
     data: {
       clubs: Club[];
     };
-  }
+}
   
 export interface Club {
     clubId: string;

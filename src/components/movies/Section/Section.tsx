@@ -12,6 +12,7 @@ interface SectionProps {
       url: string;
       MobileHeight: number;
       PcHeight: number;
+      br: string;
     };
   }[];
   heading: string;

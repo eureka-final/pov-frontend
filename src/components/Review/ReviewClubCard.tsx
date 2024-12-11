@@ -1,5 +1,5 @@
-import { useNavigate, useParams } from 'react-router-dom';
-import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 import axios from 'axios';
 import { CardContainer, Poster, CardFlex, ReviewCardContainer, LikeContainer, FlexBetween, Spoiler, SpoMore, ReadMore } from './ReviewCard.style';
 import { Body, Paragraph, Icon } from 'pov-design-system';

@@ -22,7 +22,7 @@ export const useMyClubsQuery = () => {
 
 export const useClubDetailQuery = (clubId: string) => {
   const { data: clubsData } = useQuery<ClubDetailDataResponse>({
-    queryKey: ['detailClubs', clubId],
+    queryKey: ['clubId', clubId],
     queryFn: () => getDetailClub(clubId)
   });
   
