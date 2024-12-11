@@ -14,6 +14,7 @@ export interface ReviewData {
 }
 
 export interface Review {
+  movieId: number;
   reviewId: string;
   movieTitle: string;
   title: string;
