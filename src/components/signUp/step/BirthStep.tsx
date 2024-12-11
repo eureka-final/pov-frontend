@@ -12,6 +12,7 @@ interface BirthStepProps {
 }
 
 const BirthStep = ({ onNext, onPrev }: BirthStepProps) => {
+  // @ts-ignorem
   const [buttonDisabled, setButtonDisabled] = useState<boolean>(true);
 
   const {

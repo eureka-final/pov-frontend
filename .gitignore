@@ -11,7 +11,7 @@ node_modules
 dist
 dist-ssr
 *.local
-.github
+# .github
 
 # Editor directories and files
 .vscode/*
@@ -26,8 +26,8 @@ dist-ssr
 
 *storybook.log
 
+# # .github
 # .github
-.github
 
 # env
 .env

@@ -1,71 +1,60 @@
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Padded from '../../../components/templates/Padded/Padded';
 import ReactEditor from '../../../components/review/ReviewWrite/ReactEditor';
 import { Heading, Body, Button, Modal, useOverlay, Logo } from 'pov-design-system';
-import Keyword from '../../../components/review/ReviewWrite/Keyword';
+// import Keyword from '../../../components/review/ReviewWrite/Keyword';
 import ReviewToggle from '../../../components/review/ReviewWrite/ReviewToggle';
 import { HeadingContainer, ButtonContainer, Vs, Item } from '../ReviewWrite/ReviewWrite.style';
 import { useEditReviewMutation } from '../../../hooks/queries/useEditReviewMutation';
-import { useEditReviewQuery } from '../../../hooks/queries/useEditReviewQuery';
+import { useReviewDetailQuery } from '../../../hooks/queries/useReviewsQuery';
 
 const Index = () => {
   const { movieId, reviewId } = useParams<{ movieId: string; reviewId: string }>();
+  const navigate = useNavigate();
+
+  const { reviewData } = useReviewDetailQuery(movieId!, reviewId!);
   const editReviewMutation = useEditReviewMutation();
-  const { existingReview } = useEditReviewQuery(movieId!, reviewId!);
 
   const { isOpen: isSaveOpen, open: saveOpen, close: saveClose } = useOverlay();
   const { isOpen: isTempOpen, open: tempOpen, close: tempClose } = useOverlay();
 
   // ReactEditor 상태
-  const [title, setTitle] = useState(existingReview?.title || '');
-  const [content, setContent] = useState(existingReview?.content || '');
+  const [title, setTitle] = useState(reviewData!.data.title || '');
+  const [content, setContent] = useState(reviewData!.data.contents || '');
 
   // Keyword 상태
-  const [keywords, setKeywords] = useState(
-    existingReview?.keywords || [
-      { text: '감동적인', cancel: false },
-      { text: '재미있는', cancel: false },
-      { text: '몰입감 있는', cancel: false },
-      { text: '연기력이 뛰어난', cancel: false },
-      { text: '연출이 뛰어난', cancel: false },
-      { text: '지루한', cancel: false },
-      { text: '연기가 어색한', cancel: false },
-      { text: '연출이 어색한', cancel: false },
-      { text: '전개가 느린', cancel: false },
-      { text: '기대이하의', cancel: false },
-    ]
-  );
+  const [keywords, setKeywords] = useState(reviewData!.data.keyword);
 
-  const handleKeywordsChange = (selectedKeywords: string[]) => {
-    // 부모 상태 업데이트
-    setKeywords((prevKeywords) =>
-      prevKeywords.map((keyword) => ({
-        ...keyword,
-        cancel: selectedKeywords.includes(keyword.text),
-      }))
-    );
-  };
+  // const handleKeywordsChange = (selectedKeywords: string[]) => {
+  //   // 부모 상태 업데이트
+  //   setKeywords((prevKeywords) =>
+  //     prevKeywords.map((keyword) => ({
+  //       ...keyword,
+  //       cancel: selectedKeywords.includes(keyword.text),
+  //     }))
+  //   );
+  // };
 
   // ReviewToggle 상태
-  const [spoiler, setSpoiler] = useState(existingReview?.spoiler || false);
+  const [spoiler, setSpoiler] = useState(reviewData!.data.spoiler || false);
 
   // Modal 상태
-  const [preference, setPreference] = useState(existingReview?.preference || '');
+  const [preference, setPreference] = useState('');
 
-  interface Keyword {
-    text: string;
-    cancel: boolean;
-  }
+  // interface Keyword {
+  //   text: string;
+  //   cancel: boolean;
+  // }
   // 데이터 통합 후 요청 전송
   const handleSubmit = () => {
     // 선택된 키워드만 필터링
-    const selectedKeywords = keywords.filter((keyword: Keyword) => keyword.cancel).map((keyword) => keyword.text);
+    //const selectedKeywords = keywords.filter((keyword) => keyword.).map((keyword) => keyword.text);
     const requestData = {
       title,
       contents: content,
       preference,
-      keywords: selectedKeywords,
+      keywords,
       spoiler,
     };
     console.log(requestData);
@@ -74,8 +63,8 @@ const Index = () => {
       { movieId: movieId!, reviewId: reviewId!, ...requestData },
       {
         onSuccess: () => {
-          console.log('리뷰 수정 성공!');
           saveClose();
+          navigate(`/review/${reviewId}/detail`);
         },
       }
     );
@@ -125,8 +114,8 @@ const Index = () => {
       </HeadingContainer>
 
       <ReactEditor title={title} content={content} onChangeTitle={setTitle} onChangeContent={setContent} />
-      <Keyword keywords={keywords} onKeywordsChange={handleKeywordsChange} />
-      <ReviewToggle spoiler={spoiler} onSpoilerChange={setSpoiler} />
+      {/* <Keyword keywords={keywords} onKeywordsChange={handleKeywordsChange} /> */}
+      <ReviewToggle spoiler={spoiler} onSpoilerChange={setSpoiler} movieId={movieId!} />
 
       <ButtonContainer>
         <Button variant="secondary" size="large" onClick={handleTemporary}>

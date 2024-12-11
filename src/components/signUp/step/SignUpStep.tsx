@@ -1,6 +1,5 @@
 import { Heading, Paragraph, Icon } from 'pov-design-system';
 import { SignUpSection, SignUpSectionHeader, SignUpSectionBody } from './SignUpStep.style';
-import Padded from '../../templates/Padded/Padded';
 
 interface SignUpStepProps {
   firstLine: { keyword: string; particle: string };

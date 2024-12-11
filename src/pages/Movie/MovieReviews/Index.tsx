@@ -5,6 +5,7 @@ import { Heading, Body, Icon } from 'pov-design-system';
 import Review from '../../../components/movies/Review/Review';
 
 const Index = () => {
+  //@ts-ignore
   const [reviews, setReviews] = useState({
     total: 16,
     reviewrs: [

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import Padded from '../../../components/templates/Padded/Padded';
 import ReactEditor from '../../../components/review/ReviewWrite/ReactEditor';
 import { Heading, Body, Button, Modal, useOverlay, Logo } from 'pov-design-system';
@@ -10,6 +10,7 @@ import { useCreateReviewMutation } from '../../../hooks/queries/useCreateReviewM
 
 const Index = () => {
   const { movieId } = useParams<{ movieId: string }>();
+  const navigate = useNavigate();
 
   const { isOpen: isSaveOpen, open: saveOpen, close: saveClose } = useOverlay();
   const { isOpen: isTempOpen, open: tempOpen, close: tempClose } = useOverlay();
@@ -67,8 +68,8 @@ const Index = () => {
       { movieId: movieId!, ...requestData },
       {
         onSuccess: () => {
-          console.log('리뷰 작성 성공!');
           saveClose();
+          navigate(`/review`);
           localStorage.removeItem(`${movieId}`);
         },
       }
@@ -121,7 +122,7 @@ const Index = () => {
 
       <ReactEditor title={title} content={content} onChangeTitle={setTitle} onChangeContent={setContent} />
       <Keyword keywords={keywords} onKeywordsChange={handleKeywordsChange} />
-      <ReviewToggle spoiler={spoiler} onSpoilerChange={setSpoiler} />
+      <ReviewToggle spoiler={spoiler} onSpoilerChange={setSpoiler} movieId={movieId!} />
 
       <ButtonContainer>
         <Button variant="secondary" size="large" onClick={handleTemporary}>

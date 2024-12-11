@@ -8,4 +8,5 @@ export const GenreSelectWrapper = styled.div`
   justify-content: start;
   align-items: center;
   gap: 8px;
+  cursor: pointer;
 `;

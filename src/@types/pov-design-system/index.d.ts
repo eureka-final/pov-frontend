@@ -24,4 +24,3 @@ declare module '@tosspayments/tosspayments-sdk' {
     const loadTossPayments: (clientKey: string) => Promise<TossPaymentsInstance>;
     export { loadTossPayments, TossPaymentsInstance, PaymentWidgetsInstance, ANONYMOUS };
   }
-  

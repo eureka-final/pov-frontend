@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import Padded from '../../components/templates/Padded/Padded';
 import { Badge } from 'pov-design-system';
-import { Wrapper } from './Review.style';
+import { BadgeWrapper } from './Review.style';
 import ReviewList from '../../components/review/ReviewList';
-import ReviewMyList from '../../components/review/MyReviewList';
+import MyReviewList from '../../components/review/MyReviewList';
 import ReviewClubList from '../../components/review/ReviewClubList';
 
 const Index = () => {
@@ -29,15 +29,15 @@ const Index = () => {
 
   return (
     <Padded>
-      <Wrapper>
+      <BadgeWrapper>
         {sections.map((section, index) => (
           <Badge key={index} variant="section" click={section.click} onClick={() => handleBadgeClick(index)} css={{ cursor: 'pointer' }}>
             {section.text}
           </Badge>
         ))}
-      </Wrapper>
+      </BadgeWrapper>
       {sectionsType === '모든 리뷰' && <ReviewList />}
-      {sectionsType === '내 리뷰' && <ReviewMyList />}
+      {sectionsType === '내 리뷰' && <MyReviewList />}
       {sectionsType === '클럽 리뷰' && <ReviewClubList />}
     </Padded>
   );
