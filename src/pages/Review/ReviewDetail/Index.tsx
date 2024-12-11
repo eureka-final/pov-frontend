@@ -8,6 +8,7 @@ import { useDeleteReviewMutation } from '../../../hooks/queries/useDeleteReviewM
 import dompurify from 'dompurify';
 
 const Index = () => {
+  // @ts-ignore
   const [reviewData, setReviewData] = useState({
     title: '누구냐, 너',
     contents:

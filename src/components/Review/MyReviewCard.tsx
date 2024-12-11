@@ -25,29 +25,29 @@ function MyReviewCard() {
 
   return (
     <>
-      {myReviewsData.map((review) => {
+      {myReviewsData.map((item) => {
         return (
           <CardContainer
-            key={review.reviewId}
+            key={item.review.reviewId}
             onClick={() => {
-              navigate(`/review/detail/${review.reviewId}`);
+              navigate(`/review/detail/${item.review.reviewId}`);
             }}
           >
             <CardFlex>
               <Poster>
-                <img src={review.thumbnail} alt={review.movieTitle} />
-                <Body size="small">{review.movieTitle}</Body>
+                <img src={item.review.thumbnail} alt={item.review.movieTitle} />
+                <Body size="small">{item.review.movieTitle}</Body>
               </Poster>
               <ReviewCardContainer>
-                <Profile name={review.reviewer} avatarUrl={review.profileImge} />
-                <Paragraph>{review.title}</Paragraph>
+                <Profile name={item.review.reviewer} avatarUrl={item.review.profileImage} />
+                <Paragraph>{item.review.title}</Paragraph>
 
-                <Body size="large">{truncateContents(review.contents, 380)}</Body>
+                <Body size="large">{truncateContents(item.review.contents, 380)}</Body>
 
                 <FlexBetween>
-                  <Body>{review.createdAt}</Body>
+                  <Body>{item.review.createdAt}</Body>
                   <LikeContainer>
-                    <Icon icon={review.isLiked ? 'heartfill' : 'heartline'} /> {review.likeAmount}
+                    <Icon icon={item.review.isLiked ? 'heartfill' : 'heartline'} /> {item.review.likeAmount}
                   </LikeContainer>
                 </FlexBetween>
               </ReviewCardContainer>

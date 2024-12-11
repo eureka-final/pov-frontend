@@ -13,6 +13,7 @@ const clientKey = import.meta.env.VITE_CLIENT_SECRET_KEY;
 const customerKey = uuidv4();
 
 function Index() {
+  //@ts-ignore
   const [amount, setAmount] = useState<Amount>({
     currency: 'KRW',
     value: 50_000,

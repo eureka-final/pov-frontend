@@ -18,6 +18,8 @@ import ReviewClubCard from '../../../components/review/ReviewClubCard';
 import Card from '../../../components/club/ClubDetail/Card';
 
 const Index = () => {
+
+  //@ts-ignore
   const [clubData, setClubData] = useState({
     clubName: '화양동 민음사 북클럽',
     clubDescription: '영화를 좋아하는 00년생들',

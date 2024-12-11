@@ -2,7 +2,7 @@ import { useRef, useEffect } from 'react';
 import ReviewCard from './ReviewCard';
 import { ReviewListContainer } from './ReviewCard.style';
 import { useReviewsQuery } from '../../hooks/queries/useReviewsQuery';
-import ReviewPageSkeleton from '../../pages/Review/ReviewPageSkeleton';
+// import ReviewPageSkeleton from '../../pages/Review/ReviewPageSkeleton';
 
 function ReviewList() {
   const { reviewsData, fetchNextPage, hasNextPage, isFetching } = useReviewsQuery();

@@ -11,13 +11,13 @@ export interface ReviewsData {
     likeAmount: number;
     isLiked: boolean;
     spoiler: boolean;
-  }
+  };
 }
 
 export interface ReviewFormData {
-    title: string;
-    contents: string;
-    preference: string;
-    keywords: string[];
-    spoiler: boolean;
+  title: string;
+  contents: string;
+  preference: string;
+  keywords: string[];
+  spoiler: boolean;
 }

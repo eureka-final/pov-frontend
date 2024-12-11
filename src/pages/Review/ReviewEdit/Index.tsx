@@ -18,11 +18,15 @@ const Index = () => {
   const { isOpen: isTempOpen, open: tempOpen, close: tempClose } = useOverlay();
 
   // ReactEditor 상태
+  // existingReview 는 배열 형태인데 왜 객체형식으로 사용하는건지?
+  //@ts-ignore
   const [title, setTitle] = useState(existingReview?.title || '');
+  //@ts-ignore
   const [content, setContent] = useState(existingReview?.content || '');
 
   // Keyword 상태
   const [keywords, setKeywords] = useState(
+    //@ts-ignore
     existingReview?.keywords || [
       { text: '감동적인', cancel: false },
       { text: '재미있는', cancel: false },
@@ -39,7 +43,7 @@ const Index = () => {
 
   const handleKeywordsChange = (selectedKeywords: string[]) => {
     // 부모 상태 업데이트
-    setKeywords((prevKeywords) =>
+    setKeywords((prevKeywords: Keyword[]) =>
       prevKeywords.map((keyword) => ({
         ...keyword,
         cancel: selectedKeywords.includes(keyword.text),
@@ -48,9 +52,11 @@ const Index = () => {
   };
 
   // ReviewToggle 상태
+  //@ts-ignore
   const [spoiler, setSpoiler] = useState(existingReview?.spoiler || false);
 
   // Modal 상태
+  //@ts-ignore
   const [preference, setPreference] = useState(existingReview?.preference || '');
 
   interface Keyword {
@@ -60,7 +66,7 @@ const Index = () => {
   // 데이터 통합 후 요청 전송
   const handleSubmit = () => {
     // 선택된 키워드만 필터링
-    const selectedKeywords = keywords.filter((keyword: Keyword) => keyword.cancel).map((keyword) => keyword.text);
+    const selectedKeywords = keywords.filter((keyword: Keyword) => keyword.cancel).map((keyword: Keyword) => keyword.text);
     const requestData = {
       title,
       contents: content,

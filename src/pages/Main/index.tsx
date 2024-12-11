@@ -1,7 +1,6 @@
 import { Button, Badge, Heading, Body, Paragraph, Checkbox, Icon, ShowMoreBtn, Logo, Input, SwitchToggle } from 'pov-design-system';
 import { Modal, useOverlay } from 'pov-design-system';
 import Padded from '../../components/templates/Padded/Padded';
-import { putMemberNicknameApi } from '../../apis/member/memberApi';
 
 const index = () => {
   const { isOpen, open, close } = useOverlay();
@@ -16,7 +15,7 @@ const index = () => {
       <SwitchToggle checkedState={false} onChange={handleChange} />
       <SwitchToggle checkedState={true} onChange={handleChange} />
 
-      <div css={[{ width: '350px' }]}>
+      <div>
         <Input placeholder="검색어를 입력해 주세요" icon={<Icon icon="search" color="#ADACAF" />} />
       </div>
       <Input placeholder="제목을 입력해 주세요" />
@@ -54,7 +53,7 @@ const index = () => {
 
       <Button onClick={open}>Show Modal</Button>
       <Modal isOpen={isOpen} closeModal={close}>
-        <div css={[{ width: '350px' }]}>
+        <div>
           <Heading size="medium">Title</Heading>
           <Body>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
@@ -62,7 +61,7 @@ const index = () => {
             cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
             laborum
           </Body>
-          <div css={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
+          <div>
             <Button variant="secondary" onClick={close} css={{ width: '45%' }}>
               Close
             </Button>
