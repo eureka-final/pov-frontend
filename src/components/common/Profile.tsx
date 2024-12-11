@@ -2,7 +2,7 @@ import React from 'react';
 import { Avatar } from 'pov-design-system';
 import { Container, Name } from './Profile.style';
 
-interface UserProps {
+export interface UserProps {
   name: string;
   avatarUrl: string;
 }

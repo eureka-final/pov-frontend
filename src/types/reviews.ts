@@ -46,9 +46,9 @@ export interface ReviewDetailData {
 }
 
 export interface ReviewFormData {
-    title: string;
-    contents: string;
-    preference: string;
-    keywords: string[];
-    spoiler: boolean;
+  title: string;
+  contents: string;
+  preference: string;
+  keywords: string[];
+  spoiler: boolean;
 }
