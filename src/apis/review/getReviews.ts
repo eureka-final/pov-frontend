@@ -1,5 +1,5 @@
 import { axiosInstance } from '../axiosInstance';
-import type { ReviewsResponse } from '../../types/reviews';
+import type { ReviewsResponse, ReviewDetailDataResponse } from '../../types/reviews';
 import { END_POINTS } from '../../constants/api';
 
 export const getReviews = async (pageParam: number) => {
@@ -18,6 +18,6 @@ export const getMyReviews = async () => {
 };
 
 export const getDetailReview = async (movieId: string, reviewId: string) => {
-  const { data } = await axiosInstance.get<ReviewsResponse>(END_POINTS.REVIEW(movieId, reviewId));
+  const { data } = await axiosInstance.get<ReviewDetailDataResponse>(END_POINTS.REVIEW(movieId, reviewId));
   return data;
 };

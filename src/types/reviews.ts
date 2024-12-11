@@ -27,6 +27,24 @@ export interface Review {
   spoiler: boolean;
 }
 
+export interface ReviewDetailDataResponse {
+  message: string;
+  data: ReviewDetailData;
+}
+
+export interface ReviewDetailData {
+  title: string;
+  contents: string;
+  reviewer: string;
+  profileImage: string;
+  thumbnail: string;
+  createdAt: string;
+  likeAmount: number;
+  isLiked: boolean;
+  spoiler: boolean;
+  keyword: string[];
+}
+
 export interface ReviewFormData {
     title: string;
     contents: string;
