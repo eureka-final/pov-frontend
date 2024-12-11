@@ -1,6 +1,6 @@
 import { useQuery, useInfiniteQuery } from '@tanstack/react-query';
 
-import type { ReviewsData } from '../../types/reviews';
+import type { ReviewsResponse } from '../../types/reviews';
 import { getReviews, getMyReviews } from '../../apis/review/getReviews';
 
 export const useReviewsQuery = () => {
@@ -23,7 +23,7 @@ export const useReviewsQuery = () => {
 };
 
 export const useMyReviewsQuery = () => {
-  const { data: reviewsData } = useQuery<ReviewsData[]>({
+  const { data: reviewsData } = useQuery<ReviewsResponse>({
     queryKey: ['myReviews'],
     queryFn: getMyReviews
   });
