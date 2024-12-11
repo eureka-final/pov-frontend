@@ -8,10 +8,12 @@ import ReviewToggle from '../../../components/review/ReviewWrite/ReviewToggle';
 import { HeadingContainer, ButtonContainer, Vs, Item } from '../ReviewWrite/ReviewWrite.style';
 import { useEditReviewMutation } from '../../../hooks/queries/useEditReviewMutation';
 import { useReviewDetailQuery } from '../../../hooks/queries/useReviewsQuery';
+import { useToast } from '../../../hooks/common/useToast';
 
 const Index = () => {
   const { movieId, reviewId } = useParams<{ movieId: string; reviewId: string }>();
   const navigate = useNavigate();
+  const { createToast } = useToast();
 
   const { reviewData } = useReviewDetailQuery(movieId!, reviewId!);
   const editReviewMutation = useEditReviewMutation();
@@ -65,6 +67,7 @@ const Index = () => {
         onSuccess: () => {
           saveClose();
           navigate(`/review/${reviewId}/detail`);
+          createToast('리뷰 수정 성공!', 'success');
         },
       }
     );
@@ -107,6 +110,7 @@ const Index = () => {
       }
     }
   }, []);
+
   return (
     <Padded>
       <HeadingContainer>

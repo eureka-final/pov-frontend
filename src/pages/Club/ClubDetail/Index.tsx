@@ -19,11 +19,13 @@ import ReviewClubCard from '../../../components/review/ReviewClubCard';
 import Card from '../../../components/club/ClubDetail/Card';
 import { useClubDetailQuery } from '../../../hooks/queries/useClubsQuery';
 import { useDeleteClubMutation } from '../../../hooks/queries/useDeleteClubMutation';
+import { useToast } from '../../../hooks/common/useToast';
 
 const Index = () => {
   const { clubId } = useParams<{ clubId: string }>();
   const navigate = useNavigate();
   const { isOpen: isSaveOpen, open: saveOpen, close: saveClose } = useOverlay();
+  const { createToast } = useToast();
 
   const { clubsData } = useClubDetailQuery(clubId!);
 
@@ -36,6 +38,7 @@ const Index = () => {
         onSuccess: () => {
           saveClose();
           navigate('/club');
+          createToast('클럽 삭제 성공!', 'success');
         },
       }
     );
@@ -141,7 +144,7 @@ const Index = () => {
           {/* 삭제 버튼 누르면 나오는 모달창 */}
           <Modal isOpen={isSaveOpen} closeModal={saveClose}>
             <Heading size="medium">정말 삭제하시겠습니까?</Heading>
-            <Button variant="primary" onClick={handleDelete} css={{ width: '100%' }}>
+            <Button variant="primary" onClick={handleDelete} css={{ width: '100%', marginTop: '30px' }}>
               삭제하기
             </Button>
           </Modal>

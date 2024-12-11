@@ -10,10 +10,12 @@ import { useEditClubMutation } from '../../../hooks/queries/useEditClubMutation'
 import GenreSelect from '../../../components/common/GenreSelect/GenreSelect';
 import { Container, Label } from '../../../components/styles/InputLabel';
 import { useClubDetailQuery } from '../../../hooks/queries/useClubsQuery';
+import { useToast } from '../../../hooks/common/useToast';
 
 const Index = () => {
   const { clubId } = useParams<{ clubId: string }>();
   const navigate = useNavigate();
+  const { createToast } = useToast();
 
   const { isOpen: isSaveOpen, open: saveOpen, close: saveClose } = useOverlay();
 
@@ -53,6 +55,7 @@ const Index = () => {
   const handleClose = () => {
     saveClose();
     navigate(`/club/${clubId}/detail`);
+    createToast('클럽 수정 성공!', 'success');
   };
 
   return (

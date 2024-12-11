@@ -7,10 +7,12 @@ import Keyword from '../../../components/review/ReviewWrite/Keyword';
 import ReviewToggle from '../../../components/review/ReviewWrite/ReviewToggle';
 import { HeadingContainer, ButtonContainer, Vs, Item } from './ReviewWrite.style';
 import { useCreateReviewMutation } from '../../../hooks/queries/useCreateReviewMutation';
+import { useToast } from '../../../hooks/common/useToast';
 
 const Index = () => {
   const { movieId } = useParams<{ movieId: string }>();
   const navigate = useNavigate();
+  const { createToast } = useToast();
 
   const { isOpen: isSaveOpen, open: saveOpen, close: saveClose } = useOverlay();
   const { isOpen: isTempOpen, open: tempOpen, close: tempClose } = useOverlay();
@@ -70,6 +72,7 @@ const Index = () => {
         onSuccess: () => {
           saveClose();
           navigate(`/review`);
+          createToast('리뷰 작성 완료!', 'success');
           localStorage.removeItem(`${movieId}`);
         },
       }
@@ -92,7 +95,7 @@ const Index = () => {
       console.log(tempData);
     } catch (error) {
       console.error('임시 저장 실패:', error);
-      alert('임시 저장 중 문제가 발생했습니다.');
+      createToast('임시 저장 중 문제가 발생했습니다.');
     }
   };
 

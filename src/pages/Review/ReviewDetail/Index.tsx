@@ -6,12 +6,16 @@ import Profile from '../../../components/common/Profile';
 import { useReviewDetailQuery } from '../../../hooks/queries/useReviewsQuery';
 import { useDeleteReviewMutation } from '../../../hooks/queries/useDeleteReviewMutation';
 import dompurify from 'dompurify';
+import { useToast } from '../../../hooks/common/useToast';
 
 const Index = () => {
   const { movieId, reviewId } = useParams<{ movieId: string; reviewId: string }>();
   const navigate = useNavigate();
-  const sanitizer = dompurify.sanitize;
+  const { createToast } = useToast();
+
   const { isOpen: isSaveOpen, open: saveOpen, close: saveClose } = useOverlay();
+
+  const sanitizer = dompurify.sanitize;
 
   const { reviewData } = useReviewDetailQuery(movieId!, reviewId!);
 
@@ -21,7 +25,11 @@ const Index = () => {
     deleteReviewMutation.mutate(
       { movieId: movieId!, reviewId: reviewId! },
       {
-        onSuccess: () => navigate('/review'),
+        onSuccess: () => {
+          saveClose();
+          navigate('/review');
+          createToast('리뷰 삭제 성공!', 'success');
+        },
       }
     );
   };

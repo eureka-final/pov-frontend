@@ -9,10 +9,12 @@ import { SettingClubImage } from '../../../components/club/ClubCreate/SettingClu
 import { useCreateClubMutation } from '../../../hooks/queries/useCreateClubMutation';
 import GenreSelect from '../../../components/common/GenreSelect/GenreSelect';
 import { Container, Label } from '../../../components/styles/InputLabel';
+import { useToast } from '../../../hooks/common/useToast';
 
 const Index = () => {
   const { isOpen: isSaveOpen, open: saveOpen, close: saveClose } = useOverlay();
   const navigate = useNavigate();
+  const { createToast } = useToast();
 
   // 클럽 정보 상태
   const [name, setName] = useState<string>('');
@@ -53,6 +55,7 @@ const Index = () => {
   const handleClose = () => {
     saveClose();
     navigate(`/club`);
+    createToast('클럽 만들기 성공!', 'success');
   };
 
   return (
