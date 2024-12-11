@@ -17,7 +17,7 @@ function ClubCard() {
             <CardContainer
               key={club.clubId}
               onClick={() => {
-                navigate(`/club/detail/${club.clubId}`);
+                navigate(`/club/${club.clubId}/detail`);
               }}
             >
               <CardFlex>

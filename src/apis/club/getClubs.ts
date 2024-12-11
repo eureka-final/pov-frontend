@@ -1,5 +1,5 @@
 import { axiosInstance } from '../axiosInstance';
-import type { ClubsResponse } from '../../types/club';
+import type { ClubsResponse, ClubDetailDataResponse } from '../../types/club';
 import { END_POINTS } from '../../constants/api';
 
 export const getClubs  = async () => {
@@ -12,7 +12,7 @@ export const getMyClubs = async () => {
   return data;
 };
 
-export const getDetailClubs = async (clubId: string) => {
-  const { data } = await axiosInstance.get<ClubsResponse>(END_POINTS.CLUB(clubId));
+export const getDetailClub = async (clubId: string) => {
+  const { data } = await axiosInstance.get<ClubDetailDataResponse>(END_POINTS.CLUB(clubId));
   return data;
 };

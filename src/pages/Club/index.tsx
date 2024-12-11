@@ -1,11 +1,15 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import Padded from '../../components/templates/Padded/Padded';
-import { Badge } from 'pov-design-system';
-import { Wrapper } from '../Review/Review.style';
+import { Badge, Body } from 'pov-design-system';
+import { BadgeWrapper, Wrapper, ClubBtn } from '../Review/Review.style';
 import ClubList from '../../components/club/ClubList';
 import MyClubList from '../../components/club/MyClubList';
 
 const Index = () => {
+  const navigate = useNavigate();
+
   const [sections, setSections] = useState([
     { text: '모든 클럽', click: true },
     { text: '내 클럽', click: false },
@@ -25,14 +29,23 @@ const Index = () => {
     setSectionsType(sections[index].text);
   };
 
+  const handleClubCreate = () => {
+    navigate('/club/create');
+  };
+
   return (
     <Padded>
       <Wrapper>
-        {sections.map((section, index) => (
-          <Badge key={index} variant="section" click={section.click} onClick={() => handleBadgeClick(index)} css={{ cursor: 'pointer' }}>
-            {section.text}
-          </Badge>
-        ))}
+        <BadgeWrapper>
+          {sections.map((section, index) => (
+            <Badge key={index} variant="section" click={section.click} onClick={() => handleBadgeClick(index)} css={{ cursor: 'pointer' }}>
+              {section.text}
+            </Badge>
+          ))}
+        </BadgeWrapper>
+        <ClubBtn onClick={handleClubCreate}>
+          <Body size="xLarge">+ 클럽 만들기</Body>
+        </ClubBtn>
       </Wrapper>
       {sectionsType === '모든 클럽' && <ClubList />}
       {sectionsType === '내 클럽' && <MyClubList />}
