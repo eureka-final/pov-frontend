@@ -1,14 +1,13 @@
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { CardContainer, Poster, CardFlex, ReviewCardContainer, LikeContainer, FlexBetween, Spoiler, SpoMore, ReadMore, TitleInfo } from './ReviewCard.style';
 import { Body, Paragraph, Icon, Heading, Logo } from 'pov-design-system';
 import Profile from '../common/Profile';
-import { useMyReviewsQuery } from '../../hooks/queries/useReviewsQuery';
+import { useReviewsQuery } from '../../hooks/queries/useReviewsQuery';
 import dompurify from 'dompurify';
 
 function ReviewCard() {
-  const { movieId } = useParams<{ movieId: string }>();
   const navigate = useNavigate();
-  const { reviewsData } = useMyReviewsQuery();
+  const { reviewsData } = useReviewsQuery();
 
   const sanitizer = dompurify.sanitize;
 
@@ -18,29 +17,29 @@ function ReviewCard() {
       const truncatedText = text.substring(0, maxLength);
       return (
         <>
-          <div dangerouslySetInnerHTML={{ __html: sanitizer(truncatedText) }} />
+          <div dangerouslySetInnerHTML={{ __html: sanitizer(truncatedText).replace(/<img[^>]*>/g, '') }} />
           <span>...</span>
           <ReadMore>더보기</ReadMore>
         </>
       );
     }
-    return <div dangerouslySetInnerHTML={{ __html: sanitizer(text) }} />;
+    return <div dangerouslySetInnerHTML={{ __html: sanitizer(text).replace(/<img[^>]*>/g, '') }} />;
   };
 
   return (
     <>
       {reviewsData &&
-        reviewsData.data.reviews.content.map((review) => {
+        reviewsData.map((review) => {
           return (
             <CardContainer
               key={review.reviewId}
               onClick={() => {
-                navigate(`/review/${movieId}/detail/${review.reviewId}`);
+                navigate(`/review/${review.movieId}/detail/${review.reviewId}`);
               }}
             >
               <CardFlex>
                 <Poster>
-                  <img src={review.thumbnail.replace('/w500/', '/w92/')} alt={review.movieTitle} />
+                  <img src={review.thumbnail.replace('/w154/', '/w92/')} alt={review.movieTitle} />
                   <Body size="small">{review.movieTitle}</Body>
                 </Poster>
                 <ReviewCardContainer>

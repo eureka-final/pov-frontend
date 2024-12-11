@@ -9,15 +9,30 @@ export const useReviewsQuery = () => {
     isFetching,
     hasNextPage,
     fetchNextPage,
-  } = useInfiniteQuery({
+  } = useInfiniteQuery<ReviewsResponse, Error>({
     queryKey: ['reviews'],
-    queryFn: ({ pageParam = 1 }) => getReviews(pageParam),
-    getNextPageParam: (lastPage) => (lastPage.last ? undefined : lastPage.pageNumber + 1),
-    initialPageParam: 1,
+    queryFn: async ({ pageParam = 0 }) => {
+      const response = await getReviews(pageParam);
+
+      // 응답 데이터 검증
+      if (!response || !response.data || !response.data.reviews) {
+        throw new Error('Invalid API response structure');
+      }
+
+      return response;
+    },
+    getNextPageParam: (lastPage) => {
+      // 안전한 데이터 접근
+      const reviews = lastPage?.data?.reviews;
+      if (!reviews) return undefined;
+      return reviews.last ? undefined : reviews.number + 1;
+    },
+    initialPageParam: 0,
   });
 
-  // 모든 페이지의 리뷰를 평탄화
-  const reviewsData = data?.pages.flatMap((page) => page.reviews) || [];
+  // 모든 페이지 데이터를 평탄화
+  const reviewsData =
+    data?.pages.flatMap((page) => page?.data?.reviews?.content || []) || [];
 
   return { reviewsData, isFetching, hasNextPage, fetchNextPage };
 };
