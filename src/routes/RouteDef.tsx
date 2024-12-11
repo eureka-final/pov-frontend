@@ -10,7 +10,7 @@ import ClubCreate from '../pages/Club/ClubCreate/Index';
 import ClubDetail from '../pages/Club/ClubDetail/Index';
 import ClubEdit from '../pages/Club/ClubEdit/Index';
 import Premieres from '../pages/Premieres';
-import PremiereDetail from '../pages/Premieres/PremiereDetail';
+import PremiereDetail from '../pages/Premieres/PremiereDetail/Index';
 import Payments from '../pages/Premieres/Payments/Index';
 import Success from '../pages/Premieres/Payments/Success/Index';
 import Fail from '../pages/Premieres/Payments/Fail/Index';
