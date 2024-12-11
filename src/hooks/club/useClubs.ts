@@ -1,5 +1,7 @@
 import { useQueryClient } from '@tanstack/react-query';
 
+// clubsData interface 만들기 Ex mycludcard component 의 속성값들이 any로 찍힘
+//@ts-ignore
 import type { ClubsData } from '../../types/club';
 
 export const useClubs = () => {

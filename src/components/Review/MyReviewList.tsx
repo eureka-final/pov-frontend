@@ -7,7 +7,7 @@ function MyReviewList() {
 
   return (
     <>
-      <ReviewListContainer>{reviewsData && reviewsData.length > 0 ? <MyReviewCard /> : <MyReviewCard.Empty />}</ReviewListContainer>
+      <ReviewListContainer>{reviewsData && reviewsData.data.reviews.content.length > 0 ? <MyReviewCard /> : <MyReviewCard.Empty />}</ReviewListContainer>
     </>
   );
 }

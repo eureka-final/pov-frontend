@@ -12,12 +12,12 @@ interface CardProps {
       url: string;
       MobileHeight: number;
       PcHeight: number;
+      br: string;
     };
   };
 }
 
 const Card = ({ item }: CardProps) => {
-
   return (
     <Container>
       <ImageLayer src={item.src} />

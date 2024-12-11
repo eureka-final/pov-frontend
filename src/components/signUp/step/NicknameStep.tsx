@@ -3,7 +3,7 @@ import SignUpStep from './SignUpStep';
 import { Input, Button } from 'pov-design-system';
 import { SIGN_UP_HEADER_TEXTS } from '../../../constants/texts';
 import { ButtonContainer } from './SignUpStep.style';
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 
 interface NicknameStepProps {
   onNext: (nextStep: string) => void;

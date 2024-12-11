@@ -56,6 +56,16 @@ export const ReviewInfo = styled.div`
   }
 `;
 
+export const Wrapper = styled.div`
+  display: flex;
+  gap: 15px;
+  position: absolute;
+  bottom: 35px;
+  right: 54px;
+  z-index: 10;
+  cursor: pointer;
+`;
+
 export const BodyContainer = styled.div`
   display: flex;
   flex-direction: column;
