@@ -7,7 +7,6 @@ function MyClubList() {
 
   return (
     <>
-      {/* clubsData = object */}
       <ReviewListContainer>{clubsData && clubsData.data.clubs.length > 0 ? <MyClubCard /> : <MyClubCard.Empty />}</ReviewListContainer>
     </>
   );
