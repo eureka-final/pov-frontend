@@ -38,7 +38,7 @@ function ReviewList() {
     <>
       <ReviewListContainer>
         {reviewsData.map((review) => (
-          <ReviewCard key={review.reviewId} review={review} />
+          <ReviewCard key={review.reviewId} />
         ))}
       </ReviewListContainer>
 

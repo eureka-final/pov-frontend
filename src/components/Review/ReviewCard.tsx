@@ -1,11 +1,16 @@
-import { useNavigate } from 'react-router-dom';
-import { CardContainer, Poster, CardFlex, ReviewCardContainer, FlexBetween, LikeContainer, Spoiler, SpoMore, ReadMore, TitleInfo } from './ReviewCard.style';
-import { Heading, Body, Paragraph, Icon, Logo } from 'pov-design-system';
+import { useNavigate, useParams } from 'react-router-dom';
+import { CardContainer, Poster, CardFlex, ReviewCardContainer, LikeContainer, FlexBetween, Spoiler, SpoMore, ReadMore, TitleInfo } from './ReviewCard.style';
+import { Body, Paragraph, Icon, Heading, Logo } from 'pov-design-system';
 import Profile from '../common/Profile';
-import { ReviewsData } from '../../types/reviews';
+import { useMyReviewsQuery } from '../../hooks/queries/useReviewsQuery';
+import dompurify from 'dompurify';
 
-function ReviewCard({ review }: ReviewsData) {
+function ReviewCard() {
+  const { movieId } = useParams<{ movieId: string }>();
   const navigate = useNavigate();
+  const { reviewsData } = useMyReviewsQuery();
+
+  const sanitizer = dompurify.sanitize;
 
   const truncateContents = (text: string | undefined, maxLength: number) => {
     if (!text) return '';
@@ -13,45 +18,58 @@ function ReviewCard({ review }: ReviewsData) {
       const truncatedText = text.substring(0, maxLength);
       return (
         <>
-          {truncatedText}
+          <div dangerouslySetInnerHTML={{ __html: sanitizer(truncatedText) }} />
           <span>...</span>
           <ReadMore>더보기</ReadMore>
         </>
       );
     }
-    return text;
+    return <div dangerouslySetInnerHTML={{ __html: sanitizer(text) }} />;
   };
 
   return (
-    <CardContainer onClick={() => navigate(`/review/detail/${review.reviewId}`)}>
-      <CardFlex>
-        <Poster>
-          <img src={review.thumbnail} alt={review.movieTitle} />
-          <Body size="small">{review.movieTitle}</Body>
-        </Poster>
-        <ReviewCardContainer>
-          <Profile name={review.reviewer} avatarUrl={review.profileImage} />
-          <Paragraph>{review.title}</Paragraph>
-          {review.spoiler ? (
-            <Spoiler>
-              <Body size="large">스포일러가 있어요!</Body>
-              <Body size="large">
-                <SpoMore>더보기</SpoMore>
-              </Body>
-            </Spoiler>
-          ) : (
-            <Body size="large">{truncateContents(review.contents, 380)}</Body>
-          )}
+    <>
+      {reviewsData &&
+        reviewsData.data.reviews.content.map((review) => {
+          return (
+            <CardContainer
+              key={review.reviewId}
+              onClick={() => {
+                navigate(`/review/${movieId}/detail/${review.reviewId}`);
+              }}
+            >
+              <CardFlex>
+                <Poster>
+                  <img src={review.thumbnail.replace('/w500/', '/w92/')} alt={review.movieTitle} />
+                  <Body size="small">{review.movieTitle}</Body>
+                </Poster>
+                <ReviewCardContainer>
+                  <Profile name={review.reviewer} avatarUrl={review.profileImage} />
+                  <Paragraph>{review.title}</Paragraph>
 
-          <FlexBetween>
-            <Body>{new Date(review.createdAt).toLocaleDateString()}</Body>
-            <LikeContainer>
-              <Icon icon={review.isLiked ? 'heartfill' : 'heartline'} /> {review.likeAmount}
-            </LikeContainer>
-          </FlexBetween>
-        </ReviewCardContainer>
-      </CardFlex>
-    </CardContainer>
+                  {review.spoiler ? (
+                    <Spoiler>
+                      <Body size="large">스포일러가 있어요!</Body>
+                      <Body size="large">
+                        <SpoMore>더보기</SpoMore>
+                      </Body>
+                    </Spoiler>
+                  ) : (
+                    <Body size="large">{truncateContents(review.contents, 380)}</Body>
+                  )}
+
+                  <FlexBetween>
+                    <Body>{review.createdAt}</Body>
+                    <LikeContainer>
+                      <Icon icon={review.isLiked ? 'heartfill' : 'heartline'} /> {review.likeAmount}
+                    </LikeContainer>
+                  </FlexBetween>
+                </ReviewCardContainer>
+              </CardFlex>
+            </CardContainer>
+          );
+        })}
+    </>
   );
 }
 
