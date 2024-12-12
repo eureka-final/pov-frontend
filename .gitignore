@@ -31,3 +31,8 @@ dist-ssr
 
 # env
 .env
+
+# HTTPS
+localhost+1-key.pem
+localhost+1.pem
+    
