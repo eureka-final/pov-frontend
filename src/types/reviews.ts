@@ -17,7 +17,7 @@ export interface ReviewData {
 
 export interface Review {
   movieId: number;
-  reviewId: string;
+  reviewId: number;
   movieTitle: string;
   title: string;
   contents: string;
@@ -59,7 +59,7 @@ export interface ReviewDetailData {
   likeAmount: number;
   isLiked: boolean;
   spoiler: boolean;
-  keyword: string[];
+  keywords: string[];
 }
 
 export interface ReviewFormData {

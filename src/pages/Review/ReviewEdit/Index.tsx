@@ -26,7 +26,7 @@ const Index = () => {
   const [content, setContent] = useState(reviewData!.data.contents || '');
 
   // Keyword 상태
-  const [keywords, setKeywords] = useState(reviewData!.data.keyword);
+  const [keywords, setKeywords] = useState(reviewData!.data.keywords);
 
   // const handleKeywordsChange = (selectedKeywords: string[]) => {
   //   // 부모 상태 업데이트
@@ -66,7 +66,7 @@ const Index = () => {
       {
         onSuccess: () => {
           saveClose();
-          navigate(`/review/${reviewId}/detail`);
+          navigate(`/review/${movieId}/detail/${reviewId}`);
           createToast('리뷰 수정 성공!', 'success');
         },
       }

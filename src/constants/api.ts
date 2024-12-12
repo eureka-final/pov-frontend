@@ -10,6 +10,7 @@ export const END_POINTS = {
   CLUBS: '/api/clubs',
   MY_CLUBS: '/api/clubs/myclub',
   CLUB: (clubId: string) =>  `/api/clubs/${clubId}`,
+  LIKE: (movieId: number, reviewId: number) => `/api/movies/${movieId}/reviews/${reviewId}/likes`,
   TOKEN: `/api/auth/reissue`,
 } as const;
 

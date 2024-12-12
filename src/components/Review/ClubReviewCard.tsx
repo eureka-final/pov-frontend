@@ -1,11 +1,11 @@
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { CardContainer, Poster, CardFlex, ReviewCardContainer, LikeContainer, FlexBetween, Spoiler, SpoMore, ReadMore, TitleInfo } from './ReviewCard.style';
-import { Body, Paragraph, Icon, Heading, Logo } from 'pov-design-system';
+import { Body, Paragraph, Heading, Logo } from 'pov-design-system';
 import Profile from '../common/Profile';
 import { useClubReviewsQuery } from '../../hooks/queries/useReviewsQuery';
 import dompurify from 'dompurify';
-import axios from 'axios';
+import LikeButton from '../common/LikeButton/LikeButton';
 
 interface ReviewCardProps {
   clubId: string;
@@ -32,37 +32,17 @@ function ClubReviewCard({ clubId }: ReviewCardProps) {
     return <div dangerouslySetInnerHTML={{ __html: sanitizer(text).replace(/<img[^>]*>/g, '') }} />;
   };
 
-  const [likes, setLikes] = useState(0);
-  const [likeAction, setLikeAction] = useState<boolean | null>();
-
-  const onLike = () => {
-    // Like이 클릭 안되어있을 때 처리
-    if (likeAction === false) {
-      axios.put('/api/movies/1/reviews/1/likes').then((response) => {
-        if (response.data.success) {
-          setLikes(likes + 1);
-          setLikeAction(true);
-        } else {
-          alert('좋아요 실패');
-        }
-      });
-    } else {
-      // Like이 클릭되어있을 때 처리
-      axios.put('/api/movies/1/reviews/1/unLikes').then((response) => {
-        if (response.data.success) {
-          setLikes(likes - 1);
-          setLikeAction(false);
-        } else {
-          alert('좋아요 취소 실패');
-        }
-      });
-    }
-  };
-
   return (
     <>
       {reviewsData &&
         reviewsData.data.reviews.content.map((review) => {
+          // 각 리뷰별로 좋아요 상태 관리
+          // eslint-disable-next-line react-hooks/rules-of-hooks
+          const [likeCount, setLikeCount] = useState<number>(review.likeAmount);
+          const handleLikeCount = (count: number) => {
+            setLikeCount(count);
+          };
+
           return (
             <CardContainer
               key={review.reviewId}
@@ -92,8 +72,15 @@ function ClubReviewCard({ clubId }: ReviewCardProps) {
 
                   <FlexBetween>
                     <Body>{new Date(review.createdAt).toLocaleDateString()}</Body>
-                    <LikeContainer onClick={onLike}>
-                      <Icon icon={review.isLiked ? 'heartfill' : 'heartline'} /> {likes}
+                    <LikeContainer>
+                      <LikeButton
+                        initialState={review.isLiked}
+                        movieId={review.movieId}
+                        reviewId={review.reviewId}
+                        handleLikeCount={handleLikeCount}
+                        likeCount={review.likeAmount}
+                      />
+                      {likeCount}
                     </LikeContainer>
                   </FlexBetween>
                 </ReviewCardContainer>

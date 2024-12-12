@@ -53,7 +53,7 @@ const Index = () => {
                   <Count color="#0DE781">{reviewData.data.likeAmount}</Count>
                 </Additionals>
                 <Additionals>
-                  {reviewData.data.keyword.map((item, index) => (
+                  {reviewData.data.keywords.map((item, index) => (
                     <Badge variant="keyword" cancel={true} key={item + index}>
                       {item}
                     </Badge>
@@ -80,7 +80,7 @@ const Index = () => {
           {/* 삭제 버튼 누르면 나오는 모달창 */}
           <Modal isOpen={isSaveOpen} closeModal={saveClose}>
             <Heading size="medium">정말 삭제하시겠습니까?</Heading>
-            <Button variant="primary" onClick={handleDelete} css={{ width: '100%' }}>
+            <Button variant="primary" onClick={handleDelete} css={{ width: '100%', marginTop: '30px' }}>
               삭제하기
             </Button>
           </Modal>
