@@ -11,6 +11,7 @@ self.addEventListener('activate', function (e) {
 self.addEventListener('push', function (e) {
   if (!e.data.json()) return;
 
+  console.log(e.data.json());
   const resultData = e.data.json().notification;
   const notificationTitle = resultData.title;
   const notificationOptions = {
@@ -19,4 +20,11 @@ self.addEventListener('push', function (e) {
   console.log('push: ', { resultData, notificationTitle, notificationOptions });
 
   self.registration.showNotification(notificationTitle, notificationOptions);
+});
+
+self.addEventListener('notificationclick', function (event) {
+  console.log('notification click');
+  const url = '/alarm';
+  event.notification.close();
+  event.waitUntil(clients.openWindow(url));
 });
