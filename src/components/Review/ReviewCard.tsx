@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { CardContainer, Poster, CardFlex, ReviewCardContainer, LikeContainer, FlexBetween, Spoiler, SpoMore, ReadMore, TitleInfo } from './ReviewCard.style';
-import { Body, Paragraph, Icon, Heading, Logo } from 'pov-design-system';
+import { Body, Paragraph, Icon, Heading, Logo, Button } from 'pov-design-system';
 import Profile from '../common/Profile';
 import { useReviewsQuery } from '../../hooks/queries/useReviewsQuery';
 import dompurify from 'dompurify';
@@ -82,14 +82,19 @@ ReviewCard.Loading = () => {
   );
 };
 
-// eslint-disable-next-line react/display-name
-ReviewCard.Empty = () => {
+const EmptyReviewCard = () => {
+  const navigate = useNavigate();
   return (
     <TitleInfo>
       <Heading size="xxLarge">등록된 리뷰가 없습니다.</Heading>
       <Logo icon="type2" />
+      <Button size="large" onClick={() => navigate('/movie')}>
+        원하는 영화 리뷰 작성하러 가기 🪄
+      </Button>{' '}
     </TitleInfo>
   );
 };
+
+ReviewCard.Empty = EmptyReviewCard;
 
 export default ReviewCard;

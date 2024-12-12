@@ -1,17 +1,17 @@
 export const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 export const END_POINTS = {
-  REVIEWS: (pageParam: number | unknown) => `/api/movies/reviews?page=${pageParam}`,
   MY_REVIEWS: '/api/movies/reviews/my',
-  CLUB_REVIEW: (clubId: string) => `/api/clubs/${clubId}/reviews`,
   CLUB_JOIN: '/api/clubs/reviews',
-  REVIEW: (movieId: string, reviewId: string) =>  `/api/movies/${movieId}/reviews/${reviewId}`,
-  CREATE_REVIEW: (movieId: string) => `/api/movies/${movieId}/reviews`,
   CLUBS: '/api/clubs',
   MY_CLUBS: '/api/clubs/myclub',
+  TOKEN: `/api/auth/reissue`,
+  REVIEWS: (pageParam: number | unknown) => `/api/movies/reviews?page=${pageParam}`,
+  CLUB_REVIEW: (clubId: string) => `/api/clubs/${clubId}/reviews`,
+  REVIEW: (movieId: string, reviewId: string) =>  `/api/movies/${movieId}/reviews/${reviewId}`,
+  CREATE_REVIEW: (movieId: string) => `/api/movies/${movieId}/reviews`,
   CLUB: (clubId: string) =>  `/api/clubs/${clubId}`,
   LIKE: (movieId: number, reviewId: number) => `/api/movies/${movieId}/reviews/${reviewId}/likes`,
-  TOKEN: `/api/auth/reissue`,
 } as const;
 
 export const NETWORK = {

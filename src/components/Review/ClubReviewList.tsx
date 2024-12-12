@@ -20,23 +20,26 @@ function ClubReviewList() {
   return (
     <>
       <ClubContainer>
-        {joinData?.data.clubs.map((club) => {
-          return (
-            <ClubItem key={club.clubId}>
-              <Avatar
-                size="medium"
-                username={club.clubName}
-                src={club.clubImage}
-                css={{ cursor: 'pointer' }}
-                selected={club.clubId === selectedClubId}
-                onClick={() => setSelectedClubId(club.clubId)}
-              />
-            </ClubItem>
-          );
-        })}
+        {joinData &&
+          joinData.data.clubs.map((club) => {
+            return (
+              <ClubItem key={club.clubId}>
+                <Avatar
+                  size="medium"
+                  username={club.clubName}
+                  src={club.clubImage}
+                  css={{ cursor: 'pointer' }}
+                  selected={club.clubId === selectedClubId}
+                  onClick={() => setSelectedClubId(club.clubId)}
+                />
+              </ClubItem>
+            );
+          })}
       </ClubContainer>
 
-      <ClubReviewListContainer>{selectedClubId && <ClubReviewCard clubId={selectedClubId!} />}</ClubReviewListContainer>
+      <ClubReviewListContainer>
+        {joinData && joinData.data.clubs.length > 0 && selectedClubId ? <ClubReviewCard clubId={selectedClubId!} /> : <ClubReviewCard.Empty />}
+      </ClubReviewListContainer>
     </>
   );
 }
