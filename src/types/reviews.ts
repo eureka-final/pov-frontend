@@ -1,6 +1,7 @@
 export interface ReviewsResponse {
   message: string;
   data: {
+    clubId: string;
     reviews: ReviewData;
   };
 }
@@ -28,6 +29,20 @@ export interface Review {
   isLiked: boolean;
   spoiler: boolean;
 }
+
+export interface JoinClubResponse {
+  message: string;
+  data: {
+    clubs: JoinClubData[];
+  };
+}
+
+export interface JoinClubData {
+  clubId: string;
+  clubName: string;
+  clubImage: string;
+}
+
 
 export interface ReviewDetailDataResponse {
   message: string;

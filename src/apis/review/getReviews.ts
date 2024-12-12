@@ -1,5 +1,5 @@
 import { axiosInstance } from '../axiosInstance';
-import type { ReviewsResponse, ReviewDetailDataResponse } from '../../types/reviews';
+import type { ReviewsResponse, ReviewDetailDataResponse, JoinClubResponse } from '../../types/reviews';
 import { END_POINTS } from '../../constants/api';
 
 export const getReviews = async (pageParam: number | unknown) => {
@@ -12,6 +12,16 @@ export const getReviews = async (pageParam: number | unknown) => {
 
 export const getMyReviews = async () => {
   const { data } = await axiosInstance.get<ReviewsResponse>(END_POINTS.MY_REVIEWS);
+  return data;
+};
+
+export const getClubReviews = async (clubId: string) => {
+  const { data } = await axiosInstance.get<ReviewsResponse>(END_POINTS.CLUB_REVIEW(clubId));
+  return data;
+};
+
+export const getJoinClub = async () => {
+  const { data } = await axiosInstance.get<JoinClubResponse>(END_POINTS.CLUB_JOIN);
   return data;
 };
 

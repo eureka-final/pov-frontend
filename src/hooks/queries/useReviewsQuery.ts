@@ -1,7 +1,7 @@
 import { useQuery, useInfiniteQuery } from '@tanstack/react-query';
 
-import type { ReviewsResponse, ReviewDetailDataResponse } from '../../types/reviews';
-import { getReviews, getMyReviews, getDetailReview } from '../../apis/review/getReviews';
+import type { ReviewsResponse, ReviewDetailDataResponse, JoinClubResponse } from '../../types/reviews';
+import { getReviews, getMyReviews, getClubReviews, getDetailReview, getJoinClub } from '../../apis/review/getReviews';
 
 export const useReviewsQuery = () => {
   const {
@@ -45,6 +45,25 @@ export const useMyReviewsQuery = () => {
   
   return { reviewsData };
 };
+
+export const useClubReviewsQuery = (clubId: string) => {
+  const { data: reviewsData } = useQuery<ReviewsResponse>({
+    queryKey: ['clubReviews'],
+    queryFn: () => getClubReviews(clubId)
+  });
+  
+  return { reviewsData };
+};
+
+export const useJoinClubReviewsQuery = () => {
+  const { data: joinData } = useQuery<JoinClubResponse>({
+    queryKey: ['joinClubReviews'],
+    queryFn: getJoinClub
+  });
+  
+  return { joinData };
+};
+
 
 export const useReviewDetailQuery = (movieId: string, reviewId: string) => {
   const { data: reviewData } = useQuery<ReviewDetailDataResponse>({

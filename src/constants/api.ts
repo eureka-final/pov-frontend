@@ -3,6 +3,8 @@ export const BASE_URL = import.meta.env.VITE_BASE_URL;
 export const END_POINTS = {
   REVIEWS: (pageParam: number | unknown) => `/api/movies/reviews?page=${pageParam}`,
   MY_REVIEWS: '/api/movies/reviews/my',
+  CLUB_REVIEW: (clubId: string) => `/api/clubs/${clubId}/reviews`,
+  CLUB_JOIN: '/api/clubs/reviews',
   REVIEW: (movieId: string, reviewId: string) =>  `/api/movies/${movieId}/reviews/${reviewId}`,
   CREATE_REVIEW: (movieId: string) => `/api/movies/${movieId}/reviews`,
   CLUBS: '/api/clubs',
