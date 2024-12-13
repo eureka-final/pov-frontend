@@ -8,6 +8,7 @@ import {
   Wrapper,
   Menu,
   MenuWrapper,
+  LinkWrapper,
   Additionals,
   ReviewInfo,
   BackgroundLayer,
@@ -30,6 +31,7 @@ const JoinClub = () => {
   const { clubId } = useParams<{ clubId: string }>();
   const navigate = useNavigate();
   const { isOpen: isSaveOpen, open: saveOpen, close: saveClose } = useOverlay();
+  const { isOpen: isInviteSaveOpen, open: saveInviteOpen, close: saveInviteClose } = useOverlay();
   const { isOpen: isLeaveSaveOpen, open: saveLeaveOpen, close: saveLeaveClose } = useOverlay();
 
   const [isMenuOpen, setIsMenuOpen] = useState(false); // 클럽 메뉴 토글 상태
@@ -102,22 +104,22 @@ const JoinClub = () => {
                 <MenuWrapper>
                   {clubsData.data.members.memberList.some((member) => member.isLeader && member.nickname === user?.nickname) && (
                     <>
-                      <Menu>
-                        <Icon icon="edit" width="15px" height="12px" onClick={() => navigate(`/club/${clubId}/edit`)} />
+                      <Menu onClick={() => navigate(`/club/${clubId}/edit`)}>
+                        <Icon icon="edit" width="15px" height="12px" />
                         <Heading size="small">수정하기</Heading>
                       </Menu>
-                      <Menu>
-                        <Icon icon="delete" width="15px" height="12px" onClick={saveOpen} />
+                      <Menu onClick={saveOpen}>
+                        <Icon icon="delete" width="15px" height="12px" />
                         <Heading size="small">삭제하기</Heading>
                       </Menu>
                     </>
                   )}
-                  <Menu>
-                    <Icon icon="plusLarge" width="15px" height="12px" onClick />
+                  <Menu onClick={saveInviteOpen}>
+                    <Icon icon="plusLarge" width="15px" height="12px" />
                     <Heading size="small">초대하기</Heading>
                   </Menu>
-                  <Menu>
-                    <Icon icon="leave" width="15px" height="12px" onClick={saveLeaveOpen} />
+                  <Menu onClick={saveLeaveOpen}>
+                    <Icon icon="leave" width="15px" height="12px" />
                     <Heading size="small">탈퇴하기</Heading>
                   </Menu>
                 </MenuWrapper>
@@ -195,6 +197,19 @@ const JoinClub = () => {
             <Heading size="medium">정말 삭제하시겠습니까?</Heading>
             <Button variant="primary" onClick={handleDelete} css={{ width: '100%', marginTop: '30px' }}>
               삭제하기
+            </Button>
+          </Modal>
+
+          {/* 초대 버튼 누르면 나오는 모달창 */}
+          <Modal isOpen={isInviteSaveOpen} closeModal={saveLeaveClose}>
+            <Heading size="medium">초대 URL이 생성되었어요. </Heading>
+            <Body>초대 URL을 초대하고 싶은 친구에게 보내보세요!</Body>
+            <LinkWrapper>
+              <Body>https://www.point-of-views.com/asdf</Body>
+              <Icon icon="copy" />
+            </LinkWrapper>
+            <Button variant="primary" onClick={saveInviteClose} css={{ width: '100%', marginTop: '30px' }}>
+              확인
             </Button>
           </Modal>
 

@@ -97,6 +97,15 @@ export const Menu = styled.div`
   white-space: nowrap;
 `;
 
+export const LinkWrapper = styled.div`
+  background-color: ${({ theme }) => theme.muted};
+  padding: 20px;
+  border-radius: 8px;
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+`;
+
 export const FlexWrapper = styled.div`
   display: flex;
   margin-top: 16px;
