@@ -1,13 +1,53 @@
 import { defineConfig } from 'vite';
+import { VitePWA } from 'vite-plugin-pwa';
+// import mkcert from 'vite-plugin-mkcert';
+
 import react from '@vitejs/plugin-react';
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
+    // mkcert(),
     react({
       jsxImportSource: '@emotion/react',
       babel: {
         plugins: ['@emotion/babel-plugin'],
+      },
+    }),
+    VitePWA({
+      registerType: 'autoUpdate',
+      // devOptions: {
+      //   enabled: true, // 개발 환경에서 서비스 워커 활성화
+      // },
+      includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'mask-icon.svg'],
+      manifest: {
+        name: 'pov',
+        short_name: 'pov',
+        theme_color: '#333036',
+        icons: [
+          {
+            src: 'pwa-64x64.png',
+            sizes: '64x64',
+            type: 'image/png',
+          },
+          {
+            src: 'pwa-192x192.png',
+            sizes: '192x192',
+            type: 'image/png',
+          },
+          {
+            src: 'pwa-512x512.png',
+            sizes: '512x512',
+            type: 'image/png',
+            purpose: 'any',
+          },
+          {
+            src: 'maskable-icon-512x512.png',
+            sizes: '512x512',
+            type: 'image/png',
+            purpose: 'maskable',
+          },
+        ],
       },
     }),
   ],
@@ -17,6 +57,11 @@ export default defineConfig({
     },
   },
   server: {
+    /* HTTPS */
+    // https: {
+    //   key: './localhost+1-key.pem',
+    //   cert: './localhost+1.pem',
+    // },
     proxy: {
       /* Naver OAuth */
       '/api/naver/token': {
@@ -42,5 +87,3 @@ export default defineConfig({
     },
   },
 });
-
-// /api/auth/login

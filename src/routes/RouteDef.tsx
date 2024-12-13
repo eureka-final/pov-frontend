@@ -18,7 +18,7 @@ import ReviewDetail from '../pages/Review/ReviewDetail/Index';
 import Login from '../pages/Login/Index';
 import OauthNaver from '../pages/Oauth/Naver/Index';
 import OauthGoogle from '../pages/Oauth/Google/Index';
-// import Alarm from '../pages/Alarm';
+import Notice from '../pages/Notice';
 import SignUp from '../pages/SignUp/Index';
 
 // import React, { lazy, Suspense } from 'react';
@@ -132,10 +132,10 @@ const MemberScreens = {
     path: '/mypage',
     element: null, // <MyPage />,
   },
-  // Alarm: {
-  //   path: '/alarm',
-  //   element: <Alarm />,
-  // },
+  Alarm: {
+    path: '/notice',
+    element: <Notice />,
+  },
 };
 
 export const AppRouteDef = {
