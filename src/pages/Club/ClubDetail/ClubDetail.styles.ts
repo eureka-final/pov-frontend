@@ -64,13 +64,29 @@ export const ReviewInfo = styled.div`
 `;
 
 export const Wrapper = styled.div`
-  display: flex;
-  gap: 15px;
-  position: absolute;
-  bottom: 35px;
-  right: 54px;
+  position: fixed; /* 화면에 고정 */
+  top: 50%; /* 화면 아래로부터 35px */
+  right: 7%; /* 화면 오른쪽으로부터 54px */
   z-index: 10;
+`;
+
+export const MenuWrapper = styled.div`
+  background-color: ${({ theme }) => theme.backgroundElevated};
+  padding: 20px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  position: absolute; /* 부모 기준으로 배치 */
+  top: 30px; /* Menu 아래로 40px 떨어지게 배치 */
+`;
+
+export const Menu = styled.div`
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  white-space: nowrap;
 `;
 
 export const FlexWrapper = styled.div`

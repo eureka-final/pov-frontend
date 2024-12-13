@@ -1,10 +1,13 @@
 import Basic from '../../../components/templates/Basic/Basic';
 import { useNavigate, useParams } from 'react-router-dom';
+import { useState } from 'react';
 import { Icon, Button, Heading, Badge, Body, AvatarList, ShowMoreBtn, useOverlay, Modal } from 'pov-design-system';
 import {
   Container,
   HeaderContainer,
   Wrapper,
+  Menu,
+  MenuWrapper,
   Additionals,
   ReviewInfo,
   BackgroundLayer,
@@ -26,6 +29,12 @@ const Index = () => {
   const navigate = useNavigate();
   const { isOpen: isSaveOpen, open: saveOpen, close: saveClose } = useOverlay();
   const { isOpen: isLeaveSaveOpen, open: saveLeaveOpen, close: saveLeaveClose } = useOverlay();
+
+  const [isMenuOpen, setIsMenuOpen] = useState(false); // 클럽 메뉴 토글 상태
+
+  const toggleMenu = () => {
+    setIsMenuOpen((prev) => !prev);
+  };
 
   const { createToast } = useToast();
 
@@ -78,21 +87,40 @@ const Index = () => {
                   ))}
                 </Additionals>
               </ReviewInfo>
-              <Wrapper>
-                <div>
-                  <Icon icon="edit" onClick={() => navigate(`/club/${clubId}/edit`)} />
-                  <Body>수정</Body>
-                </div>
-                <div>
-                  <Icon icon="delete" onClick={saveOpen} />
-                  <Body>삭제</Body>
-                </div>
-                <div>
-                  <Icon icon="delete" onClick={saveLeaveOpen} />
-                  <Body>탈퇴</Body>
-                </div>
-              </Wrapper>
             </HeaderContainer>
+
+            {/* 클럽 메뉴 */}
+            <Wrapper>
+              <Menu onClick={toggleMenu}>
+                <Icon icon="menu" />
+                <Body>클럽 메뉴</Body>
+              </Menu>
+
+              {isMenuOpen && (
+                <MenuWrapper>
+                  {!clubsData.data.members.memberList.some((member) => member.isLeader) && (
+                    <>
+                      <Menu>
+                        <Icon icon="edit" width="15px" height="12px" onClick={() => navigate(`/club/${clubId}/edit`)} />
+                        <Heading size="small">수정하기</Heading>
+                      </Menu>
+                      <Menu>
+                        <Icon icon="delete" width="15px" height="12px" onClick={saveOpen} />
+                        <Heading size="small">삭제하기</Heading>
+                      </Menu>
+                    </>
+                  )}
+                  <Menu>
+                    <Icon icon="plusLarge" width="15px" height="12px" onClick />
+                    <Heading size="small">초대하기</Heading>
+                  </Menu>
+                  <Menu>
+                    <Icon icon="leave" width="15px" height="12px" onClick={saveLeaveOpen} />
+                    <Heading size="small">탈퇴하기</Heading>
+                  </Menu>
+                </MenuWrapper>
+              )}
+            </Wrapper>
           </Container>
 
           <Section>
