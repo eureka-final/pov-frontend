@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { Avatar } from 'pov-design-system';
+import { Avatar, Icon } from 'pov-design-system';
 import { UploadProfileImgButtonContainer, UploadImgButton } from './UploadProfileImgButton.style';
 
 interface UploadProfileImgButtonProps {
@@ -43,7 +43,9 @@ const UploadProfileImgButton = ({ profileImageUrl, handleChangeProfileImage }: U
         style={{ width: '160px', height: '160px', display: 'none' }}
       />
       {/* TODO UploadImgButton 카메라 아이콘으로 수정 */}
-      <UploadImgButton>1</UploadImgButton>
+      <UploadImgButton>
+        <Icon icon="camera" css={{ width: '16px' }} />
+      </UploadImgButton>
     </UploadProfileImgButtonContainer>
   );
 };
