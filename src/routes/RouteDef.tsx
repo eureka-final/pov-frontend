@@ -9,7 +9,7 @@ import Club from '../pages/Club';
 import ClubCreate from '../pages/Club/ClubCreate/Index';
 import ClubDetail from '../pages/Club/ClubDetail/Index';
 import ClubEdit from '../pages/Club/ClubEdit/Index';
-import Premieres from '../pages/Premieres';
+import Premieres from '../pages/Premieres/Index';
 import PremiereDetail from '../pages/Premieres/PremiereDetail/Index';
 import Payments from '../pages/Premieres/Payments/Index';
 import Success from '../pages/Premieres/Payments/Success/Index';

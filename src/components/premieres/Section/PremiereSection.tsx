@@ -1,27 +1,17 @@
-import { Section } from './PremiereSection.style';
-import PremiereCard from '../Card/PremiereCard';
-import type { PremiereCardProps } from '../Card/PremiereCard';
+import { Section, Card, ThumbnailImage } from './PremiereSection.style';
+import { Premieres } from '../../../types/premieres';
+import { Heading, Body } from 'pov-design-system';
+import { useNavigate } from 'react-router-dom';
 
-export interface PremiereSectionProps {
-  items: PremiereCardProps[];
-}
-
-const PremiereSection = ({ items }: PremiereSectionProps) => {
+const PremiereSection = ({ premiereId, title, thumbnail, startAt }: Premieres) => {
+  const navigate = useNavigate();
   return (
     <Section>
-      {items.map((item, index) => (
-        <PremiereCard
-          key={index}
-          premiereId={item.premiereId}
-          title={item.title}
-          startAt={item.startAt}
-          endAt={item.endAt}
-          isPaymentRequired={item.isPaymentRequired}
-          price={item.price}
-          thumbnailImage={item.thumbnailImage}
-          bodyImage={item.bodyImage}
-        ></PremiereCard>
-      ))}
+      <Card onClick={() => navigate(`/premieres/${premiereId}`)}>
+        <ThumbnailImage src={thumbnail} />
+        <Heading size="medium">{title}</Heading>
+        <Body size="large">{startAt}</Body>
+      </Card>
     </Section>
   );
 };
