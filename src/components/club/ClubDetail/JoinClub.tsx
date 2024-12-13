@@ -23,8 +23,10 @@ import Card from '../../../components/club/ClubDetail/Card';
 import { useClubDetailQuery } from '../../../hooks/queries/useClubsQuery';
 import { useLeaveClubMutaion } from '../../../hooks/queries/useLeaveClubMutaion';
 import { useToast } from '../../../hooks/common/useToast';
+import { useAuthStore } from '../../../stores/useAuthStore';
 
 const JoinClub = () => {
+  const user = useAuthStore((state) => state.user);
   const { clubId } = useParams<{ clubId: string }>();
   const navigate = useNavigate();
   const { isOpen: isSaveOpen, open: saveOpen, close: saveClose } = useOverlay();
@@ -98,7 +100,7 @@ const JoinClub = () => {
 
               {isMenuOpen && (
                 <MenuWrapper>
-                  {clubsData.data.members.memberList.some((member) => member.isLeader) && (
+                  {clubsData.data.members.memberList.some((member) => member.isLeader && member.nickname === user?.nickname) && (
                     <>
                       <Menu>
                         <Icon icon="edit" width="15px" height="12px" onClick={() => navigate(`/club/${clubId}/edit`)} />
