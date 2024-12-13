@@ -3,10 +3,11 @@ import styled from '@emotion/styled';
 export const HeaderWrapper = styled.header`
   display: flex;
   justify-content: space-between;
+  position: sticky;
 
   @media screen and (min-width: 0px) and (max-width: 600px) {
-    padding-top: 24px;
-    padding-bottom: 16px;
+    padding-top: 32px;
+    padding-bottom: 24px;
     align-items: start;
   }
 
@@ -34,12 +35,27 @@ export const LeftWrapper = styled.div`
   }
 `;
 
+export const RightWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  align-items: center;
+  gap: 16px;
+`;
+
 export const LogoItem = styled.div`
   cursor: pointer;
   transition:
     transform 0.3s ease,
     color 0.3s ease; /* 애니메이션 효과 */
   &:hover {
-    transform: scale(1.1); /* 크기 확대 */
+    transform: scale(1.05); /* 크기 확대 */
   }
+`;
+
+export const NoticeButton = styled.div``;
+
+export const LoginButton = styled.div`
+  color: ${({ theme }) => theme.secondary};
+  cursor: pointer;
 `;
