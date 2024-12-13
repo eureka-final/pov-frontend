@@ -1,4 +1,4 @@
-import Main from '../pages/Main';
+import Main from '../pages/Main/Index';
 import Movie from '../pages/Movie';
 import Review from '../pages/Review';
 import MovieDetail from '../pages/Movie/MovieDetail';
@@ -96,15 +96,15 @@ const PremieresScreens = {
     element: <PremiereDetail />,
   },
   Payments: {
-    path: '/premieres/payments',
+    path: '/premieres/:premiereId/payments',
     element: <Payments />,
   },
   Success: {
-    path: '/premieres/payments/success',
+    path: '/premieres/:premiereId/payments/success',
     element: <Success />,
   },
   Fail: {
-    path: '/premieres/payments/fail',
+    path: '/premieres/:premiereId/payments/fail',
     element: <Fail />,
   },
 };

@@ -23,7 +23,7 @@ export const BackgroundLayer = styled.div<{ src: string }>`
   background-repeat: no-repeat;
   overflow: hidden;
   mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
-  z-index: 10;
+  z-index: 1;
 `;
 
 export const TitleInfo = styled.div`

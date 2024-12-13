@@ -2,7 +2,7 @@ import { Button, Badge, Heading, Body, Paragraph, Checkbox, Icon, ShowMoreBtn, L
 import { Modal, useOverlay } from 'pov-design-system';
 import Padded from '../../components/templates/Padded/Padded';
 
-const index = () => {
+const Index = () => {
   const { isOpen, open, close } = useOverlay();
   const handleChange = () => {
     console.log('switchtoggle');
@@ -61,7 +61,8 @@ const index = () => {
             cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
             laborum
           </Body>
-          <div>
+
+          <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
             <Button variant="secondary" onClick={close} css={{ width: '45%' }}>
               Close
             </Button>
@@ -90,4 +91,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default Index;

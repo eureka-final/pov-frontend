@@ -1,5 +1,6 @@
 import { loadTossPayments, TossPaymentsInstance, PaymentWidgetsInstance } from '@tosspayments/tosspayments-sdk';
 import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import Padded from '../../../components/templates/Padded/Padded';
 import { v4 as uuidv4 } from 'uuid';
 import './style.css';
@@ -20,6 +21,8 @@ function Index() {
   });
   const [ready, setReady] = useState<boolean>(false);
   const [widgets, setWidgets] = useState<PaymentWidgetsInstance | null>(null);
+
+  const { premiereId } = useParams<{ premiereId: string }>();
 
   useEffect(() => {
     async function fetchPaymentWidgets() {
@@ -105,10 +108,10 @@ function Index() {
             // 결제를 요청하기 전에 orderId, amount를 서버에 저장하세요.
             // 결제 과정에서 악의적으로 결제 금액이 바뀌는 것을 확인하는 용도입니다.
             await widgets?.requestPayment({
-              orderId: 'gcq1VyXgdwusIcTTZnQmq',
-              orderName: '토스 티셔츠 외 2건',
-              successUrl: window.location.origin + '/premieres/payments/success',
-              failUrl: window.location.origin + '/premieres/payments/fail',
+              orderId: uuidv4(),
+              orderName: '시사회 응모 결제건',
+              successUrl: window.location.origin + `/premieres/${premiereId}/payments/success`,
+              failUrl: window.location.origin + `/premieres/${premiereId}/payments/fail`,
               customerEmail: 'customer123@gmail.com',
               customerName: '김토스',
               customerMobilePhone: '01012341234',

@@ -1,7 +1,7 @@
 import { useQuery, useInfiniteQuery } from '@tanstack/react-query';
 
-import type { ReviewsResponse, ReviewDetailDataResponse } from '../../types/reviews';
-import { getReviews, getMyReviews, getDetailReview } from '../../apis/review/getReviews';
+import type { ReviewsResponse, ReviewDetailDataResponse, JoinClubResponse } from '../../types/reviews';
+import { getReviews, getMyReviews, getClubReviews, getDetailReview, getJoinClub } from '../../apis/review/getReviews';
 
 export const useReviewsQuery = () => {
   const {
@@ -9,15 +9,30 @@ export const useReviewsQuery = () => {
     isFetching,
     hasNextPage,
     fetchNextPage,
-  } = useInfiniteQuery({
+  } = useInfiniteQuery<ReviewsResponse, Error>({
     queryKey: ['reviews'],
-    queryFn: ({ pageParam = 1 }) => getReviews(pageParam),
-    getNextPageParam: (lastPage) => (lastPage.last ? undefined : lastPage.pageNumber + 1),
-    initialPageParam: 1,
+    queryFn: async ({ pageParam = 0 }) => {
+      const response = await getReviews(pageParam);
+
+      // 응답 데이터 검증
+      if (!response || !response.data || !response.data.reviews) {
+        throw new Error('Invalid API response structure');
+      }
+
+      return response;
+    },
+    getNextPageParam: (lastPage) => {
+      // 안전한 데이터 접근
+      const reviews = lastPage?.data?.reviews;
+      if (!reviews) return undefined;
+      return reviews.last ? undefined : reviews.number + 1;
+    },
+    initialPageParam: 0,
   });
 
-  // 모든 페이지의 리뷰를 평탄화
-  const reviewsData = data?.pages.flatMap((page) => page.reviews) || [];
+  // 모든 페이지 데이터를 평탄화
+  const reviewsData =
+    data?.pages.flatMap((page) => page?.data?.reviews?.content || []) || [];
 
   return { reviewsData, isFetching, hasNextPage, fetchNextPage };
 };
@@ -30,6 +45,25 @@ export const useMyReviewsQuery = () => {
   
   return { reviewsData };
 };
+
+export const useClubReviewsQuery = (clubId: string) => {
+  const { data: reviewsData } = useQuery<ReviewsResponse>({
+    queryKey: ['clubReviews'],
+    queryFn: () => getClubReviews(clubId)
+  });
+  
+  return { reviewsData };
+};
+
+export const useJoinClubReviewsQuery = () => {
+  const { data: joinData } = useQuery<JoinClubResponse>({
+    queryKey: ['joinClubReviews'],
+    queryFn: getJoinClub
+  });
+  
+  return { joinData };
+};
+
 
 export const useReviewDetailQuery = (movieId: string, reviewId: string) => {
   const { data: reviewData } = useQuery<ReviewDetailDataResponse>({
