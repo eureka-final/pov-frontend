@@ -11,7 +11,7 @@ export const AlarmCardContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: start;
-  gap: 4px;
+  gap: 8px;
 
   width: 100%;
   height: 80px;
@@ -22,5 +22,11 @@ export const AlarmCardContainer = styled.div`
 `;
 
 export const TimeText = styled.div`
+  color: ${({ theme }) => theme.teritary};
+`;
+
+export const NoContentsContainer = styled(AlarmCardContainer)`
+  align-items: center;
+  gap: 16px;
   color: ${({ theme }) => theme.teritary};
 `;
