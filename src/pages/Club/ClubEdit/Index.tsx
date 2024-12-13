@@ -23,7 +23,7 @@ const Index = () => {
   const { clubsData } = useClubDetailQuery(clubId!);
   const [name, setName] = useState<string>(clubsData ? clubsData.data.clubName : '');
   const [description, setDescription] = useState<string>(clubsData ? clubsData.data.clubDescription : '');
-  const [maxParticipants, setMaxParticipants] = useState<number>(clubsData ? clubsData.data.maxParticipant : 0);
+  const [maxParticipants, setMaxParticipants] = useState<number>(clubsData ? clubsData.data.maxParticipants : 0);
   const [imgUrl, setImgUrl] = useState<string | null>('');
   const [uploadImgUrl, setUploadImgUrl] = useState<string | null>(clubsData ? clubsData.data.clubImage : null);
   const [genres, setGenres] = useState<string[]>(clubsData ? clubsData.data.clubFavorGenres : []);

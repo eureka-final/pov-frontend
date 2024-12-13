@@ -12,7 +12,7 @@ export interface Club {
     clubName: string;
     clubDescription: string;
     participant: number;
-    maxParticipant: number;
+    maxParticipants: number;
     clubMovieCount: number;
     clubFavorGenres: string[];
 }
@@ -32,7 +32,7 @@ export interface ClubDetailData {
         memberList: ClubMember[];
     };
     participant: number;
-    maxParticipant: number;
+    maxParticipants: number;
     isPublic: boolean;
     clubReviewList: ClubReviewList;
     clubFavorGenres: string[];
