@@ -1,6 +1,7 @@
 import { app } from './initFirebase';
 import { getMessaging, getToken } from 'firebase/messaging';
-import { postFcmToken } from '../../apis/member/postFcmToken';
+import { postFcmToken } from '../../apis/member/postMember';
+import { useAuthStore } from '../../stores/useAuthStore';
 
 /* Firebase messaging 객체 초기화 */
 const messaging = getMessaging(app);
@@ -23,8 +24,16 @@ async function registerServiceWorker() {
 }
 
 /* 푸시 알림 권한 요청 및 서버로 fcm device token 전달 */
-export function requestPermission(): void {
+export async function requestPermission(): Promise<void> {
+  const fcmDeviceToken = useAuthStore((state) => state.fcmDeviceToken);
+  const setFcmDeviceToken = useAuthStore((state) => state.setFcmDeviceToken);
   let registration: ServiceWorkerRegistration;
+
+  // 이미 fcm device token이 존재하는 경우 return
+  if (fcmDeviceToken) {
+    console.log();
+    return;
+  }
 
   registerServiceWorker()
     .then((reg) => {
@@ -48,6 +57,7 @@ export function requestPermission(): void {
     .then((currentToken) => {
       if (currentToken) {
         postFcmToken(currentToken); // 서버로 fcm device token 전송
+        setFcmDeviceToken(currentToken); // storage에 device token 저장
       } else {
         console.error('유효한 토큰이 존재하지 않음');
       }
