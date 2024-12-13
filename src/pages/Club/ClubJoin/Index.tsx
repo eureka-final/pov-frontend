@@ -32,7 +32,7 @@ const Index = () => {
       {
         onSuccess: () => {
           saveClose();
-          navigate(`/club/:${clubId}/detail`);
+          navigate(`/club/${clubId}/detail`);
           createToast('클럽 가입 성공!', 'success');
         },
       }
@@ -43,7 +43,7 @@ const Index = () => {
 
   return (
     <Basic>
-      {clubsData && (
+      {clubsData && clubsData.data.clubReviewList && (
         <>
           <Container>
             <HeaderContainer src={clubsData.data.clubImage}>

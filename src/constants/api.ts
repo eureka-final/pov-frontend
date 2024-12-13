@@ -12,6 +12,7 @@ export const END_POINTS = {
   CREATE_REVIEW: (movieId: string) => `/api/movies/${movieId}/reviews`,
   CLUB: (clubId: string) =>  `/api/clubs/${clubId}`,
   JOIN_CLUB: (clubId: string) =>  `/api/clubs/${clubId}/member`,
+  LEAVE_CLUB: (clubId: string) =>  `/api/clubs/${clubId}/leave`,
   LIKE: (movieId: number, reviewId: number) => `/api/movies/${movieId}/reviews/${reviewId}/likes`,
 } as const;
 

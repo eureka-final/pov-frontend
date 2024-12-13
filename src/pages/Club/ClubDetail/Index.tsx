@@ -18,27 +18,42 @@ import { ClubReviewListContainer } from '../../../components/review/ReviewCard.s
 import ReviewClubCard from '../../../components/review/ReviewClubCard';
 import Card from '../../../components/club/ClubDetail/Card';
 import { useClubDetailQuery } from '../../../hooks/queries/useClubsQuery';
-import { useDeleteClubMutation } from '../../../hooks/queries/useDeleteClubMutation';
+import { useLeaveClubMutaion } from '../../../hooks/queries/useLeaveClubMutaion';
 import { useToast } from '../../../hooks/common/useToast';
 
 const Index = () => {
   const { clubId } = useParams<{ clubId: string }>();
   const navigate = useNavigate();
   const { isOpen: isSaveOpen, open: saveOpen, close: saveClose } = useOverlay();
+  const { isOpen: isLeaveSaveOpen, open: saveLeaveOpen, close: saveLeaveClose } = useOverlay();
+
   const { createToast } = useToast();
 
   const { clubsData } = useClubDetailQuery(clubId!);
 
-  const deleteClubMutation = useDeleteClubMutation();
+  const leaveClubMutation = useLeaveClubMutaion();
 
   const handleDelete = () => {
-    deleteClubMutation.mutate(
+    leaveClubMutation.mutate(
       { clubId: clubId! },
       {
         onSuccess: () => {
           saveClose();
           navigate('/club');
           createToast('클럽 삭제 성공!', 'success');
+        },
+      }
+    );
+  };
+
+  const handleLeave = () => {
+    leaveClubMutation.mutate(
+      { clubId: clubId! },
+      {
+        onSuccess: () => {
+          saveLeaveClose();
+          navigate(`/club/${clubId}/detail`);
+          createToast('클럽 탈퇴 성공!', 'success');
         },
       }
     );
@@ -71,6 +86,10 @@ const Index = () => {
                 <div>
                   <Icon icon="delete" onClick={saveOpen} />
                   <Body>삭제</Body>
+                </div>
+                <div>
+                  <Icon icon="delete" onClick={saveLeaveOpen} />
+                  <Body>탈퇴</Body>
                 </div>
               </Wrapper>
             </HeaderContainer>
@@ -146,6 +165,14 @@ const Index = () => {
             <Heading size="medium">정말 삭제하시겠습니까?</Heading>
             <Button variant="primary" onClick={handleDelete} css={{ width: '100%', marginTop: '30px' }}>
               삭제하기
+            </Button>
+          </Modal>
+
+          {/* 탈퇴 버튼 누르면 나오는 모달창 */}
+          <Modal isOpen={isLeaveSaveOpen} closeModal={saveLeaveClose}>
+            <Heading size="medium">정말 탈퇴하시겠습니까?</Heading>
+            <Button variant="primary" onClick={handleLeave} css={{ width: '100%', marginTop: '30px' }}>
+              탈퇴하기
             </Button>
           </Modal>
         </>
