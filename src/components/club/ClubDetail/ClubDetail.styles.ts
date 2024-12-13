@@ -65,7 +65,7 @@ export const ReviewInfo = styled.div`
 
 export const Wrapper = styled.div`
   position: absolute;
-  z-index: 10;
+  z-index: 30;
 
   @media (min-width: 0px) and (max-width: 600px) {
     top: 60%;
@@ -74,7 +74,7 @@ export const Wrapper = styled.div`
 
   @media (min-width: 600px) {
     top: 55%; 
-    right: 15%; 
+    right: 20%; 
   }
 `;
 
@@ -85,8 +85,8 @@ export const MenuWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 14px;
-  position: absolute; /* 부모 기준으로 배치 */
-  top: 30px; /* Menu 아래로 40px 떨어지게 배치 */
+  position: absolute;
+  top: 30px;
 `;
 
 export const Menu = styled.div`
