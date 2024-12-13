@@ -1,4 +1,4 @@
-import Main from '../pages/Main';
+import Main from '../pages/Main/Index';
 import Movie from '../pages/Movie';
 import Review from '../pages/Review';
 import MovieDetail from '../pages/Movie/MovieDetail';
@@ -18,8 +18,9 @@ import ReviewDetail from '../pages/Review/ReviewDetail/Index';
 import Login from '../pages/Login/Index';
 import OauthNaver from '../pages/Oauth/Naver/Index';
 import OauthGoogle from '../pages/Oauth/Google/Index';
-// import Alarm from '../pages/Alarm';
+import Notice from '../pages/Notice';
 import SignUp from '../pages/SignUp/Index';
+import MyPage from '../pages/MyPage';
 
 // import React, { lazy, Suspense } from 'react';
 // import ReviewPageSkeleton from '../pages/Review/ReviewPageSkeleton';
@@ -95,15 +96,15 @@ const PremieresScreens = {
     element: <PremiereDetail />,
   },
   Payments: {
-    path: '/premieres/payments',
+    path: '/premieres/:premiereId/payments',
     element: <Payments />,
   },
   Success: {
-    path: '/premieres/payments/success',
+    path: '/premieres/:premiereId/payments/success',
     element: <Success />,
   },
   Fail: {
-    path: '/premieres/payments/fail',
+    path: '/premieres/:premiereId/payments/fail',
     element: <Fail />,
   },
 };
@@ -130,12 +131,12 @@ const AuthScreens = {
 const MemberScreens = {
   MyPage: {
     path: '/mypage',
-    element: null, // <MyPage />,
+    element: <MyPage />,
   },
-  // Alarm: {
-  //   path: '/alarm',
-  //   element: <Alarm />,
-  // },
+  Alarm: {
+    path: '/notice',
+    element: <Notice />,
+  },
 };
 
 export const AppRouteDef = {

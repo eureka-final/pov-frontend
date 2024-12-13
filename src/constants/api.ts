@@ -1,14 +1,19 @@
 export const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 export const END_POINTS = {
-  REVIEWS: (pageParam: number) => `https://www.point-of-views.com/api/movies/reviews?_limit=10&_page=${pageParam}`,
-  MY_REVIEWS: 'https://www.point-of-views.com/api/movies/reviews/my',
-  REVIEW: (movieId: string, reviewId: string) =>  `https://www.point-of-views.com/api/movies/${movieId}/reviews/${reviewId}`,
-  CREATE_REVIEW: (movieId: string) => `https://www.point-of-views.com/api/movies/${movieId}/reviews`,
+  MY_REVIEWS: '/api/movies/reviews/my',
+  CLUB_JOIN: '/api/clubs/reviews',
   CLUBS: '/api/clubs',
   MY_CLUBS: '/api/clubs/myclub',
-  CLUB: (clubId: string) =>  `/api/clubs/${clubId}`,
   TOKEN: `/api/auth/reissue`,
+  REVIEWS: (pageParam: number | unknown) => `/api/movies/reviews?page=${pageParam}`,
+  CLUB_REVIEW: (clubId: string) => `/api/clubs/${clubId}/reviews`,
+  REVIEW: (movieId: string, reviewId: string) =>  `/api/movies/${movieId}/reviews/${reviewId}`,
+  CREATE_REVIEW: (movieId: string) => `/api/movies/${movieId}/reviews`,
+  CLUB: (clubId: string) =>  `/api/clubs/${clubId}`,
+  JOIN_CLUB: (clubId: string) =>  `/api/clubs/${clubId}/member`,
+  LEAVE_CLUB: (clubId: string) =>  `/api/clubs/${clubId}/leave`,
+  LIKE: (movieId: number, reviewId: number) => `/api/movies/${movieId}/reviews/${reviewId}/likes`,
 } as const;
 
 export const NETWORK = {

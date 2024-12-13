@@ -1,12 +1,11 @@
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { CardContainer, Poster, CardFlex, ReviewCardContainer, LikeContainer, FlexBetween, Spoiler, SpoMore, ReadMore, TitleInfo } from './ReviewCard.style';
-import { Body, Paragraph, Icon, Heading, Logo } from 'pov-design-system';
+import { Body, Paragraph, Icon, Heading, Logo, Button } from 'pov-design-system';
 import Profile from '../common/Profile';
 import { useMyReviewsQuery } from '../../hooks/queries/useReviewsQuery';
 import dompurify from 'dompurify';
 
 function MyReviewCard() {
-  const { movieId } = useParams<{ movieId: string }>();
   const navigate = useNavigate();
   const { reviewsData } = useMyReviewsQuery();
 
@@ -18,13 +17,13 @@ function MyReviewCard() {
       const truncatedText = text.substring(0, maxLength);
       return (
         <>
-          <div dangerouslySetInnerHTML={{ __html: sanitizer(truncatedText) }} />
+          <div dangerouslySetInnerHTML={{ __html: sanitizer(truncatedText).replace(/<img[^>]*>/g, '') }} />
           <span>...</span>
           <ReadMore>더보기</ReadMore>
         </>
       );
     }
-    return <div dangerouslySetInnerHTML={{ __html: sanitizer(text) }} />;
+    return <div dangerouslySetInnerHTML={{ __html: sanitizer(text).replace(/<img[^>]*>/g, '') }} />;
   };
 
   return (
@@ -35,12 +34,12 @@ function MyReviewCard() {
             <CardContainer
               key={review.reviewId}
               onClick={() => {
-                navigate(`/review/${movieId}/detail/${review.reviewId}`);
+                navigate(`/review/${review.movieId}/detail/${review.reviewId}`);
               }}
             >
               <CardFlex>
                 <Poster>
-                  <img src={review.thumbnail.replace('/w500/', '/w92/')} alt={review.movieTitle} />
+                  <img src={review.thumbnail.replace('/w154/', '/w92/')} alt={review.movieTitle} />
                   <Body size="small">{review.movieTitle}</Body>
                 </Poster>
                 <ReviewCardContainer>
@@ -59,7 +58,7 @@ function MyReviewCard() {
                   )}
 
                   <FlexBetween>
-                    <Body>{review.createdAt}</Body>
+                    <Body>{new Date(review.createdAt).toLocaleDateString()}</Body>
                     <LikeContainer>
                       <Icon icon={review.isLiked ? 'heartfill' : 'heartline'} /> {review.likeAmount}
                     </LikeContainer>
@@ -73,14 +72,19 @@ function MyReviewCard() {
   );
 }
 
-// eslint-disable-next-line react/display-name
-MyReviewCard.Empty = () => {
+const EmptyMyReviewCard = () => {
+  const navigate = useNavigate();
   return (
     <TitleInfo>
       <Heading size="xxLarge">등록된 리뷰가 없습니다.</Heading>
       <Logo icon="type2" />
+      <Button size="large" onClick={() => navigate('/movie')}>
+        원하는 영화 리뷰 작성하러 가기 🪄
+      </Button>{' '}
     </TitleInfo>
   );
 };
+
+MyReviewCard.Empty = EmptyMyReviewCard;
 
 export default MyReviewCard;

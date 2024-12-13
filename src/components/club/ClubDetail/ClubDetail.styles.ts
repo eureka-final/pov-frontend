@@ -64,13 +64,65 @@ export const ReviewInfo = styled.div`
 `;
 
 export const Wrapper = styled.div`
-  display: flex;
-  gap: 15px;
   position: absolute;
-  bottom: 35px;
-  right: 54px;
-  z-index: 10;
+  z-index: 30;
+
+  @media (min-width: 0px) and (max-width: 600px) {
+    top: 60%;
+    right: 5%;
+  }
+
+  @media (min-width: 600px) {
+    top: 55%; 
+    right: 20%; 
+  }
+`;
+
+export const MenuWrapper = styled.div`
+  background-color: ${({ theme }) => theme.backgroundElevated};
+  padding: 20px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  position: absolute;
+  top: 30px;
+`;
+
+export const Menu = styled.div`
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  white-space: nowrap;
+`;
+
+export const LinkWrapper = styled.div`
+  background-color: ${({ theme }) => theme.muted};
+  padding: 20px;
+  border-radius: 8px;
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+`;
+
+export const FlexWrapper = styled.div`
+  display: flex;
+  margin-top: 16px;
+  gap: 8px;
+`;
+
+export const ModalContainer = styled.div`
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+`;
+
+export const JoinContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const Additionals = styled.div<{ justify?: string }>`

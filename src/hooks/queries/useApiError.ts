@@ -58,21 +58,24 @@ export const useApiError = (handlers: Record<string, any> = {}) => {
       const httpStatus = String(error.status || 'default'); // HTTP 상태 코드 (문자열 변환)
 
       if (handlers[httpStatus]?.default) {
-        // 우선순위 1: 컴포넌트에서 재정의한 (HTTP 상태)
+        // 우선순위 1: 컴포넌트에서 커스텀한 (HTTP 상태) 핸들러
         handlers[httpStatus].default();
       } else if (typeof defaultHandlers[httpStatus] === 'object') {
-        // 우선순위 2: 기본 핸들러의 (HTTP 상태)
+        // 우선순위 2: 기본 핸들러에 정의한 (HTTP 상태) 핸들러
         (defaultHandlers[httpStatus] as { default: () => void }).default();
+        
+        // ErrorBoundary로 에러를 전파
+        setError(error as Error);
       } else {
         // 우선순위 3: 정의되지 않은 에러
         defaultHandlers.default();
+
+        // ErrorBoundary로 에러를 전파
+        setError(error as Error);
       }
 
       // 공통 처리 로직
       // defaultHandlers.common(error);
-
-      // ErrorBoundary로 에러를 전파
-      setError(error as Error);
 
     },
     [handlers]

@@ -35,7 +35,7 @@ function ClubCard() {
                 <Body size="large">{club.clubDescription}</Body>
                 <FlexWrapper>
                   <Body>
-                    {club.participant}/{club.maxParticipant}
+                    {club.participant}/{club.maxParticipants}
                   </Body>
                   <Body>·</Body>
                   <Body>북마크 {club.clubMovieCount}개</Body>

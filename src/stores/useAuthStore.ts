@@ -5,8 +5,10 @@ import type { User } from '../types/user';
 
 interface AuthState {
   user: User | null;
+  fcmDeviceToken: string | null;
   isLoggedIn: boolean;
   setUser: (user: User) => void;
+  setFcmDeviceToken: (fcmDeviceToken: string) => void;
   setLoggedIn: (loggedIn: boolean) => void;
   clearSession: () => void;
 }
@@ -14,9 +16,11 @@ interface AuthState {
 export const useAuthStore = create<AuthState>()(
   persist(
     (set) => ({
-      isLoggedIn: false,
       user: null,
+      fcmDeviceToken: null,
+      isLoggedIn: false,
       setUser: (user) => set({ user: user }),
+      setFcmDeviceToken: (token) => set({ fcmDeviceToken: token }),
       setLoggedIn: (loggedIn) => set({ isLoggedIn: loggedIn }),
       clearSession: () => set({ isLoggedIn: false }),
     }),
