@@ -4,6 +4,7 @@ export const Container = styled.div`
   padding: 0.5em;
   display: flex;
   align-items: center;
+  cursor: pointer;
 `;
 
 export const Name = styled.span`
