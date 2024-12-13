@@ -96,7 +96,7 @@ const PremieresScreens = {
     element: <PremiereDetail />,
   },
   Payments: {
-    path: '/premieres/:premiereId/payments',
+    path: '/premieres/:premiereId/payments/:orderId',
     element: <Payments />,
   },
   Success: {

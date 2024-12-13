@@ -8,7 +8,7 @@ export const END_POINTS = {
   TOKEN: `/api/auth/reissue`,
   PAYMENT_TEMP: '/api/payments/temp',
   PAYMENT: `/api/payments`,
-  PREMIERE: (premiereId: string) => `/api/premieres/${premiereId}/entry`,
+  PREMIERE_ENTRY: (premiereId: string) => `/api/premieres/${premiereId}/entry`,
   REVIEWS: (pageParam: number | unknown) => `/api/movies/reviews?page=${pageParam}`,
   CLUB_REVIEW: (clubId: string) => `/api/clubs/${clubId}/reviews`,
   REVIEW: (movieId: string, reviewId: string) =>  `/api/movies/${movieId}/reviews/${reviewId}`,
