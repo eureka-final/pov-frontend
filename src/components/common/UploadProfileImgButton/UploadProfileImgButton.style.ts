@@ -4,6 +4,7 @@ export const UploadProfileImgButtonContainer = styled.div`
   position: relative;
   width: 160px;
   height: 160px;
+  cursor: pointer;
 `;
 
 export const UploadImgButton = styled.div`
@@ -20,4 +21,5 @@ export const UploadImgButton = styled.div`
 
   border-radius: 40px;
   background: ${({ theme }) => theme.color.white};
+  color: ${({ theme }) => theme.color.gray700};
 `;

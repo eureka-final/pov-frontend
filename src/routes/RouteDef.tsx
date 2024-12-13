@@ -20,6 +20,7 @@ import OauthNaver from '../pages/Oauth/Naver/Index';
 import OauthGoogle from '../pages/Oauth/Google/Index';
 import Notice from '../pages/Notice';
 import SignUp from '../pages/SignUp/Index';
+import MyPage from '../pages/MyPage';
 
 // import React, { lazy, Suspense } from 'react';
 // import ReviewPageSkeleton from '../pages/Review/ReviewPageSkeleton';
@@ -130,7 +131,7 @@ const AuthScreens = {
 const MemberScreens = {
   MyPage: {
     path: '/mypage',
-    element: null, // <MyPage />,
+    element: <MyPage />,
   },
   Alarm: {
     path: '/notice',
