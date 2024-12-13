@@ -73,6 +73,25 @@ export const Wrapper = styled.div`
   cursor: pointer;
 `;
 
+export const FlexWrapper = styled.div`
+  display: flex;
+  margin-top: 16px;
+  gap: 8px;
+`;
+
+export const ModalContainer = styled.div`
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+`;
+
+export const JoinContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
 export const Additionals = styled.div<{ justify?: string }>`
   display: flex;
   justify-content: ${({ justify }) => (justify ? `${justify}` : 'flex-start')};
