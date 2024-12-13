@@ -22,6 +22,7 @@ import { ClubReviewListContainer } from '../../../components/review/ReviewCard.s
 import ReviewClubCard from '../../../components/review/ReviewClubCard';
 import Card from '../../../components/club/ClubDetail/Card';
 import { useClubDetailQuery } from '../../../hooks/queries/useClubsQuery';
+import { useDeleteClubMutation } from '../../../hooks/queries/useDeleteClubMutation';
 import { useLeaveClubMutaion } from '../../../hooks/queries/useLeaveClubMutaion';
 import { useToast } from '../../../hooks/common/useToast';
 import { useAuthStore } from '../../../stores/useAuthStore';
@@ -44,10 +45,11 @@ const JoinClub = () => {
 
   const { clubsData } = useClubDetailQuery(clubId!);
 
+  const deleteClubMutation = useDeleteClubMutation();
   const leaveClubMutation = useLeaveClubMutaion();
 
   const handleDelete = () => {
-    leaveClubMutation.mutate(
+    deleteClubMutation.mutate(
       { clubId: clubId! },
       {
         onSuccess: () => {
