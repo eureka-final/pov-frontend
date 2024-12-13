@@ -1,14 +1,21 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, UseQueryOptions } from '@tanstack/react-query';
 import type { ClubsResponse, ClubDetailDataResponse } from '../../types/club';
 import { getClubs, getMyClubs, getDetailClub } from '../../apis/club/getClubs';
+import { useApiError } from './useApiError';
 
 export const useClubsQuery = () => {
-  const { data: clubsData } = useQuery<ClubsResponse>({
-    queryKey: ['clubs'],
-    queryFn: getClubs
-  });
 
-  return { clubsData };
+  const { handleError } = useApiError();
+
+  const { data: clubsData, error } = useQuery<ClubsResponse>({
+    queryKey: ['clubs'],
+    queryFn: getClubs,
+    onError: (error: Error) => {
+      handleError(error);
+    }
+  } as UseQueryOptions<ClubsResponse, Error>);
+
+  return { clubsData, error };
 };
 
 export const useMyClubsQuery = () => {

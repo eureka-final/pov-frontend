@@ -64,10 +64,18 @@ export const ReviewInfo = styled.div`
 `;
 
 export const Wrapper = styled.div`
-  position: fixed; /* 화면에 고정 */
-  top: 50%; /* 화면 아래로부터 35px */
-  right: 7%; /* 화면 오른쪽으로부터 54px */
+  position: absolute;
   z-index: 10;
+
+  @media (min-width: 0px) and (max-width: 600px) {
+    top: 60%;
+    right: 5%;
+  }
+
+  @media (min-width: 600px) {
+    top: 55%; 
+    right: 15%; 
+  }
 `;
 
 export const MenuWrapper = styled.div`

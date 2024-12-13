@@ -8,7 +8,6 @@ import ReviewEdit from '../pages/Review/ReviewEdit/Index';
 import Club from '../pages/Club';
 import ClubCreate from '../pages/Club/ClubCreate/Index';
 import ClubDetail from '../pages/Club/ClubDetail/Index';
-import ClubJoin from '../pages/Club/ClubJoin/Index';
 import ClubEdit from '../pages/Club/ClubEdit/Index';
 import Premieres from '../pages/Premieres';
 import PremiereDetail from '../pages/Premieres/PremiereDetail/Index';
@@ -79,10 +78,6 @@ const ClubScreens = {
   ClubDetail: {
     path: '/club/:clubId/detail',
     element: <ClubDetail />,
-  },
-  ClubJoin: {
-    path: '/club/:clubId',
-    element: <ClubJoin />,
   },
   ClubEdit: {
     path: '/club/:clubId/edit',

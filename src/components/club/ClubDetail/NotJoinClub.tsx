@@ -1,5 +1,5 @@
 import Basic from '../../../components/templates/Basic/Basic';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { Button, Heading, Badge, Body, useOverlay, Modal } from 'pov-design-system';
 import {
   Container,
@@ -10,15 +10,14 @@ import {
   BackgroundLayer,
   ModalContainer,
   JoinContainer,
-} from '../ClubDetail/ClubDetail.styles';
+} from '../../../components/club/ClubDetail/ClubDetail.styles';
 import { useClubDetailQuery } from '../../../hooks/queries/useClubsQuery';
 import { useJoinClubMutation } from '../../../hooks/queries/useJoinClubMutation';
 import { useToast } from '../../../hooks/common/useToast';
 import Profile from '../../../components/common/Profile';
 
-const Index = () => {
+const NotJoinClub = () => {
   const { clubId } = useParams<{ clubId: string }>();
-  const navigate = useNavigate();
   const { isOpen: isSaveOpen, open: saveOpen, close: saveClose } = useOverlay();
   const { createToast } = useToast();
 
@@ -32,7 +31,7 @@ const Index = () => {
       {
         onSuccess: () => {
           saveClose();
-          navigate(`/club/${clubId}/detail`);
+          window.location.href = `/club/${clubId}/detail`;
           createToast('클럽 가입 성공!', 'success');
         },
       }
@@ -43,7 +42,7 @@ const Index = () => {
 
   return (
     <Basic>
-      {clubsData && clubsData.data.clubReviewList && (
+      {clubsData && (
         <>
           <Container>
             <HeaderContainer src={clubsData.data.clubImage}>
@@ -93,4 +92,4 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default NotJoinClub;

@@ -24,6 +24,7 @@ export interface ClubDetailDataResponse {
 }
 
 export interface ClubDetailData {
+    isMember: boolean;
     clubId: string;
     clubName: string;
     clubDescription: string;
