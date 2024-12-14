@@ -52,6 +52,7 @@ export interface ClubMember {
     nickname: string;
     profileImage: string;
     isLeader: boolean;
+    email: string;
 }
 
 export interface ClubReviewList {
@@ -117,4 +118,8 @@ export interface ClubFormData {
     maxParticipants: number | null;
     clubFavorGenre: string[];
     isPublic: boolean;
+}
+
+export interface LeaderData {
+    newLeaderEmail: string;
 }
