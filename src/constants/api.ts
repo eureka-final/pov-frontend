@@ -1,7 +1,6 @@
 export const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 export const END_POINTS = {
-  MY_REVIEWS: '/api/movies/reviews/my',
   CLUB_JOIN: '/api/clubs/reviews',
   CLUBS: '/api/clubs',
   MY_CLUBS: '/api/clubs/myclub',
@@ -12,7 +11,8 @@ export const END_POINTS = {
   PREMIERE_DETAIL: (premiereId: string) => `/api/premieres/${premiereId}`,
   PREMIERE_ENTRY: (premiereId: string) => `/api/premieres/${premiereId}/entry`,
   REVIEWS: (pageParam: number | unknown) => `/api/movies/reviews?page=${pageParam}`,
-  CLUB_REVIEW: (clubId: string) => `/api/clubs/${clubId}/reviews`,
+  MY_REVIEWS:  (pageParam: number | unknown) => `/api/movies/reviews/my?page=${pageParam}`,
+  CLUB_REVIEW: (clubId: string, pageParam: number | unknown) => `/api/clubs/${clubId}/reviews?page=${pageParam}`,
   REVIEW: (movieId: string, reviewId: string) =>  `/api/movies/${movieId}/reviews/${reviewId}`,
   CREATE_REVIEW: (movieId: string) => `/api/movies/${movieId}/reviews`,
   CLUB: (clubId: string) =>  `/api/clubs/${clubId}`,
