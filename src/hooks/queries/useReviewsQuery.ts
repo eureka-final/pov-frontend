@@ -13,7 +13,7 @@ export const useReviewsQuery = () => {
     queryKey: ['reviews'],
     queryFn: async ({ pageParam = 0 }) => {
       const response = await getReviews(pageParam);
-
+      
       // 응답 데이터 검증
       if (!response || !response.data || !response.data.reviews) {
         throw new Error('Invalid API response structure');

@@ -10,6 +10,17 @@ function ReviewList() {
   const observerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
+    const handleScroll = () => {
+      if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 200 && hasNextPage) {
+        fetchNextPage();
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [fetchNextPage, hasNextPage]);
+
+  useEffect(() => {
     if (!observerRef.current) return;
 
     const observer = new IntersectionObserver(
@@ -18,7 +29,7 @@ function ReviewList() {
           fetchNextPage();
         }
       },
-      { threshold: 1.0 }
+      { threshold: 0.1 }
     );
 
     observer.observe(observerRef.current);
