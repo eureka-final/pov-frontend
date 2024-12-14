@@ -30,7 +30,7 @@ export const useReviewsQuery = () => {
     initialPageParam: 0,
   });
 
-  // 모든 페이지 데이터를 평탄화
+  // 모든 페이지 데이터를 평탄화 (합치기)
   const reviewsData =
     data?.pages.flatMap((page) => page?.data?.reviews?.content || []) || [];
 
