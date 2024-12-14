@@ -5,7 +5,7 @@ import MovieDetail from '../pages/Movie/MovieDetail';
 import MovieReviews from '../pages/Movie/MovieReviews/Index';
 import ReviewWrite from '../pages/Review/ReviewWrite/Index';
 import ReviewEdit from '../pages/Review/ReviewEdit/Index';
-import Club from '../pages/Club';
+import Club from '../pages/Club/Index';
 import ClubCreate from '../pages/Club/ClubCreate/Index';
 import ClubDetail from '../pages/Club/ClubDetail/Index';
 import ClubEdit from '../pages/Club/ClubEdit/Index';

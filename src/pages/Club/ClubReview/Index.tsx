@@ -1,6 +1,7 @@
 import { useNavigate, useParams } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
+  ClubReviewListContainer,
   CardContainer,
   Poster,
   CardFlex,
@@ -17,12 +18,50 @@ import Profile from '../../../components/common/Profile';
 import { useClubReviewsQuery } from '../../../hooks/queries/useReviewsQuery';
 import dompurify from 'dompurify';
 import LikeButton from '../../../components/common/LikeButton/LikeButton';
+import { useInView } from 'react-intersection-observer';
+import ReviewPageSkeleton from '../../../components/review/ReviewPageSkeleton';
 
 function Index() {
   const navigate = useNavigate();
   const { clubId } = useParams<{ clubId: string }>();
 
-  const { reviewsData } = useClubReviewsQuery(clubId!);
+  const pageSize = 10;
+  const { reviewsData, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } = useClubReviewsQuery(clubId!);
+  const { ref, inView } = useInView();
+
+  const [likeCounts, setLikeCounts] = useState<number[]>([]);
+
+  useEffect(() => {
+    if (inView && hasNextPage) {
+      fetchNextPage();
+    }
+  }, [inView, hasNextPage, fetchNextPage]);
+
+  useEffect(() => {
+    if (reviewsData && reviewsData.length > 0) {
+      setLikeCounts((prevCounts) => {
+        const newCounts = reviewsData.map((review) => review.likeAmount);
+        if (JSON.stringify(prevCounts) === JSON.stringify(newCounts)) {
+          return prevCounts; // 동일한 데이터일 경우 업데이트하지 않음
+        }
+        return newCounts;
+      });
+    }
+  }, [reviewsData]);
+
+  if (isLoading) {
+    return (
+      <>
+        {Array.from({ length: pageSize }).map((_, index) => (
+          <ReviewPageSkeleton key={`initial-skeleton-${index}`} />
+        ))}
+      </>
+    );
+  }
+
+  if (reviewsData.length === 0) {
+    return <EmptyClubReviewCard />;
+  }
 
   const sanitizer = dompurify.sanitize;
 
@@ -41,16 +80,14 @@ function Index() {
     return <div dangerouslySetInnerHTML={{ __html: sanitizer(text).replace(/<img[^>]*>/g, '') }} />;
   };
 
-  const [likeCounts, setLikeCounts] = useState<number[]>(reviewsData?.data.reviews.content.map((review) => review.likeAmount) ?? []);
-
   const handleLikeCount = (index: number, newCount: number) => {
-    setLikeCounts((prev) => (prev ? prev.map((count, i) => (i === index ? newCount : count)) : []));
+    setLikeCounts((prev) => prev.map((count, i) => (i === index ? newCount : count)));
   };
 
   return (
     <>
-      {reviewsData &&
-        reviewsData.data.reviews.content.map((review, index) => (
+      <ClubReviewListContainer>
+        {reviewsData.map((review, index) => (
           <CardContainer
             key={review.reviewId}
             onClick={() => {
@@ -94,6 +131,9 @@ function Index() {
             </CardFlex>
           </CardContainer>
         ))}
+      </ClubReviewListContainer>
+      {isFetchingNextPage && Array.from({ length: pageSize }).map((_, index) => <ReviewPageSkeleton key={`fetching-skeleton-${index}`} />)}
+      {hasNextPage && <div ref={ref} style={{ height: '1px' }} />}
     </>
   );
 }
