@@ -171,6 +171,8 @@ const JoinClub = () => {
               {clubsData.data.clubReviewList.reviews.content.slice(0, 3).map((review) => (
                 <ReviewClubCard
                   key={review.reviewId}
+                  movieId={review.movieId}
+                  reviewId={review.reviewId}
                   movieTitle={review.movieTitle}
                   title={review.title}
                   contents={review.contents}

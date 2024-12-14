@@ -101,7 +101,7 @@ function ClubReviewCard({ clubId }: ReviewCardProps) {
                   </Body>
                 </Spoiler>
               ) : (
-                <Body size="large">{truncateContents(review.contents, 380)}</Body>
+                <Body size="large">{truncateContents(review.contents, 145)}</Body>
               )}
 
               <FlexBetween>

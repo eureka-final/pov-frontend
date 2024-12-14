@@ -65,7 +65,8 @@ export interface ClubReviewList {
 }
 
 export interface ClubReview {
-    reviewId: number;
+    movieId: string;
+    reviewId: string;
     movieTitle: string;
     title: string;
     contents: string;

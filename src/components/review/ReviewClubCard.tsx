@@ -7,7 +7,9 @@ import Profile from '../common/Profile';
 import dompurify from 'dompurify';
 
 interface ReviewCardProps {
-  key: number;
+  key: string;
+  movieId: string;
+  reviewId: string;
   movieTitle: string;
   title: string;
   contents: string | undefined;
@@ -20,12 +22,24 @@ interface ReviewCardProps {
   spoiler: boolean;
 }
 
-function ReviewClubCard({ movieTitle, title, contents, reviewer, profileImge, thumbnail, createdAt, likeAmount, isLiked, spoiler }: ReviewCardProps) {
+function ReviewClubCard({
+  movieId,
+  reviewId,
+  movieTitle,
+  title,
+  contents,
+  reviewer,
+  profileImge,
+  thumbnail,
+  createdAt,
+  likeAmount,
+  isLiked,
+  spoiler,
+}: ReviewCardProps) {
   const navigate = useNavigate();
   const [likes, setLikes] = useState(likeAmount);
   const [likeAction, setLikeAction] = useState<boolean | null>(isLiked);
 
-  //const { movieId, reviewId } = useParams<{ movieId: string; reviewId: string }>();
   const sanitizer = dompurify.sanitize;
 
   const truncateContents = (text: string | undefined, maxLength: number) => {
@@ -68,32 +82,30 @@ function ReviewClubCard({ movieTitle, title, contents, reviewer, profileImge, th
   };
 
   return (
-    <CardContainer>
+    <CardContainer
+      onClick={() => {
+        navigate(`/review/${movieId}/detail/${reviewId}`);
+      }}
+    >
       <CardFlex>
         <Poster>
-          <img src={thumbnail} alt={movieTitle} />
+          <img src={thumbnail.replace('/w154/', '/w92/')} alt={movieTitle} />
           <Body size="small">{movieTitle}</Body>
         </Poster>
         <ReviewCardContainer>
-          <div
-            onClick={() => {
-              // navigate(`/review/${movieId}/detail/${reviewId}`);
-              navigate(`/review/1/detail/1`);
-            }}
-          >
-            <Profile name={reviewer} avatarUrl={profileImge} />
-            <Paragraph>{title}</Paragraph>
-            {spoiler ? (
-              <Spoiler>
-                <Body size="large">스포일러가 있어요!</Body>
-                <Body size="large">
-                  <SpoMore>더보기</SpoMore>
-                </Body>
-              </Spoiler>
-            ) : (
-              <Body size="large">{truncateContents(contents, 145)}</Body>
-            )}
-          </div>
+          <Profile name={reviewer} avatarUrl={profileImge} />
+          <Paragraph>{title}</Paragraph>
+
+          {spoiler ? (
+            <Spoiler>
+              <Body size="large">스포일러가 있어요!</Body>
+              <Body size="large">
+                <SpoMore>더보기</SpoMore>
+              </Body>
+            </Spoiler>
+          ) : (
+            <Body size="large">{truncateContents(contents, 145)}</Body>
+          )}
 
           <FlexBetween>
             <Body>{new Date(createdAt).toLocaleDateString()}</Body>
