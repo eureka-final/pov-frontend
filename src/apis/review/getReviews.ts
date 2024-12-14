@@ -7,8 +7,8 @@ export const getReviews = async (pageParam: number | unknown) => {
   return data;
 };
 
-export const getMyReviews = async () => {
-  const { data } = await axiosInstance.get<ReviewsResponse>(END_POINTS.MY_REVIEWS);
+export const getMyReviews = async (pageParam: number | unknown) => {
+  const { data } = await axiosInstance.get<ReviewsResponse>(END_POINTS.MY_REVIEWS(pageParam));
   return data;
 };
 
