@@ -1,14 +1,13 @@
 import { useEffect } from 'react';
-import { ReviewListContainer } from './ReviewCard.style';
 import { useReviewsQuery } from '../../hooks/queries/useReviewsQuery';
-// import ReviewPageSkeleton from '../../pages/Review/ReviewPageSkeleton';
+import ReviewPageSkeleton from './ReviewPageSkeleton';
 import { useInView } from 'react-intersection-observer';
 
-import ReviewCard, { ReviewCardLoading, ReviewCardEmpty } from './ReviewCard';
+import ReviewCard, { ReviewCardEmpty } from './ReviewCard';
 
 function ReviewList() {
-  const { reviewsData, fetchNextPage, hasNextPage, isFetching } = useReviewsQuery();
-
+  const pageSize = 10;
+  const { reviewsData, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } = useReviewsQuery();
   const { ref, inView } = useInView();
 
   useEffect(() => {
@@ -17,37 +16,33 @@ function ReviewList() {
     }
   }, [inView]);
 
-  // const observerRef = useRef<HTMLDivElement | null>(null);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 200 && hasNextPage) {
-        fetchNextPage();
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [fetchNextPage, hasNextPage]);
-
-  if (isFetching && reviewsData.length === 0) {
-    return <ReviewCardLoading />;
+  if (isLoading) {
+    // 초기 로딩 시 스켈레톤 10개 렌더링
+    return (
+      <>
+        {Array.from({ length: pageSize }).map((_, index) => (
+          <ReviewPageSkeleton key={`initial-skeleton-${index}`} />
+        ))}
+      </>
+    );
   }
 
-  if (!isFetching && reviewsData.length === 0) {
+  if (reviewsData.length === 0) {
     return <ReviewCardEmpty />;
   }
 
   return (
     <>
-      <ReviewListContainer>
-        {reviewsData.map((review) => (
-          <ReviewCard key={review.reviewId} {...review} />
-        ))}
-      </ReviewListContainer>
+      {/* 리뷰 데이터 렌더링 */}
+      {reviewsData.map((review) => (
+        <ReviewCard key={review.reviewId} {...review} />
+      ))}
 
-      {isFetching && <ReviewCardLoading />}
-      <div ref={ref} />
+      {/* 추가 로드 중 스켈레톤 렌더링 */}
+      {isFetchingNextPage && Array.from({ length: pageSize }).map((_, index) => <ReviewPageSkeleton key={`fetching-skeleton-${index}`} />)}
+
+      {/* 트리거 ref 위치 */}
+      {hasNextPage && <div ref={ref} style={{ height: '1px' }} />}
     </>
   );
 }

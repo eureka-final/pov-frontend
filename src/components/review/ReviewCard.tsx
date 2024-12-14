@@ -1,6 +1,18 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { CardContainer, Poster, CardFlex, ReviewCardContainer, LikeContainer, FlexBetween, Spoiler, SpoMore, ReadMore, TitleInfo } from './ReviewCard.style';
+import {
+  ReviewListContainer,
+  CardContainer,
+  Poster,
+  CardFlex,
+  ReviewCardContainer,
+  LikeContainer,
+  FlexBetween,
+  Spoiler,
+  SpoMore,
+  ReadMore,
+  TitleInfo,
+} from './ReviewCard.style';
 import { Body, Paragraph, Icon, Heading, Logo, Button } from 'pov-design-system';
 import Profile from '../common/Profile';
 import dompurify from 'dompurify';
@@ -26,41 +38,43 @@ function ReviewCard({ reviewId, movieId, thumbnail, movieTitle, reviewer, profil
   };
 
   return (
-    <CardContainer
-      key={reviewId}
-      onClick={() => {
-        navigate(`/review/${movieId}/detail/${reviewId}`);
-      }}
-    >
-      <CardFlex>
-        <Poster>
-          <img src={thumbnail.replace('/w154/', '/w92/')} alt={movieTitle} />
-          <Body size="small">{movieTitle}</Body>
-        </Poster>
-        <ReviewCardContainer>
-          <Profile name={reviewer} avatarUrl={profileImage} />
-          <Paragraph>{title}</Paragraph>
+    <ReviewListContainer>
+      <CardContainer
+        key={reviewId}
+        onClick={() => {
+          navigate(`/review/${movieId}/detail/${reviewId}`);
+        }}
+      >
+        <CardFlex>
+          <Poster>
+            <img src={thumbnail.replace('/w154/', '/w92/')} alt={movieTitle} />
+            <Body size="small">{movieTitle}</Body>
+          </Poster>
+          <ReviewCardContainer>
+            <Profile name={reviewer} avatarUrl={profileImage} />
+            <Paragraph>{title}</Paragraph>
 
-          {spoiler ? (
-            <Spoiler>
-              <Body size="large">스포일러가 있어요!</Body>
-              <Body size="large">
-                <SpoMore>더보기</SpoMore>
-              </Body>
-            </Spoiler>
-          ) : (
-            <Body size="large">{truncateContents(contents, 380)}</Body>
-          )}
+            {spoiler ? (
+              <Spoiler>
+                <Body size="large">스포일러가 있어요!</Body>
+                <Body size="large">
+                  <SpoMore>더보기</SpoMore>
+                </Body>
+              </Spoiler>
+            ) : (
+              <Body size="large">{truncateContents(contents, 380)}</Body>
+            )}
 
-          <FlexBetween>
-            <Body>{new Date(createdAt).toLocaleDateString()}</Body>
-            <LikeContainer>
-              <Icon icon={isLiked ? 'heartfill' : 'heartline'} /> {likeAmount}
-            </LikeContainer>
-          </FlexBetween>
-        </ReviewCardContainer>
-      </CardFlex>
-    </CardContainer>
+            <FlexBetween>
+              <Body>{new Date(createdAt).toLocaleDateString()}</Body>
+              <LikeContainer>
+                <Icon icon={isLiked ? 'heartfill' : 'heartline'} /> {likeAmount}
+              </LikeContainer>
+            </FlexBetween>
+          </ReviewCardContainer>
+        </CardFlex>
+      </CardContainer>
+    </ReviewListContainer>
   );
 }
 

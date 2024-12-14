@@ -6,9 +6,10 @@ import { getReviews, getMyReviews, getClubReviews, getDetailReview, getJoinClub 
 export const useReviewsQuery = () => {
   const {
     data,
-    isFetching,
+    isLoading,
     hasNextPage,
     fetchNextPage,
+    isFetchingNextPage
   } = useInfiniteQuery<ReviewsResponse, Error>({
     queryKey: ['reviews'],
     queryFn: async ({ pageParam = 0 }) => {
@@ -34,7 +35,7 @@ export const useReviewsQuery = () => {
   const reviewsData =
     data?.pages.flatMap((page) => page?.data?.reviews?.content || []) || [];
 
-  return { reviewsData, isFetching, hasNextPage, fetchNextPage };
+  return { reviewsData, isLoading, hasNextPage, fetchNextPage, isFetchingNextPage };
 };
 
 export const useMyReviewsQuery = () => {
