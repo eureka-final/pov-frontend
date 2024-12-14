@@ -78,13 +78,6 @@ function ReviewCard({ reviewId, movieId, thumbnail, movieTitle, reviewer, profil
   );
 }
 
-export const ReviewCardLoading = () => (
-  <TitleInfo>
-    <Heading size="xxLarge">로딩중..</Heading>
-    <Logo icon="type1" />
-  </TitleInfo>
-);
-
 export const ReviewCardEmpty = () => {
   const navigate = useNavigate();
   return (

@@ -32,16 +32,15 @@ function ClubReviewCard({ clubId }: ReviewCardProps) {
     return <div dangerouslySetInnerHTML={{ __html: sanitizer(text).replace(/<img[^>]*>/g, '') }} />;
   };
 
-  // 각 리뷰의 likeCount를 관리하는 상태
-  const [likeCounts, setLikeCounts] = useState<number[] | undefined>(() => reviewsData && reviewsData.data.reviews.content.map((review) => review.likeAmount));
+  const [likeCounts, setLikeCounts] = useState<number[]>(reviewsData?.data.reviews.content.map((review) => review.likeAmount) ?? []);
 
   const handleLikeCount = (index: number, newCount: number) => {
-    setLikeCounts((prev) => (prev ? prev.map((count, i) => (i === index ? newCount : count)) : undefined));
+    setLikeCounts((prev) => (prev ? prev.map((count, i) => (i === index ? newCount : count)) : []));
   };
 
   return (
     <>
-      {reviewsData ? (
+      {reviewsData &&
         reviewsData.data.reviews.content.map((review, index) => (
           <CardContainer
             key={review.reviewId}
@@ -77,24 +76,15 @@ function ClubReviewCard({ clubId }: ReviewCardProps) {
                       movieId={review.movieId}
                       reviewId={review.reviewId}
                       handleLikeCount={(newCount) => handleLikeCount(index, newCount)}
-                      likeCount={likeCounts![index]}
+                      likeCount={likeCounts[index] ?? 0}
                     />
-                    {likeCounts![index]}
+                    {likeCounts[index] ?? 0}
                   </LikeContainer>
                 </FlexBetween>
               </ReviewCardContainer>
             </CardFlex>
           </CardContainer>
-        ))
-      ) : (
-        <TitleInfo>
-          <Heading size="xxLarge">작성한 리뷰가 없습니다.</Heading>
-          <Logo icon="type4" />
-          <Button size="large" onClick={() => navigate('/movie')}>
-            원하는 영화 리뷰 작성하러 가기 🪄
-          </Button>
-        </TitleInfo>
-      )}
+        ))}
     </>
   );
 }
