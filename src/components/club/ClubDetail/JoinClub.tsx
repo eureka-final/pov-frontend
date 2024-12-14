@@ -164,7 +164,7 @@ const JoinClub = () => {
                   {clubsData.data.clubReviewList.reviews.content.length}
                 </Body>
               </SectionHeading>
-              <ShowMoreBtn />
+              <ShowMoreBtn onClick={() => navigate(`/club/${clubId}/review`)} />
             </SectionWrapper>
 
             <ClubReviewListContainer>
