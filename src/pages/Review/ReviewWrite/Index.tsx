@@ -30,7 +30,7 @@ const Index = () => {
     { text: '연기가 어색한', cancel: false },
     { text: '연출이 어색한', cancel: false },
     { text: '전개가 느린', cancel: false },
-    { text: '기대이하의', cancel: false },
+    { text: '기대 이하의', cancel: false },
   ]);
 
   const handleKeywordsChange = (selectedKeywords: string[]) => {
