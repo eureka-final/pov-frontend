@@ -191,7 +191,7 @@ const JoinClub = () => {
               <SectionHeading>
                 <Heading size="large">이 클럽의 북마크</Heading>
                 <Body size="large" css={numberStyling}>
-                  {clubsData.data.clubReviewList.reviews.content.length}
+                  {clubsData.data.movieCount}
                 </Body>
               </SectionHeading>
               <ShowMoreBtn />

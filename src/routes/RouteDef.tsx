@@ -48,11 +48,7 @@ const MovieScreens = {
 const ReviewScreens = {
   Review: {
     path: '/review',
-    element: (
-      // <Suspense fallback={<ReviewPageSkeleton />}>
-      <Review />
-      // </Suspense>
-    ),
+    element: <Review />,
   },
   ReviewWrite: {
     path: '/review/:movieId/write',
