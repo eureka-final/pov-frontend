@@ -1,13 +1,23 @@
-import { useRef, useEffect } from 'react';
+import { useEffect } from 'react';
 import { ReviewListContainer } from './ReviewCard.style';
 import { useReviewsQuery } from '../../hooks/queries/useReviewsQuery';
 // import ReviewPageSkeleton from '../../pages/Review/ReviewPageSkeleton';
+import { useInView } from 'react-intersection-observer';
 
 import ReviewCard, { ReviewCardLoading, ReviewCardEmpty } from './ReviewCard';
 
 function ReviewList() {
   const { reviewsData, fetchNextPage, hasNextPage, isFetching } = useReviewsQuery();
-  const observerRef = useRef<HTMLDivElement | null>(null);
+
+  const { ref, inView } = useInView();
+
+  useEffect(() => {
+    if (inView) {
+      fetchNextPage();
+    }
+  }, [inView]);
+
+  // const observerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -19,23 +29,6 @@ function ReviewList() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, [fetchNextPage, hasNextPage]);
-
-  useEffect(() => {
-    if (!observerRef.current) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting && hasNextPage && !isFetching) {
-          fetchNextPage();
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    observer.observe(observerRef.current);
-
-    return () => observer.disconnect();
-  }, [hasNextPage, fetchNextPage, isFetching]);
 
   if (isFetching && reviewsData.length === 0) {
     return <ReviewCardLoading />;
@@ -54,7 +47,7 @@ function ReviewList() {
       </ReviewListContainer>
 
       {isFetching && <ReviewCardLoading />}
-      <div ref={observerRef} />
+      <div ref={ref} />
     </>
   );
 }
