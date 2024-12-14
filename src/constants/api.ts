@@ -12,7 +12,7 @@ export const END_POINTS = {
   PREMIERE_ENTRY: (premiereId: string) => `/api/premieres/${premiereId}/entry`,
   REVIEWS: (pageParam: number | unknown) => `/api/movies/reviews?page=${pageParam}`,
   MY_REVIEWS:  (pageParam: number | unknown) => `/api/movies/reviews/my?page=${pageParam}`,
-  CLUB_REVIEW: (clubId: string) => `/api/clubs/${clubId}/reviews`,
+  CLUB_REVIEW: (clubId: string, pageParam: number | unknown) => `/api/clubs/${clubId}/reviews?page=${pageParam}`,
   REVIEW: (movieId: string, reviewId: string) =>  `/api/movies/${movieId}/reviews/${reviewId}`,
   CREATE_REVIEW: (movieId: string) => `/api/movies/${movieId}/reviews`,
   CLUB: (clubId: string) =>  `/api/clubs/${clubId}`,
