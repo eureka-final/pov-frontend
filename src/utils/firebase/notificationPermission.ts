@@ -23,46 +23,78 @@ async function registerServiceWorker() {
   }
 }
 
-/* 푸시 알림 권한 요청 및 서버로 fcm device token 전달 */
+// /* 푸시 알림 권한 요청 및 서버로 fcm device token 전달 */
+// export async function requestPermission(): Promise<void> {
+//   const fcmDeviceToken = useAuthStore((state) => state.fcmDeviceToken);
+//   console.log(fcmDeviceToken);
+//   const setFcmDeviceToken = useAuthStore((state) => state.setFcmDeviceToken);
+//   console.log(fcmDeviceToken);
+//   let registration: ServiceWorkerRegistration;
+
+//   // 이미 fcm device token이 존재하는 경우 return
+//   if (fcmDeviceToken) {
+//     console.log('device token already exists');
+//     return;
+//   }
+
+//   registerServiceWorker()
+//     .then((reg) => {
+//       registration = reg;
+
+//       return Notification.requestPermission();
+//     })
+//     .then((permission) => {
+//       if (permission === 'granted') {
+//         return getToken(messaging, {
+//           vapidKey: import.meta.env.VITE_FIREBASE_VAPID_KEY,
+//           serviceWorkerRegistration: registration,
+//         });
+//       } else if (permission === 'denied') {
+//         console.error('푸시 알림 권한 차단됨');
+//         throw new Error('Permission denied');
+//       } else {
+//         throw new Error('알림 권한이 허용되지 않음');
+//       }
+//     })
+//     .then((currentToken) => {
+//       if (currentToken) {
+//         postFcmToken(currentToken); // 서버로 fcm device token 전송
+//         // setFcmDeviceToken(currentToken); // storage에 device token 저장
+//       } else {
+//         console.error('유효한 토큰이 존재하지 않음');
+//       }
+//     })
+//     .catch((error) => {
+//       console.error('오류 발생:', error);
+//     });
+// }
+
 export async function requestPermission(): Promise<void> {
-  const fcmDeviceToken = useAuthStore((state) => state.fcmDeviceToken);
-  const setFcmDeviceToken = useAuthStore((state) => state.setFcmDeviceToken);
-  let registration: ServiceWorkerRegistration;
+  const { fcmDeviceToken, setFcmDeviceToken } = useAuthStore.getState();
 
   // 이미 fcm device token이 존재하는 경우 return
-  if (fcmDeviceToken) {
-    console.log();
-    return;
-  }
+  if (fcmDeviceToken) return;
 
-  registerServiceWorker()
-    .then((reg) => {
-      registration = reg;
+  try {
+    const registration = await registerServiceWorker();
+    const permission = await Notification.requestPermission();
 
-      return Notification.requestPermission();
-    })
-    .then((permission) => {
-      if (permission === 'granted') {
-        return getToken(messaging, {
-          vapidKey: import.meta.env.VITE_FIREBASE_VAPID_KEY,
-          serviceWorkerRegistration: registration,
-        });
-      } else if (permission === 'denied') {
-        console.error('푸시 알림 권한 차단됨');
-        throw new Error('Permission denied');
-      } else {
-        throw new Error('알림 권한이 허용되지 않음');
-      }
-    })
-    .then((currentToken) => {
-      if (currentToken) {
-        postFcmToken(currentToken); // 서버로 fcm device token 전송
-        setFcmDeviceToken(currentToken); // storage에 device token 저장
-      } else {
-        console.error('유효한 토큰이 존재하지 않음');
-      }
-    })
-    .catch((error) => {
-      console.error('오류 발생:', error);
+    if (permission !== 'granted') {
+      throw new Error(`알림이 허용되지 않음`);
+    }
+
+    const currentToken = await getToken(messaging, {
+      vapidKey: import.meta.env.VITE_FIREBASE_VAPID_KEY,
+      serviceWorkerRegistration: registration,
     });
+
+    if (currentToken) {
+      postFcmToken(currentToken);
+      setFcmDeviceToken(currentToken);
+    } else {
+      console.error('유효한 토큰이 존재하지 않음');
+    }
+  } catch (error) {
+    console.error('오류 발생:', error);
+  }
 }
