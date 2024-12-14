@@ -11,3 +11,19 @@ export interface Premieres {
     thumbnail: string;
     startAt: string;
 }
+
+export interface PremieresDetailDataResponse {
+    message: string;
+    data: PremieresDetailData;
+  }
+
+export interface PremieresDetailData {
+    title: string;
+    startAt: string;
+    endAt: string;
+    price: number;
+    isPaymentRequired: boolean;
+    eventImage: string;
+    thumbnail: string;
+  }
+  

@@ -9,6 +9,7 @@ export const END_POINTS = {
   PAYMENT_TEMP: '/api/payments/temp',
   PAYMENT: `/api/payments`,
   PREMIERES: `/api/premieres`,
+  PREMIERE_DETAIL: (premiereId: string) => `/api/premieres/${premiereId}`,
   PREMIERE_ENTRY: (premiereId: string) => `/api/premieres/${premiereId}/entry`,
   REVIEWS: (pageParam: number | unknown) => `/api/movies/reviews?page=${pageParam}`,
   CLUB_REVIEW: (clubId: string) => `/api/clubs/${clubId}/reviews`,

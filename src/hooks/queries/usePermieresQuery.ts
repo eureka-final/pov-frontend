@@ -1,7 +1,7 @@
 import { useQuery, UseQueryOptions } from '@tanstack/react-query';
 import { useApiError } from './useApiError';
-import { getPremieres } from '../../apis/premieres/getPremieres';
-import { PremieresResponse } from '../../types/premieres';
+import { getDetailPermieres, getPremieres } from '../../apis/premieres/getPremieres';
+import { PremieresDetailDataResponse, PremieresResponse } from '../../types/premieres';
 
 export const usePermieresQuery = () => {
 
@@ -16,4 +16,13 @@ export const usePermieresQuery = () => {
   } as UseQueryOptions<PremieresResponse, Error>);
 
   return { premieresData, error };
+};
+
+export const usePermieresDetailQuery = (premiereId: string) => {
+  const { data: premieresData } = useQuery<PremieresDetailDataResponse>({
+    queryKey: ['premiereId', premiereId],
+    queryFn: () => getDetailPermieres(premiereId)
+  });
+  
+  return { premieresData };
 };
