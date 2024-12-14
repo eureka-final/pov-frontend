@@ -31,9 +31,11 @@ const JoinClub = () => {
   const user = useAuthStore((state) => state.user);
   const { clubId } = useParams<{ clubId: string }>();
   const navigate = useNavigate();
+
   const { isOpen: isSaveOpen, open: saveOpen, close: saveClose } = useOverlay();
   const { isOpen: isInviteSaveOpen, open: saveInviteOpen, close: saveInviteClose } = useOverlay();
   const { isOpen: isLeaveSaveOpen, open: saveLeaveOpen, close: saveLeaveClose } = useOverlay();
+  const { isOpen: isLeaderLeaveSaveOpen, open: saveLeaderLeaveOpen, close: saveLeaderLeaveClose } = useOverlay();
 
   const [isMenuOpen, setIsMenuOpen] = useState(false); // 클럽 메뉴 토글 상태
 
@@ -104,7 +106,7 @@ const JoinClub = () => {
 
               {isMenuOpen && (
                 <MenuWrapper>
-                  {clubsData.data.members.memberList.some((member) => member.isLeader && member.nickname === user?.nickname) && (
+                  {clubsData.data.members.memberList.some((member) => member.isLeader && member.nickname === user?.nickname) ? (
                     <>
                       <Menu onClick={() => navigate(`/club/${clubId}/edit`)}>
                         <Icon icon="edit" width="15px" height="12px" />
@@ -114,15 +116,20 @@ const JoinClub = () => {
                         <Icon icon="delete" width="15px" height="12px" />
                         <Heading size="small">삭제하기</Heading>
                       </Menu>
+                      <Menu onClick={saveLeaderLeaveOpen}>
+                        <Icon icon="leave" width="15px" height="12px" />
+                        <Heading size="small">탈퇴하기</Heading>
+                      </Menu>
                     </>
+                  ) : (
+                    <Menu onClick={saveLeaveOpen}>
+                      <Icon icon="leave" width="15px" height="12px" />
+                      <Heading size="small">탈퇴하기</Heading>
+                    </Menu>
                   )}
                   <Menu onClick={saveInviteOpen}>
                     <Icon icon="plusLarge" width="15px" height="12px" />
                     <Heading size="small">초대하기</Heading>
-                  </Menu>
-                  <Menu onClick={saveLeaveOpen}>
-                    <Icon icon="leave" width="15px" height="12px" />
-                    <Heading size="small">탈퇴하기</Heading>
                   </Menu>
                 </MenuWrapper>
               )}
@@ -130,12 +137,15 @@ const JoinClub = () => {
           </Container>
 
           <Section>
-            <SectionHeading>
-              <Heading size="large">참여중인 멤버</Heading>
-              <Body size="large" css={numberStyling}>
-                {clubsData.data.participant}
-              </Body>
-            </SectionHeading>
+            <SectionWrapper>
+              <SectionHeading>
+                <Heading size="large">참여중인 멤버</Heading>
+                <Body size="large" css={numberStyling}>
+                  {clubsData.data.participant}
+                </Body>
+              </SectionHeading>
+              <ShowMoreBtn onClick={() => navigate(`/club/${clubId}/member`)} />
+            </SectionWrapper>
             <AvatarList
               userCount={clubsData.data.participant}
               users={clubsData.data.members.memberList.map((member, index) => ({
@@ -212,6 +222,16 @@ const JoinClub = () => {
             </LinkWrapper>
             <Button variant="primary" onClick={saveInviteClose} css={{ width: '100%', marginTop: '30px' }}>
               확인
+            </Button>
+          </Modal>
+
+          {/* 그룹장이 탈퇴 버튼 누르면 나오는 모달창 */}
+          <Modal isOpen={isLeaderLeaveSaveOpen} closeModal={saveLeaderLeaveClose}>
+            <Heading size="medium">정말 탈퇴하시겠습니까?</Heading>
+            <Body size="medium">탈퇴 전에 그룹장을 다른 멤버한테 위임해주세요.</Body>
+
+            <Button variant="primary" onClick={handleLeave} css={{ width: '100%', marginTop: '30px' }}>
+              탈퇴하기
             </Button>
           </Modal>
 

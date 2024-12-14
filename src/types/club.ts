@@ -41,6 +41,13 @@ export interface ClubDetailData {
     clubMovieList: ClubMovieList;
 }
 
+export interface ClubMemberDataResponse {
+    message: string;
+    data:  {
+        memberList: ClubMember[];
+    };
+}
+
 export interface ClubMember {
     nickname: string;
     profileImage: string;
