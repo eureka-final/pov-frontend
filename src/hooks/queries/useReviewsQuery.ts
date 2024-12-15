@@ -6,14 +6,15 @@ import { getReviews, getMyReviews, getClubReviews, getDetailReview, getJoinClub 
 export const useReviewsQuery = () => {
   const {
     data,
-    isFetching,
+    isLoading,
     hasNextPage,
     fetchNextPage,
+    isFetchingNextPage
   } = useInfiniteQuery<ReviewsResponse, Error>({
     queryKey: ['reviews'],
     queryFn: async ({ pageParam = 0 }) => {
       const response = await getReviews(pageParam);
-
+      
       // 응답 데이터 검증
       if (!response || !response.data || !response.data.reviews) {
         throw new Error('Invalid API response structure');
@@ -30,30 +31,85 @@ export const useReviewsQuery = () => {
     initialPageParam: 0,
   });
 
-  // 모든 페이지 데이터를 평탄화
+  // 모든 페이지 데이터를 평탄화 (합치기)
   const reviewsData =
     data?.pages.flatMap((page) => page?.data?.reviews?.content || []) || [];
 
-  return { reviewsData, isFetching, hasNextPage, fetchNextPage };
+  return { reviewsData, isLoading, hasNextPage, fetchNextPage, isFetchingNextPage };
 };
 
 export const useMyReviewsQuery = () => {
-  const { data: reviewsData } = useQuery<ReviewsResponse>({
+  const {
+    data,
+    isLoading,
+    hasNextPage,
+    fetchNextPage,
+    isFetchingNextPage
+  } = useInfiniteQuery<ReviewsResponse, Error>({
     queryKey: ['myReviews'],
-    queryFn: getMyReviews
+    queryFn: async ({ pageParam = 0 }) => {
+      const response = await getMyReviews(pageParam);
+      
+      // 응답 데이터 검증
+      if (!response || !response.data || !response.data.reviews) {
+        throw new Error('Invalid API response structure');
+      }
+
+      return response;
+    },
+    getNextPageParam: (lastPage) => {
+      // 안전한 데이터 접근
+      const reviews = lastPage?.data?.reviews;
+      if (!reviews) return undefined;
+      return reviews.last ? undefined : reviews.number + 1;
+    },
+    initialPageParam: 0,
   });
-  
-  return { reviewsData };
+
+  // 모든 페이지 데이터를 평탄화 (합치기)
+  const reviewsData =
+    data?.pages.flatMap((page) => page?.data?.reviews?.content || []) || [];
+
+  return { reviewsData, isLoading, hasNextPage, fetchNextPage, isFetchingNextPage };
 };
 
+
 export const useClubReviewsQuery = (clubId: string) => {
-  const { data: reviewsData } = useQuery<ReviewsResponse>({
+  const {
+    data,
+    isLoading,
+    hasNextPage,
+    fetchNextPage,
+    isFetchingNextPage
+  } = useInfiniteQuery<ReviewsResponse, Error>({
     queryKey: ['clubReviews'],
-    queryFn: () => getClubReviews(clubId)
+    queryFn: async ({ pageParam = 0 }) => {
+      const response = await getClubReviews(clubId, pageParam);
+      
+      // 응답 데이터 검증
+      if (!response || !response.data || !response.data.reviews) {
+        throw new Error('Invalid API response structure');
+      }
+
+      return response;
+    },
+    getNextPageParam: (lastPage) => {
+      // 안전한 데이터 접근
+      const reviews = lastPage?.data?.reviews;
+      if (!reviews) return undefined;
+      return reviews.last ? undefined : reviews.number + 1;
+    },
+    initialPageParam: 0,
   });
-  
-  return { reviewsData };
+
+  // 모든 페이지 데이터를 평탄화 (합치기)
+  const reviewsData =
+    data?.pages.flatMap((page) => page?.data?.reviews?.content || []) || [];
+
+  return { reviewsData, isLoading, hasNextPage, fetchNextPage, isFetchingNextPage };
 };
+
+
 
 export const useJoinClubReviewsQuery = () => {
   const { data: joinData } = useQuery<JoinClubResponse>({

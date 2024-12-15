@@ -1,7 +1,7 @@
 import type { ComponentPropsWithoutRef } from 'react';
 import { useState } from 'react';
 
-import { useLikeMutation } from '../../../hooks/queries/useLikeMutation';
+import { useLikeMutation, useDisLikeMutation } from '../../../hooks/queries/useLikeMutation';
 import { Icon } from 'pov-design-system';
 
 interface LikeButtonProps extends ComponentPropsWithoutRef<'div'> {
@@ -14,6 +14,7 @@ interface LikeButtonProps extends ComponentPropsWithoutRef<'div'> {
 
 const LikeButton = ({ initialState, movieId, reviewId, handleLikeCount, likeCount, ...attribute }: LikeButtonProps) => {
   const likeMutation = useLikeMutation();
+  const disLikeMutation = useDisLikeMutation();
 
   const [isLikeChecked, setIsLikeChecked] = useState<boolean>(initialState);
 
@@ -25,7 +26,23 @@ const LikeButton = ({ initialState, movieId, reviewId, handleLikeCount, likeCoun
     updateLikeCount(isLike);
 
     likeMutation.mutate(
-      { movieId, reviewId, isLike },
+      { movieId, reviewId },
+      {
+        onError: () => {
+          setIsLikeChecked(!isLike);
+          handleLikeCount(prevLikeCount);
+        },
+      }
+    );
+  };
+
+  const handleDisLikeCheck = (isLike: boolean) => {
+    const prevLikeCount = likeCount;
+    setIsLikeChecked(isLike);
+    updateLikeCount(isLike);
+
+    disLikeMutation.mutate(
+      { movieId, reviewId },
       {
         onError: () => {
           setIsLikeChecked(!isLike);
@@ -42,7 +59,7 @@ const LikeButton = ({ initialState, movieId, reviewId, handleLikeCount, likeCoun
           icon={'heartfill'}
           onClick={(e: { stopPropagation: () => void }) => {
             e.stopPropagation();
-            handleLikeCheck(false);
+            handleDisLikeCheck(false);
           }}
         />
       ) : (

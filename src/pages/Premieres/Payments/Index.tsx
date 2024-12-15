@@ -1,9 +1,10 @@
 import { loadTossPayments, TossPaymentsInstance, PaymentWidgetsInstance } from '@tosspayments/tosspayments-sdk';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 import Padded from '../../../components/templates/Padded/Padded';
 import { v4 as uuidv4 } from 'uuid';
 import './style.css';
+import { useAuthStore } from '../../../stores/useAuthStore';
 
 interface Amount {
   currency: string;
@@ -14,15 +15,20 @@ const clientKey = import.meta.env.VITE_CLIENT_SECRET_KEY;
 const customerKey = uuidv4();
 
 function Index() {
-  //@ts-ignore
-  const [amount, setAmount] = useState<Amount>({
-    currency: 'KRW',
-    value: 50_000,
-  });
+  const amount: Amount = useMemo(
+    () => ({
+      currency: 'KRW',
+      value: 50_000,
+    }),
+    []
+  );
+
   const [ready, setReady] = useState<boolean>(false);
   const [widgets, setWidgets] = useState<PaymentWidgetsInstance | null>(null);
 
   const { premiereId } = useParams<{ premiereId: string }>();
+  const { orderId } = useParams<{ orderId: string }>();
+  const user = useAuthStore((state) => state.user);
 
   useEffect(() => {
     async function fetchPaymentWidgets() {
@@ -79,26 +85,8 @@ function Index() {
       <div id="payment-method" />
       {/* 이용약관 UI */}
       <div id="agreement" />
-      {/* 쿠폰 체크박스 */}
-      {/* <div>
-          <div>
-            <label htmlFor="coupon-box">
-              <input
-                id="coupon-box"
-                type="checkbox"
-                aria-checked="true"
-                disabled={!ready}
-                onChange={(event) => {
-                  // ------  주문서의 결제 금액이 변경되었을 경우 결제 금액 업데이트 ------
-                  setAmount(event.target.checked ? amount - 5_000 : amount + 5_000);
-                }}
-              />
-              <span>5,000원 쿠폰 적용</span>
-            </label>
-          </div>
-        </div> 
 
-          {/* 결제하기 버튼 */}
+      {/* 결제하기 버튼 */}
       <button
         className="btn primary w-100"
         disabled={!ready}
@@ -108,13 +96,12 @@ function Index() {
             // 결제를 요청하기 전에 orderId, amount를 서버에 저장하세요.
             // 결제 과정에서 악의적으로 결제 금액이 바뀌는 것을 확인하는 용도입니다.
             await widgets?.requestPayment({
-              orderId: uuidv4(),
+              orderId: orderId!,
               orderName: '시사회 응모 결제건',
               successUrl: window.location.origin + `/premieres/${premiereId}/payments/success`,
               failUrl: window.location.origin + `/premieres/${premiereId}/payments/fail`,
-              customerEmail: 'customer123@gmail.com',
-              customerName: '김토스',
-              customerMobilePhone: '01012341234',
+              customerEmail: user?.email,
+              customerName: user?.nickname,
             });
           } catch (error) {
             // 에러 처리하기

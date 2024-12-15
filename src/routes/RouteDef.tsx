@@ -5,11 +5,13 @@ import MovieDetail from '../pages/Movie/MovieDetail';
 import MovieReviews from '../pages/Movie/MovieReviews/Index';
 import ReviewWrite from '../pages/Review/ReviewWrite/Index';
 import ReviewEdit from '../pages/Review/ReviewEdit/Index';
-import Club from '../pages/Club';
+import Club from '../pages/Club/Index';
 import ClubCreate from '../pages/Club/ClubCreate/Index';
 import ClubDetail from '../pages/Club/ClubDetail/Index';
 import ClubEdit from '../pages/Club/ClubEdit/Index';
-import Premieres from '../pages/Premieres';
+import ClubMember from '../pages/Club/ClubMember/Index';
+import ClubReview from '../pages/Club/ClubReview/Index';
+import Premieres from '../pages/Premieres/Index';
 import PremiereDetail from '../pages/Premieres/PremiereDetail/Index';
 import Payments from '../pages/Premieres/Payments/Index';
 import Success from '../pages/Premieres/Payments/Success/Index';
@@ -21,6 +23,7 @@ import OauthGoogle from '../pages/Oauth/Google/Index';
 import Notice from '../pages/Notice';
 import SignUp from '../pages/SignUp/Index';
 import MyPage from '../pages/MyPage';
+import NotFound from '../pages/NotFound/Index';
 
 // import React, { lazy, Suspense } from 'react';
 // import ReviewPageSkeleton from '../pages/Review/ReviewPageSkeleton';
@@ -47,11 +50,7 @@ const MovieScreens = {
 const ReviewScreens = {
   Review: {
     path: '/review',
-    element: (
-      // <Suspense fallback={<ReviewPageSkeleton />}>
-      <Review />
-      // </Suspense>
-    ),
+    element: <Review />,
   },
   ReviewWrite: {
     path: '/review/:movieId/write',
@@ -84,6 +83,18 @@ const ClubScreens = {
     path: '/club/:clubId/edit',
     element: <ClubEdit />,
   },
+  ClubMember: {
+    path: '/club/:clubId/member',
+    element: <ClubMember />,
+  },
+  // ClubSecretDetail: {
+  //   path: '/clubs',
+  //   element: <ClubSecretDetail />,
+  // },
+  ClubReview: {
+    path: '/club/:clubId/review',
+    element: <ClubReview />,
+  },
 };
 
 const PremieresScreens = {
@@ -96,7 +107,7 @@ const PremieresScreens = {
     element: <PremiereDetail />,
   },
   Payments: {
-    path: '/premieres/:premiereId/payments',
+    path: '/premieres/:premiereId/payments/:orderId',
     element: <Payments />,
   },
   Success: {
@@ -139,6 +150,13 @@ const MemberScreens = {
   },
 };
 
+const NotFoundScreens = {
+  NotFound: {
+    path: '*',
+    element: <NotFound />,
+  },
+};
+
 export const AppRouteDef = {
   ...MovieScreens,
   ...ReviewScreens,
@@ -146,4 +164,5 @@ export const AppRouteDef = {
   ...PremieresScreens,
   ...AuthScreens,
   ...MemberScreens,
+  ...NotFoundScreens,
 };

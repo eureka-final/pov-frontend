@@ -1,15 +1,37 @@
 import { PremiereContentSection, PremiereBodyImage } from './index.style';
 import { Button } from 'pov-design-system';
 import { useNavigate, useParams } from 'react-router-dom';
+import { useEntryMutation } from '../../../hooks/queries/usePermiereMutation';
+import { usePermieresDetailQuery } from '../../../hooks/queries/usePermieresQuery';
 
 const Index = () => {
   const navigate = useNavigate();
   const { premiereId } = useParams<{ premiereId: string }>();
+  const { premieresData } = usePermieresDetailQuery(premiereId!);
+  const entryMutation = useEntryMutation();
+
+  const checkEntry = () => {
+    const requestData = {
+      amount: 50000,
+      quantity: 1,
+    };
+    console.log(requestData);
+    entryMutation.mutate(
+      { premiereId: premiereId!, ...requestData },
+      {
+        onSuccess: (data) => {
+          const orderId = data.data.orderId;
+          console.log('응모 가능!!!!!!!!');
+          navigate(`/premieres/${premiereId}/payments/${orderId}`);
+        },
+      }
+    );
+  };
 
   return (
     <PremiereContentSection>
-      <PremiereBodyImage src="https://m.cjone.com/cjmweb/upfile/2016/12/02/m_cjone_vip_event_img01_20161201.jpg" />
-      <Button size="large" onClick={() => navigate(`/premieres/${premiereId}/payments`)}>
+      <PremiereBodyImage src={premieresData?.data.eventImage} />
+      <Button size="large" onClick={checkEntry}>
         응모하기
       </Button>
     </PremiereContentSection>

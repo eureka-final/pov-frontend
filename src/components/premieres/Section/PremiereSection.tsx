@@ -1,28 +1,17 @@
-import { Section } from './PremiereSection.style';
-import PremiereCard from '../Card/PremiereCard';
-import type { PremiereCardProps } from '../Card/PremiereCard';
+import { Card, ThumbnailImage } from './PremiereSection.style';
+import { Premieres } from '../../../types/premieres';
+import { Heading, Body } from 'pov-design-system';
+import { useNavigate } from 'react-router-dom';
 
-export interface PremiereSectionProps {
-  items: PremiereCardProps[];
-}
-
-const PremiereSection = ({ items }: PremiereSectionProps) => {
+const PremiereSection = ({ premiereId, title, thumbnail, startAt }: Premieres) => {
+  const navigate = useNavigate();
   return (
-    <Section>
-      {items.map((item, index) => (
-        <PremiereCard
-          key={index}
-          premiereId={item.premiereId}
-          title={item.title}
-          startAt={item.startAt}
-          endAt={item.endAt}
-          isPaymentRequired={item.isPaymentRequired}
-          price={item.price}
-          thumbnailImage={item.thumbnailImage}
-          bodyImage={item.bodyImage}
-        ></PremiereCard>
-      ))}
-    </Section>
+    <Card onClick={() => navigate(`/premieres/${premiereId}`)}>
+      {/* <ThumbnailImage src={thumbnail} /> */}
+      <ThumbnailImage src="https://m.cjone.com/cjmweb/upfile/2016/12/02/m_cjone_vip_event_img01_20161201.jpg" />
+      <Heading size="medium">{title}</Heading>
+      <Body size="large">{startAt.replace('T', ' ')}</Body>
+    </Card>
   );
 };
 
