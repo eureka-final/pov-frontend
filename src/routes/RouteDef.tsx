@@ -87,6 +87,10 @@ const ClubScreens = {
     path: '/club/:clubId/member',
     element: <ClubMember />,
   },
+  // ClubSecretDetail: {
+  //   path: '/clubs',
+  //   element: <ClubSecretDetail />,
+  // },
   ClubReview: {
     path: '/club/:clubId/review',
     element: <ClubReview />,

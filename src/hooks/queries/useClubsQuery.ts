@@ -1,6 +1,6 @@
 import { useQuery, UseQueryOptions } from '@tanstack/react-query';
 import type { ClubsResponse, ClubDetailDataResponse, ClubMemberDataResponse } from '../../types/club';
-import { getClubs, getMyClubs, getDetailClub, getMemberClub } from '../../apis/club/getClubs';
+import { getClubs, getMyClubs, getDetailClub, getMemberClub, getInviteClub } from '../../apis/club/getClubs';
 import { useApiError } from './useApiError';
 
 export const useClubsQuery = () => {
@@ -43,4 +43,13 @@ export const useClubMemberQuery = (clubId: string) => {
   });
   
   return { clubsData };
+};
+
+export const useClubInviteQuery = (clubId: string) => {
+  const { data: codeData } = useQuery<ClubMemberDataResponse>({
+    queryKey: ['clubInvite', clubId],
+    queryFn: () => getInviteClub(clubId)
+  });
+  
+  return { codeData };
 };

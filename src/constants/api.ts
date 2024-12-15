@@ -17,6 +17,7 @@ export const END_POINTS = {
   CREATE_REVIEW: (movieId: string) => `/api/movies/${movieId}/reviews`,
   CLUB: (clubId: string) =>  `/api/clubs/${clubId}`,
   JOIN_CLUB: (clubId: string) =>  `/api/clubs/${clubId}/member`,
+  INVITE_CLUB: (clubId: string) => `/api/clubs/${clubId}/invite-code`,
   LEAVE_CLUB: (clubId: string) =>  `/api/clubs/${clubId}/leave`,
   LEADER_CLUB: (clubId: string) =>  `/api/clubs/${clubId}/leader`,
   LIKE: (movieId: number, reviewId: number) => `/api/movies/${movieId}/reviews/${reviewId}/like`,
