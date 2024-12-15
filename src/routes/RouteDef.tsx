@@ -23,6 +23,7 @@ import OauthGoogle from '../pages/Oauth/Google/Index';
 import Notice from '../pages/Notice';
 import SignUp from '../pages/SignUp/Index';
 import MyPage from '../pages/MyPage';
+import NotFound from '../pages/NotFound/Index';
 
 // import React, { lazy, Suspense } from 'react';
 // import ReviewPageSkeleton from '../pages/Review/ReviewPageSkeleton';
@@ -145,6 +146,13 @@ const MemberScreens = {
   },
 };
 
+const NotFoundScreens = {
+  NotFound: {
+    path: '*',
+    element: <NotFound />,
+  },
+};
+
 export const AppRouteDef = {
   ...MovieScreens,
   ...ReviewScreens,
@@ -152,4 +160,5 @@ export const AppRouteDef = {
   ...PremieresScreens,
   ...AuthScreens,
   ...MemberScreens,
+  ...NotFoundScreens,
 };
