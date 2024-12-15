@@ -21,6 +21,7 @@ import OauthGoogle from '../pages/Oauth/Google/Index';
 import Notice from '../pages/Notice';
 import SignUp from '../pages/SignUp/Index';
 import MyPage from '../pages/MyPage';
+import Settings from '../pages/MyPage/Settings';
 
 // import React, { lazy, Suspense } from 'react';
 // import ReviewPageSkeleton from '../pages/Review/ReviewPageSkeleton';
@@ -133,9 +134,13 @@ const MemberScreens = {
     path: '/mypage',
     element: <MyPage />,
   },
-  Alarm: {
+  Notice: {
     path: '/notice',
     element: <Notice />,
+  },
+  Settings: {
+    path: '/settings',
+    element: <Settings />,
   },
 };
 
