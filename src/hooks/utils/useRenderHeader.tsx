@@ -10,10 +10,13 @@ const detailHeaderRoutes = [
   { path: '/oauth/google', title: '' },
   { path: '/movie/detail', title: '영화 상세정보' },
   { path: '/premieres/:premiereId', title: '시사회 이벤트 자세히 보기' },
+  { path: '/settings', title: '설정' },
 ];
 
 const exceptionRoutes = [
   { path: '/signup' }, // index에서 header 직접 호출
+  { path: '/oauth/naver' }, // header x
+  { path: '/oauth/google' }, // header x
 ];
 
 const useRenderHeader = () => {
