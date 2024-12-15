@@ -1,32 +1,41 @@
 import { useParams } from 'react-router-dom';
 import { useState } from 'react';
-import { CardContainer, CardFlex, ReviewCardContainer } from '../../../components/club/ClubCard.style';
+import { ReviewListContainer, CardContainer, CardFlex, ReviewCardContainer } from '../../../components/club/ClubCard.style';
 import { Body, Input, Icon, Heading, Avatar, useOverlay, Modal, Button } from 'pov-design-system';
 import { useClubMemberQuery } from '../../../hooks/queries/useClubsQuery';
 import { useChangeLeaderMutation } from '../../../hooks/queries/useEditClubMutation';
+import { useToast } from '../../../hooks/common/useToast';
 
 function Index() {
   const { clubId } = useParams<{ clubId: string }>();
 
-  const { clubsData } = useClubMemberQuery(clubId!);
+  const { clubsData, refetch } = useClubMemberQuery(clubId!);
 
   const [searchKeyword, setSearchKeyword] = useState('');
+  const [selectedEmail, setSelectedEmail] = useState<string>('');
 
-  //const filteredClubs = clubsData?.data.memberList.filter((member) => member.nickname.toLowerCase().includes(searchKeyword.toLowerCase())) || [];
   const { isOpen: isSaveOpen, open: saveOpen, close: saveClose } = useOverlay();
+  const { createToast } = useToast();
 
   const leaderChangeMutation = useChangeLeaderMutation();
 
-  const handleChange = (email: string) => {
-    const requestData = {
-      newLeaderEmail: email,
-    };
+  // 그룹장을 항상 리스트의 첫 번째에 배치하는 로직
+  const sortedMembers =
+    clubsData?.data.clubMember
+      .filter((member) => member.nickname.toLowerCase().includes(searchKeyword.toLowerCase())) // 검색 필터
+      .sort((a, b) => (b.isLeader ? 1 : 0) - (a.isLeader ? 1 : 0)) || []; // 그룹장을 앞에 배치
 
+  const handleChange = () => {
+    const requestData = {
+      newLeaderEmail: selectedEmail,
+    };
     leaderChangeMutation.mutate(
       { clubId: clubId!, ...requestData },
       {
         onSuccess: () => {
           saveClose();
+          createToast('클럽장 변경 성공!', 'success');
+          refetch();
         },
       }
     );
@@ -41,8 +50,8 @@ function Index() {
         onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchKeyword(e.target.value)}
       />
 
-      {clubsData?.data.memberList.map((member) => {
-        return (
+      <ReviewListContainer>
+        {sortedMembers.map((member) => (
           <CardContainer key={member.nickname}>
             <CardFlex>
               <Avatar size="small" username={member.nickname} src={member.profileImage} />
@@ -50,20 +59,30 @@ function Index() {
                 <Heading size="large">{member.nickname}</Heading>
                 {member.isLeader ? <Body size="large">그룹장</Body> : <Body size="large">멤버</Body>}
               </ReviewCardContainer>
-              <Heading size="small" css={{ color: '#1BD27D' }} onClick={saveOpen}>
-                그룹장 임명하기
-              </Heading>
+              {member.isLeader ? (
+                <></>
+              ) : (
+                <Heading
+                  size="small"
+                  css={{ color: '#1BD27D', cursor: 'pointer' }}
+                  onClick={() => {
+                    setSelectedEmail(member.email);
+                    saveOpen();
+                  }}
+                >
+                  그룹장 임명하기
+                </Heading>
+              )}
             </CardFlex>
-
-            <Modal isOpen={isSaveOpen} closeModal={saveClose}>
-              <Heading>클럽장을 위임하시겠습니까?</Heading>
-              <Button variant="primary" onClick={handleChange(member.email)} css={{ marginTop: '20px' }}>
-                확인
-              </Button>
-            </Modal>
           </CardContainer>
-        );
-      })}
+        ))}
+        <Modal isOpen={isSaveOpen} closeModal={saveClose}>
+          <Heading>클럽장을 위임하시겠습니까?</Heading>
+          <Button variant="primary" onClick={handleChange} css={{ marginTop: '20px' }}>
+            확인
+          </Button>
+        </Modal>
+      </ReviewListContainer>
     </>
   );
 }

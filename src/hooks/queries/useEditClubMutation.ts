@@ -38,9 +38,9 @@ export const useChangeLeaderMutation = () => {
   const { createToast } = useToast();
 
   const { handleError } = useApiError({ 
-    400: {
+    403: {
       default: () => {
-        createToast('올바른 형식을 입력하세요.');
+        createToast('클럽장만 위임할 수 있습니다.');
       },
     },
   });

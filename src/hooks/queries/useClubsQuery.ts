@@ -37,12 +37,12 @@ export const useClubDetailQuery = (clubId: string) => {
 };
 
 export const useClubMemberQuery = (clubId: string) => {
-  const { data: clubsData } = useQuery<ClubMemberDataResponse>({
+  const { data: clubsData, refetch } = useQuery<ClubMemberDataResponse>({
     queryKey: ['clubMember', clubId],
     queryFn: () => getMemberClub(clubId)
   });
   
-  return { clubsData };
+  return { clubsData, refetch };
 };
 
 export const useClubInviteQuery = (clubId: string) => {

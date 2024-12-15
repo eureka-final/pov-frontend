@@ -44,7 +44,7 @@ export interface ClubDetailData {
 export interface ClubMemberDataResponse {
     message: string;
     data:  {
-        memberList: ClubMember[];
+        clubMember: ClubMember[];
     };
 }
 
