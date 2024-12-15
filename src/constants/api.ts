@@ -1,7 +1,7 @@
 export const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 export const END_POINTS = {
-  CLUB_JOIN: '/api/clubs/reviews',
+  CLUB_JOIN: '/api/clubs/reviews/my',
   CLUBS: '/api/clubs',
   MY_CLUBS: '/api/clubs/myclub',
   TOKEN: `/api/auth/reissue`,

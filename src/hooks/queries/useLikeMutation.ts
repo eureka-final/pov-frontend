@@ -12,7 +12,7 @@ export const useLikeMutation = () => {
   const likeMutation = useMutation({
     mutationFn: putLike,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['communityReviews'] });
+      queryClient.invalidateQueries({ queryKey: ['likes'] });
     },
     onError: () => {
       createToast('오류가 발생했습니다. 다시 시도해 주세요.');

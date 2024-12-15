@@ -8,7 +8,7 @@ export const useEntryMutation = () => {
 
   const entryMutation = useMutation({
     mutationFn: postEntry,
-    onSuccess: (data) => {
+    onSuccess: (_, data) => {
       queryClient.invalidateQueries({ queryKey: ['entry'] });
       console.log('성공적으로 전송:', data);
     },

@@ -27,3 +27,14 @@ export interface PremieresDetailData {
     thumbnail: string;
   }
   
+export interface PaymentsFormData {
+    amount: number;
+    quantity: number;
+}
+
+export interface PaymentsFormDataResponse {
+    message: string;
+    data: {
+        orderId: string;
+    };
+}

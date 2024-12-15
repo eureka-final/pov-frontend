@@ -11,11 +11,16 @@ const Index = () => {
   const entryMutation = useEntryMutation();
 
   const checkEntry = () => {
+    const requestData = {
+      amount: 50000,
+      quantity: 1,
+    };
+    console.log(requestData);
     entryMutation.mutate(
-      { premiereId: premiereId! },
+      { premiereId: premiereId!, ...requestData },
       {
         onSuccess: (data) => {
-          const orderId = data.orderId;
+          const orderId = data.data.orderId;
           console.log('응모 가능!!!!!!!!');
           navigate(`/premieres/${premiereId}/payments/${orderId}`);
         },
