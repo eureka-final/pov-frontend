@@ -50,6 +50,17 @@ const JoinClub = () => {
   const deleteClubMutation = useDeleteClubMutation();
   const leaveClubMutation = useLeaveClubMutaion();
 
+  const handleCopy = (text: string) => {
+    navigator.clipboard.writeText(text).then(
+      () => {
+        createToast('초대 URL이 복사되었습니다!', 'default');
+      },
+      () => {
+        createToast('URL 복사에 실패했습니다.', 'error');
+      }
+    );
+  };
+
   const handleDelete = () => {
     deleteClubMutation.mutate(
       { clubId: clubId! },
@@ -215,12 +226,12 @@ const JoinClub = () => {
           </Modal>
 
           {/* 초대 버튼 누르면 나오는 모달창 */}
-          <Modal isOpen={isInviteSaveOpen} closeModal={saveLeaveClose}>
+          <Modal isOpen={isInviteSaveOpen} closeModal={saveInviteClose}>
             <Heading size="medium">초대 URL이 생성되었어요. </Heading>
             <Body>초대 URL을 초대하고 싶은 친구에게 보내보세요!</Body>
             <LinkWrapper>
-              <Body>https://www.point-of-views.com/asdf</Body>
-              <Icon icon="copy" />
+              <Body>https://www.point-of-views.com/club/{clubId}/detail</Body>
+              <Icon icon="copy" onClick={() => handleCopy(`https://www.point-of-views.com/club/${clubId}/detail`)} style={{ cursor: 'pointer' }} />{' '}
             </LinkWrapper>
             <Button variant="primary" onClick={saveInviteClose} css={{ width: '100%', marginTop: '30px' }}>
               확인
