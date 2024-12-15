@@ -24,7 +24,7 @@ import Card from '../../../components/club/ClubDetail/Card';
 import { useClubDetailQuery } from '../../../hooks/queries/useClubsQuery';
 import { useDeleteClubMutation } from '../../../hooks/queries/useDeleteClubMutation';
 import { useLeaveClubMutaion } from '../../../hooks/queries/useLeaveClubMutaion';
-import { useClubInviteQuery } from '../../../hooks/queries/useClubsQuery';
+// import { useClubInviteQuery } from '../../../hooks/queries/useClubsQuery';
 import { useToast } from '../../../hooks/common/useToast';
 import { useAuthStore } from '../../../stores/useAuthStore';
 
@@ -51,7 +51,7 @@ const JoinClub = () => {
   const deleteClubMutation = useDeleteClubMutation();
   const leaveClubMutation = useLeaveClubMutaion();
 
-  const { codeData } = useClubInviteQuery(clubId!);
+  // const { codeData } = useClubInviteQuery(clubId!);
 
   const handleCopy = (text: string) => {
     navigator.clipboard.writeText(text).then(
@@ -240,12 +240,12 @@ const JoinClub = () => {
                 </>
               ) : (
                 <>
-                  <Body>https://www.point-of-views.com/clubs/{codeData?.data.code}</Body>
+                  {/* <Body>https://www.point-of-views.com/clubs/{codeData?.data.code}</Body>
                   <Icon
                     icon="copy"
                     onClick={() => handleCopy(`https://www.point-of-views.com/club/${codeData?.data.code}/detail`)}
                     style={{ cursor: 'pointer' }}
-                  />
+                  /> */}
                 </>
               )}
             </LinkWrapper>
