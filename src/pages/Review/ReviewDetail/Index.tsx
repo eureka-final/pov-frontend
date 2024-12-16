@@ -6,12 +6,16 @@ import Profile from '../../../components/common/Profile';
 import { useReviewDetailQuery } from '../../../hooks/queries/useReviewsQuery';
 import { useDeleteReviewMutation } from '../../../hooks/queries/useDeleteReviewMutation';
 import dompurify from 'dompurify';
+import { useToast } from '../../../hooks/common/useToast';
 
 const Index = () => {
   const { movieId, reviewId } = useParams<{ movieId: string; reviewId: string }>();
   const navigate = useNavigate();
-  const sanitizer = dompurify.sanitize;
+  const { createToast } = useToast();
+
   const { isOpen: isSaveOpen, open: saveOpen, close: saveClose } = useOverlay();
+
+  const sanitizer = dompurify.sanitize;
 
   const { reviewData } = useReviewDetailQuery(movieId!, reviewId!);
 
@@ -21,7 +25,11 @@ const Index = () => {
     deleteReviewMutation.mutate(
       { movieId: movieId!, reviewId: reviewId! },
       {
-        onSuccess: () => navigate('/review'),
+        onSuccess: () => {
+          saveClose();
+          navigate('/review');
+          createToast('리뷰 삭제 성공!', 'success');
+        },
       }
     );
   };
@@ -45,7 +53,7 @@ const Index = () => {
                   <Count color="#0DE781">{reviewData.data.likeAmount}</Count>
                 </Additionals>
                 <Additionals>
-                  {reviewData.data.keyword.map((item, index) => (
+                  {reviewData.data.keywords.map((item, index) => (
                     <Badge variant="keyword" cancel={true} key={item + index}>
                       {item}
                     </Badge>
@@ -72,7 +80,7 @@ const Index = () => {
           {/* 삭제 버튼 누르면 나오는 모달창 */}
           <Modal isOpen={isSaveOpen} closeModal={saveClose}>
             <Heading size="medium">정말 삭제하시겠습니까?</Heading>
-            <Button variant="primary" onClick={handleDelete} css={{ width: '100%' }}>
+            <Button variant="primary" onClick={handleDelete} css={{ width: '100%', marginTop: '30px' }}>
               삭제하기
             </Button>
           </Modal>

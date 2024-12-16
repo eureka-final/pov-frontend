@@ -1,6 +1,7 @@
 import { useRef } from 'react';
-import { Avatar } from 'pov-design-system';
+import { Avatar, Icon } from 'pov-design-system';
 import { UploadProfileImgButtonContainer, UploadImgButton } from './UploadProfileImgButton.style';
+import { putProfileImage } from '../../../apis/member/putMember';
 
 interface UploadProfileImgButtonProps {
   profileImageUrl: string;
@@ -24,9 +25,10 @@ const UploadProfileImgButton = ({ profileImageUrl, handleChangeProfileImage }: U
 
     // 파일을 업로드하고 URL을 받아와 상태에 저장
     try {
-      const profileImgUrl = 'https://cdn2.ppomppu.co.kr/zboard/data3/2024/0927/m_20240927130534_2fRINwJ70R.jpg'; // TODO 프로필 이미지 업로드 API 개발되면 수정
-      // const profileImgUrl = await uploadProfileImg(targetFile);
-      handleChangeProfileImage(profileImgUrl);
+      const response = await putProfileImage(targetFile);
+      if (response) {
+        handleChangeProfileImage(response.data.data.profileImage);
+      }
     } catch (error) {
       console.error(error);
     }
@@ -42,8 +44,9 @@ const UploadProfileImgButton = ({ profileImageUrl, handleChangeProfileImage }: U
         onChange={handleFileInputSubmit}
         style={{ width: '160px', height: '160px', display: 'none' }}
       />
-      {/* TODO UploadImgButton 카메라 아이콘으로 수정 */}
-      <UploadImgButton>1</UploadImgButton>
+      <UploadImgButton>
+        <Icon icon="camera" css={{ width: '16px' }} />
+      </UploadImgButton>
     </UploadProfileImgButtonContainer>
   );
 };

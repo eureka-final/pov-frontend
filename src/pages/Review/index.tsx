@@ -4,7 +4,7 @@ import { Badge } from 'pov-design-system';
 import { BadgeWrapper } from './Review.style';
 import ReviewList from '../../components/review/ReviewList';
 import MyReviewList from '../../components/review/MyReviewList';
-import ReviewClubList from '../../components/review/ReviewClubList';
+import ClubReviewList from '../../components/review/ClubReviewList';
 
 const Index = () => {
   const [sections, setSections] = useState([
@@ -38,7 +38,7 @@ const Index = () => {
       </BadgeWrapper>
       {sectionsType === '모든 리뷰' && <ReviewList />}
       {sectionsType === '내 리뷰' && <MyReviewList />}
-      {sectionsType === '클럽 리뷰' && <ReviewClubList />}
+      {sectionsType === '클럽 리뷰' && <ClubReviewList />}
     </Padded>
   );
 };

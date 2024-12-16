@@ -1,10 +1,20 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { putClub } from '../../apis/club/putClub';
+import { putClub, putLeader } from '../../apis/club/putClub';
+import { useApiError } from './useApiError';
 import { useToast } from '../common/useToast';
 
 export const useEditClubMutation = () => {
   const queryClient = useQueryClient();
+
   const { createToast } = useToast();
+
+  const { handleError } = useApiError({ 
+    400: {
+      default: () => {
+        createToast('올바른 형식을 입력하세요.');
+      },
+    },
+  });
 
   const editClubMutation = useMutation({
     mutationFn: putClub,
@@ -12,11 +22,40 @@ export const useEditClubMutation = () => {
       // 변이 성공 시 캐시 무효화로 클럽 데이터 갱신
       queryClient.invalidateQueries({ queryKey: ['clubs', clubId] });
     },
-    onError: () => {
-      createToast('올바른 형식을 입력하세요.');
+    onError: (error) => {
+      handleError(error);
     },
   }
   );
 
   return editClubMutation;
+};
+
+
+export const useChangeLeaderMutation = () => {
+  const queryClient = useQueryClient();
+
+  const { createToast } = useToast();
+
+  const { handleError } = useApiError({ 
+    403: {
+      default: () => {
+        createToast('클럽장만 위임할 수 있습니다.');
+      },
+    },
+  });
+
+  const leaderChangeMutation = useMutation({
+    mutationFn: putLeader,
+    onSuccess: (_, { clubId }) => {
+      // 변이 성공 시 캐시 무효화로 클럽 데이터 갱신
+      queryClient.invalidateQueries({ queryKey: ['clubs', clubId] });
+    },
+    onError: (error) => {
+      handleError(error);
+    },
+  }
+  );
+
+  return leaderChangeMutation;
 };

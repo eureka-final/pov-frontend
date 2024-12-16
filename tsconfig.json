@@ -7,6 +7,6 @@
     "typeRoots": ["./node_modules/@types", "./node_modules/pov-design-system"],
     "types": ["@emotion/react"],
     "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true
-  }
+    "allowSyntheticDefaultImports": true,
+  },
 }

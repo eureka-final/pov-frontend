@@ -1,6 +1,6 @@
 import { useQueryClient } from '@tanstack/react-query';
 
-import type { ReviewsResponse } from '../../types/reviews';
+import type { ReviewsResponse } from '../../types/review';
 
 export const useReviews = () => {
   const queryClient = useQueryClient();

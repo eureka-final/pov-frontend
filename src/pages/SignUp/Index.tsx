@@ -19,7 +19,7 @@ const Index = () => {
   const location = useLocation();
   const { Step, Funnel, setStep } = useFunnel(signInSteps[0]);
   const setLoggedIn = useAuthStore((state) => state.setLoggedIn);
-  const setUser = useAuthStore((state) => state.setLoggedIn);
+  const setUser = useAuthStore((state) => state.setUser);
 
   /*zod 유효성 검사 스키마 정의 */
   const schema = z.object({
@@ -66,7 +66,7 @@ const Index = () => {
       const response = await postSignUpApi(data);
       console.log(response);
       setLoggedIn(true);
-      setUser(response.memberInfo);
+      setUser(response.data.memberInfo);
       setStep(signInSteps[3]);
     } catch (error) {
       console.error('회원가입 실패:', error);

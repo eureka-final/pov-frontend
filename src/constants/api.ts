@@ -1,15 +1,29 @@
 export const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 export const END_POINTS = {
-  REVIEWS: (pageParam: number) => `https://www.point-of-views.com/api/movies/reviews?_limit=10&_page=${pageParam}`,
-  MY_REVIEWS: 'https://www.point-of-views.com/api/movies/reviews/my',
-  REVIEW: (movieId: string, reviewId: string) => `https://www.point-of-views.com/api/movies/${movieId}/reviews/${reviewId}`,
-  CREATE_REVIEW: (movieId: string) => `https://www.point-of-views.com/api/movies/${movieId}/reviews`,
+  ADMIN_MOVIES: `/api/movies/admin-search`,
+  CLUB_JOIN: '/api/clubs/reviews/my',
   CLUBS: '/api/clubs',
   MY_CLUBS: '/api/clubs/myclub',
-  CLUB: (clubId: string) => `/api/clubs/${clubId}`,
   TOKEN: `/api/auth/reissue`,
-  ADMIN_MOVIES: `/api/movies/admin-search`,
+  PAYMENT_TEMP: '/api/payments/temp',
+  PAYMENT: `/api/payments`,
+  PREMIERES: `/api/premieres`,
+  PREMIERE_DETAIL: (premiereId: string) => `/api/premieres/${premiereId}`,
+  PREMIERE_ENTRY: (premiereId: string) => `/api/premieres/${premiereId}/entry`,
+  PREMIERE_CANCEL_ENTRY: (premiereId: string) => `/api/premieres/${premiereId}/entry/cancel`,
+  REVIEWS: (pageParam: number | unknown) => `/api/movies/reviews?page=${pageParam}`,
+  MY_REVIEWS: (pageParam: number | unknown) => `/api/movies/reviews/my?page=${pageParam}`,
+  CLUB_REVIEW: (clubId: string, pageParam: number | unknown) => `/api/clubs/${clubId}/reviews?page=${pageParam}`,
+  REVIEW: (movieId: string, reviewId: string) => `/api/movies/${movieId}/reviews/${reviewId}`,
+  CREATE_REVIEW: (movieId: string) => `/api/movies/${movieId}/reviews`,
+  CLUB: (clubId: string) => `/api/clubs/${clubId}`,
+  JOIN_CLUB: (clubId: string) => `/api/clubs/${clubId}/member`,
+  INVITE_CLUB: (clubId: string) => `/api/clubs/${clubId}/invite-code`,
+  LEAVE_CLUB: (clubId: string) => `/api/clubs/${clubId}/leave`,
+  LEADER_CLUB: (clubId: string) => `/api/clubs/${clubId}/leader`,
+  LIKE: (movieId: number, reviewId: number) => `/api/movies/${movieId}/reviews/${reviewId}/like`,
+  DISLIKE: (movieId: number, reviewId: number) => `/api/movies/${movieId}/reviews/${reviewId}/dislike`,
 } as const;
 
 export const NETWORK = {

@@ -89,4 +89,5 @@ export const TitleInfo = styled.div`
   flex-direction: column; 
   align-items: center;
   margin-top: 15%;
+  gap: 20px;
 `;

@@ -12,7 +12,7 @@ export interface Club {
     clubName: string;
     clubDescription: string;
     participant: number;
-    maxParticipant: number;
+    maxParticipants: number;
     clubMovieCount: number;
     clubFavorGenres: string[];
 }
@@ -24,6 +24,7 @@ export interface ClubDetailDataResponse {
 }
 
 export interface ClubDetailData {
+    isMember: boolean;
     clubId: string;
     clubName: string;
     clubDescription: string;
@@ -32,7 +33,7 @@ export interface ClubDetailData {
         memberList: ClubMember[];
     };
     participant: number;
-    maxParticipant: number;
+    maxParticipants: number;
     isPublic: boolean;
     clubReviewList: ClubReviewList;
     clubFavorGenres: string[];
@@ -40,10 +41,18 @@ export interface ClubDetailData {
     clubMovieList: ClubMovieList;
 }
 
+export interface ClubMemberDataResponse {
+    message: string;
+    data:  {
+        clubMember: ClubMember[];
+    };
+}
+
 export interface ClubMember {
     nickname: string;
     profileImage: string;
     isLeader: boolean;
+    email: string;
 }
 
 export interface ClubReviewList {
@@ -56,7 +65,8 @@ export interface ClubReviewList {
 }
 
 export interface ClubReview {
-    reviewId: number;
+    movieId: string;
+    reviewId: string;
     movieTitle: string;
     title: string;
     contents: string;
@@ -109,4 +119,8 @@ export interface ClubFormData {
     maxParticipants: number | null;
     clubFavorGenre: string[];
     isPublic: boolean;
+}
+
+export interface LeaderData {
+    newLeaderEmail: string;
 }

@@ -1,14 +1,25 @@
-import { useNavigate, useParams } from 'react-router-dom';
-import { CardContainer, Poster, CardFlex, ReviewCardContainer, LikeContainer, FlexBetween, Spoiler, SpoMore, ReadMore, TitleInfo } from './ReviewCard.style';
-import { Body, Paragraph, Icon, Heading, Logo } from 'pov-design-system';
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import {
+  ReviewListContainer,
+  CardContainer,
+  Poster,
+  CardFlex,
+  ReviewCardContainer,
+  LikeContainer,
+  FlexBetween,
+  Spoiler,
+  SpoMore,
+  ReadMore,
+  TitleInfo,
+} from './ReviewCard.style';
+import { Body, Paragraph, Icon, Heading, Logo, Button } from 'pov-design-system';
 import Profile from '../common/Profile';
-import { useMyReviewsQuery } from '../../hooks/queries/useReviewsQuery';
 import dompurify from 'dompurify';
+import { Review } from '../../types/review';
 
-function MyReviewCard() {
-  const { movieId } = useParams<{ movieId: string }>();
+function MyReviewCard({ reviewId, movieId, thumbnail, movieTitle, reviewer, profileImage, title, spoiler, contents, createdAt, isLiked, likeAmount }: Review) {
   const navigate = useNavigate();
-  const { reviewsData } = useMyReviewsQuery();
 
   const sanitizer = dompurify.sanitize;
 
@@ -18,69 +29,67 @@ function MyReviewCard() {
       const truncatedText = text.substring(0, maxLength);
       return (
         <>
-          <div dangerouslySetInnerHTML={{ __html: sanitizer(truncatedText) }} />
+          <div dangerouslySetInnerHTML={{ __html: sanitizer(truncatedText).replace(/<img[^>]*>/g, '') }} />
           <span>...</span>
           <ReadMore>더보기</ReadMore>
         </>
       );
     }
-    return <div dangerouslySetInnerHTML={{ __html: sanitizer(text) }} />;
+    return <div dangerouslySetInnerHTML={{ __html: sanitizer(text).replace(/<img[^>]*>/g, '') }} />;
   };
 
   return (
-    <>
-      {reviewsData &&
-        reviewsData.data.reviews.content.map((review) => {
-          return (
-            <CardContainer
-              key={review.reviewId}
-              onClick={() => {
-                navigate(`/review/${movieId}/detail/${review.reviewId}`);
-              }}
-            >
-              <CardFlex>
-                <Poster>
-                  <img src={review.thumbnail.replace('/w500/', '/w92/')} alt={review.movieTitle} />
-                  <Body size="small">{review.movieTitle}</Body>
-                </Poster>
-                <ReviewCardContainer>
-                  <Profile name={review.reviewer} avatarUrl={review.profileImage} />
-                  <Paragraph>{review.title}</Paragraph>
+    <ReviewListContainer>
+      <CardContainer
+        key={reviewId}
+        onClick={() => {
+          navigate(`/review/${movieId}/detail/${reviewId}`);
+        }}
+      >
+        <CardFlex>
+          <Poster>
+            <img src={thumbnail.replace('/w154/', '/w92/')} alt={movieTitle} />
+            <Body size="small">{movieTitle}</Body>
+          </Poster>
+          <ReviewCardContainer>
+            <Profile name={reviewer} avatarUrl={profileImage} />
+            <Paragraph>{title}</Paragraph>
 
-                  {review.spoiler ? (
-                    <Spoiler>
-                      <Body size="large">스포일러가 있어요!</Body>
-                      <Body size="large">
-                        <SpoMore>더보기</SpoMore>
-                      </Body>
-                    </Spoiler>
-                  ) : (
-                    <Body size="large">{truncateContents(review.contents, 380)}</Body>
-                  )}
+            {spoiler ? (
+              <Spoiler>
+                <Body size="large">스포일러가 있어요!</Body>
+                <Body size="large">
+                  <SpoMore>더보기</SpoMore>
+                </Body>
+              </Spoiler>
+            ) : (
+              <Body size="large">{truncateContents(contents, 380)}</Body>
+            )}
 
-                  <FlexBetween>
-                    <Body>{review.createdAt}</Body>
-                    <LikeContainer>
-                      <Icon icon={review.isLiked ? 'heartfill' : 'heartline'} /> {review.likeAmount}
-                    </LikeContainer>
-                  </FlexBetween>
-                </ReviewCardContainer>
-              </CardFlex>
-            </CardContainer>
-          );
-        })}
-    </>
+            <FlexBetween>
+              <Body>{new Date(createdAt).toLocaleDateString()}</Body>
+              <LikeContainer>
+                <Icon icon={isLiked ? 'heartfill' : 'heartline'} /> {likeAmount}
+              </LikeContainer>
+            </FlexBetween>
+          </ReviewCardContainer>
+        </CardFlex>
+      </CardContainer>
+    </ReviewListContainer>
   );
 }
 
-// eslint-disable-next-line react/display-name
-MyReviewCard.Empty = () => {
+export const EmptyMyReviewCard = () => {
+  const navigate = useNavigate();
   return (
     <TitleInfo>
       <Heading size="xxLarge">등록된 리뷰가 없습니다.</Heading>
       <Logo icon="type2" />
+      <Button size="large" onClick={() => navigate('/movie')}>
+        원하는 영화 리뷰 작성하러 가기 🪄
+      </Button>{' '}
     </TitleInfo>
   );
 };
 
-export default MyReviewCard;
+export default React.memo(MyReviewCard);
