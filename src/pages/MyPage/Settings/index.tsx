@@ -4,26 +4,34 @@ import ThemeToggle from '../../../components/common/Toggle/ThemeToggle';
 import NoticeToggle from '../../../components/common/Toggle/NoticeToggle';
 import { useClearUser } from '../../../stores/useAuthStore';
 import { deleteMember } from '../../../apis/member/deleteMember';
+import { postLogoutApi } from '../../../apis/auth/logoutApi';
+import { useToast } from '../../../hooks/common/useToast';
 
 const index = () => {
   const { isOpen: isLogoutConfirmOpen, open: logoutConfirmOpen, close: logoutConfirmClose } = useOverlay();
   const { isOpen: isLogoutOpen, open: logoutOpen, close: logoutClose } = useOverlay();
   const { isOpen: isSignOutConfirmOpen, open: signOutConfirmOpen, close: signOutConfirmClose } = useOverlay();
   const { isOpen: isSignOutOpen, open: signOutOpen, close: signOutClose } = useOverlay();
-
-  const handleLogoutClick = () => {
-    useClearUser();
-    // TODO 로그아웃 api 호출
+  const { createToast } = useToast();
+  const handleLogoutClick = async () => {
+    const response = await postLogoutApi();
     logoutConfirmClose();
-    logoutOpen();
+    if (response) {
+      useClearUser();
+      logoutOpen();
+    } else {
+      createToast('로그아웃에 실패했어요. 다시 시도해주세요.');
+    }
   };
 
   const handleSignOutClick = async () => {
     const response = await deleteMember();
+    signOutConfirmClose();
     if (response) {
       useClearUser();
-      signOutConfirmClose();
       signOutOpen();
+    } else {
+      createToast('회원 탈퇴에 실패했어요. 다시 시도해주세요.');
     }
   };
 
