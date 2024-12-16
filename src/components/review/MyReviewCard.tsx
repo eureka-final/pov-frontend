@@ -16,7 +16,7 @@ import {
 import { Body, Paragraph, Icon, Heading, Logo, Button } from 'pov-design-system';
 import Profile from '../common/Profile';
 import dompurify from 'dompurify';
-import { Review } from '../../types/reviews';
+import { Review } from '../../types/review';
 
 function MyReviewCard({ reviewId, movieId, thumbnail, movieTitle, reviewer, profileImage, title, spoiler, contents, createdAt, isLiked, likeAmount }: Review) {
   const navigate = useNavigate();

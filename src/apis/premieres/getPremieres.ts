@@ -1,6 +1,6 @@
 import { axiosInstance } from '../axiosInstance';
 import { END_POINTS } from '../../constants/api';
-import { PremieresDetailDataResponse, PremieresResponse } from '../../types/premieres';
+import { PremieresDetailDataResponse, PremieresResponse } from '../../types/premiere';
 
 export const getPremieres  = async () => {
   const { data } = await axiosInstance.get<PremieresResponse>(END_POINTS.PREMIERES);

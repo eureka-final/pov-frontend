@@ -1,5 +1,5 @@
 import { axiosInstance } from '../axiosInstance';
-import type { ReviewsResponse, ReviewDetailDataResponse, JoinClubResponse } from '../../types/reviews';
+import type { ReviewsResponse, ReviewDetailDataResponse, JoinClubResponse } from '../../types/review';
 import { END_POINTS } from '../../constants/api';
 
 export const getReviews = async (pageParam: number | unknown) => {

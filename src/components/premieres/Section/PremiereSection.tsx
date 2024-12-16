@@ -1,5 +1,5 @@
 import { Card, ThumbnailImage } from './PremiereSection.style';
-import { Premieres } from '../../../types/premieres';
+import { Premieres } from '../../../types/premiere';
 import { Heading, Body } from 'pov-design-system';
 import { useNavigate } from 'react-router-dom';
 

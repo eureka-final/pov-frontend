@@ -1,6 +1,6 @@
 import { axiosInstance } from '../axiosInstance';
 import { END_POINTS } from '../../constants/api';
-import { PaymentsFormDataResponse, EntryFormData } from '../../types/premieres';
+import { PaymentsFormDataResponse, EntryFormData } from '../../types/premiere';
 
 export interface EntryCancelParams extends EntryFormData {
     premiereId: string;

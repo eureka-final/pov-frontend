@@ -1,5 +1,5 @@
 import { axiosInstance } from '../axiosInstance';
-import type { ReviewFormData } from '../../types/reviews';
+import type { ReviewFormData } from '../../types/review';
 import { END_POINTS } from '../../constants/api';
 
 export interface PostReviewParams extends ReviewFormData {
