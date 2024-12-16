@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-
-import { getNaverUserInfoApi } from '../../../apis/auth/oauthApi';
-import { postLoginApi } from '../../../apis/auth/loginApi';
+// import { getNaverUserInfoApi } from '../../../apis/auth/oauthApi';
+// import { postLoginApi } from '../../../apis/auth/loginApi';
 import { useAuthStore } from '../../../stores/useAuthStore';
 
 import Padded from '../../../components/templates/Padded/Padded';
+import { postLogin } from '../../../apis/auth/postAuth';
 
 const Index = () => {
   const navigate = useNavigate();
@@ -23,34 +23,47 @@ const Index = () => {
       navigate(location.pathname, { replace: true }); // URL에서 쿼리 파라미터 제거
 
       if (code && state) {
-        const data = await getNaverUserInfoApi(code, state);
+        const response = await postLogin(code, state, 'NAVER');
 
-        if (data) {
-          try {
-            const response = await postLoginApi(data.email, 'NAVER');
-
-            if (response.data.exists) {
-              setLoggedIn(true);
-              setUser(response.data.memberInfo);
-              alert('로그인 성공');
-              navigate('/main');
-            } else {
-              alert('최초 로그인, 회원가입으로 이동');
-              navigate('/signup', {
-                state: {
-                  email: data.email,
-                  profileImage: data.profileImage,
-                  socialType: 'NAVER',
-                },
-              });
-            }
-          } catch (error: any) {
-            console.error(error);
-            alert('로그인 실패');
-            navigate('/login');
-            return;
+        if (response) {
+          if (response.data.exists) {
+            setLoggedIn(true);
+            setUser(response.data.memberInfo);
+            window.location.href = '/';
+          } else {
+            window.location.href = '/signup';
           }
         }
+
+        /* 기존 로그인 로직 */
+        // const data = await getNaverUserInfoApi(code, state);
+
+        // if (data) {
+        //   try {
+        //     const response = await postLoginApi(data.email, 'NAVER');
+
+        //     if (response.data.exists) {
+        //       setLoggedIn(true);
+        //       setUser(response.data.memberInfo);
+        //       alert('로그인 성공');
+        //       navigate('/main');
+        //     } else {
+        //       alert('최초 로그인, 회원가입으로 이동');
+        //       navigate('/signup', {
+        //         state: {
+        //           email: data.email,
+        //           profileImage: data.profileImage,
+        //           socialType: 'NAVER',
+        //         },
+        //       });
+        //     }
+        //   } catch (error) {
+        //     console.error(error);
+        //     alert('로그인 실패');
+        //     navigate('/login');
+        //     return;
+        //   }
+        // }
       }
     };
 
