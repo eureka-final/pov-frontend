@@ -6,16 +6,34 @@ import { CardWapper } from '../../components/movies/Card/Card.styles';
 const MoviePageSkeleton = () => {
   return (
     <>
-      <Container>
-        <SectionContainer>
-          <CardContainer>
-            <CardWapper>
-              <Skeleton width="156px" height="233px" />
-              <Skeleton width="156px" height="60px" />
-            </CardWapper>
-          </CardContainer>
-        </SectionContainer>
-      </Container>
+      <SectionContainer>
+        <CardContainer>
+          <CardWapper>
+            <Skeleton width="156px" height="233px" />
+            <Skeleton width="100%" height="60px" />
+          </CardWapper>
+          <CardWapper>
+            <Skeleton width="156px" height="233px" />
+            <Skeleton width="100%" height="60px" />
+          </CardWapper>
+          <CardWapper>
+            <Skeleton width="156px" height="233px" />
+            <Skeleton width="100%" height="60px" />
+          </CardWapper>
+          <CardWapper>
+            <Skeleton width="156px" height="233px" />
+            <Skeleton width="100%" height="60px" />
+          </CardWapper>
+          <CardWapper>
+            <Skeleton width="156px" height="233px" />
+            <Skeleton width="100%" height="60px" />
+          </CardWapper>
+          <CardWapper>
+            <Skeleton width="156px" height="233px" />
+            <Skeleton width="100%" height="60px" />
+          </CardWapper>
+        </CardContainer>
+      </SectionContainer>
     </>
   );
 };
