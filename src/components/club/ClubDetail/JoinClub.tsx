@@ -20,7 +20,6 @@ import {
 } from './ClubDetail.styles';
 import { ClubReviewListContainer } from '../../../components/review/ReviewCard.style';
 import ReviewClubCard from '../../../components/review/ReviewClubCard';
-import Card from '../../../components/club/ClubDetail/Card';
 import { useClubDetailQuery } from '../../../hooks/queries/useClubsQuery';
 import { useDeleteClubMutation } from '../../../hooks/queries/useDeleteClubMutation';
 import { useLeaveClubMutaion } from '../../../hooks/queries/useLeaveClubMutaion';
@@ -213,10 +212,11 @@ const JoinClub = () => {
               <ShowMoreBtn />
             </SectionWrapper>
 
+            {/* TODO: 북마크 데이터로 교체  */}
             <ClubBookMarkContainer>
-              {clubsData.data.clubMovieList.clubMovies.content.slice(0, 6).map((item, index) => (
+              {/* {clubsData.data.clubMovieList.clubMovies.content.slice(0, 6).map((item, index) => (
                 <Card key={item.item.title + index} item={item.item} />
-              ))}
+              ))} */}
             </ClubBookMarkContainer>
           </Section>
 
