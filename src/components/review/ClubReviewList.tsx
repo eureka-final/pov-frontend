@@ -26,10 +26,7 @@ function ClubReviewList() {
               src={club.clubImage}
               css={{ cursor: 'pointer' }}
               selected={club.clubId === selectedClubId}
-              onClick={() => {
-                console.log(`클릭된 clubId: ${club.clubId}`);
-                setSelectedClubId(club.clubId);
-              }}
+              onClick={() => setSelectedClubId(club.clubId)}
             />
           </ClubItem>
         ))}
