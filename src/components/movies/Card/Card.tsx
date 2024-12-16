@@ -1,5 +1,5 @@
 import { Movie } from '../../../types/movie';
-import { Container, InfoContainer, Info, Count } from './Card.styles';
+import { CardWapper, InfoContainer, Info, Count } from './Card.styles';
 import { Heading, Body, Icon } from 'pov-design-system';
 
 interface CardProps {
@@ -8,7 +8,7 @@ interface CardProps {
 
 const Card = ({ item }: CardProps) => {
   return (
-    <Container>
+    <CardWapper>
       <img src={item.poster} />
       <Heading size="medium">{item.title}</Heading>
       <Body size="large" style={{ color: '#ADACAF' }}>
@@ -24,7 +24,7 @@ const Card = ({ item }: CardProps) => {
           <Count>{item.reviewCount}</Count>
         </InfoContainer>
       </Info>
-    </Container>
+    </CardWapper>
   );
 };
 

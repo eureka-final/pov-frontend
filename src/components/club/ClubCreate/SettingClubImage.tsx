@@ -26,8 +26,9 @@ export const SettingClubImage: React.FC<ClubImageProps> = ({ onImgUrl, uploadImg
       const formData = new FormData();
       formData.append('file', uploadFile);
 
+      // TODO: query로 작성
       try {
-        const res = await axiosInstanceMulipart.post('http://www.point-of-views.com/api/clubs/images', formData);
+        const res = await axiosInstanceMulipart.post('https://www.point-of-views.com/api/clubs/images', formData);
         onImgUrl(res.data.data.imageUrl);
 
         // eslint-disable-next-line @typescript-eslint/no-explicit-any

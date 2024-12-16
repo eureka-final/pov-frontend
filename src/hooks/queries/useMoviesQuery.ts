@@ -29,8 +29,9 @@ export const useMoviesQuery = () => {
     },
     initialPageParam: 0,
   });
+  
   const moviesData =
-  data?.pages.flatMap((page) => page?.data?.movies?.content || []) || [];
+  data?.pages.flatMap((page) => page?.data?.movies?.content) || [];
 
   return { moviesData, isLoading, hasNextPage, fetchNextPage, isFetchingNextPage };
 };
