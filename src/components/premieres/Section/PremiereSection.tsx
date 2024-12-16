@@ -3,7 +3,8 @@ import { Premieres } from '../../../types/premieres';
 import { Heading, Body } from 'pov-design-system';
 import { useNavigate } from 'react-router-dom';
 
-const PremiereSection = ({ premiereId, title, thumbnail, startAt }: Premieres) => {
+// const PremiereSection = ({ premiereId, title, thumbnail, startAt }: Premieres) => {
+const PremiereSection = ({ premiereId, title, startAt }: Premieres) => {
   const navigate = useNavigate();
   return (
     <Card onClick={() => navigate(`/premieres/${premiereId}`)}>

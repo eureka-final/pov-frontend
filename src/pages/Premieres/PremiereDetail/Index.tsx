@@ -1,32 +1,70 @@
+import { useEffect, useRef, useState } from 'react';
 import { PremiereContentSection, PremiereBodyImage } from './index.style';
 import { Button } from 'pov-design-system';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useEntryMutation } from '../../../hooks/queries/usePermiereMutation';
+import { useEntryMutation, useCancelEntryMutation } from '../../../hooks/queries/usePermiereMutation';
 import { usePermieresDetailQuery } from '../../../hooks/queries/usePermieresQuery';
 
 const Index = () => {
   const navigate = useNavigate();
   const { premiereId } = useParams<{ premiereId: string }>();
   const { premieresData } = usePermieresDetailQuery(premiereId!);
+
+  //@ts-ignore
+  const [orderId, setOrderId] = useState<string | null>(null);
+  const orderIdRef = useRef<string | null>(null);
+
   const entryMutation = useEntryMutation();
+  const cancelEntryMutation = useCancelEntryMutation();
+  const isCanceling = useRef(false); // 중복 요청 방지 플래그
 
   const checkEntry = () => {
     const requestData = {
       amount: 50000,
       quantity: 1,
     };
-    console.log(requestData);
     entryMutation.mutate(
       { premiereId: premiereId!, ...requestData },
       {
         onSuccess: (data) => {
-          const orderId = data.data.orderId;
-          console.log('응모 가능!!!!!!!!');
-          navigate(`/premieres/${premiereId}/payments/${orderId}`);
+          const newOrderId = data.data.orderId;
+          setOrderId(newOrderId);
+          orderIdRef.current = newOrderId;
+          navigate(`/premieres/${premiereId}/payments/${newOrderId}`);
         },
       }
     );
   };
+
+  useEffect(() => {
+    const handlePopState = () => {
+      console.log('pop', orderIdRef.current); // Ref를 사용하여 최신 orderId 참조
+      if (orderIdRef.current) {
+        cancelEntryMutation.mutate(
+          { premiereId: premiereId!, orderId: orderIdRef.current },
+          {
+            onSuccess: () => {
+              console.log('응모 취소 성공');
+              isCanceling.current = false;
+            },
+            onError: () => {
+              console.error('응모 취소 실패');
+              isCanceling.current = false;
+            },
+          }
+        );
+      }
+    };
+
+    window.addEventListener('popstate', function () {
+      handlePopState();
+    });
+    return () => {
+      window.removeEventListener('popstate', function () {
+        handlePopState();
+      });
+    };
+  }, [premiereId, orderId, cancelEntryMutation]);
 
   return (
     <PremiereContentSection>

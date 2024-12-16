@@ -32,6 +32,10 @@ export interface PaymentsFormData {
     quantity: number;
 }
 
+export interface EntryFormData {
+    orderId: string;
+}
+
 export interface PaymentsFormDataResponse {
     message: string;
     data: {

@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useToast } from '../common/useToast';
-import { postEntry } from '../../apis/premieres/postEntry';
+import { postEntry, deleteCancelEntry } from '../../apis/premieres/postEntry';
 
 export const useEntryMutation = () => {
   const queryClient = useQueryClient();
@@ -20,4 +20,23 @@ export const useEntryMutation = () => {
   );
 
   return entryMutation;
+};
+
+export const useCancelEntryMutation = () => {
+  const queryClient = useQueryClient();
+  const { createToast } = useToast();
+
+  const cancelEntryMutation = useMutation({
+    mutationFn: deleteCancelEntry,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['cancelEntry'] });
+    },
+    onError: () => {
+      // 에러 핸들링
+      createToast('응모취소에 실패했습니다. 다시 시도해주세요');
+    },
+  }
+  );
+
+  return cancelEntryMutation;
 };
