@@ -2,7 +2,7 @@ import { axiosInstance } from '../axiosInstance';
 import { END_POINTS } from '../../constants/api';
 import { PaymentsFormData, PaymentsFormDataResponse } from '../../types/premieres';
 
-interface EntryParams extends PaymentsFormData {
+export interface EntryParams extends PaymentsFormData {
     premiereId: string;
 }
 

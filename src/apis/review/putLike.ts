@@ -2,7 +2,7 @@ import { axiosInstance } from '../axiosInstance';
 
 import { END_POINTS } from '../../constants/api';
 
-interface putLikeParams {
+export interface putLikeParams {
   movieId: number;
   reviewId: number;
 }
