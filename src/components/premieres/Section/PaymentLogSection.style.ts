@@ -24,6 +24,7 @@ export const NoContentsContainer = styled.div`
   width: 100%;
   height: 80px;
   padding: 0 24px;
+  margin-top: 16px;
   border-radius: 8px;
 
   background-color: ${({ theme }) => theme.backgroundElevated};
