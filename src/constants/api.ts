@@ -12,24 +12,18 @@ export const END_POINTS = {
   PREMIERE_ENTRY: (premiereId: string) => `/api/premieres/${premiereId}/entry`,
   PREMIERE_CANCEL_ENTRY: (premiereId: string) => `/api/premieres/${premiereId}/entry/cancel`,
   REVIEWS: (pageParam: number | unknown) => `/api/movies/reviews?page=${pageParam}`,
-  MY_REVIEWS: (pageParam: number | unknown) => `/api/movies/reviews/my?page=${pageParam}`,
+  MY_REVIEWS:  (pageParam: number | unknown) => `/api/movies/reviews/my?page=${pageParam}`,
   CLUB_REVIEW: (clubId: string, pageParam: number | unknown) => `/api/clubs/${clubId}/reviews?page=${pageParam}`,
-  REVIEW: (movieId: string, reviewId: string) => `/api/movies/${movieId}/reviews/${reviewId}`,
+  REVIEW: (movieId: string, reviewId: string) =>  `/api/movies/${movieId}/reviews/${reviewId}`,
   CREATE_REVIEW: (movieId: string) => `/api/movies/${movieId}/reviews`,
-  CLUB: (clubId: string) => `/api/clubs/${clubId}`,
-  JOIN_CLUB: (clubId: string) => `/api/clubs/${clubId}/member`,
+  CLUB: (clubId: string) =>  `/api/clubs/${clubId}`,
+  JOIN_CLUB: (clubId: string) =>  `/api/clubs/${clubId}/member`,
   INVITE_CLUB: (clubId: string) => `/api/clubs/${clubId}/invite-code`,
-  LEAVE_CLUB: (clubId: string) => `/api/clubs/${clubId}/leave`,
-  LEADER_CLUB: (clubId: string) => `/api/clubs/${clubId}/leader`,
+  LEAVE_CLUB: (clubId: string) =>  `/api/clubs/${clubId}/leave`,
+  LEADER_CLUB: (clubId: string) =>  `/api/clubs/${clubId}/leader`,
   LIKE: (movieId: number, reviewId: number) => `/api/movies/${movieId}/reviews/${reviewId}/like`,
   DISLIKE: (movieId: number, reviewId: number) => `/api/movies/${movieId}/reviews/${reviewId}/dislike`,
 } as const;
-
-export const EXCEPTION_POINTS = {
-  NAVER_LOGIN: '/oauth2/authorization/naver',
-  NAVER_REDIRECT: '/login/oauth2/code/naver',
-  SWAGGER: '/api/swagger-ui/index.html',
-};
 
 export const NETWORK = {
   RETRY_COUNT: 2,
