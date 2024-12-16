@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useToast } from '../common/useToast';
-import { postEntry, deleteCancelEntry } from '../../apis/premieres/postEntry';
+import { postEntry } from '../../apis/premieres/postEntry';
+import { deleteEntry } from '../../apis/premieres/deleteEntry';
 
 export const useEntryMutation = () => {
   const queryClient = useQueryClient();
@@ -27,7 +28,7 @@ export const useCancelEntryMutation = () => {
   const { createToast } = useToast();
 
   const cancelEntryMutation = useMutation({
-    mutationFn: deleteCancelEntry,
+    mutationFn: deleteEntry,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['cancelEntry'] });
     },

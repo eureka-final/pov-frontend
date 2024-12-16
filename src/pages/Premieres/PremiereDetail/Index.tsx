@@ -38,7 +38,6 @@ const Index = () => {
 
   useEffect(() => {
     const handlePopState = () => {
-      console.log('pop', orderIdRef.current); // Ref를 사용하여 최신 orderId 참조
       if (orderIdRef.current && !isCanceling.current) {
         isCanceling.current = true;
         cancelEntryMutation.mutate(
