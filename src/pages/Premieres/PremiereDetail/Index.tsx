@@ -39,7 +39,8 @@ const Index = () => {
   useEffect(() => {
     const handlePopState = () => {
       console.log('pop', orderIdRef.current); // Ref를 사용하여 최신 orderId 참조
-      if (orderIdRef.current) {
+      if (orderIdRef.current && !isCanceling.current) {
+        isCanceling.current = true;
         cancelEntryMutation.mutate(
           { premiereId: premiereId!, orderId: orderIdRef.current },
           {
@@ -64,7 +65,7 @@ const Index = () => {
         handlePopState();
       });
     };
-  }, [premiereId, orderId, cancelEntryMutation]);
+  }, [premiereId, cancelEntryMutation]);
 
   return (
     <PremiereContentSection>
