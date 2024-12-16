@@ -4,6 +4,8 @@ export interface Notice {
   content: string;
   isRead: boolean;
   createdAt: string;
+  movieId: string;
+  reviewId: string;
 }
 
 export interface NoticesResponse {
