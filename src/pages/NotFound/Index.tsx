@@ -11,15 +11,7 @@ const Index = () => {
   // 현재 URL이 예외 목록에 포함되어 있는지 확인
   if (exceptionUrls.some((url) => location.pathname.startsWith(url))) {
     const redirectUrl = `https://www.point-of-views.com${location.pathname}`;
-
-    // 무한 리다이렉트 방지
-    if (window.location.href !== redirectUrl) {
-      console.log(`Redirecting to: ${redirectUrl}`);
-      window.location.href = redirectUrl; // 서버로 리다이렉트
-    } else {
-      console.log('Already on the target URL. Preventing further redirects.');
-    }
-
+    window.location.href = redirectUrl; // 서버로 리다이렉트
     return null; // 렌더링 중단
   }
 
