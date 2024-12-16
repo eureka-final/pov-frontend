@@ -11,7 +11,7 @@ import MoviePageSkeleton from './MoviePageSkeleton';
 const Index = () => {
   const user = useAuthStore((state) => state.user);
   const { ref, inView } = useInView();
-  const pageSize = 12;
+  const pageSize = 2;
 
   const heading = `${user?.nickname}${constants.movies.main.topic.recommendation}`;
 
