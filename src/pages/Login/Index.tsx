@@ -1,12 +1,12 @@
 import Padded from '../../components/templates/Padded/Padded';
 import { SignInSection, SignInSectionHeader, SignInButtonWrapper, NaverSignInButton, GoogleSignInButton } from './Index.style';
 import { Logo, Heading, Paragraph } from 'pov-design-system';
-import { EXCEPTION_POINTS } from '../../constants/api';
+// import { EXCEPTION_POINTS } from '../../constants/api';
 
 const Index = () => {
   /* 네이버 OAuth 서버 URL로 리디렉션 */
   const redirectToNaverLogin = () => {
-    const authUrl = `${import.meta.env.VITE_BASE_URL}${EXCEPTION_POINTS.NAVER_LOGIN}`;
+    const authUrl = `${import.meta.env.VITE_BASE_URL}/oauth2/authorization/naver`;
     window.location.href = authUrl;
   };
 
