@@ -1,9 +1,15 @@
 import styled from '@emotion/styled';
 
-export const AlarmCardWrapper = styled.div`
+export const Section = styled.div`
   @media (min-width: 600px) {
     padding: 0 192px;
   }
+`;
+
+export const AlarmCardWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 `;
 
 export const AlarmCardContainer = styled.div`
