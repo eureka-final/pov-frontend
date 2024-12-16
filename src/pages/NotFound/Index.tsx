@@ -1,16 +1,25 @@
+// import { EXCEPTION_POINTS } from '../../constants/api';
 import { Heading, Button, Logo, Body } from 'pov-design-system';
-import { useNavigate } from 'react-router-dom';
 import { containerStyling, buttonStyling, headingStyling, textStyling } from '../../components/fallbackUI/FallbackUI.style';
+import { useNavigate } from 'react-router-dom';
 
 const Index = () => {
   const navigate = useNavigate();
-
   // 서버로 리다이렉트가 필요한 예외 URL 목록
   const exceptionUrls = ['/api', '/oauth2/authorization/naver', '/login/oauth2/code/naver', '/api/swagger-ui/index.html'];
 
   // 현재 URL이 예외 목록에 포함되어 있는지 확인
   if (exceptionUrls.some((url) => location.pathname.startsWith(url))) {
-    window.location.href = location.pathname; // 서버로 리다이렉트
+    const redirectUrl = `https://www.point-of-views.com${location.pathname}`;
+
+    // 무한 리다이렉트 방지
+    if (window.location.href !== redirectUrl) {
+      console.log(`Redirecting to: ${redirectUrl}`);
+      window.location.href = redirectUrl; // 서버로 리다이렉트
+    } else {
+      console.log('Already on the target URL. Preventing further redirects.');
+    }
+
     return null; // 렌더링 중단
   }
 
