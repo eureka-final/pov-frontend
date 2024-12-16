@@ -1,14 +1,17 @@
 import { Movie } from '../../../types/movie';
 import { CardWapper, InfoContainer, Info, Count } from './Card.styles';
 import { Heading, Body, Icon } from 'pov-design-system';
+import { useNavigate } from 'react-router-dom';
 
 interface CardProps {
   item: Movie;
 }
 
 const Card = ({ item }: CardProps) => {
+  const navigate = useNavigate();
+
   return (
-    <CardWapper>
+    <CardWapper onClick={() => navigate(`/movie/${item.id}/detail`)}>
       <img src={item.poster} />
       <Heading size="medium">{item.title}</Heading>
       <Body size="large" style={{ color: '#ADACAF' }}>

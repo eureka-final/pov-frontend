@@ -12,7 +12,7 @@ export const useLikeMutation = () => {
   const likeMutation = useMutation({
     mutationFn: putLike,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['like'] });
+      queryClient.invalidateQueries({ queryKey: ['clubReviews'] });
     },
     onError: () => {
       createToast('좋아요 실패');
@@ -29,7 +29,7 @@ export const useDisLikeMutation = () => {
   const disLikeMutation = useMutation({
     mutationFn: putDisLike,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['dislike'] });
+      queryClient.invalidateQueries({ queryKey: ['clubReviews'] });
     },
     onError: () => {
       createToast('좋아요 취소 실패');

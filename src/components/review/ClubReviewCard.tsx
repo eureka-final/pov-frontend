@@ -68,7 +68,11 @@ function ClubReviewCard({ clubId }: { clubId: string }) {
   };
 
   const handleLikeCount = (index: number, newCount: number) => {
-    setLikeCounts((prev) => prev.map((count, i) => (i === index ? newCount : count)));
+    setLikeCounts((prev) => {
+      const updatedCounts = [...prev];
+      updatedCounts[index] = newCount;
+      return updatedCounts;
+    });
   };
 
   return (
@@ -108,9 +112,9 @@ function ClubReviewCard({ clubId }: { clubId: string }) {
                     movieId={review.movieId}
                     reviewId={review.reviewId}
                     handleLikeCount={(newCount) => handleLikeCount(index, newCount)}
-                    likeCount={likeCounts[index] ?? 0}
+                    likeCount={likeCounts[index]}
                   />
-                  {likeCounts[index] ?? 0}
+                  {likeCounts[index]}
                 </LikeContainer>
               </FlexBetween>
             </ReviewCardContainer>

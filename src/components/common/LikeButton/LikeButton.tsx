@@ -18,18 +18,20 @@ const LikeButton = ({ initialState, movieId, reviewId, handleLikeCount, likeCoun
 
   const [isLikeChecked, setIsLikeChecked] = useState<boolean>(initialState);
 
-  const updateLikeCount = (isLike: boolean) => (isLike ? handleLikeCount(likeCount + 1) : handleLikeCount(likeCount - 1));
-
   const handleLikeCheck = (isLike: boolean) => {
+    const prevLikeChecked = isLikeChecked;
     const prevLikeCount = likeCount;
+
     setIsLikeChecked(isLike);
-    updateLikeCount(isLike);
+    const newCount = isLike ? likeCount + 2 : likeCount - 2;
+    handleLikeCount(newCount);
 
     likeMutation.mutate(
       { movieId, reviewId },
       {
         onError: () => {
-          setIsLikeChecked(!isLike);
+          // 복구
+          setIsLikeChecked(prevLikeChecked);
           handleLikeCount(prevLikeCount);
         },
       }
@@ -37,15 +39,19 @@ const LikeButton = ({ initialState, movieId, reviewId, handleLikeCount, likeCoun
   };
 
   const handleDisLikeCheck = (isLike: boolean) => {
+    const prevLikeChecked = isLikeChecked;
     const prevLikeCount = likeCount;
+
     setIsLikeChecked(isLike);
-    updateLikeCount(isLike);
+    const newCount = isLike ? likeCount + 2 : likeCount - 2;
+    handleLikeCount(newCount);
 
     disLikeMutation.mutate(
       { movieId, reviewId },
       {
         onError: () => {
-          setIsLikeChecked(!isLike);
+          // 복구
+          setIsLikeChecked(prevLikeChecked);
           handleLikeCount(prevLikeCount);
         },
       }
@@ -55,13 +61,15 @@ const LikeButton = ({ initialState, movieId, reviewId, handleLikeCount, likeCoun
   return (
     <div {...attribute}>
       {isLikeChecked ? (
-        <Icon
-          icon={'heartfill'}
-          onClick={(e: { stopPropagation: () => void }) => {
-            e.stopPropagation();
-            handleDisLikeCheck(false);
-          }}
-        />
+        <>
+          <Icon
+            icon={'heartfill'}
+            onClick={(e: { stopPropagation: () => void }) => {
+              e.stopPropagation();
+              handleDisLikeCheck(false);
+            }}
+          />
+        </>
       ) : (
         <Icon
           icon={'heartline'}

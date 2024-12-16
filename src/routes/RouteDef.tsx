@@ -27,7 +27,6 @@ import Settings from '../pages/MyPage/Settings';
 import NotFound from '../pages/NotFound/Index';
 
 // import React, { lazy, Suspense } from 'react';
-// import ReviewPageSkeleton from '../pages/Review/ReviewPageSkeleton';
 
 const MovieScreens = {
   Main: {
@@ -39,7 +38,7 @@ const MovieScreens = {
     element: <Movie />,
   },
   MovieDetail: {
-    path: '/movie/detail',
+    path: '/movie/:id/detail',
     element: <MovieDetail />,
   },
   MovieReviews: {

@@ -1,10 +1,10 @@
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import axios from 'axios';
 import { CardContainer, Poster, CardFlex, ReviewCardContainer, LikeContainer, FlexBetween, Spoiler, SpoMore, ReadMore } from './ReviewCard.style';
 import { Body, Paragraph, Icon } from 'pov-design-system';
 import Profile from '../common/Profile';
 import dompurify from 'dompurify';
+import { axiosInstance } from '../../apis/axiosInstance';
 
 interface ReviewCardProps {
   key: number;
@@ -60,8 +60,9 @@ function ReviewClubCard({
   const onLike = () => {
     // Like이 클릭 안되어있을 때 처리
     if (likeAction === false) {
-      axios.put('/api/movies/1/reviews/1/likes').then((response) => {
-        if (response.data.success) {
+      axiosInstance.put(`/api/movies/${movieId}/reviews/${reviewId}/like`).then((response) => {
+        if (response.data) {
+          console.log(response.data);
           setLikes(likes + 1);
           setLikeAction(true);
         } else {
@@ -70,8 +71,9 @@ function ReviewClubCard({
       });
     } else {
       // Like이 클릭되어있을 때 처리
-      axios.put('/api/movies/1/reviews/1/unLikes').then((response) => {
-        if (response.data.success) {
+      axiosInstance.put(`/api/movies/${movieId}/reviews/${reviewId}/dislike`).then((response) => {
+        if (response.data) {
+          console.log(response.data);
           setLikes(likes - 1);
           setLikeAction(false);
         } else {
