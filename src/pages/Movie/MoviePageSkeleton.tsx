@@ -1,40 +1,24 @@
 import { Skeleton } from 'pov-design-system';
-import { Container } from './Movie.styles';
+import Padded from '../../components/templates/Padded/Padded';
 import { SectionContainer, CardContainer } from '../../components/movies/Section/Section.styles';
-import { CardWapper } from '../../components/movies/Card/Card.styles';
+import { CardWapper, MarginTop } from '../../components/movies/Card/Card.styles';
 
 const MoviePageSkeleton = () => {
   return (
-    <>
-      <SectionContainer>
-        <CardContainer>
-          <CardWapper>
-            <Skeleton width="156px" height="233px" />
-            <Skeleton width="100%" height="60px" />
-          </CardWapper>
-          <CardWapper>
-            <Skeleton width="156px" height="233px" />
-            <Skeleton width="100%" height="60px" />
-          </CardWapper>
-          <CardWapper>
-            <Skeleton width="156px" height="233px" />
-            <Skeleton width="100%" height="60px" />
-          </CardWapper>
-          <CardWapper>
-            <Skeleton width="156px" height="233px" />
-            <Skeleton width="100%" height="60px" />
-          </CardWapper>
-          <CardWapper>
-            <Skeleton width="156px" height="233px" />
-            <Skeleton width="100%" height="60px" />
-          </CardWapper>
-          <CardWapper>
-            <Skeleton width="156px" height="233px" />
-            <Skeleton width="100%" height="60px" />
-          </CardWapper>
-        </CardContainer>
-      </SectionContainer>
-    </>
+    <Padded>
+      <MarginTop>
+        <SectionContainer>
+          <CardContainer>
+            {Array.from({ length: 6 }).map((_, index) => (
+              <CardWapper key={`skeleton-${index}`}>
+                <Skeleton width="156px" height="233px" />
+                <Skeleton width="156px" height="60px" />
+              </CardWapper>
+            ))}
+          </CardContainer>
+        </SectionContainer>
+      </MarginTop>
+    </Padded>
   );
 };
 

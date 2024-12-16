@@ -22,3 +22,7 @@ export const Info = styled.div`
 `;
 
 export const Count = styled.span``;
+
+export const MarginTop = styled.div`
+  margin-top: 35px;
+`;
