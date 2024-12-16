@@ -1,7 +1,7 @@
 import { axiosInstance } from '../axiosInstance';
 import { END_POINTS } from '../../constants/api';
 
-interface JoinClubParams {
+export interface JoinClubParams {
     clubId: string;
 }
 

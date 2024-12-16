@@ -1,20 +1,29 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { CardContainer, Poster, CardFlex, ReviewCardContainer, LikeContainer, FlexBetween, Spoiler, SpoMore, ReadMore, TitleInfo } from './ReviewCard.style';
+import {
+  ClubReviewListContainer,
+  CardContainer,
+  Poster,
+  CardFlex,
+  ReviewCardContainer,
+  LikeContainer,
+  FlexBetween,
+  Spoiler,
+  SpoMore,
+  ReadMore,
+  TitleInfo,
+} from '../../../components/review/ReviewCard.style';
 import { Body, Paragraph, Heading, Logo, Button } from 'pov-design-system';
-import Profile from '../common/Profile';
-import { useClubReviewsQuery } from '../../hooks/queries/useReviewsQuery';
+import Profile from '../../../components/common/Profile';
+import { useClubReviewsQuery } from '../../../hooks/queries/useReviewsQuery';
 import dompurify from 'dompurify';
-import LikeButton from '../common/LikeButton/LikeButton';
+import LikeButton from '../../../components/common/LikeButton/LikeButton';
 import { useInView } from 'react-intersection-observer';
-import ReviewPageSkeleton from './ReviewPageSkeleton';
+import ReviewPageSkeleton from '../../../components/review/ReviewPageSkeleton';
 
-interface ReviewCardProps {
-  clubId: string;
-}
-
-function ClubReviewCard({ clubId }: ReviewCardProps) {
+function Index() {
   const navigate = useNavigate();
+  const { clubId } = useParams<{ clubId: string }>();
 
   const pageSize = 10;
   const { reviewsData, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } = useClubReviewsQuery(clubId!);
@@ -77,50 +86,52 @@ function ClubReviewCard({ clubId }: ReviewCardProps) {
 
   return (
     <>
-      {reviewsData.map((review, index) => (
-        <CardContainer
-          key={review.reviewId}
-          onClick={() => {
-            navigate(`/review/${review.movieId}/detail/${review.reviewId}`);
-          }}
-        >
-          <CardFlex>
-            <Poster>
-              <img src={review.thumbnail.replace('/w154/', '/w92/')} alt={review.movieTitle} />
-              <Body size="small">{review.movieTitle}</Body>
-            </Poster>
-            <ReviewCardContainer>
-              <Profile name={review.reviewer} avatarUrl={review.profileImage} />
-              <Paragraph>{review.title}</Paragraph>
+      <ClubReviewListContainer>
+        {reviewsData.map((review, index) => (
+          <CardContainer
+            key={review.reviewId}
+            onClick={() => {
+              navigate(`/review/${review.movieId}/detail/${review.reviewId}`);
+            }}
+          >
+            <CardFlex>
+              <Poster>
+                <img src={review.thumbnail.replace('/w154/', '/w92/')} alt={review.movieTitle} />
+                <Body size="small">{review.movieTitle}</Body>
+              </Poster>
+              <ReviewCardContainer>
+                <Profile name={review.reviewer} avatarUrl={review.profileImage} />
+                <Paragraph>{review.title}</Paragraph>
 
-              {review.spoiler ? (
-                <Spoiler>
-                  <Body size="large">스포일러가 있어요!</Body>
-                  <Body size="large">
-                    <SpoMore>더보기</SpoMore>
-                  </Body>
-                </Spoiler>
-              ) : (
-                <Body size="large">{truncateContents(review.contents, 145)}</Body>
-              )}
+                {review.spoiler ? (
+                  <Spoiler>
+                    <Body size="large">스포일러가 있어요!</Body>
+                    <Body size="large">
+                      <SpoMore>더보기</SpoMore>
+                    </Body>
+                  </Spoiler>
+                ) : (
+                  <Body size="large">{truncateContents(review.contents, 380)}</Body>
+                )}
 
-              <FlexBetween>
-                <Body>{new Date(review.createdAt).toLocaleDateString()}</Body>
-                <LikeContainer>
-                  <LikeButton
-                    initialState={review.isLiked}
-                    movieId={review.movieId}
-                    reviewId={review.reviewId}
-                    handleLikeCount={(newCount) => handleLikeCount(index, newCount)}
-                    likeCount={likeCounts[index] ?? 0}
-                  />
-                  {likeCounts[index] ?? 0}
-                </LikeContainer>
-              </FlexBetween>
-            </ReviewCardContainer>
-          </CardFlex>
-        </CardContainer>
-      ))}
+                <FlexBetween>
+                  <Body>{new Date(review.createdAt).toLocaleDateString()}</Body>
+                  <LikeContainer>
+                    <LikeButton
+                      initialState={review.isLiked}
+                      movieId={review.movieId}
+                      reviewId={review.reviewId}
+                      handleLikeCount={(newCount) => handleLikeCount(index, newCount)}
+                      likeCount={likeCounts[index] ?? 0}
+                    />
+                    {likeCounts[index] ?? 0}
+                  </LikeContainer>
+                </FlexBetween>
+              </ReviewCardContainer>
+            </CardFlex>
+          </CardContainer>
+        ))}
+      </ClubReviewListContainer>
       {isFetchingNextPage && Array.from({ length: pageSize }).map((_, index) => <ReviewPageSkeleton key={`fetching-skeleton-${index}`} />)}
       {hasNextPage && <div ref={ref} style={{ height: '1px' }} />}
     </>
@@ -140,6 +151,6 @@ const EmptyClubReviewCard = () => {
   );
 };
 
-ClubReviewCard.Empty = EmptyClubReviewCard;
+Index.Empty = EmptyClubReviewCard;
 
-export default ClubReviewCard;
+export default Index;

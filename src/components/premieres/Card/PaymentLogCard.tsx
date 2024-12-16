@@ -1,5 +1,5 @@
 import { Heading, Body } from 'pov-design-system';
-import { Card } from './PremiereCard.style';
+import { Card } from './PaymentLogCard.style';
 import { useTheme } from '@emotion/react';
 import { useNavigate } from 'react-router-dom';
 import type { PremiereEntry } from '../../../types/premiere';
