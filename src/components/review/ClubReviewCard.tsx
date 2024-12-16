@@ -9,11 +9,7 @@ import LikeButton from '../common/LikeButton/LikeButton';
 import { useInView } from 'react-intersection-observer';
 import ReviewPageSkeleton from './ReviewPageSkeleton';
 
-interface ReviewCardProps {
-  clubId: string;
-}
-
-function ClubReviewCard({ clubId }: ReviewCardProps) {
+function ClubReviewCard({ clubId }: { clubId: string }) {
   const navigate = useNavigate();
 
   const pageSize = 10;
