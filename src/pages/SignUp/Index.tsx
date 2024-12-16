@@ -66,7 +66,7 @@ const Index = () => {
       const response = await postSignUpApi(data);
       console.log(response);
       setLoggedIn(true);
-      setUser(response.memberInfo);
+      setUser(response.data.memberInfo);
       setStep(signInSteps[3]);
     } catch (error) {
       console.error('회원가입 실패:', error);

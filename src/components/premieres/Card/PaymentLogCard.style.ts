@@ -14,10 +14,3 @@ export const Card = styled.div`
     width: 168px;
   }
 `;
-
-export const ThumbnailImage = styled.img`
-  width: 100%;
-  aspect-ratio: '3 / 4';
-  object-fit: cover;
-  border-radius: 4px;
-`;

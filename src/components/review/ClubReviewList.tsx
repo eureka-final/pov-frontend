@@ -7,10 +7,8 @@ import ClubReviewCard from './ClubReviewCard';
 function ClubReviewList() {
   const { joinData } = useJoinClubReviewsQuery();
 
-  // 현재 선택된 클럽의 ID 상태
   const [selectedClubId, setSelectedClubId] = useState<string | null>(null);
 
-  // joinData가 로드되면 첫 번째 클럽의 ID로 설정
   useEffect(() => {
     if (joinData?.data?.clubs && joinData.data.clubs.length > 0) {
       setSelectedClubId(joinData.data.clubs[0].clubId);
@@ -20,26 +18,21 @@ function ClubReviewList() {
   return (
     <>
       <ClubContainer>
-        {joinData &&
-          joinData.data.clubs.map((club) => {
-            return (
-              <ClubItem key={club.clubId}>
-                <Avatar
-                  size="medium"
-                  username={club.clubName}
-                  src={club.clubImage}
-                  css={{ cursor: 'pointer' }}
-                  selected={club.clubId === selectedClubId}
-                  onClick={() => setSelectedClubId(club.clubId)}
-                />
-              </ClubItem>
-            );
-          })}
+        {joinData?.data.clubs.map((club) => (
+          <ClubItem key={club.clubId}>
+            <Avatar
+              size="medium"
+              username={club.clubName}
+              src={club.clubImage}
+              css={{ cursor: 'pointer' }}
+              selected={club.clubId === selectedClubId}
+              onClick={() => setSelectedClubId(club.clubId)}
+            />
+          </ClubItem>
+        ))}
       </ClubContainer>
 
-      <ClubReviewListContainer>
-        {joinData && joinData.data.clubs.length > 0 && selectedClubId ? <ClubReviewCard clubId={selectedClubId!} /> : <ClubReviewCard.Empty />}
-      </ClubReviewListContainer>
+      <ClubReviewListContainer>{selectedClubId ? <ClubReviewCard clubId={selectedClubId} /> : <ClubReviewCard.Empty />}</ClubReviewListContainer>
     </>
   );
 }

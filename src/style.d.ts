@@ -1,5 +1,4 @@
 import '@emotion/react';
-
 interface TextStyle {
   [key: string]: {
     fontSize: string;
@@ -7,7 +6,6 @@ interface TextStyle {
     fontWeight: number;
   };
 }
-
 declare module '@emotion/react' {
   export interface Theme {
     background: string;

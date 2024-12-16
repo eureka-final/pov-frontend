@@ -2,12 +2,15 @@ import { axiosInstance } from '../axiosInstance';
 
 import { END_POINTS } from '../../constants/api';
 
-interface putLikeParams {
+export interface putLikeParams {
   movieId: number;
   reviewId: number;
-  isLike: boolean;
 }
 
-export const putLike = ({ movieId, reviewId, isLike }: putLikeParams) => {
-  return axiosInstance.put(END_POINTS.LIKE(movieId, reviewId), { isLike });
+export const putLike = ({ movieId, reviewId }: putLikeParams) => {
+  return axiosInstance.put(END_POINTS.LIKE(movieId, reviewId));
+};
+
+export const putDisLike = ({ movieId, reviewId }: putLikeParams) => {
+  return axiosInstance.put(END_POINTS.DISLIKE(movieId, reviewId));
 };
