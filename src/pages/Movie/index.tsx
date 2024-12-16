@@ -1,6 +1,6 @@
 import Padded from '../../components/templates/Padded/Padded';
 import Section from '../../components/movies/Section/Section';
-import { Container, InputContainer, SearchInput } from './Movie.styles';
+import { Container } from './Movie.styles';
 import { useState } from 'react';
 import { constants } from '../../constants/constants';
 
@@ -100,20 +100,12 @@ const Index = () => {
   const [userData, setUserData] = useState<User>({
     name: '혜밍웨이',
   });
-  const [value, setValue] = useState<string>('');
-
-  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(e.target.value);
-  };
 
   const heading = `${userData.name}${constants.movies.main.topic.recommendation}`;
 
   return (
     <Padded>
       <Container>
-        <InputContainer>
-          <SearchInput id="example-input" type="text" value={value} placeholder="영화 검색하기" onChange={handleSearch} />
-        </InputContainer>
         <Section items={dummy} heading={heading} />
       </Container>
     </Padded>

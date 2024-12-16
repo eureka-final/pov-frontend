@@ -7,9 +7,9 @@ import Profile from '../common/Profile';
 import dompurify from 'dompurify';
 
 interface ReviewCardProps {
-  key: string;
-  movieId: string;
-  reviewId: string;
+  key: number;
+  movieId: number;
+  reviewId: number;
   movieTitle: string;
   title: string;
   contents: string | undefined;
