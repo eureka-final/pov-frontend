@@ -38,6 +38,7 @@ const Index = () => {
 
   useEffect(() => {
     const handlePopState = () => {
+      console.log('pop', orderIdRef.current);
       if (orderIdRef.current && !isCanceling.current) {
         isCanceling.current = true;
         cancelEntryMutation.mutate(
