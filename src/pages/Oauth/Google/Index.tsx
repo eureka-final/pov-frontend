@@ -41,7 +41,7 @@ const Index = () => {
                 },
               });
             }
-          } catch (error) {
+          } catch (error: any) {
             console.error(error);
             alert('로그인 실패');
             navigate('/login');
