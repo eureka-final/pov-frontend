@@ -1,6 +1,6 @@
-import { useInfiniteQuery } from '@tanstack/react-query';
-import { getMovies } from '../../apis/movie/getMovies';
-import { MoviesResponse } from '../../types/movie';
+import { useQuery, useInfiniteQuery } from '@tanstack/react-query';
+import { getMovies, getDetailReview } from '../../apis/movie/getMovies';
+import { MoviesResponse, MovieDetailResponse } from '../../types/movie';
 
 export const useMoviesQuery = () => {
   const {
@@ -34,4 +34,13 @@ export const useMoviesQuery = () => {
   data?.pages.flatMap((page) => page?.data?.movies?.content) || [];
 
   return { moviesData, isLoading, hasNextPage, fetchNextPage, isFetchingNextPage };
+};
+
+export const useMovieDetailQuery = (movieId: string) => {
+  const { data: movieData } = useQuery<MovieDetailResponse>({
+    queryKey: ['movies', movieId],
+    queryFn: () => getDetailReview(movieId)
+  });
+  
+  return { movieData };
 };

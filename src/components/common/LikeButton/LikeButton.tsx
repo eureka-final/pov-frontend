@@ -23,7 +23,7 @@ const LikeButton = ({ initialState, movieId, reviewId, handleLikeCount, likeCoun
     const prevLikeCount = likeCount;
 
     setIsLikeChecked(isLike);
-    const newCount = isLike ? likeCount + 2 : likeCount - 2;
+    const newCount = isLike ? likeCount + 1 : likeCount - 1;
     handleLikeCount(newCount);
 
     likeMutation.mutate(
@@ -43,7 +43,7 @@ const LikeButton = ({ initialState, movieId, reviewId, handleLikeCount, likeCoun
     const prevLikeCount = likeCount;
 
     setIsLikeChecked(isLike);
-    const newCount = isLike ? likeCount + 2 : likeCount - 2;
+    const newCount = isLike ? likeCount + 1 : likeCount - 1;
     handleLikeCount(newCount);
 
     disLikeMutation.mutate(
