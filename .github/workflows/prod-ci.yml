@@ -20,6 +20,7 @@ jobs:
 
       - name: Add .env setting
         run: |
+          touch .env
           echo "VITE_BASE_URL=${{ secrets.VITE_BASE_URL }}" >> .env
           echo "VITE_CLIENT_SECRET_KEY=${{ secrets.VITE_CLIENT_SECRET_KEY }}" >> .env
           echo "VITE_FIREBASE_API_KEY=${{ secrets.VITE_FIREBASE_API_KEY }}" >> .env
