@@ -4,15 +4,15 @@ import { Body } from 'pov-design-system';
 
 interface ProductionsProps {
   productions: {
-    url: string;
+    profileImage: string;
     name: string;
-    position: string;
+    role: string;
   };
 }
 
 const Productions = ({ productions }: ProductionsProps) => {
   const src = {
-    url: productions.url,
+    url: productions.profileImage,
     MobileHeight: 48,
     PcHeight: 48,
     br: '100%',
@@ -25,7 +25,7 @@ const Productions = ({ productions }: ProductionsProps) => {
       <Wrapper>
         <Body size="large">{productions.name}</Body>
         <Body size="large" style={{ color: '##ADACAF' }}>
-          {productions.position}
+          {productions.role}
         </Body>
       </Wrapper>
     </Container>

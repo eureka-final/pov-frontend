@@ -1,76 +1,88 @@
 import type { ComponentPropsWithoutRef } from 'react';
 import { useState } from 'react';
-
-import { useLikeMutation, useDisLikeMutation } from '../../../hooks/queries/useLikeMutation';
 import { Icon } from 'pov-design-system';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { putLike, putDisLike } from '../../../apis/review/putLike';
 
 interface LikeButtonProps extends ComponentPropsWithoutRef<'div'> {
   initialState: boolean;
-  movieId: number;
-  reviewId: number;
+  movieId: string;
+  reviewId: string;
   likeCount: number;
-  handleLikeCount: (count: number) => void;
+  handleLikeCount: (count: number | ((prevCount: number) => number)) => void;
 }
 
-const LikeButton = ({ initialState, movieId, reviewId, handleLikeCount, likeCount, ...attribute }: LikeButtonProps) => {
-  const likeMutation = useLikeMutation();
-  const disLikeMutation = useDisLikeMutation();
+const LikeButton = ({ initialState, movieId, reviewId, handleLikeCount }: LikeButtonProps) => {
+  const [isLiked, setIsLiked] = useState<boolean>(initialState);
+  const queryClient = useQueryClient();
 
-  const [isLikeChecked, setIsLikeChecked] = useState<boolean>(initialState);
+  const likeMutation = useMutation({
+    mutationFn: putLike,
+    onMutate: async () => {
+      // 이전 쿼리 취소
+      await queryClient.cancelQueries({ queryKey: ['clubReviews', movieId, reviewId] });
 
-  const updateLikeCount = (isLike: boolean) => (isLike ? handleLikeCount(likeCount + 1) : handleLikeCount(likeCount - 1));
+      // 현재 상태를 가져옴
+      const previousReviews = queryClient.getQueryData(['clubReviews', movieId, reviewId]);
 
-  const handleLikeCheck = (isLike: boolean) => {
-    const prevLikeCount = likeCount;
-    setIsLikeChecked(isLike);
-    updateLikeCount(isLike);
+      // 낙관적 업데이트 - 즉시 상태를 업데이트
+      setIsLiked(true);
+      handleLikeCount((prevCount) => prevCount + 1);
 
-    likeMutation.mutate(
-      { movieId, reviewId },
-      {
-        onError: () => {
-          setIsLikeChecked(!isLike);
-          handleLikeCount(prevLikeCount);
-        },
-      }
-    );
-  };
+      return { previousReviews }; // 에러 발생 시 복구할 데이터 반환
+    },
+    //@ts-ignore
+    onError: (err, _, context) => {
+      // 에러 발생 시 이전 상태로 복원
+      queryClient.setQueryData(['movies', movieId, 'reviews', reviewId], context?.previousReviews);
+      setIsLiked(false);
+      handleLikeCount((prevCount) => prevCount - 1);
+    },
+    onSettled: () => {
+      // 성공 또는 실패에 상관없이 데이터 재검증
+      queryClient.invalidateQueries({ queryKey: ['movies', movieId, 'reviews', reviewId] });
+    },
+  });
 
-  const handleDisLikeCheck = (isLike: boolean) => {
-    const prevLikeCount = likeCount;
-    setIsLikeChecked(isLike);
-    updateLikeCount(isLike);
+  const disLikeMutation = useMutation({
+    mutationFn: putDisLike,
+    onMutate: async () => {
+      await queryClient.cancelQueries({ queryKey: ['movies', movieId, 'reviews', reviewId] });
+      const previousReviews = queryClient.getQueryData(['movies', movieId, 'reviews', reviewId]);
 
-    disLikeMutation.mutate(
-      { movieId, reviewId },
-      {
-        onError: () => {
-          setIsLikeChecked(!isLike);
-          handleLikeCount(prevLikeCount);
-        },
-      }
-    );
+      setIsLiked(false);
+      handleLikeCount((prevCount) => prevCount - 1);
+
+      return { previousReviews };
+    },
+    //@ts-ignore
+    onError: (err, _, context) => {
+      queryClient.setQueryData(['movies', movieId, 'reviews', reviewId], context?.previousReviews);
+      setIsLiked(true);
+      handleLikeCount((prevCount) => prevCount + 1);
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: ['movies', movieId, 'reviews', reviewId] });
+    },
+  });
+
+  const toggleLike = () => {
+    if (isLiked) {
+      disLikeMutation.mutate({ movieId, reviewId });
+    } else {
+      likeMutation.mutate({ movieId, reviewId });
+    }
   };
 
   return (
-    <div {...attribute}>
-      {isLikeChecked ? (
-        <Icon
-          icon={'heartfill'}
-          onClick={(e: { stopPropagation: () => void }) => {
-            e.stopPropagation();
-            handleDisLikeCheck(false);
-          }}
-        />
-      ) : (
-        <Icon
-          icon={'heartline'}
-          onClick={(e: { stopPropagation: () => void }) => {
-            e.stopPropagation();
-            handleLikeCheck(true);
-          }}
-        />
-      )}
+    <div>
+      <Icon
+        icon={isLiked ? 'heartfill' : 'heartline'}
+        onClick={(e: { stopPropagation: () => void }) => {
+          e.stopPropagation();
+          toggleLike();
+        }}
+      />
     </div>
   );
 };
