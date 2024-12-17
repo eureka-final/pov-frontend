@@ -31,6 +31,7 @@ const LikeButton = ({ initialState, movieId, reviewId, handleLikeCount }: LikeBu
 
       return { previousReviews }; // 에러 발생 시 복구할 데이터 반환
     },
+    //@ts-ignore
     onError: (err, _, context) => {
       // 에러 발생 시 이전 상태로 복원
       queryClient.setQueryData(['movies', movieId, 'reviews', reviewId], context?.previousReviews);
@@ -54,6 +55,7 @@ const LikeButton = ({ initialState, movieId, reviewId, handleLikeCount }: LikeBu
 
       return { previousReviews };
     },
+    //@ts-ignore
     onError: (err, _, context) => {
       queryClient.setQueryData(['movies', movieId, 'reviews', reviewId], context?.previousReviews);
       setIsLiked(true);

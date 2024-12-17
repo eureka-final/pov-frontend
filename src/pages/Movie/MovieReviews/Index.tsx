@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { constants } from '../../../constants/constants';
 import { HeadingContainer, Section, Div, PaddedContainer } from './MovieReviews.styles';
 import { Heading, Body, Icon } from 'pov-design-system';
-import Review from '../../../components/movies/Review/Review';
+// import Review from '../../../components/movies/Review/Review';
 
 const Index = () => {
   //@ts-ignore
@@ -67,9 +67,9 @@ const Index = () => {
             <Icon icon="angleright" color="#ADACAF" style={{ width: '16px', height: '16px' }} />
           </Div>
         </HeadingContainer>
-        {reviews.reviewrs.map((item) => (
+        {/* {reviews.reviewrs.map((item) => (
           <Review reviewers={item} />
-        ))}
+        ))} */}
       </Section>
     </PaddedContainer>
   );
