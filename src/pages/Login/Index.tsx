@@ -3,6 +3,7 @@ import { SignInSection, SignInSectionHeader, SignInButtonWrapper, NaverSignInBut
 import { Logo, Heading, Paragraph } from 'pov-design-system';
 // import { EXCEPTION_POINTS } from '../../constants/api';
 
+// hotfix-02
 const Index = () => {
   /* POV Server Login URL로 리디렉션 */
   const redirectToNaverLogin = () => {
