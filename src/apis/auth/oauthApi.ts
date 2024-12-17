@@ -5,7 +5,7 @@ import axios from 'axios';
 const getNaverAccessToken = async (code: string, state: string) => {
   try {
     // Access Token 발급 API 호출
-    const tokenResponse = await axios.post('/api/naver/token', null, {
+    const tokenResponse = await axios.post('https://nid.naver.com/oauth2.0/token', null, {
       params: {
         grant_type: 'authorization_code',
         client_id: import.meta.env.VITE_NAVER_CLIENT_ID,
@@ -28,7 +28,7 @@ const getNaverUserInfo = async (accessToken: string) => {
   try {
     // Access Token을 이용해 사용자 정보 요청
     if (accessToken) {
-      const userResponse = await axios.get('/api/naver/userInfo', {
+      const userResponse = await axios.get('https://openapi.naver.com/v1/nid/me', {
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
@@ -70,7 +70,7 @@ const getGoogleAccessToken = async (code: string) => {
 // Google 사용자 정보 요청
 const getGoogleUserInfo = async (accessToken: string) => {
   try {
-    const userInfoResponse = await axios.get('/api/google/userInfo', {
+    const userInfoResponse = await axios.get('https://www.googleapis.com/oauth2/v3/userinfo', {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
