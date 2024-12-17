@@ -19,13 +19,13 @@ import {
   ClubBookMarkContainer,
 } from './ClubDetail.styles';
 import { ClubReviewListContainer } from '../../../components/review/ReviewCard.style';
-import ReviewClubCard from '../../../components/review/ReviewClubCard';
 import { useClubDetailQuery } from '../../../hooks/queries/useClubsQuery';
 import { useDeleteClubMutation } from '../../../hooks/queries/useDeleteClubMutation';
 import { useLeaveClubMutaion } from '../../../hooks/queries/useLeaveClubMutaion';
 // import { useClubInviteQuery } from '../../../hooks/queries/useClubsQuery';
 import { useToast } from '../../../hooks/common/useToast';
 import { useAuthStore } from '../../../stores/useAuthStore';
+import ClubReviewCard from '../../review/ClubReviewCard';
 
 const JoinClub = () => {
   const user = useAuthStore((state) => state.user);
@@ -182,7 +182,7 @@ const JoinClub = () => {
 
             <ClubReviewListContainer>
               {clubsData.data.clubReviewList.reviews.content.slice(0, 3).map((review) => (
-                <ReviewClubCard
+                <ClubReviewCard
                   key={review.reviewId}
                   movieId={review.movieId}
                   reviewId={review.reviewId}
@@ -190,7 +190,7 @@ const JoinClub = () => {
                   title={review.title}
                   contents={review.contents}
                   reviewer={review.reviewer}
-                  profileImge={review.profileImage}
+                  profileImage={review.profileImage}
                   thumbnail={review.thumbnail}
                   createdAt={review.createdAt}
                   likeAmount={review.likeAmount}

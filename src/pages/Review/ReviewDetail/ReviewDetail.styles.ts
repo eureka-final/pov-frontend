@@ -98,3 +98,11 @@ export const HeadingContainer = styled.div`
   display: flex;
   justify-content: space-between;
 `;
+
+
+export const LikeContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px; /* 아이콘과 좋아요 수 사이 간격 */
+  color: ${({ theme }) => theme.color.green600};
+`;

@@ -1,6 +1,6 @@
 import Padded from '../../components/templates/Padded/Padded';
 import { Container } from '../Movie/Movie.styles';
-import ReviewClubCard from '../../components/review/ReviewClubCard';
+import ClubReviewCard from '../../components/review/ClubReviewCard';
 import { ClubReviewListContainer } from '../../components/review/ReviewCard.style';
 import { useReviewsQuery } from '../../hooks/queries/useReviewsQuery';
 import { useMoviesQuery } from '../../hooks/queries/useMoviesQuery';
@@ -35,7 +35,7 @@ const Index = () => {
         </SectionWrapper>
         <ClubReviewListContainer>
           {reviewsData.slice(0, 3).map((review) => (
-            <ReviewClubCard
+            <ClubReviewCard
               key={review.reviewId}
               movieId={review.movieId}
               reviewId={review.reviewId}
@@ -43,7 +43,7 @@ const Index = () => {
               title={review.title}
               contents={review.contents}
               reviewer={review.reviewer}
-              profileImge={review.profileImage}
+              profileImage={review.profileImage}
               thumbnail={review.thumbnail}
               createdAt={review.createdAt}
               likeAmount={review.likeAmount}
