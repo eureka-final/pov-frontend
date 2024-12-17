@@ -15,9 +15,9 @@ export const END_POINTS = {
   PREMIERE_ENTRY: (premiereId: string) => `/api/premieres/${premiereId}/entry`,
   PREMIERE_CANCEL_ENTRY: (premiereId: string) => `/api/premieres/${premiereId}/entry/cancel`,
   REVIEWS: (pageParam: number | unknown) => `/api/movies/reviews?page=${pageParam}`,
-  MY_REVIEWS:  (pageParam: number | unknown) => `/api/movies/reviews/my?page=${pageParam}`,
+  MY_REVIEWS: (pageParam: number | unknown) => `/api/movies/reviews/my?page=${pageParam}`,
   CLUB_REVIEW: (clubId: string, pageParam: number | unknown) => `/api/clubs/${clubId}/reviews?page=${pageParam}`,
-  REVIEW: (movieId: string, reviewId: string) =>  `/api/movies/${movieId}/reviews/${reviewId}`,
+  REVIEW: (movieId: string, reviewId: string) => `/api/movies/${movieId}/reviews/${reviewId}`,
   CREATE_REVIEW: (movieId: string) => `/api/movies/${movieId}/reviews`,
   CLUB: (clubId: string) =>  `/api/clubs/${clubId}`,
   CLUB_PRIVATE: (query: string) =>  `/api/clubs/code?value=${query}`,
@@ -31,6 +31,12 @@ export const END_POINTS = {
   LIKE_MOVIE: (movieId: string) => `/api/movies/${movieId}/like`,
   DISLIKE_MOVIE: (movieId: string) => `/api/movies/${movieId}/dislike`,
 } as const;
+
+export const EXCEPTION_POINTS = {
+  NAVER_LOGIN: '/oauth2/authorization/naver',
+  NAVER_REDIRECT: '/login/oauth2/code/naver',
+  SWAGGER: '/api/swagger-ui/index.html',
+};
 
 export const NETWORK = {
   RETRY_COUNT: 2,

@@ -9,11 +9,7 @@ export const SIGN_UP_HEADER_TEXTS = {
   },
   favorGenre: {
     title: { firstLine: ['관심있는 장르', '를'], secondLine: '선택해주세요' },
-    description: '최대 3개까지 선택할 수 있어요.',
-  },
-  loading: {
-    title: { firstLine: ['회원정보', '를'], secondLine: '생성하고 있어요' },
-    description: '잠시만 기다려주세요.',
+    description: '최소 1개 이상의 장르를 선택해주세요.',
   },
   complete: {
     title: { firstLine: ['회원가입', '이'], secondLine: '완료됐어요' },

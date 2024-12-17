@@ -6,14 +6,14 @@ import MovieReviews from '../pages/Movie/MovieReviews/Index';
 import Review from '../pages/Review/Index';
 import ReviewWrite from '../pages/Review/ReviewWrite/Index';
 import ReviewEdit from '../pages/Review/ReviewEdit/Index';
-import Club from '../pages/Club/Index';
+import Club from '../pages/Club';
 import ClubCreate from '../pages/Club/ClubCreate/Index';
 import ClubDetail from '../pages/Club/ClubDetail/Index';
 import ClubPrivate from '../pages/Club/ClubPrivate/Index';
 import ClubEdit from '../pages/Club/ClubEdit/Index';
 import ClubMember from '../pages/Club/ClubMember/Index';
 import ClubReview from '../pages/Club/ClubReview/Index';
-import Premieres from '../pages/Premieres/Index';
+import Premieres from '../pages/Premieres';
 import PremiereDetail from '../pages/Premieres/PremiereDetail/Index';
 import Payments from '../pages/Premieres/Payments/Index';
 import Success from '../pages/Premieres/Payments/Success/Index';
@@ -136,7 +136,7 @@ const AuthScreens = {
     element: <SignUp />,
   },
   OauthNaver: {
-    path: '/oauth/naver',
+    path: '/oauth/naver/callback',
     element: <OauthNaver />,
   },
   OauthGoogle: {

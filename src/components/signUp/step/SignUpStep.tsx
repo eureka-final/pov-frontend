@@ -1,5 +1,6 @@
 import { Heading, Paragraph, Icon } from 'pov-design-system';
 import { SignUpSection, SignUpSectionHeader, SignUpSectionBody } from './SignUpStep.style';
+import { useTheme } from '@emotion/react';
 
 interface SignUpStepProps {
   firstLine: { keyword: string; particle: string };
@@ -10,10 +11,11 @@ interface SignUpStepProps {
 }
 
 const SignUpStep = ({ firstLine, secondLine, description, onPrev, children }: SignUpStepProps) => {
+  const theme = useTheme();
   return (
     <SignUpSection>
       <SignUpSectionHeader>
-        <Icon icon="angleleft" css={{ marginBottom: '32px' }} onClick={onPrev} />
+        <Icon icon="angleleft" css={{ width: '20px', marginBottom: '32px', color: theme.teritary }} onClick={onPrev} />
         <Heading size="xxLarge">
           <p style={{ display: 'inline', color: '#AA6FFF' }}>{firstLine.keyword}</p>
           <p style={{ display: 'inline' }}>{firstLine.particle}</p>

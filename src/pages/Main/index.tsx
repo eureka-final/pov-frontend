@@ -9,6 +9,8 @@ import { useNavigate } from 'react-router-dom';
 import { SectionWrapper } from '../../components/club/ClubDetail/ClubDetail.styles';
 import { CardContainer } from '../../components/movies/Section/Section.styles';
 import Card from '../../components/movies/Card/Card';
+import { useEffect } from 'react';
+import { requestPermission } from '../../utils/firebase/notificationPermission';
 
 const Index = () => {
   const navigate = useNavigate();
