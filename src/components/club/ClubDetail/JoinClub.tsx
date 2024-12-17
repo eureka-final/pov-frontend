@@ -263,8 +263,8 @@ const JoinClub = () => {
                 </>
               ) : (
                 <>
-                  <Body>https://www.point-of-views.com/clubs/{inviteCode}</Body>
-                  <Icon icon="copy" onClick={() => handleCopy(`https://www.point-of-views.com/club/${inviteCode}/detail`)} style={{ cursor: 'pointer' }} />
+                  <Body>{inviteCode}</Body>
+                  <Icon icon="copy" onClick={() => handleCopy(`${inviteCode}`)} style={{ cursor: 'pointer' }} />
                 </>
               )}
             </LinkWrapper>

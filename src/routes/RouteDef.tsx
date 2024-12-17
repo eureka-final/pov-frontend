@@ -9,6 +9,7 @@ import ReviewEdit from '../pages/Review/ReviewEdit/Index';
 import Club from '../pages/Club/Index';
 import ClubCreate from '../pages/Club/ClubCreate/Index';
 import ClubDetail from '../pages/Club/ClubDetail/Index';
+import ClubPrivate from '../pages/Club/ClubPrivate/Index';
 import ClubEdit from '../pages/Club/ClubEdit/Index';
 import ClubMember from '../pages/Club/ClubMember/Index';
 import ClubReview from '../pages/Club/ClubReview/Index';
@@ -92,10 +93,10 @@ const ClubScreens = {
     path: '/club/:clubId/member',
     element: <ClubMember />,
   },
-  // ClubSecretDetail: {
-  //   path: '/clubs',
-  //   element: <ClubSecretDetail />,
-  // },
+  ClubPrivate: {
+    path: '/clubs/code',
+    element: <ClubPrivate />,
+  },
   ClubReview: {
     path: '/club/:clubId/review',
     element: <ClubReview />,

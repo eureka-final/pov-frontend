@@ -17,6 +17,11 @@ export const getDetailClub = async (clubId: string) => {
   return data;
 };
 
+export const getPrivateClub = async (query: string) => {
+  const { data } = await axiosInstance.get<ClubDetailDataResponse>(END_POINTS.CLUB_PRIVATE(query));
+  return data;
+};
+
 export const getMemberClub = async (clubId: string) => {
   const { data } = await axiosInstance.get<ClubMemberDataResponse>(END_POINTS.JOIN_CLUB(clubId));
   return data;
