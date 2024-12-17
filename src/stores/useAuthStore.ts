@@ -1,6 +1,5 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import { ACCESS_TOKEN_KEY } from '../constants/api';
 import type { User } from '../types/user';
 
 interface AuthState {
@@ -25,7 +24,7 @@ export const useAuthStore = create<AuthState>()(
       clearSession: () => set({ isLoggedIn: false }),
     }),
     {
-      name: ACCESS_TOKEN_KEY,
+      name: 'user',
     }
   )
 );
