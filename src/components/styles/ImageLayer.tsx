@@ -17,7 +17,7 @@ const Layer = styled.img<{ MobileHeight?: number; PcHeight?: number; br: string 
 
 interface LayerProps {
   src: {
-    url: string;
+    url: string | undefined;
     MobileHeight: number;
     PcHeight: number;
     br: string;
