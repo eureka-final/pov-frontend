@@ -1,7 +1,7 @@
 import { matchPath, useLocation, useNavigate } from 'react-router-dom';
 import useWindowSize from './useWindowSize';
-import Header from '../../components/Header/Header';
-import DetailHeader from '../../components/Header/DetailHeader';
+import Header from '../../components/header/Header';
+import DetailHeader from '../../components/header/DetailHeader';
 
 /* 모바일 크기에서 DetailHeader를 렌더링할 Routes와 HeaderTitle */
 const detailHeaderRoutes = [

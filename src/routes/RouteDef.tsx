@@ -1,8 +1,9 @@
 import Main from '../pages/Main/Index';
-import Movie from '../pages/Movie';
-import Review from '../pages/Review/Index';
+import Movie from '../pages/Movie/Index';
+import MovieSearch from '../pages/Movie/MovieSearch/Index';
 import MovieDetail from '../pages/Movie/MovieDetail';
 import MovieReviews from '../pages/Movie/MovieReviews/Index';
+import Review from '../pages/Review/Index';
 import ReviewWrite from '../pages/Review/ReviewWrite/Index';
 import ReviewEdit from '../pages/Review/ReviewEdit/Index';
 import Club from '../pages/Club/Index';
@@ -36,6 +37,10 @@ const MovieScreens = {
   Movie: {
     path: '/movie',
     element: <Movie />,
+  },
+  MovieSearch: {
+    path: '/movie/search',
+    element: <MovieSearch />,
   },
   MovieDetail: {
     path: '/movie/:movieId/detail',

@@ -9,6 +9,7 @@ export const END_POINTS = {
   PAYMENT: `/api/payments`,
   PREMIERES: `/api/premieres`,
   MOVIE: (premiereId: string | unknown) => `/api/movies/search?page=${premiereId}&size=12&query=love`,
+  MOVIE_SEARCH: (premiereId: string | unknown, query: string) => `/api/movies/search?page=${premiereId}&size=12&query=${query}`,
   MOVIE_DETAIL: (movieId: string) => `/api/movies/${movieId}`,
   PREMIERE_DETAIL: (premiereId: string) => `/api/premieres/${premiereId}`,
   PREMIERE_ENTRY: (premiereId: string) => `/api/premieres/${premiereId}/entry`,
