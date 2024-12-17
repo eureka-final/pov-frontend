@@ -48,6 +48,7 @@ export const SignUpSectionBody = styled.div`
 
 export const ButtonContainer = styled.div`
   width: 100%;
+  margin-top: 32px;
 
   @media screen and (min-width: 0px) and (max-width: 600px) {
     position: absolute;
