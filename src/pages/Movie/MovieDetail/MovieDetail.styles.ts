@@ -139,8 +139,8 @@ export const HeadingContainer = styled.div`
 
 export const ImageContainer = styled.div`
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 46px;
 `;
 
 export const ScrollContainer = styled.div`

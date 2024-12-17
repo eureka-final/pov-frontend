@@ -60,10 +60,6 @@ const Index = () => {
       br: '8px',
     }));
 
-  const genreParser = (genres: string[]): string[] => {
-    return genres.map((genre) => constants.movies.main.genres[genre] || genre);
-  };
-
   return (
     <Basic>
       {movieData && (
@@ -79,7 +75,13 @@ const Index = () => {
                     {item.name}
                   </Body>
                 ))}
-                <Body>{genreParser(movieData.data.genre)}</Body>
+                <AdditionalsContainer>
+                  {movieData.data.genre.map((genre, index) => (
+                    <Badge key={index} variant="keyword" cancel={true}>
+                      {genre}
+                    </Badge>
+                  ))}
+                </AdditionalsContainer>
               </BodyContainer>
 
               <AdditionalsContainer>
@@ -105,15 +107,15 @@ const Index = () => {
                 <ResponsiveContainer mobDirection="column" pcDirection="row" gap={16}>
                   <Additionals>
                     <Icon icon="heartline" />
-                    <Count color="#FFFFFF">{constants.movies.main.likes}</Count>
+                    <Count>{constants.movies.main.likes}</Count>
                   </Additionals>
                   <Additionals>
                     <Icon icon="reviewline" />
-                    <Count color="#FFFFFF">{constants.movies.main.reviews}</Count>
+                    <Count>{constants.movies.main.reviews}</Count>
                   </Additionals>
                   <Additionals>
                     <Icon icon="bookmarkline" />
-                    <Count color="#FFFFFF">{constants.movies.main.bookmark}</Count>
+                    <Count>{constants.movies.main.bookmark}</Count>
                   </Additionals>
                 </ResponsiveContainer>
                 <Wrapper>
@@ -136,7 +138,9 @@ const Index = () => {
                   <ShowMoreBtn onClick={() => navigate('/movie/review')} />
                 </Div>
               </HeadingContainer>
-              <Review reviewers={movieData.data.reviews} />
+              {movieData.data.reviews.map((review) => (
+                <Review key={review.id} reviewers={review} />
+              ))}
             </Section>
 
             <Section>
@@ -145,6 +149,9 @@ const Index = () => {
               </HeadingContainer>
               <ImageContainer>
                 {movieData.data.directors.map((item, index) => (
+                  <Productions productions={item} key={item.id + index} />
+                ))}
+                {movieData.data.actors.map((item, index) => (
                   <Productions productions={item} key={item.id + index} />
                 ))}
               </ImageContainer>

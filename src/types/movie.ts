@@ -30,12 +30,12 @@ export interface MovieDetailResponse {
 }
 
 export interface MovieDetailData {
-  backdrop: string;  // 추가 데이터
+  backdrop: string;
   title: string;
   released: string;
   genre: string[];
   movieLikeCount: number;
-  preferenceCounts: MoviePrefer[]; // 추가 데이터
+  preferenceCounts: MoviePrefer[];
   plot: string;
   directors: MovieDirector[];
   actors: MovieActor[];
@@ -43,7 +43,7 @@ export interface MovieDetailData {
   country: string[];
   images: string[];
   videos: string[];
-  reviews: MovieReview; // 추가 데이터 ()
+  reviews: MovieReview[];
 }
 
 export interface MovieDirector {
@@ -71,8 +71,9 @@ export interface MovieReview {
   title: string;
   contents: string;
   isSpoiler: boolean;
+  disabled: boolean;
   modifiedAt: string;
   likeCount: number;
   profileImage: string;
-  name: string;
+  nickname: string;
 }
