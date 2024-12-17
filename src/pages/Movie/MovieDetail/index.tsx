@@ -35,6 +35,15 @@ const Index = () => {
 
   const { movieData } = useMovieDetailQuery(movieId!);
 
+  const preference =
+    movieData &&
+    movieData.data.preferenceCounts.map((item) => ({
+      reviewCount: item.goodCount + item.badCount,
+      like: item.goodCount,
+      unlike: item.badCount,
+      percentage: item.badCount ? (item.goodCount / (item.goodCount + item.badCount)) * 100 : 0,
+    }));
+
   const steels =
     movieData &&
     movieData.data.images.map((item) => ({
@@ -167,7 +176,7 @@ const Index = () => {
                 </Additionals>
                 <Additionals>
                   <Icon icon="reviewline" color="#0DE781" />
-                  <Count color="#0DE781">{movieData.data.reviewCount}</Count>
+                  <Count color="#0DE781">{preference && preference.reduce((acc, item) => acc + item.reviewCount, 0)}</Count>
                 </Additionals>
               </AdditionalsContainer>
             </HeaderInfo>
@@ -193,7 +202,10 @@ const Index = () => {
                   </Additionals>
                 </ResponsiveContainer>
                 <Wrapper>
-                  <ProgressBar percentage={movieData.data.percentage} like={movieData.data.goodCount} unlike={movieData.data.badCount} />
+                  {preference &&
+                    preference.map((item, index) => (
+                      <ProgressBar key={item.percentage + index} percentage={item.percentage} like={item.like} unlike={item.unlike} />
+                    ))}
                 </Wrapper>
                 <Content>{movieData.data.plot}</Content>
               </Wrapper>
@@ -202,7 +214,7 @@ const Index = () => {
               <HeadingContainer>
                 <Div>
                   <Heading>{constants.movies.detail.heading.review}</Heading>
-                  <Body style={{ color: '#0DE781' }}>{movieData.data.reviewCount}</Body>
+                  <Body style={{ color: '#0DE781' }}>{preference && preference.reduce((acc, item) => acc + item.reviewCount, 0)}</Body>
                 </Div>
                 <Div>
                   <ShowMorebtn onClick={() => navigate('/movie/review')} />

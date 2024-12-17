@@ -44,10 +44,7 @@ export interface MovieDetailData {
   released: string;
   genre: string[];
   movieLikeCount: number;
-  reviewCount: number; // 추가 데이터
-  percentage: number; // 추가 데이터
-  goodCount: number;
-  badCount: number;
+  preferenceCounts: MoviePrefer[]; // 추가 데이터
   plot: string;
   directors: MovieDirector[];
   actors: MovieActor[];
@@ -71,6 +68,11 @@ export interface MovieActor {
   profileImage: string;
   role: string;
   order: number;
+}
+
+export interface MoviePrefer {
+  goodCount: number;
+  badCount: number;
 }
 
 export interface MovieReview {

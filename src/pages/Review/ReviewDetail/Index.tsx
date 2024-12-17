@@ -38,8 +38,8 @@ const Index = () => {
       {reviewData && (
         <>
           <Container>
-            <HeaderContainer src={reviewData.data.thumbnail}>
-              <BackgroundLayer src={reviewData.data.thumbnail}></BackgroundLayer>
+            <HeaderContainer src={reviewData.data.thumbnail.replace('/w154/', '/original/')}>
+              <BackgroundLayer src={reviewData.data.thumbnail.replace('/w154/', '/original/')}></BackgroundLayer>
               <TitleInfo>
                 <Heading size="xLarge">{reviewData.data.title}</Heading>
               </TitleInfo>
