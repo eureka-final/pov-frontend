@@ -64,8 +64,8 @@ const Index = () => {
     <Basic>
       {movieData && (
         <Container>
+          <BackgroundLayer src={movieData.data.backdrop.replace('/w154/', '/original/')}></BackgroundLayer>
           <HeaderContainer src={movieData.data.backdrop.replace('/w154/', '/original/')}>
-            <BackgroundLayer src={movieData.data.backdrop.replace('/w154/', '/original/')}></BackgroundLayer>
             <HeaderInfo>
               <Heading size="large">{movieData.data.title}</Heading>
               <BodyContainer>

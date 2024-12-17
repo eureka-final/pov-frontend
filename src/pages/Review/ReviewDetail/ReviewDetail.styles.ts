@@ -15,7 +15,7 @@ export const HeaderContainer = styled.div<{ src: string }>`
 
 export const BackgroundLayer = styled.div<{ src: string }>`
   width: 100%;
-  height: 100%;
+  height: 480px;
   position: absolute;
   left: 0;
   top: 0;
@@ -107,7 +107,6 @@ export const HeadingContainer = styled.div`
   display: flex;
   justify-content: space-between;
 `;
-
 
 export const LikeContainer = styled.div`
   display: flex;

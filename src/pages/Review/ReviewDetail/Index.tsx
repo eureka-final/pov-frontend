@@ -80,10 +80,9 @@ const Index = () => {
     <Basic>
       {reviewData && (
         <>
-          <BackgroundLayer src={reviewData.data.thumbnail}></BackgroundLayer>
+          <BackgroundLayer src={reviewData.data.thumbnail.replace('/w154/', '/original/')}></BackgroundLayer>
           <Container>
             <HeaderContainer src={reviewData.data.thumbnail.replace('/w154/', '/original/')}>
-              <BackgroundLayer src={reviewData.data.thumbnail.replace('/w154/', '/original/')}></BackgroundLayer>
               <TitleInfo>
                 <Heading size="xLarge">{reviewData.data.title}</Heading>
               </TitleInfo>
