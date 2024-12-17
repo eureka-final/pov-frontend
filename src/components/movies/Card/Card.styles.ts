@@ -26,3 +26,9 @@ export const Count = styled.span``;
 export const MarginTop = styled.div`
   margin-top: 35px;
 `;
+
+export const LikeContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px; /* 아이콘과 좋아요 수 사이 간격 */
+`;

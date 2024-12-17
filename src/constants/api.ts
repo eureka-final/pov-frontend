@@ -25,6 +25,8 @@ export const END_POINTS = {
   LEADER_CLUB: (clubId: string) =>  `/api/clubs/${clubId}/leader`,
   LIKE: (movieId: string, reviewId: string) => `/api/movies/${movieId}/reviews/${reviewId}/like`,
   DISLIKE: (movieId: string, reviewId: string) => `/api/movies/${movieId}/reviews/${reviewId}/dislike`,
+  LIKE_MOVIE: (movieId: string) => `/api/movies/${movieId}/like`,
+  DISLIKE_MOVIE: (movieId: string) => `/api/movies/${movieId}/dislike`,
 } as const;
 
 export const NETWORK = {

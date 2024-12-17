@@ -21,6 +21,7 @@ import { useToast } from '../../../hooks/common/useToast';
 
 import { useState } from 'react';
 import { useLikeMutation, useDisLikeMutation } from '../../../hooks/queries/useLikeMutation';
+
 const Index = () => {
   const { movieId, reviewId } = useParams<{ movieId: string; reviewId: string }>();
   const navigate = useNavigate();
@@ -33,6 +34,7 @@ const Index = () => {
   const { reviewData } = useReviewDetailQuery(movieId!, reviewId!);
 
   const deleteReviewMutation = useDeleteReviewMutation();
+
   const [likes, setLikes] = useState(reviewData?.data.likeAmount || 0);
   const [likeAction, setLikeAction] = useState<boolean>(reviewData?.data.isLiked || false);
   const likeMutation = useLikeMutation();

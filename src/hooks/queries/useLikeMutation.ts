@@ -13,7 +13,7 @@ export const useLikeMutation = () => {
       queryClient.invalidateQueries({ queryKey: ['movies', movieId, 'reviews', reviewId] });
     },
     onError: () => {
-      createToast('좋아요 실패');
+      createToast('리뷰 좋아요 실패');
     },
   });
 
@@ -30,7 +30,7 @@ export const useDisLikeMutation = () => {
       queryClient.invalidateQueries({ queryKey: ['movies', movieId, 'reviews', reviewId] });
     },
     onError: () => {
-      createToast('좋아요 취소 실패');
+      createToast('리뷰 좋아요 취소 실패');
     },
   });
 

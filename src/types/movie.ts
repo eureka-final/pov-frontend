@@ -1,13 +1,3 @@
-export interface Movie {
-  item: {
-    title: string;
-    poster: string;
-    released: string;
-    movieLikeCount: number;
-    movieReviewCount: number;
-  }
-}
-
 export interface MoviesResponse {
   message: string;
   data: {
@@ -25,11 +15,12 @@ export interface MovieData {
 }
 
 export interface Movie {
-  id: number;
+  id: string;
   title: string;
   poster: string;
   released: string;
   movieLikeCount: number;
+  isLiked: boolean;
   reviewCount: number;
 }
 
