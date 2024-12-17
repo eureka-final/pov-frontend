@@ -21,8 +21,3 @@ export const getMemberClub = async (clubId: string) => {
   const { data } = await axiosInstance.get<ClubMemberDataResponse>(END_POINTS.JOIN_CLUB(clubId));
   return data;
 };
-
-export const getInviteClub = async (clubId: string) => {
-  const { data } = await axiosInstance.get<ClubMemberDataResponse>(END_POINTS.INVITE_CLUB(clubId));
-  return data;
-};

@@ -22,7 +22,7 @@ import { ClubReviewListContainer } from '../../../components/review/ReviewCard.s
 import { useClubDetailQuery } from '../../../hooks/queries/useClubsQuery';
 import { useDeleteClubMutation } from '../../../hooks/queries/useDeleteClubMutation';
 import { useLeaveClubMutaion } from '../../../hooks/queries/useLeaveClubMutaion';
-// import { useClubInviteQuery } from '../../../hooks/queries/useClubsQuery';
+import { useInviteCodeMutation } from '../../../hooks/queries/useCreateClubMutation';
 import { useToast } from '../../../hooks/common/useToast';
 import { useAuthStore } from '../../../stores/useAuthStore';
 import ClubReviewCard from '../../review/ClubReviewCard';
@@ -50,8 +50,20 @@ const JoinClub = () => {
   const deleteClubMutation = useDeleteClubMutation();
   const leaveClubMutation = useLeaveClubMutaion();
 
-  // const { codeData } = useClubInviteQuery(clubId!);
+  const inviteCodeMutation = useInviteCodeMutation();
+  const [inviteCode, setInviteCode] = useState<string | null>('');
 
+  const handleCode = () => {
+    inviteCodeMutation.mutate(
+      { clubId: clubId! },
+      {
+        onSuccess: (data) => {
+          saveInviteOpen();
+          setInviteCode(data.data);
+        },
+      }
+    );
+  };
   const handleCopy = (text: string) => {
     navigator.clipboard.writeText(text).then(
       () => {
@@ -140,10 +152,21 @@ const JoinClub = () => {
                       <Heading size="small">탈퇴하기</Heading>
                     </Menu>
                   )}
-                  <Menu onClick={saveInviteOpen}>
-                    <Icon icon="plusLarge" width="15px" height="12px" />
-                    <Heading size="small">초대하기</Heading>
-                  </Menu>
+                  {clubsData.data.isPublic ? (
+                    <>
+                      <Menu onClick={saveInviteOpen}>
+                        <Icon icon="plusLarge" width="15px" height="12px" />
+                        <Heading size="small">초대하기</Heading>
+                      </Menu>
+                    </>
+                  ) : (
+                    <>
+                      <Menu onClick={handleCode}>
+                        <Icon icon="plusLarge" width="15px" height="12px" />
+                        <Heading size="small">초대하기</Heading>
+                      </Menu>
+                    </>
+                  )}
                 </MenuWrapper>
               )}
             </Wrapper>
@@ -240,12 +263,8 @@ const JoinClub = () => {
                 </>
               ) : (
                 <>
-                  {/* <Body>https://www.point-of-views.com/clubs/{codeData?.data.code}</Body>
-                  <Icon
-                    icon="copy"
-                    onClick={() => handleCopy(`https://www.point-of-views.com/club/${codeData?.data.code}/detail`)}
-                    style={{ cursor: 'pointer' }}
-                  /> */}
+                  <Body>https://www.point-of-views.com/clubs/{inviteCode}</Body>
+                  <Icon icon="copy" onClick={() => handleCopy(`https://www.point-of-views.com/club/${inviteCode}/detail`)} style={{ cursor: 'pointer' }} />
                 </>
               )}
             </LinkWrapper>
