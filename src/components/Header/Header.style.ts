@@ -59,3 +59,9 @@ export const LoginButton = styled.div`
   color: ${({ theme }) => theme.secondary};
   cursor: pointer;
 `;
+
+export const FlexWrapper = styled.span`
+  display: flex;
+  align-items: center;
+  gap: 8px; 
+`;

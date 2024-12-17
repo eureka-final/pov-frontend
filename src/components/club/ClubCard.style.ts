@@ -67,6 +67,7 @@ export const FlexBetween = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-left: 41%;
 `;
 
 export const LikeContainer = styled.div`
