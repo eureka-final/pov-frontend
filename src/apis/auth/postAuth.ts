@@ -15,6 +15,8 @@ export const postSignUp = async (nickname: string, birth: string, favorGenres: s
     // Access Token을 Session Storage에 저장
     const headers = response.headers;
     const accessToken = headers['authorization'];
+    console.log('accessToken =', accessToken);
+
     if (accessToken) {
       localStorage.setItem(ACCESS_TOKEN_KEY, accessToken);
     }
