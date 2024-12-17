@@ -2,8 +2,8 @@ import { useEffect } from 'react';
 import Padded from '../../../components/templates/Padded/Padded';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { getGoogleUserInfoApi } from '../../../apis/auth/oauthApi';
+import { postLoginApi } from '../../../apis/auth/loginApi';
 import { useAuthStore } from '../../../stores/useAuthStore';
-import { postLogin } from '../../../apis/auth/postAuth';
 
 const Index = () => {
   const navigate = useNavigate();
@@ -24,13 +24,13 @@ const Index = () => {
 
         if (data) {
           try {
-            const response = await postLogin(data.email, 'GOOGLE');
+            const response = await postLoginApi(data.email, 'GOOGLE');
 
             if (response.data.exists) {
               setLoggedIn(true);
               setUser(response.data.memberInfo);
               alert('로그인 성공');
-              window.location.href = '/';
+              navigate('/main');
             } else {
               alert('최초 로그인, 회원가입으로 이동');
               navigate('/signup', {
