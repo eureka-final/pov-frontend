@@ -17,13 +17,12 @@ const Index = () => {
     const loginWithNaver = async () => {
       const params = new URLSearchParams(location.search);
 
-      const code = params.get('code');
-      const state = params.get('state');
+      const email = params.get('email');
 
       navigate(location.pathname, { replace: true }); // URL에서 쿼리 파라미터 제거
 
-      if (code && state) {
-        const response = await postLogin(code, state, 'NAVER');
+      if (email) {
+        const response = await postLogin(email, 'NAVER');
 
         if (response) {
           if (response.data.exists) {
@@ -34,36 +33,9 @@ const Index = () => {
             window.location.href = '/signup';
           }
         }
-
-        /* 기존 로그인 로직 */
-        // const data = await getNaverUserInfoApi(code, state);
-
-        // if (data) {
-        //   try {
-        //     const response = await postLoginApi(data.email, 'NAVER');
-
-        //     if (response.data.exists) {
-        //       setLoggedIn(true);
-        //       setUser(response.data.memberInfo);
-        //       alert('로그인 성공');
-        //       navigate('/main');
-        //     } else {
-        //       alert('최초 로그인, 회원가입으로 이동');
-        //       navigate('/signup', {
-        //         state: {
-        //           email: data.email,
-        //           profileImage: data.profileImage,
-        //           socialType: 'NAVER',
-        //         },
-        //       });
-        //     }
-        //   } catch (error) {
-        //     console.error(error);
-        //     alert('로그인 실패');
-        //     navigate('/login');
-        //     return;
-        //   }
-        // }
+      } else {
+        alert('콜백 URL에 이메일 정보가 없습니다. 처음부터 다시 시도해주세요.');
+        window.location.href = '/login';
       }
     };
 

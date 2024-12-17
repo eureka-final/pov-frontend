@@ -4,7 +4,7 @@ import { Logo, Heading, Paragraph } from 'pov-design-system';
 // import { EXCEPTION_POINTS } from '../../constants/api';
 
 const Index = () => {
-  /* 네이버 OAuth 서버 URL로 리디렉션 */
+  /* POV Server Login URL로 리디렉션 */
   const redirectToNaverLogin = () => {
     const authUrl = `${import.meta.env.VITE_BASE_URL}/oauth2/authorization/naver`;
     window.location.href = authUrl;
