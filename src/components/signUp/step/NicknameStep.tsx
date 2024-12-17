@@ -3,7 +3,7 @@ import SignUpStep from './SignUpStep';
 import { Input, Button } from 'pov-design-system';
 import { SIGN_UP_HEADER_TEXTS } from '../../../constants/texts';
 import { ButtonContainer } from './SignUpStep.style';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 interface NicknameStepProps {
   onNext: (nextStep: string) => void;
@@ -11,17 +11,28 @@ interface NicknameStepProps {
 }
 
 const NicknameStep = ({ onNext, onPrev }: NicknameStepProps) => {
-  const {
-    formState: { errors },
-    register,
-    setFocus,
-  } = useFormContext();
+  const [initButtonDisabled, setInitButtonDisabled] = useState<boolean>(true);
+  const [errorMsg, setErrorMsg] = useState<string>('');
+  const [nicknameText, setNicknameText] = useState<string>('');
 
-  // TODO 포커스 사라지는 문제 해결 필요 (다시 렌더링이 되더라도 input에 focus를 강제 유지하는 방법은 없는지?)
-  // NOTE 현재 상태면 error가 변경될 때마다 Input 자체가 계속 재렌더링돼서 focus가 사라짐
+  const { register, setFocus } = useFormContext();
+
+  const handleNicknameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (initButtonDisabled) setInitButtonDisabled(false);
+
+    if (event.target.value.length === 0) {
+      setErrorMsg('닉네임은 필수 입력 항목이에요.');
+    } else if (event.target.value.length > 12) {
+      setErrorMsg('닉네임은 최대 12자까지만 입력할 수 있어요.');
+    } else {
+      setErrorMsg('');
+    }
+    setNicknameText(event.target.value);
+  };
+
   useEffect(() => {
     setFocus('nickname');
-  }, [errors]);
+  }, []);
 
   return (
     <SignUpStep
@@ -34,13 +45,15 @@ const NicknameStep = ({ onNext, onPrev }: NicknameStepProps) => {
         <Input
           size="large"
           placeholder="닉네임을 입력해주세요"
-          isError={!!errors.nickname}
-          supportingText={errors.nickname?.message}
+          isError={!!errorMsg}
+          supportingText={errorMsg}
           {...register('nickname')}
+          value={nicknameText}
+          onChange={handleNicknameChange}
         />
       </div>
       <ButtonContainer>
-        <Button css={{ width: '100%' }} size="large" onClick={onNext} disabled={!!errors.nickname}>
+        <Button css={{ width: '100%' }} size="large" onClick={onNext} disabled={initButtonDisabled || !!errorMsg}>
           다음으로
         </Button>
       </ButtonContainer>

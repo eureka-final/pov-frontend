@@ -5,6 +5,7 @@ import GenreSelect from '../../../components/common/GenreSelect/GenreSelect';
 import { SIGN_UP_HEADER_TEXTS } from '../../../constants/texts';
 import type { User } from '../../../types/user';
 import { ButtonContainer } from './SignUpStep.style';
+import { useEffect, useState } from 'react';
 
 interface FavorGenreStepProps {
   onSubmit: (data: User) => Promise<void>;
@@ -12,10 +13,30 @@ interface FavorGenreStepProps {
 }
 
 const FavorGenreStep = ({ onSubmit, onPrev }: FavorGenreStepProps) => {
+  const [initButtonDisabled, setInitButtonDisabled] = useState<'init' | 'false' | 'true'>('init');
   const {
     control,
+    getValues,
     formState: { errors },
   } = useFormContext();
+
+  const handleChangeGenres = (selectedGenrse: string[]) => {
+    if (selectedGenrse.length === 0) {
+      setInitButtonDisabled('true');
+    } else {
+      setInitButtonDisabled('false');
+    }
+  };
+
+  useEffect(() => {
+    console.log(getValues('favorGenres'));
+    if (initButtonDisabled === 'init') {
+      setInitButtonDisabled('true');
+    }
+    if (initButtonDisabled === 'true') {
+      setInitButtonDisabled('false');
+    }
+  }, [getValues('favorGenres')]);
 
   return (
     <SignUpStep
@@ -30,12 +51,20 @@ const FavorGenreStep = ({ onSubmit, onPrev }: FavorGenreStepProps) => {
         render={({ field }) => (
           <GenreSelect
             value={field.value || []} // favorGenres 필드의 value 전달
-            onChange={(selectedGenres) => field.onChange(selectedGenres)}
+            onChange={(selectedGenres) => {
+              field.onChange(selectedGenres);
+              handleChangeGenres(selectedGenres);
+            }}
           />
         )}
       />
       <ButtonContainer>
-        <Button css={{ width: '100%' }} size="large" onClick={onSubmit} disabled={errors.favorGenre}>
+        <Button
+          css={{ width: '100%' }}
+          size="large"
+          onClick={onSubmit}
+          disabled={initButtonDisabled === 'true' || initButtonDisabled === 'init' || !!errors.favorGenre}
+        >
           다음으로
         </Button>
       </ButtonContainer>
