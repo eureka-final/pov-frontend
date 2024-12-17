@@ -2,6 +2,9 @@ import Card from '../../components/admins/movies/Card';
 import AdminTemplate from '../../components/templates/Admin/AdminTemplate';
 import { Container, Header, List } from './Movie.styles';
 import { Heading, Body, Input, Icon } from 'pov-design-system';
+import { useAdminMoviesQuery } from '../../hooks/queries/useAdminMoviesQuery';
+import { useInView } from 'react-intersection-observer';
+import { useEffect } from 'react';
 
 const dummy = [
   {
@@ -430,6 +433,20 @@ const dummy = [
 ];
 
 const Index = () => {
+  const pageSize = 10;
+  const { moviesData, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } = useAdminMoviesQuery();
+  const { ref, inView } = useInView();
+
+  useEffect(() => {
+    if (inView) {
+      fetchNextPage();
+    }
+  }, [inView]);
+
+  useEffect(() => {
+    console.log(moviesData);
+  }, []);
+
   return (
     <AdminTemplate>
       <Container>
@@ -441,8 +458,8 @@ const Index = () => {
         </Header>
         <Input placeholder="검색어를 입력해 주세요" icon={<Icon icon="search" color="#ADACAF" />} />
         <List>
-          {dummy.map((item, index) => (
-            <Card key={item.name + index} item={item} />
+          {moviesData.map((item, index) => (
+            <Card key={item.title + index} item={item} />
           ))}
         </List>
       </Container>

@@ -185,7 +185,7 @@ const AdminScreens = {
     element: <AdminMovie />,
   },
   MovieDetail: {
-    path: '/admin/movie/detail',
+    path: '/admin/movie/detail/:id',
     element: <AdminMovieDetail />,
   },
   MovieUpdate: {
@@ -225,9 +225,6 @@ export const AppRouteDef = {
   ...PremieresScreens,
   ...AuthScreens,
   ...MemberScreens,
-<<<<<<< HEAD
   ...AdminScreens,
-=======
   ...NotFoundScreens,
->>>>>>> develop
 };

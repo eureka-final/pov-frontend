@@ -1,16 +1,28 @@
-// import { useInfiniteQuery } from '@tanstack/react-query';
+import { useInfiniteQuery } from '@tanstack/react-query';
+import { MoviesAdmin } from '../../types/admins';
+import { getMoviesByAdmin } from '../../apis/admin/getMovies';
 
-// import { getMoviesByAdmin } from '../../apis/admin/getMovies';
+export const useAdminMoviesQuery = () => {
+  const { data, isLoading, hasNextPage, fetchNextPage, isFetchingNextPage } = useInfiniteQuery<MoviesAdmin, Error>({
+    queryKey: ['movies'],
+    queryFn: async ({ pageParam = 0 }) => {
+      const response = await getMoviesByAdmin(pageParam);
 
-// export const useReviewsQuery = () => {
-//   const { data, isFetching, hasNextPage, fetchNextPage } = useInfiniteQuery({
-//     queryKey: ['admin_movies'],
-//     queryFn: ({ pageParam = 1 }) => getMoviesByAdmin(pageParam),
-//     getNextPageParam: (lastPage) => (lastPage.last ? undefined : lastPage.pageNumber + 1),
-//     initialPageParam: 1,
-//   });
+      if (!response || !response.data || !response.data.curationMovies) {
+        throw new Error('Invalid API response structure');
+      }
 
-//   const reviewsData = data?.pages.flatMap((page) => page.reviews) || [];
+      return response;
+    },
+    getNextPageParam: (lastPage) => {
+      const movies = lastPage?.data?.curationMovies;
+      if (!movies) return undefined;
+      return movies.last ? undefined : movies.number + 1;
+    },
+    initialPageParam: 0,
+  });
 
-//   return { reviewsData, isFetching, hasNextPage, fetchNextPage };
-// };
+  const moviesData = data?.pages.flatMap((page) => page?.data?.curationMovies?.content || []) || [];
+
+  return { moviesData, isLoading, hasNextPage, fetchNextPage, isFetchingNextPage };
+};

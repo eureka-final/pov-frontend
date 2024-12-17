@@ -1,7 +1,6 @@
 export const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 export const END_POINTS = {
-  ADMIN_MOVIES: `/api/movies/admin-search`,
   CLUB_JOIN: '/api/clubs/reviews/my',
   CLUBS: '/api/clubs',
   MY_CLUBS: '/api/clubs/myclub',
@@ -24,6 +23,7 @@ export const END_POINTS = {
   LEADER_CLUB: (clubId: string) => `/api/clubs/${clubId}/leader`,
   LIKE: (movieId: number, reviewId: number) => `/api/movies/${movieId}/reviews/${reviewId}/like`,
   DISLIKE: (movieId: number, reviewId: number) => `/api/movies/${movieId}/reviews/${reviewId}/dislike`,
+  ADMIN_MOVIES: (pageParam: number | unknown) => `/api/movies/admin-search?page=${pageParam}`,
 } as const;
 
 export const NETWORK = {

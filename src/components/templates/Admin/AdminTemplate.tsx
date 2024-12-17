@@ -17,15 +17,15 @@ const categories = [
       },
       {
         name: 'TMDB 영화 등록하기',
-        target: '/admin/tmdb/apply',
+        target: '/admin/movie/tmdb',
       },
       {
         name: '큐레이션 조회하기',
-        target: '/admin/qurations/',
+        target: '/admin/movie/qurations',
       },
       {
         name: '큐레이션 등록하기',
-        target: '/admin/qurations/apply',
+        target: '/admin/movie/qurations/apply',
       },
       {
         name: '인기 영화 통계',
