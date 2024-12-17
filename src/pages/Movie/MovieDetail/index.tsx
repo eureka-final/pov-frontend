@@ -133,9 +133,9 @@ const index = () => {
 
   return (
     <Basic>
+      <BackgroundLayer src={'https://cdnweb01.wikitree.co.kr/webdata/editor/201604/12/img_20160412115212_fb73f812.jpg'}></BackgroundLayer>
       <Container>
         <HeaderContainer src={movieData.url}>
-          <BackgroundLayer src={'https://cdnweb01.wikitree.co.kr/webdata/editor/201604/12/img_20160412115212_fb73f812.jpg'}></BackgroundLayer>
           <HeaderInfo>
             <Heading size="large">{movieData.name}</Heading>
             <BodyContainer>

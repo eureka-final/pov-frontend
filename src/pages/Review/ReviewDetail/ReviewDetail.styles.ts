@@ -17,6 +17,8 @@ export const BackgroundLayer = styled.div<{ src: string }>`
   width: 100%;
   height: 100%;
   position: absolute;
+  left: 0;
+  top: 0;
   background: ${({ src }) => (src ? `url(${src})` : '#ffffff')};
   background-size: cover;
   background-position: center;
@@ -83,7 +85,6 @@ export const Additionals = styled.div<{ justify?: string }>`
 export const Count = styled.span<{ color?: string }>`
   color: ${({ color }) => (color ? `${color}` : '#FFFFFF')};
 `;
-
 
 export const ReviewContainer = styled.div`
   display: flex;

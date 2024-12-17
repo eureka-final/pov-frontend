@@ -2,6 +2,7 @@ import { ReactNode } from 'react';
 import { FullArea, ResponsiveArea } from './Area.styled';
 import { matchPath, useLocation } from 'react-router-dom';
 import useWindowSize from '../../../hooks/utils/useWindowSize';
+import Padded from '../Padded/Padded';
 
 interface AreaProps {
   children: ReactNode;
@@ -29,7 +30,7 @@ const Area = ({ children }: AreaProps) => {
   // 이외 Routes인 경우 모두 ResponsiveArea
   return (
     <ResponsiveArea width={windowSize.width} height={windowSize.height}>
-      {children}
+      <Padded>{children}</Padded>
     </ResponsiveArea>
   );
 };

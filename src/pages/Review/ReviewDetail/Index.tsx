@@ -37,9 +37,9 @@ const Index = () => {
     <Basic>
       {reviewData && (
         <>
+          <BackgroundLayer src={reviewData.data.thumbnail}></BackgroundLayer>
           <Container>
             <HeaderContainer src={reviewData.data.thumbnail}>
-              <BackgroundLayer src={reviewData.data.thumbnail}></BackgroundLayer>
               <TitleInfo>
                 <Heading size="xLarge">{reviewData.data.title}</Heading>
               </TitleInfo>

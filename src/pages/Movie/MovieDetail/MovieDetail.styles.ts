@@ -22,8 +22,10 @@ export const PaddedContainer = styled.div`
 
 export const BackgroundLayer = styled.div<{ src: string }>`
   width: 100%;
-  height: 100%;
+  height: 480px;
   position: absolute;
+  top: 0;
+  left: 0;
   background: ${({ src }) => (src ? `url(${src})` : '#ffffff')};
   background-size: cover;
   background-position: center;
