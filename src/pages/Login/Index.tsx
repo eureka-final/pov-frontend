@@ -8,7 +8,7 @@ const Index = () => {
   const redirectToNaverLogin = () => {
     const authUrl = `${import.meta.env.VITE_BASE_URL}/oauth2/authorization/naver`;
     window.alert(authUrl);
-    window.location.href = '/main';
+    window.location.href = authUrl;
   };
 
   /* 구글 OAuth 서버 URL로 리디렉션 */
