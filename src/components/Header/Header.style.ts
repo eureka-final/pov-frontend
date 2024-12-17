@@ -4,6 +4,7 @@ export const HeaderWrapper = styled.header`
   display: flex;
   justify-content: space-between;
   position: sticky;
+  z-index: 20;
 
   @media screen and (min-width: 0px) and (max-width: 600px) {
     padding-top: 32px;

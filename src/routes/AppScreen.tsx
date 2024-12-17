@@ -28,13 +28,14 @@ const ResponsiveArea = styled.div<{ width?: number; height?: number }>`
 
 const AppScreen = () => {
   const windowSize = useWindowSize();
-  return (
-    <ViewArea>
-      <ResponsiveArea width={windowSize.width} height={windowSize.height}>
-        <AppPages />
-      </ResponsiveArea>
-    </ViewArea>
-  );
+  return <AppPages />;
+  // return (
+  //   <ViewArea>
+  //     <ResponsiveArea width={windowSize.width} height={windowSize.height}>
+  //       <AppPages />
+  //     </ResponsiveArea>
+  //   </ViewArea>
+  // );
 };
 
 export default AppScreen;
