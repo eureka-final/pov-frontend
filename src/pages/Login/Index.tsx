@@ -8,7 +8,8 @@ const Index = () => {
   /* POV Server Login URL로 리디렉션 */
   const redirectToNaverLogin = () => {
     const authUrl = `${import.meta.env.VITE_BASE_URL}/oauth2/authorization/naver`;
-    window.location.href = authUrl;
+    window.alert(authUrl);
+    window.location.href = '/main';
   };
 
   /* 구글 OAuth 서버 URL로 리디렉션 */

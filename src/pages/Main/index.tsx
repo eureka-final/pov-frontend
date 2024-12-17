@@ -1,9 +1,14 @@
 import { Button, Badge, Heading, Body, Paragraph, Checkbox, Icon, ShowMoreBtn, Logo, Input, SwitchToggle } from 'pov-design-system';
 import { Modal, useOverlay } from 'pov-design-system';
 import Padded from '../../components/templates/Padded/Padded';
+import { useEffect } from 'react';
+import { requestPermission } from '../../utils/firebase/notificationPermission';
 
 const Index = () => {
   const { isOpen, open, close } = useOverlay();
+  useEffect(() => {
+    requestPermission();
+  }, []);
   const handleChange = () => {
     console.log('switchtoggle');
   };
