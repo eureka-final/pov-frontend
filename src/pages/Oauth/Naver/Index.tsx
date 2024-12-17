@@ -18,21 +18,32 @@ const Index = () => {
       const params = new URLSearchParams(location.search);
 
       const email = params.get('email');
+      const exists = params.get('exists');
+      const image = params.get('profileImage');
 
       navigate(location.pathname, { replace: true }); // URL에서 쿼리 파라미터 제거
 
-      if (email) {
+      if (exists && email) {
         const response = await postLogin(email, 'NAVER');
 
         if (response) {
-          if (response.data.exists) {
-            setLoggedIn(true);
-            setUser(response.data.memberInfo);
-            window.location.href = '/';
-          } else {
-            window.location.href = '/signup';
-          }
+          setLoggedIn(true);
+          setUser(response.data.memberInfo);
+          alert('로그인 완료');
+          window.location.href = '/';
+        } else {
+          alert('로그인 실패');
+          window.location.href = '/';
         }
+      } else if (email) {
+        alert('사용자 정보 없음, 회원가입 필요');
+        navigate('/signup', {
+          state: {
+            email: email,
+            profileImage: image,
+            socialType: 'NAVER',
+          },
+        });
       } else {
         alert('콜백 URL에 이메일 정보가 없습니다. 처음부터 다시 시도해주세요.');
         window.location.href = '/login';

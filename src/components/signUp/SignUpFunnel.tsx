@@ -29,7 +29,12 @@ const SignUpFunnel = ({ steps, Funnel, Step, stepHandler, onSubmit }: SignUpFunn
         <FavorGenreStep onSubmit={onSubmit} onPrev={() => stepHandler(steps[1])}></FavorGenreStep>
       </Step>
       <Step name="success">
-        <OnSuccessStep onNext={() => navigate('/main')} onPrev={() => navigate('/login')}></OnSuccessStep>
+        <OnSuccessStep
+          onNext={() => {
+            window.location.href = '/';
+          }}
+          onPrev={() => navigate('/login')}
+        ></OnSuccessStep>
       </Step>
     </Funnel>
   );
