@@ -31,11 +31,10 @@ export const postSignUp = async (nickname: string, birth: string, favorGenres: s
 };
 
 /* 로그인 요청 API */
-export const postLogin = async (code: string, state: string | null, socialType: string) => {
+export const postLogin = async (email: string, socialType: string) => {
   try {
     const response = await axiosInstance.post('/api/auth/login', {
-      code: code,
-      state: state,
+      email: email,
       socialType: socialType,
     });
 
