@@ -40,11 +40,9 @@ const Index = () => {
           // 회원 정보가 이미 존재하는 경우 홈으로 이동
           setLoggedIn(true);
           setUser(response.data.memberInfo);
-          alert('로그인 성공');
-          // window.location.href = '/';
+          window.location.href = '/';
         } else {
           // 회원 정보가 존재하지 않는 경우 회원가입으로 이동
-          alert('최초 로그인, 회원가입으로 이동');
           navigate('/signup', {
             state: {
               email: data.email,
@@ -56,7 +54,7 @@ const Index = () => {
       } catch (error) {
         console.error(error);
         alert('로그인 실패');
-        // window.location.href = '/login';
+        window.location.href = '/login';
         return;
       }
     };

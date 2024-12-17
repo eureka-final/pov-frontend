@@ -1,7 +1,5 @@
 import { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-// import { getNaverUserInfoApi } from '../../../apis/auth/oauthApi';
-// import { postLoginApi } from '../../../apis/auth/loginApi';
 import { useAuthStore } from '../../../stores/useAuthStore';
 
 import Padded from '../../../components/templates/Padded/Padded';
@@ -20,7 +18,8 @@ const Index = () => {
       const email = params.get('email');
       const profileImage = params.get('image');
 
-      navigate(location.pathname, { replace: true }); // URL에서 쿼리 파라미터 제거
+      // URL에서 쿼리 파라미터 제거
+      navigate(location.pathname, { replace: true });
 
       // 쿼리 파라미터에 이메일 정보가 없는 경우 에러 처리
       if (!email) {
@@ -42,11 +41,9 @@ const Index = () => {
         console.log(response);
         setLoggedIn(true);
         setUser(response.data.memberInfo);
-        alert('로그인 완료');
-        // window.location.href = '/';
+        window.location.href = '/';
       } else {
         // 회원 정보가 존재하지 않는 경우 회원가입 페이지로 이동
-        alert('최초 로그인, 회원가입 페이지로 이동');
         navigate('/signup', { state: { email: email, profileImage: profileImage, socialType: 'NAVER' } });
         window.location.href = '/';
       }
