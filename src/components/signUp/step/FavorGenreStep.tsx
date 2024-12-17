@@ -5,7 +5,7 @@ import GenreSelect from '../../../components/common/GenreSelect/GenreSelect';
 import { SIGN_UP_HEADER_TEXTS } from '../../../constants/texts';
 import type { User } from '../../../types/user';
 import { ButtonContainer } from './SignUpStep.style';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 interface FavorGenreStepProps {
   onSubmit: (data: User) => Promise<void>;
@@ -16,7 +16,6 @@ const FavorGenreStep = ({ onSubmit, onPrev }: FavorGenreStepProps) => {
   const [initButtonDisabled, setInitButtonDisabled] = useState<'init' | 'false' | 'true'>('init');
   const {
     control,
-    getValues,
     formState: { errors },
   } = useFormContext();
 
@@ -28,15 +27,15 @@ const FavorGenreStep = ({ onSubmit, onPrev }: FavorGenreStepProps) => {
     }
   };
 
-  useEffect(() => {
-    console.log(getValues('favorGenres'));
-    if (initButtonDisabled === 'init') {
-      setInitButtonDisabled('true');
-    }
-    if (initButtonDisabled === 'true') {
-      setInitButtonDisabled('false');
-    }
-  }, [getValues('favorGenres')]);
+  // useEffect(() => {
+  //   console.log(getValues('favorGenres'));
+  //   if (initButtonDisabled === 'init') {
+  //     setInitButtonDisabled('true');
+  //   }
+  //   if (initButtonDisabled === 'true') {
+  //     setInitButtonDisabled('false');
+  //   }
+  // }, [getValues('favorGenres')]);
 
   return (
     <SignUpStep
