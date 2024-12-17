@@ -12,7 +12,7 @@ const Index = () => {
   const location = useLocation();
   const setLoggedIn = useAuthStore((state) => state.setLoggedIn);
   const setUser = useAuthStore((state) => state.setUser);
-
+  // hotfix
   useEffect(() => {
     const loginWithNaver = async () => {
       const params = new URLSearchParams(location.search);
