@@ -6,8 +6,8 @@ import { putLike, putDisLike } from '../../../apis/review/putLike';
 
 interface LikeButtonProps extends ComponentPropsWithoutRef<'div'> {
   initialState: boolean;
-  movieId: number;
-  reviewId: number;
+  movieId: string;
+  reviewId: string;
   likeCount: number;
   handleLikeCount: (count: number | ((prevCount: number) => number)) => void;
 }

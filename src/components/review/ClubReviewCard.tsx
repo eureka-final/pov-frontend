@@ -19,8 +19,8 @@ import {
 
 interface ReviewCardProps {
   key: number;
-  movieId: number;
-  reviewId: number;
+  movieId: string;
+  reviewId: string;
   movieTitle: string;
   title: string;
   contents: string | undefined;

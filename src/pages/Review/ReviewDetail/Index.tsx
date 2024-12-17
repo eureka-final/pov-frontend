@@ -1,13 +1,15 @@
 import Basic from '../../../components/templates/Basic/Basic';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Heading, Body, Paragraph, Icon, Badge, useOverlay, Modal, Button } from 'pov-design-system';
-import { Container, HeaderContainer, Additionals, TitleInfo, ReviewInfo, Count, BodyContainer, BackgroundLayer, Wrapper } from './ReviewDetail.styles';
+import { Container, HeaderContainer, Additionals, TitleInfo, ReviewInfo, BodyContainer, BackgroundLayer, Wrapper, LikeContainer } from './ReviewDetail.styles';
 import Profile from '../../../components/common/Profile';
 import { useReviewDetailQuery } from '../../../hooks/queries/useReviewsQuery';
 import { useDeleteReviewMutation } from '../../../hooks/queries/useDeleteReviewMutation';
 import dompurify from 'dompurify';
 import { useToast } from '../../../hooks/common/useToast';
 
+import { useState } from 'react';
+import { useLikeMutation, useDisLikeMutation } from '../../../hooks/queries/useLikeMutation';
 const Index = () => {
   const { movieId, reviewId } = useParams<{ movieId: string; reviewId: string }>();
   const navigate = useNavigate();
@@ -20,6 +22,34 @@ const Index = () => {
   const { reviewData } = useReviewDetailQuery(movieId!, reviewId!);
 
   const deleteReviewMutation = useDeleteReviewMutation();
+  const [likes, setLikes] = useState(reviewData?.data.likeAmount || 0);
+  const [likeAction, setLikeAction] = useState<boolean>(reviewData?.data.isLiked || false);
+  const likeMutation = useLikeMutation();
+  const disLikeMutation = useDisLikeMutation();
+
+  const onLike = () => {
+    if (likeAction === false) {
+      likeMutation.mutate(
+        { movieId: movieId!, reviewId: reviewId! },
+        {
+          onSuccess: () => {
+            setLikes(likes + 1);
+            setLikeAction(true);
+          },
+        }
+      );
+    } else {
+      disLikeMutation.mutate(
+        { movieId: movieId!, reviewId: reviewId! },
+        {
+          onSuccess: () => {
+            setLikes(likes - 1);
+            setLikeAction(false);
+          },
+        }
+      );
+    }
+  };
 
   const handleDelete = () => {
     deleteReviewMutation.mutate(
@@ -48,10 +78,9 @@ const Index = () => {
                 <BodyContainer>
                   <Body size="large">{new Date(reviewData.data.createdAt).toLocaleDateString()}</Body>
                 </BodyContainer>
-                <Additionals>
-                  <Icon icon="heartfill" color="#0DE781" />
-                  <Count color="#0DE781">{reviewData.data.likeAmount}</Count>
-                </Additionals>
+                <LikeContainer onClick={onLike}>
+                  <Icon icon={likeAction ? 'heartfill' : 'heartline'} /> {likes}
+                </LikeContainer>
                 <Additionals>
                   {reviewData.data.keywords.map((item, index) => (
                     <Badge variant="keyword" cancel={true} key={item + index}>

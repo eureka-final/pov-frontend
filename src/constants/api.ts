@@ -23,8 +23,8 @@ export const END_POINTS = {
   INVITE_CLUB: (clubId: string) => `/api/clubs/${clubId}/invite-code`,
   LEAVE_CLUB: (clubId: string) =>  `/api/clubs/${clubId}/leave`,
   LEADER_CLUB: (clubId: string) =>  `/api/clubs/${clubId}/leader`,
-  LIKE: (movieId: number, reviewId: number) => `/api/movies/${movieId}/reviews/${reviewId}/like`,
-  DISLIKE: (movieId: number, reviewId: number) => `/api/movies/${movieId}/reviews/${reviewId}/dislike`,
+  LIKE: (movieId: string, reviewId: string) => `/api/movies/${movieId}/reviews/${reviewId}/like`,
+  DISLIKE: (movieId: string, reviewId: string) => `/api/movies/${movieId}/reviews/${reviewId}/dislike`,
 } as const;
 
 export const NETWORK = {
