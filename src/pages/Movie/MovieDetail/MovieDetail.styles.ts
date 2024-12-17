@@ -136,12 +136,13 @@ export const ReviewContainer = styled.div`
 export const HeadingContainer = styled.div`
   display: flex;
   justify-content: space-between;
+  margin-top: 30px;
 `;
 
 export const ImageContainer = styled.div`
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 46px;
 `;
 
 export const ScrollContainer = styled.div`

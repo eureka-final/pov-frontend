@@ -124,3 +124,8 @@ export interface ClubFormData {
 export interface LeaderData {
     newLeaderEmail: string;
 }
+
+export interface InviteCode {
+    message: string;
+    data: string;
+}

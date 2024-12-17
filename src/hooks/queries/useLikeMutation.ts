@@ -1,7 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-
 import { useToast } from '../../hooks/common/useToast';
-
 import { putLike, putDisLike } from '../../apis/review/putLike';
 
 
@@ -11,11 +9,11 @@ export const useLikeMutation = () => {
 
   const likeMutation = useMutation({
     mutationFn: putLike,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['like'] });
+    onSuccess: (_, { movieId, reviewId }) => {
+      queryClient.invalidateQueries({ queryKey: ['movies', movieId, 'reviews', reviewId] });
     },
     onError: () => {
-      createToast('좋아요 실패');
+      createToast('리뷰 좋아요 실패');
     },
   });
 
@@ -28,11 +26,11 @@ export const useDisLikeMutation = () => {
 
   const disLikeMutation = useMutation({
     mutationFn: putDisLike,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['dislike'] });
+    onSuccess: (_, { movieId, reviewId }) => {
+      queryClient.invalidateQueries({ queryKey: ['movies', movieId, 'reviews', reviewId] });
     },
     onError: () => {
-      createToast('좋아요 취소 실패');
+      createToast('리뷰 좋아요 취소 실패');
     },
   });
 

@@ -42,7 +42,6 @@ function Index() {
       {
         onSuccess: () => {
           console.log('결제 성공');
-          confirmPayment();
           setIsConfirmed(true);
         },
       }
@@ -81,8 +80,8 @@ function Index() {
                 <Link to={`/`} className="btn w-100">
                   홈으로 가기
                 </Link>
-                <Link to={`/mypage/order/detail`} className="btn primary w-100">
-                  주문 상세 페이지로 가기
+                <Link to={`/mypage`} className="btn primary w-100">
+                  응모 내역 보러가기
                 </Link>
               </div>
             </div>

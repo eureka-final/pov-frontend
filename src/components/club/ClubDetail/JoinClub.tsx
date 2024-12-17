@@ -19,14 +19,13 @@ import {
   ClubBookMarkContainer,
 } from './ClubDetail.styles';
 import { ClubReviewListContainer } from '../../../components/review/ReviewCard.style';
-import ReviewClubCard from '../../../components/review/ReviewClubCard';
-import Card from '../../../components/club/ClubDetail/Card';
 import { useClubDetailQuery } from '../../../hooks/queries/useClubsQuery';
 import { useDeleteClubMutation } from '../../../hooks/queries/useDeleteClubMutation';
 import { useLeaveClubMutaion } from '../../../hooks/queries/useLeaveClubMutaion';
-// import { useClubInviteQuery } from '../../../hooks/queries/useClubsQuery';
+import { useInviteCodeMutation } from '../../../hooks/queries/useCreateClubMutation';
 import { useToast } from '../../../hooks/common/useToast';
 import { useAuthStore } from '../../../stores/useAuthStore';
+import ClubReviewCard from '../../review/ClubReviewCard';
 
 const JoinClub = () => {
   const user = useAuthStore((state) => state.user);
@@ -51,8 +50,20 @@ const JoinClub = () => {
   const deleteClubMutation = useDeleteClubMutation();
   const leaveClubMutation = useLeaveClubMutaion();
 
-  // const { codeData } = useClubInviteQuery(clubId!);
+  const inviteCodeMutation = useInviteCodeMutation();
+  const [inviteCode, setInviteCode] = useState<string | null>('');
 
+  const handleCode = () => {
+    inviteCodeMutation.mutate(
+      { clubId: clubId! },
+      {
+        onSuccess: (data) => {
+          saveInviteOpen();
+          setInviteCode(data.data);
+        },
+      }
+    );
+  };
   const handleCopy = (text: string) => {
     navigator.clipboard.writeText(text).then(
       () => {
@@ -140,10 +151,21 @@ const JoinClub = () => {
                       <Heading size="small">탈퇴하기</Heading>
                     </Menu>
                   )}
-                  <Menu onClick={saveInviteOpen}>
-                    <Icon icon="plusLarge" width="15px" height="12px" />
-                    <Heading size="small">초대하기</Heading>
-                  </Menu>
+                  {clubsData.data.isPublic ? (
+                    <>
+                      <Menu onClick={saveInviteOpen}>
+                        <Icon icon="plusLarge" width="15px" height="12px" />
+                        <Heading size="small">초대하기</Heading>
+                      </Menu>
+                    </>
+                  ) : (
+                    <>
+                      <Menu onClick={handleCode}>
+                        <Icon icon="plusLarge" width="15px" height="12px" />
+                        <Heading size="small">초대하기</Heading>
+                      </Menu>
+                    </>
+                  )}
                 </MenuWrapper>
               )}
             </Wrapper>
@@ -182,7 +204,7 @@ const JoinClub = () => {
 
             <ClubReviewListContainer>
               {clubsData.data.clubReviewList.reviews.content.slice(0, 3).map((review) => (
-                <ReviewClubCard
+                <ClubReviewCard
                   key={review.reviewId}
                   movieId={review.movieId}
                   reviewId={review.reviewId}
@@ -190,7 +212,7 @@ const JoinClub = () => {
                   title={review.title}
                   contents={review.contents}
                   reviewer={review.reviewer}
-                  profileImge={review.profileImage}
+                  profileImage={review.profileImage}
                   thumbnail={review.thumbnail}
                   createdAt={review.createdAt}
                   likeAmount={review.likeAmount}
@@ -212,10 +234,11 @@ const JoinClub = () => {
               <ShowMoreBtn />
             </SectionWrapper>
 
+            {/* TODO: 북마크 데이터로 교체  */}
             <ClubBookMarkContainer>
-              {clubsData.data.clubMovieList.clubMovies.content.slice(0, 6).map((item, index) => (
+              {/* {clubsData.data.clubMovieList.clubMovies.content.slice(0, 6).map((item, index) => (
                 <Card key={item.item.title + index} item={item.item} />
-              ))}
+              ))} */}
             </ClubBookMarkContainer>
           </Section>
 
@@ -239,12 +262,8 @@ const JoinClub = () => {
                 </>
               ) : (
                 <>
-                  {/* <Body>https://www.point-of-views.com/clubs/{codeData?.data.code}</Body>
-                  <Icon
-                    icon="copy"
-                    onClick={() => handleCopy(`https://www.point-of-views.com/club/${codeData?.data.code}/detail`)}
-                    style={{ cursor: 'pointer' }}
-                  /> */}
+                  <Body>{inviteCode}</Body>
+                  <Icon icon="copy" onClick={() => handleCopy(`${inviteCode}`)} style={{ cursor: 'pointer' }} />
                 </>
               )}
             </LinkWrapper>

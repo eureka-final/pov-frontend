@@ -1,30 +1,103 @@
-import { Additionals, Count, ReviewContainer, Content, Wrapper } from './Review.styles';
-import { Heading, Body, Icon } from 'pov-design-system';
+import { useNavigate, useParams } from 'react-router-dom';
+import Profile from '../../common/Profile';
+import { Additionals, ReviewContainer, Contents, Wrapper } from './Review.styles';
+import { Body, Icon } from 'pov-design-system';
+import { useState } from 'react';
+import dompurify from 'dompurify';
+import { useLikeMutation, useDisLikeMutation } from '../../../hooks/queries/useLikeMutation';
+import { LikeContainer, Spoiler, SpoMore, ReadMore } from '../../../components/review/ReviewCard.style';
 
 interface ReviewProps {
   reviewers: {
-    profile: string;
-    name: string;
-    content: string;
-    date: string;
-    likes: string;
+    id: string;
+    profileImage: string;
+    nickname: string;
+    contents: string;
+    modifiedAt: string;
+    likeCount: number;
+    isSpoiler: boolean;
+    isLiked: boolean;
   };
 }
 
 const Review = ({ reviewers }: ReviewProps) => {
+  const navigate = useNavigate();
+  const { movieId } = useParams<{ movieId: string }>();
+
+  const sanitizer = dompurify.sanitize;
+
+  const truncateContents = (text: string | undefined, maxLength: number) => {
+    if (!text) return '';
+    if (text.length > maxLength) {
+      const truncatedText = text.substring(0, maxLength);
+      return (
+        <>
+          <div dangerouslySetInnerHTML={{ __html: sanitizer(truncatedText).replace(/<img[^>]*>/g, '') }} />
+          <span>...</span>
+          <ReadMore>더보기</ReadMore>
+        </>
+      );
+    }
+    return <div dangerouslySetInnerHTML={{ __html: sanitizer(text).replace(/<img[^>]*>/g, '') }} />;
+  };
+
+  const [likes, setLikes] = useState(reviewers.likeCount);
+  const [likeAction, setLikeAction] = useState<boolean | null>(reviewers.isLiked);
+  const likeMutation = useLikeMutation();
+  const disLikeMutation = useDisLikeMutation();
+
+  const onLike = () => {
+    if (likeAction === false) {
+      likeMutation.mutate(
+        { movieId: movieId!, reviewId: reviewers.id! },
+        {
+          onSuccess: () => {
+            setLikes(likes + 1);
+            setLikeAction(true);
+          },
+        }
+      );
+    } else {
+      disLikeMutation.mutate(
+        { movieId: movieId!, reviewId: reviewers.id! },
+        {
+          onSuccess: () => {
+            setLikes(likes - 1);
+            setLikeAction(false);
+          },
+        }
+      );
+    }
+  };
+
   return (
     <ReviewContainer>
-      <Wrapper>
-        <img src={reviewers.profile} />
-        <Heading size="small">{reviewers.name}</Heading>
-      </Wrapper>
-      <Content>{reviewers.content}</Content>
-      <Body size="small" style={{ color: '#ADACAF' }}>
-        {reviewers.date}
-      </Body>
+      <Contents
+        onClick={() => {
+          navigate(`/review/${movieId}/detail/${reviewers.id}`);
+        }}
+      >
+        <Wrapper>
+          <Profile name={reviewers.nickname} avatarUrl={reviewers.profileImage} />
+        </Wrapper>
+        {reviewers.isSpoiler ? (
+          <Spoiler>
+            <Body size="large">스포일러가 있어요!</Body>
+            <Body size="large">
+              <SpoMore>더보기</SpoMore>
+            </Body>
+          </Spoiler>
+        ) : (
+          <Body size="large">{truncateContents(reviewers.contents, 300)}</Body>
+        )}
+        <Body size="small" style={{ color: '#ADACAF' }}>
+          {new Date(reviewers.modifiedAt).toLocaleDateString()}
+        </Body>
+      </Contents>
       <Additionals justify="flex-end">
-        <Icon icon="heartline" color="#ADACAF" />
-        <Count color="#ADACAF">{reviewers.likes}</Count>
+        <LikeContainer onClick={onLike}>
+          <Icon icon={likeAction ? 'heartfill' : 'heartline'} /> {likes}
+        </LikeContainer>
       </Additionals>
     </ReviewContainer>
   );

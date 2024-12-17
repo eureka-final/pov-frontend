@@ -60,12 +60,20 @@ export const ReviewInfo = styled.div`
 
 export const Wrapper = styled.div`
   display: flex;
-  gap: 15px;
+  gap: 25px;
   position: absolute;
   bottom: 35px;
   right: 54px;
   z-index: 10;
   cursor: pointer;
+`;
+
+export const Menu = styled.div`
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  white-space: nowrap;
 `;
 
 export const BodyContainer = styled.div`
@@ -98,4 +106,12 @@ export const ReviewContainer = styled.div`
 export const HeadingContainer = styled.div`
   display: flex;
   justify-content: space-between;
+`;
+
+
+export const LikeContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px; /* 아이콘과 좋아요 수 사이 간격 */
+  color: ${({ theme }) => theme.color.green600};
 `;

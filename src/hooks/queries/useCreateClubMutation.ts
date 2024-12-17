@@ -1,5 +1,5 @@
 import { useMutation } from '@tanstack/react-query';
-import { postClub } from '../../apis/club/postClub';
+import { postClub, postInviteClub } from '../../apis/club/postClub';
 import { useApiError } from './useApiError';
 import { useToast } from '../common/useToast';
 
@@ -26,4 +26,21 @@ export const useCreateClubMutation = () => {
   );
 
   return createClubMutation;
+};
+
+export const useInviteCodeMutation = () => {
+  const { createToast } = useToast();
+
+  const inviteCodeMutation = useMutation({
+    mutationFn: postInviteClub,
+    onSuccess: (data) => {
+      console.log('성공적으로 전송:', data);
+    },
+    onError: () => {
+      createToast('초대코드 생성 실패');
+    },
+  }
+  );
+
+  return inviteCodeMutation;
 };

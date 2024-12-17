@@ -1,13 +1,15 @@
 import Main from '../pages/Main';
 import Movie from '../pages/Movie';
-import Review from '../pages/Review';
-import MovieDetail from '../pages/Movie/MovieDetail';
+import MovieSearch from '../pages/Movie/MovieSearch/Index';
+import MovieDetail from '../pages/Movie/MovieDetail/Index';
 import MovieReviews from '../pages/Movie/MovieReviews/Index';
+import Review from '../pages/Review';
 import ReviewWrite from '../pages/Review/ReviewWrite/Index';
 import ReviewEdit from '../pages/Review/ReviewEdit/Index';
 import Club from '../pages/Club';
 import ClubCreate from '../pages/Club/ClubCreate/Index';
 import ClubDetail from '../pages/Club/ClubDetail/Index';
+import ClubPrivate from '../pages/Club/ClubPrivate/Index';
 import ClubEdit from '../pages/Club/ClubEdit/Index';
 import ClubMember from '../pages/Club/ClubMember/Index';
 import ClubReview from '../pages/Club/ClubReview/Index';
@@ -27,7 +29,6 @@ import Settings from '../pages/MyPage/Settings';
 import NotFound from '../pages/NotFound/Index';
 
 // import React, { lazy, Suspense } from 'react';
-// import ReviewPageSkeleton from '../pages/Review/ReviewPageSkeleton';
 
 const MovieScreens = {
   Main: {
@@ -38,8 +39,12 @@ const MovieScreens = {
     path: '/movie',
     element: <Movie />,
   },
+  MovieSearch: {
+    path: '/movie/search',
+    element: <MovieSearch />,
+  },
   MovieDetail: {
-    path: '/movie/detail',
+    path: '/movie/:movieId/detail',
     element: <MovieDetail />,
   },
   MovieReviews: {
@@ -88,10 +93,10 @@ const ClubScreens = {
     path: '/club/:clubId/member',
     element: <ClubMember />,
   },
-  // ClubSecretDetail: {
-  //   path: '/clubs',
-  //   element: <ClubSecretDetail />,
-  // },
+  ClubPrivate: {
+    path: '/clubs/code',
+    element: <ClubPrivate />,
+  },
   ClubReview: {
     path: '/club/:clubId/review',
     element: <ClubReview />,
