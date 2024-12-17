@@ -40,7 +40,8 @@ export const postLogin = async (email: string, socialType: string) => {
 
     // Access Token을 Session Storage에 저장
     const headers = response.headers;
-    const accessToken = headers['authorization'];
+    const accessToken = headers['Authorization'];
+    console.log('accessToken =', accessToken);
     if (accessToken) {
       localStorage.setItem(ACCESS_TOKEN_KEY, accessToken);
     }
