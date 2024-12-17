@@ -18,7 +18,7 @@ import {
 } from '../club/ClubCard.style';
 
 interface ReviewCardProps {
-  key: number;
+  key: string;
   movieId: string;
   reviewId: string;
   movieTitle: string;

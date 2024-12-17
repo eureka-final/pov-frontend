@@ -1,7 +1,18 @@
 import Basic from '../../../components/templates/Basic/Basic';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Heading, Body, Paragraph, Icon, Badge, useOverlay, Modal, Button } from 'pov-design-system';
-import { Container, HeaderContainer, Additionals, TitleInfo, ReviewInfo, BodyContainer, BackgroundLayer, Wrapper, LikeContainer } from './ReviewDetail.styles';
+import {
+  Container,
+  HeaderContainer,
+  Additionals,
+  TitleInfo,
+  ReviewInfo,
+  BodyContainer,
+  BackgroundLayer,
+  Wrapper,
+  Menu,
+  LikeContainer,
+} from './ReviewDetail.styles';
 import Profile from '../../../components/common/Profile';
 import { useReviewDetailQuery } from '../../../hooks/queries/useReviewsQuery';
 import { useDeleteReviewMutation } from '../../../hooks/queries/useDeleteReviewMutation';
@@ -90,14 +101,14 @@ const Index = () => {
                 </Additionals>
               </ReviewInfo>
               <Wrapper>
-                <div>
-                  <Icon icon="edit" onClick={() => navigate(`/review/${movieId}/edit/${reviewId}`)} />
+                <Menu onClick={() => navigate(`/review/${movieId}/edit/${reviewId}`)}>
+                  <Icon icon="edit" />
                   <Body>수정</Body>
-                </div>
-                <div>
-                  <Icon icon="delete" onClick={saveOpen} />
+                </Menu>
+                <Menu onClick={saveOpen}>
+                  <Icon icon="delete" />
                   <Body>삭제</Body>
-                </div>
+                </Menu>
               </Wrapper>
             </HeaderContainer>
           </Container>
