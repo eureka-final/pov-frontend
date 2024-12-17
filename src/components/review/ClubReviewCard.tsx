@@ -3,7 +3,6 @@ import { Body, Paragraph, Heading, Logo, Button, Icon } from 'pov-design-system'
 import Profile from '../common/Profile';
 import dompurify from 'dompurify';
 import { useState } from 'react';
-
 import { useLikeMutation, useDisLikeMutation } from '../../hooks/queries/useLikeMutation';
 import {
   CardContainer,

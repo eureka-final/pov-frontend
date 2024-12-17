@@ -17,6 +17,8 @@ import { Body, Paragraph, Icon, Heading, Logo, Button } from 'pov-design-system'
 import Profile from '../common/Profile';
 import dompurify from 'dompurify';
 import { Review } from '../../types/review';
+import { useState } from 'react';
+import { useLikeMutation, useDisLikeMutation } from '../../hooks/queries/useLikeMutation';
 
 function ReviewCard({ reviewId, movieId, thumbnail, movieTitle, reviewer, profileImage, title, spoiler, contents, createdAt, isLiked, likeAmount }: Review) {
   const navigate = useNavigate();
@@ -37,15 +39,44 @@ function ReviewCard({ reviewId, movieId, thumbnail, movieTitle, reviewer, profil
     return <div dangerouslySetInnerHTML={{ __html: sanitizer(text).replace(/<img[^>]*>/g, '') }} />;
   };
 
+  const [likes, setLikes] = useState(likeAmount);
+  const [likeAction, setLikeAction] = useState<boolean | null>(isLiked);
+  const likeMutation = useLikeMutation();
+  const disLikeMutation = useDisLikeMutation();
+
+  const onLike = () => {
+    if (likeAction === false) {
+      likeMutation.mutate(
+        { movieId: movieId!, reviewId: reviewId! },
+        {
+          onSuccess: () => {
+            setLikes(likes + 1);
+            setLikeAction(true);
+          },
+        }
+      );
+    } else {
+      disLikeMutation.mutate(
+        { movieId: movieId!, reviewId: reviewId! },
+        {
+          onSuccess: () => {
+            setLikes(likes - 1);
+            setLikeAction(false);
+          },
+        }
+      );
+    }
+  };
+
   return (
     <ReviewListContainer>
-      <CardContainer
-        key={reviewId}
-        onClick={() => {
-          navigate(`/review/${movieId}/detail/${reviewId}`);
-        }}
-      >
-        <CardFlex>
+      <CardContainer>
+        <CardFlex
+          key={reviewId}
+          onClick={() => {
+            navigate(`/review/${movieId}/detail/${reviewId}`);
+          }}
+        >
           <Poster>
             <img src={thumbnail.replace('/w154/', '/w92/')} alt={movieTitle} />
             <Body size="small">{movieTitle}</Body>
@@ -64,15 +95,14 @@ function ReviewCard({ reviewId, movieId, thumbnail, movieTitle, reviewer, profil
             ) : (
               <Body size="large">{truncateContents(contents, 300)}</Body>
             )}
-
-            <FlexBetween>
-              <Body>{new Date(createdAt).toLocaleDateString()}</Body>
-              <LikeContainer>
-                <Icon icon={isLiked ? 'heartfill' : 'heartline'} /> {likeAmount}
-              </LikeContainer>
-            </FlexBetween>
           </ReviewCardContainer>
         </CardFlex>
+        <FlexBetween>
+          <Body>{new Date(createdAt).toLocaleDateString()}</Body>
+          <LikeContainer onClick={onLike}>
+            <Icon icon={likeAction ? 'heartfill' : 'heartline'} /> {likes}
+          </LikeContainer>
+        </FlexBetween>
       </CardContainer>
     </ReviewListContainer>
   );
