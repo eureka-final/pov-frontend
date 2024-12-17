@@ -131,7 +131,7 @@ const AuthScreens = {
     element: <SignUp />,
   },
   OauthNaver: {
-    path: '/oauth/naver',
+    path: '/oauth/naver/callback',
     element: <OauthNaver />,
   },
   OauthGoogle: {
