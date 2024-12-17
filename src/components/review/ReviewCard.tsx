@@ -62,7 +62,7 @@ function ReviewCard({ reviewId, movieId, thumbnail, movieTitle, reviewer, profil
                 </Body>
               </Spoiler>
             ) : (
-              <Body size="large">{truncateContents(contents, 380)}</Body>
+              <Body size="large">{truncateContents(contents, 300)}</Body>
             )}
 
             <FlexBetween>

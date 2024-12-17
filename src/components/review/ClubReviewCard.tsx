@@ -1,12 +1,22 @@
 import { useNavigate } from 'react-router-dom';
-import { CardContainer, Poster, CardFlex, ReviewCardContainer, LikeContainer, FlexBetween, TitleInfo, ReadMore } from './ReviewCard.style';
 import { Body, Paragraph, Heading, Logo, Button, Icon } from 'pov-design-system';
 import Profile from '../common/Profile';
 import dompurify from 'dompurify';
 import { useState } from 'react';
 
 import { useLikeMutation, useDisLikeMutation } from '../../hooks/queries/useLikeMutation';
-import { Spoiler, SpoMore } from '../club/ClubCard.style';
+import {
+  CardContainer,
+  Poster,
+  CardFlex,
+  ReviewCardContainer,
+  LikeContainer,
+  FlexBetween,
+  TitleInfo,
+  ReadMore,
+  Spoiler,
+  SpoMore,
+} from '../club/ClubCard.style';
 
 interface ReviewCardProps {
   key: number;
@@ -110,7 +120,7 @@ function ClubReviewCard({
                 </Body>
               </Spoiler>
             ) : (
-              <Body size="large">{truncateContents(contents, 145)}</Body>
+              <Body size="large">{truncateContents(contents, 100)}</Body>
             )}
           </ReviewCardContainer>
         </CardFlex>
