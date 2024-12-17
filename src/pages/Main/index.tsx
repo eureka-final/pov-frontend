@@ -18,6 +18,10 @@ const Index = () => {
   const { moviesData } = useMoviesQuery();
   const { reviewsData } = useReviewsQuery();
 
+  useEffect(() => {
+    requestPermission();
+  }, []);
+
   return (
     <Padded>
       <Container>
