@@ -7,6 +7,7 @@ const Index = () => {
   /* POV Server Login URL로 리디렉션 */
   const redirectToNaverLogin = () => {
     const authUrl = `${import.meta.env.VITE_BASE_URL}/oauth2/authorization/naver`;
+    window.alert(authUrl);
     window.location.href = authUrl;
   };
 

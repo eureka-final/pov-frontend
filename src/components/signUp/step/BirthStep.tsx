@@ -12,28 +12,18 @@ interface BirthStepProps {
 }
 
 const BirthStep = ({ onNext, onPrev }: BirthStepProps) => {
-  // @ts-ignorem
-  const [buttonDisabled, setButtonDisabled] = useState<boolean>(true);
-
+  const [initButtonDisabled, setInitButtonDisabled] = useState<boolean>(true);
   const {
     formState: { errors },
     register,
     setFocus,
     getValues,
   } = useFormContext();
-  console.log(errors);
 
   // errors가 업데이트될 때마다 관련 상태 업데이트
   useEffect(() => {
-    console.log('hi');
     setFocus('birth'); // focus를 계속 유지
-    setButtonDisabled(!!errors.birth); // 버튼 상태 업데이트
   }, [errors, getValues('birth')]);
-
-  // 초기 렌더링 시 button을 disabled로 설정
-  useEffect(() => {
-    setButtonDisabled(true);
-  }, []);
 
   return (
     <SignUpStep
@@ -51,10 +41,13 @@ const BirthStep = ({ onNext, onPrev }: BirthStepProps) => {
           isError={errors.birth}
           supportingText={errors.birth?.message}
           {...register('birth')}
+          onChange={() => {
+            if (initButtonDisabled) setInitButtonDisabled(false);
+          }}
         />
       </div>
       <ButtonContainer>
-        <Button css={{ width: '100%' }} size="large" disabled={!!errors.birth} onClick={onNext}>
+        <Button css={{ width: '100%' }} size="large" disabled={initButtonDisabled || !!errors.birth} onClick={onNext}>
           다음으로
         </Button>
       </ButtonContainer>

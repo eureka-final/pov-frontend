@@ -23,10 +23,10 @@ const SignUpFunnel = ({ steps, Funnel, Step, stepHandler, onSubmit }: SignUpFunn
         <NicknameStep onNext={() => stepHandler(steps[1])} onPrev={() => navigate(-1)}></NicknameStep>
       </Step>
       <Step name="birth">
-        <BirthStep onNext={() => stepHandler(steps[2])} onPrev={() => stepHandler(steps[1])}></BirthStep>
+        <BirthStep onNext={() => stepHandler(steps[2])} onPrev={() => stepHandler(steps[0])}></BirthStep>
       </Step>
       <Step name="favorGenres">
-        <FavorGenreStep onSubmit={onSubmit} onPrev={() => stepHandler(steps[2])}></FavorGenreStep>
+        <FavorGenreStep onSubmit={onSubmit} onPrev={() => stepHandler(steps[1])}></FavorGenreStep>
       </Step>
       <Step name="success">
         <OnSuccessStep onNext={() => navigate('/main')} onPrev={() => navigate('/login')}></OnSuccessStep>
