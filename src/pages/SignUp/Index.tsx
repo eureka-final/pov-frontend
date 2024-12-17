@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useForm, FormProvider } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -13,6 +13,7 @@ const signInSteps = ['nickname', 'birth', 'favorGenres', 'success'];
 
 const Index = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const { Step, Funnel, setStep } = useFunnel(signInSteps[0]);
   const setLoggedIn = useAuthStore((state) => state.setLoggedIn);
   const setUser = useAuthStore((state) => state.setUser);
@@ -40,6 +41,9 @@ const Index = () => {
       nickname: '',
       birth: '',
       favorGenres: [],
+      email: location.state.email,
+      profileImage: location.state.profileImage,
+      socialType: location.state.socialType,
     },
   });
   const { getValues } = methods;
@@ -51,6 +55,7 @@ const Index = () => {
 
   /* Form 제출 시 실행될 handler 함수 */
   const onSubmit = async (data: User) => {
+    console.log(data);
     try {
       const response = await postSignUpApi(data);
       console.log(response);
