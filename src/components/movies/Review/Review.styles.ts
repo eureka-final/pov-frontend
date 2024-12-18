@@ -42,3 +42,9 @@ export const Content = styled.div`
   font-weight: 400;
   line-height: 22.4px;
 `;
+
+export const Contents = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+`;

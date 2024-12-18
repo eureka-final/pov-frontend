@@ -13,7 +13,7 @@ import {
   Menu,
   LikeContainer,
 } from './ReviewDetail.styles';
-import Profile from '../../../components/common/Profile';
+import Profile from '../../../components/common/Profile/Profile';
 import { useReviewDetailQuery } from '../../../hooks/queries/useReviewsQuery';
 import { useDeleteReviewMutation } from '../../../hooks/queries/useDeleteReviewMutation';
 import dompurify from 'dompurify';
@@ -81,8 +81,8 @@ const Index = () => {
       {reviewData && (
         <>
           <Container>
+            <BackgroundLayer src={reviewData.data.thumbnail.replace('/w154/', '/original/')}></BackgroundLayer>
             <HeaderContainer src={reviewData.data.thumbnail.replace('/w154/', '/original/')}>
-              <BackgroundLayer src={reviewData.data.thumbnail.replace('/w154/', '/original/')}></BackgroundLayer>
               <TitleInfo>
                 <Heading size="xLarge">{reviewData.data.title}</Heading>
               </TitleInfo>
@@ -113,11 +113,11 @@ const Index = () => {
                 </Menu>
               </Wrapper>
             </HeaderContainer>
-          </Container>
 
-          <Paragraph>
-            <div dangerouslySetInnerHTML={{ __html: sanitizer(`${reviewData.data.contents}`) }} />
-          </Paragraph>
+            <Paragraph css={{ marginTop: '48px' }}>
+              <div dangerouslySetInnerHTML={{ __html: sanitizer(`${reviewData.data.contents}`) }} />
+            </Paragraph>
+          </Container>
 
           {/* 삭제 버튼 누르면 나오는 모달창 */}
           <Modal isOpen={isSaveOpen} closeModal={saveClose}>

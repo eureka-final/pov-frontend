@@ -1,6 +1,6 @@
 import { Container, Layout, Wrapper } from './Productions.styles';
-import ImageLayer from '../../styles/ImageLayer';
-import { Body } from 'pov-design-system';
+// import ImageLayer from '../../styles/ImageLayer';
+import { Body, Avatar, Heading } from 'pov-design-system';
 
 interface ProductionsProps {
   productions: {
@@ -20,11 +20,12 @@ const Productions = ({ productions }: ProductionsProps) => {
   return (
     <Container>
       <Layout>
-        <ImageLayer src={src} />
+        {/* <ImageLayer src={src} /> */}
+        <Avatar src={src.url} />
       </Layout>
       <Wrapper>
-        <Body size="large">{productions.name}</Body>
-        <Body size="large" style={{ color: '##ADACAF' }}>
+        <Heading size="small">{productions.name}</Heading>
+        <Body size="large" style={{ color: '#ADACAF' }}>
           {productions.role}
         </Body>
       </Wrapper>

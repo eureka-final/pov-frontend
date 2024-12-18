@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import NavigationTabs from '../common/NavigationTabs';
-import Profile from '../common/Profile';
 import { Logo, Input, Icon, Heading, Body } from 'pov-design-system';
 import { HeaderWrapper, LeftWrapper, RightWrapper, NoticeButton, LoginButton, LogoItem, FlexWrapper } from './Header.style';
 import { useAuthStore } from '../../stores/useAuthStore';
 import { useNavigate } from 'react-router-dom';
+import HeaderProfile from '../common/Profile/HeaderProfile';
 
 function Header() {
   const user = useAuthStore((state) => state.user);
@@ -52,7 +52,7 @@ function Header() {
               <NoticeButton onClick={() => navigate('/notice')}>
                 <Icon icon="bell"></Icon>
               </NoticeButton>
-              <Profile name={user?.nickname} avatarUrl={user.profileImage} />
+              <HeaderProfile name={user?.nickname} avatarUrl={user.profileImage} />
             </>
           )}
           {!isLoggedIn && (

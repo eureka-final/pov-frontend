@@ -5,18 +5,20 @@ export const Container = styled.div`
 `;
 
 export const HeaderContainer = styled.div<{ src: string }>`
-  width: 100%;
   height: 480px;
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
 `;
 
 export const BackgroundLayer = styled.div<{ src: string }>`
   width: 100%;
-  height: 100%;
+  height: 520px;
   position: absolute;
+  left: 0;
+  top: 0;
   background: ${({ src }) => (src ? `url(${src})` : '#ffffff')};
   background-size: cover;
   background-position: center;
@@ -27,13 +29,15 @@ export const BackgroundLayer = styled.div<{ src: string }>`
 `;
 
 export const TitleInfo = styled.div`
+  padding-bottom: 160px;
   display: flex;
+  box-sizing: content-box;
   z-index: 20;
   text-align: center;
+
   @media (min-width: 0px) and (max-width: 600px) {
     left: 24px;
   }
-
   @media (min-width: 600px) {
     left: 76px;
   }
@@ -43,25 +47,18 @@ export const ReviewInfo = styled.div`
   display: flex;
   flex-direction: column;
   position: absolute;
-  bottom: 55px;
-  left: 24px;
+  bottom: 64px;
   z-index: 20;
   gap: 16px;
-  @media (min-width: 0px) and (max-width: 600px) {
-    left: 24px;
-  }
-
-  @media (min-width: 600px) {
-    left: 76px;
-  }
+  left: 0;
 `;
 
 export const Wrapper = styled.div`
   display: flex;
   gap: 25px;
   position: absolute;
-  bottom: 35px;
-  right: 54px;
+  bottom: 64px;
+  right: 0;
   z-index: 10;
   cursor: pointer;
 `;
@@ -92,7 +89,6 @@ export const Count = styled.span<{ color?: string }>`
   color: ${({ color }) => (color ? `${color}` : '#FFFFFF')};
 `;
 
-
 export const ReviewContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -106,7 +102,6 @@ export const HeadingContainer = styled.div`
   display: flex;
   justify-content: space-between;
 `;
-
 
 export const LikeContainer = styled.div`
   display: flex;

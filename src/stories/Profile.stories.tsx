@@ -1,6 +1,6 @@
 // In the Storybook file
 import { Meta, StoryFn } from '@storybook/react';
-import Profile, { UserProps } from '../components/common/Profile';
+import Profile, { UserProps } from '../components/common/Profile/Profile';
 
 export default {
   component: Profile,
