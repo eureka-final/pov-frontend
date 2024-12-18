@@ -21,7 +21,7 @@ const Index = () => {
       // 인가 코드가 존재하지 않는 경우 에러 처리
       if (!code) {
         alert('서비스의 문제로 인해 로그인에 실패했어요.');
-        // window.location.href = '/';
+        window.location.href = '/';
         return;
       }
 
@@ -29,7 +29,7 @@ const Index = () => {
       // 구글에서 회원정보를 받아오는 데 실패한 경우 에러 처리
       if (!data) {
         alert('구글에서 회원정보를 받아오는 데 실패했어요.');
-        // window.location.href = '/';
+        window.location.href = '/';
         return;
       }
 
@@ -42,8 +42,8 @@ const Index = () => {
           setLoggedIn(true);
           setUser(response.data.memberInfo);
 
-          // if (response.data.memberInfo.role === 'USER') window.location.href = '/';
-          // if (response.data.memberInfo.role === 'ADMIN') window.location.href = '/admin/movies';
+          if (response.data.memberInfo.role === 'USER') window.location.href = '/';
+          if (response.data.memberInfo.role === 'ADMIN') window.location.href = '/admin/movies';
         } else {
           // 회원 정보가 존재하지 않는 경우 회원가입으로 이동
           navigate('/signup', {
@@ -57,7 +57,7 @@ const Index = () => {
       } catch (error) {
         console.error(error);
         alert('로그인 실패');
-        // window.location.href = '/login';
+        window.location.href = '/login';
         return;
       }
     };
