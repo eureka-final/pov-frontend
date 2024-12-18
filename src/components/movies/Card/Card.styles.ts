@@ -4,7 +4,7 @@ import { Heading } from 'pov-design-system';
 export const InfoContainer = styled.div`
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 8px;
 `;
 
 export const CardWapper = styled.div`
@@ -40,6 +40,7 @@ export const SingleLineHeading = styled(Heading)`
   white-space: nowrap;
   text-overflow: ellipsis;
   width: 100%; /* 부모 요소에 따라 너비 조정 */
+  margin-bottom: 4px;
 `;
 
 export const ThumbnailImage = styled.img`

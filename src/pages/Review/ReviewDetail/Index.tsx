@@ -21,12 +21,13 @@ import { useToast } from '../../../hooks/common/useToast';
 
 import { useState } from 'react';
 import { useLikeMutation, useDisLikeMutation } from '../../../hooks/queries/useLikeMutation';
+import { useTheme } from '@emotion/react';
 
 const Index = () => {
   const { movieId, reviewId } = useParams<{ movieId: string; reviewId: string }>();
   const navigate = useNavigate();
   const { createToast } = useToast();
-
+  const theme = useTheme();
   const { isOpen: isSaveOpen, open: saveOpen, close: saveClose } = useOverlay();
 
   const sanitizer = dompurify.sanitize;
@@ -71,7 +72,7 @@ const Index = () => {
         onSuccess: () => {
           saveClose();
           navigate('/review');
-          createToast('리뷰 삭제 성공!', 'success');
+          createToast('리뷰가 삭제되었어요.', 'success');
         },
       }
     );
@@ -89,10 +90,12 @@ const Index = () => {
               <ReviewInfo>
                 <Profile name={reviewData.data.reviewer} avatarUrl={reviewData.data.profileImage} />
                 <BodyContainer>
-                  <Body size="large">{new Date(reviewData.data.createdAt).toLocaleDateString()}</Body>
+                  <Body size="large" css={{ color: theme.teritary }}>
+                    {new Date(reviewData.data.createdAt).toLocaleDateString()}
+                  </Body>
                 </BodyContainer>
                 <LikeContainer onClick={onLike}>
-                  <Icon icon={likeAction ? 'heartfill' : 'heartline'} /> {likes}
+                  <Icon icon={likeAction ? 'heartfill' : 'heartline'} css={{ width: '16px' }} /> {likes}
                 </LikeContainer>
                 <Additionals>
                   {reviewData.data.keywords.map((item, index) => (
@@ -104,24 +107,24 @@ const Index = () => {
               </ReviewInfo>
               <Wrapper>
                 <Menu onClick={() => navigate(`/review/${movieId}/edit/${reviewId}`)}>
-                  <Icon icon="edit" />
-                  <Body>수정</Body>
+                  <Icon icon="edit" css={{ width: '14px' }} />
+                  <Body size="large">수정하기</Body>
                 </Menu>
                 <Menu onClick={saveOpen}>
-                  <Icon icon="delete" />
-                  <Body>삭제</Body>
+                  <Icon icon="delete" css={{ width: '14px' }} />
+                  <Body size="large">삭제하기</Body>
                 </Menu>
               </Wrapper>
             </HeaderContainer>
 
-            <Paragraph css={{ marginTop: '48px' }}>
+            <Paragraph css={{ marginTop: '48px', marginBottom: '300px' }}>
               <div dangerouslySetInnerHTML={{ __html: sanitizer(`${reviewData.data.contents}`) }} />
             </Paragraph>
           </Container>
 
           {/* 삭제 버튼 누르면 나오는 모달창 */}
           <Modal isOpen={isSaveOpen} closeModal={saveClose}>
-            <Heading size="medium">정말 삭제하시겠습니까?</Heading>
+            <Heading size="medium">정말 리뷰를 삭제하시겠어요?</Heading>
             <Button variant="primary" onClick={handleDelete} css={{ width: '100%', marginTop: '30px' }}>
               삭제하기
             </Button>

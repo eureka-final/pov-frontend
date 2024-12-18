@@ -25,7 +25,7 @@ const Index = () => {
     <HomeContainer>
       <Container>
         <SectionWrapper>
-          <Heading size="large">POV&apos;s 선정 영화 🎞️</Heading>
+          <Heading size="xLarge">POV&apos;s 선정 영화 🎞️</Heading>
           <ShowMoreBtn onClick={() => navigate(`/movie/trending`)} />
         </SectionWrapper>
         <CardContainer>{moviesData && moviesData.data.movies.slice(0, 6).map((item, index) => <Card key={item.title + index} item={item} />)}</CardContainer>
