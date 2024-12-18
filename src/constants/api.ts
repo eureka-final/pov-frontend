@@ -23,7 +23,11 @@ export const END_POINTS = {
   LEADER_CLUB: (clubId: string) => `/api/clubs/${clubId}/leader`,
   LIKE: (movieId: number, reviewId: number) => `/api/movies/${movieId}/reviews/${reviewId}/like`,
   DISLIKE: (movieId: number, reviewId: number) => `/api/movies/${movieId}/reviews/${reviewId}/dislike`,
-  ADMIN_MOVIES: (pageParam: number | unknown) => `/api/movies/admin-search?page=${pageParam}`,
+  MOVIES: (pageParam: number | unknown, query: string) => `/api/movies/search?query=${query}&page=${pageParam}`,
+  MOVIE_DETAIL: (movieId: string) => `/api/movies/${movieId}`,
+  ADMIN_MOVIES: (pageParam: number | unknown, query: string) => `/api/movies/admin-search?query=${query}&page=${pageParam}`,
+  TMDB_MOVIES: (pageParam: number | unknown, query: string) => `/api/movies/tmdb-search?query=${query}&page=${pageParam}`,
+  TMDB_DETAIL: (tmdbId: string) => `/api/movies/tmdb-search/${tmdbId}`,
 } as const;
 
 export const NETWORK = {

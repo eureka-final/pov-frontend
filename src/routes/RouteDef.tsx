@@ -189,7 +189,7 @@ const AdminScreens = {
     element: <AdminMovieDetail />,
   },
   MovieUpdate: {
-    path: '/admin/movie/update',
+    path: '/admin/movie/update/:id',
     element: <AdminMovieUpdate />,
   },
   TMDBMovie: {
@@ -197,7 +197,7 @@ const AdminScreens = {
     element: <TMDBMovies />,
   },
   TMDBApply: {
-    path: '/admin/movie/tmdb/apply',
+    path: '/admin/movie/tmdb/apply/:id',
     element: <TMDBMoviesApply />,
   },
   AdminQurations: {

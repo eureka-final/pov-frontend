@@ -1,70 +1,41 @@
 import AdminTemplate from '../../../components/templates/Admin/AdminTemplate';
-import { Container, Header, Card, Info, InfoContainer, Wrapper, Buttons, ImageContainer, HeadingContainer, Div } from './MovieDetail.styles';
+import { Container, Header, Card, Info, InfoContainer, Wrapper, Buttons, ImageContainer, HeadingContainer, Div, Layer } from './MovieDetail.styles';
 import { Heading, Body, Button, Icon } from 'pov-design-system';
 import ImageLayer from '../../../components/styles/ImageLayer';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useMovieDetailQuery } from '../../../hooks/queries/useMovieQuery';
+import { List } from '../Movie.styles';
+import { useDeleteMovieMutation } from '../../../hooks/queries/useDeleteMovieMutation';
+import { useToast } from '../../../hooks/common/useToast';
 
 const Index = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const { id } = location.state || '';
+  const { detailData } = useMovieDetailQuery(id);
+  const deleteMovieMutation = useDeleteMovieMutation();
+  const { createToast } = useToast();
+
   const src = {
-    url: 'https://s3-alpha-sig.figma.com/img/e6e7/2525/ff55062ea84c1c29644c11b52ffd3e4e?Expires=1733702400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=OGpweIGZMfE-f19r-yrQPCtuMFKPyyoRL5IyWBBhvLVsQdo4dKjksz8~-rPhxIDSpDVmJ3ZenNTlQEuk-sGkE9m~Fftn-KPVTpACV0F2V2z9AFo1JVovVPk9lN8talydRJEftN-SgZECwsjNIXPq26zqZMEOq-VBHKXkwN~bmrrjbTjEINB5IWX6h4Qs0D2Yn6w3kmfU2hwa~zdzJ42LpezDQ2bHEQtIoxC56kao2nFKhFztc7Lxx78JPHE9tEyejvBYg-PZdCJf~78DXtIBMlAsGkXk6Mt96aRYVxxaoNezfHz7OiyWFLPGV0p8Vp1oHq61SPrJM8ahO7GSYu2qMA__',
+    url: detailData?.data?.poster || '',
     MobileHeight: 260,
     PcHeight: 260,
     br: '8',
   };
 
-  const movie = {
-    title: '다크 나이트',
-    applied: true,
-    genres: ['스릴러', '라마'],
-    country: ['영국', '미국'],
-    release: '2008-07-18',
-    plot: '조커라는 위협이 그의 신비한 과거에서 등장하면서, 고담 시민들에게 혼란과 혼돈을 초래합니다. 다크 나이트는 정의를 지키기 위해 그의 심리적, 신체적 한계를 시험해야 합니다.',
-    peoples: {
-      cast: [
-        {
-          id: 10,
-          tmdbId: 12345,
-          name: 'Christian Bale',
-          profile_path: '/abc123.jpg',
-          character: 'Bruce Wayne / Batman',
-          order: 1,
-        },
-        {
-          id: 20,
-          tmdbId: 54321,
-          name: 'Christopher Nolan',
-          original_name: 'Christopher Nolan',
-          profile_path: '/ghi789.jpg',
-          department: 'Directing',
-          job: 'Director',
-        },
-      ],
-      crew: [
-        {
-          id: 20,
-          tmdbId: 54321,
-          name: 'Christopher Nolan',
-          original_name: 'Christopher Nolan',
-          profile_path: '/ghi789.jpg',
-          department: 'Directing',
-          job: 'Director',
-        },
-        {
-          id: 20,
-          tmdbId: 54321,
-          name: 'Christopher Nolan',
-          original_name: 'Christopher Nolan',
-          profile_path: '/ghi789.jpg',
-          department: 'Directing',
-          job: 'Director',
-        },
-      ],
-    },
+  const handleUpdateDetail = () => {
+    navigate(`/admin/movie/update/${id}`, { state: { id: id } });
   };
 
-  const handleUpdateDetail = () => {
-    navigate(`/admin/movie/update`);
+  const handleDeleteMovie = () => {
+    deleteMovieMutation.mutate(
+      { movieId: id! },
+      {
+        onSuccess: () => {
+          createToast('클럽 삭제 성공!', 'success');
+        },
+      }
+    );
   };
 
   return (
@@ -82,64 +53,64 @@ const Index = () => {
               <ImageLayer src={src} />
             </div>
             <Info>
-              <Heading size="large">{movie.title}</Heading>
-              <Wrapper>
+              <Heading size="large">{detailData?.data.title}</Heading>
+              {/* <Wrapper>
                 <Body size="xLarge" style={{ color: '#ADACAF', marginRight: '32px', width: '80px' }}>
                   등록여부
                 </Body>
-                <Body size="xLarge">{movie.applied ? '등록' : '미등록'}</Body>
-              </Wrapper>
+                <Body size="xLarge">{detailData?.data.applied ? '등록' : '미등록'}</Body>
+              </Wrapper> */}
               <Wrapper>
                 <Body size="xLarge" style={{ color: '#ADACAF', marginRight: '32px', width: '80px' }}>
                   장르
                 </Body>
-                <Body size="xLarge">{movie.genres.join(', ')}</Body>
+                <Body size="xLarge">{detailData?.data.genre.join(', ')}</Body>
               </Wrapper>
               <Wrapper>
                 <Body size="xLarge" style={{ color: '#ADACAF', marginRight: '32px', width: '80px' }}>
                   감독
                 </Body>
-                <Body size="xLarge">{movie.peoples.cast.map((person) => person.name).join(', ')}</Body>
+                <Body size="xLarge">{detailData?.data.directors.map((person) => person.name).join(', ')}</Body>
               </Wrapper>
-              <Wrapper>
+              {/* <Wrapper>
                 <Body size="xLarge" style={{ color: '#ADACAF', marginRight: '32px', width: '80px' }}>
                   작가
                 </Body>
-                <Body size="xLarge">{movie.peoples.cast.map((person) => person.name).join(', ')}</Body>
-              </Wrapper>
+                <Body size="xLarge">{detailData?.data.peoples.cast.map((person) => person.name).join(', ')}</Body>
+              </Wrapper> */}
               <Wrapper>
                 <Body size="xLarge" style={{ color: '#ADACAF', marginRight: '32px', width: '80px' }}>
                   출연진
                 </Body>
-                <Body size="xLarge">{movie.peoples.crew.map((person) => person.name).join(', ')}</Body>
+                <Body size="xLarge">{detailData?.data.actors.map((person) => person.name).join(', ')}</Body>
               </Wrapper>
               <Wrapper>
                 <Body size="xLarge" style={{ color: '#ADACAF', marginRight: '32px', width: '80px' }}>
                   국가
                 </Body>
-                <Body size="xLarge">{movie.country.join(', ')}</Body>
+                <Body size="xLarge">{detailData?.data.country.join(', ')}</Body>
               </Wrapper>
               <Wrapper>
                 <Body size="xLarge" style={{ color: '#ADACAF', marginRight: '32px', width: '80px' }}>
                   개봉일자
                 </Body>
-                <Body size="xLarge">{movie.release}</Body>
+                <Body size="xLarge">{detailData?.data.released}</Body>
               </Wrapper>
               <Wrapper>
                 <Body size="xLarge" style={{ color: '#ADACAF', marginRight: '32px', width: '80px' }}>
                   줄거리
                 </Body>
                 <Body size="xLarge" style={{ width: '380px' }}>
-                  {movie.plot}
+                  {detailData?.data.plot}
                 </Body>
               </Wrapper>
             </Info>
           </InfoContainer>
           <Buttons>
-            <Button variant="secondary" css={{ width: '100%' }}>
+            <Button variant="secondary" css={{ width: '100%' }} onClick={handleDeleteMovie}>
               삭제하기
             </Button>
-            <Button variant="primary" css={{ width: '100%' }}>
+            <Button variant="primary" css={{ width: '100%' }} onClick={handleUpdateDetail}>
               수정하기
             </Button>
           </Buttons>
@@ -153,6 +124,16 @@ const Index = () => {
                 <Icon icon="angleright" color="#ADACAF" style={{ width: '16px', height: '16px' }} />
               </Div>
             </HeadingContainer>
+            <List>
+              {detailData?.data.images.map((image) => (
+                <Layer key={image}>
+                  <Body size="xLarge">{image}</Body>
+                  <Body size="xLarge" style={{ color: '#ADACAF' }}>
+                    미리보기
+                  </Body>
+                </Layer>
+              ))}
+            </List>
           </ImageContainer>
           <ImageContainer>
             <HeadingContainer>
@@ -164,6 +145,7 @@ const Index = () => {
                 <Icon icon="angleright" color="#ADACAF" style={{ width: '16px', height: '16px' }} />
               </Div>
             </HeadingContainer>
+            <List>{detailData?.data.videos.map((image) => <Layer key={image}>{image}</Layer>)}</List>
           </ImageContainer>
         </Card>
       </Container>

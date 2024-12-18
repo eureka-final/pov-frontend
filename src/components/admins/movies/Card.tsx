@@ -8,24 +8,32 @@ interface CardProps {
     id: number;
     title: string;
     released: string;
+    poster: string;
+    movieLikeCount: number;
+    reviewCount: number;
   };
+  target: string;
 }
 
-const Card = ({ item }: CardProps) => {
+const Card = ({ item, target }: CardProps) => {
   const navigate = useNavigate();
   const handleDetailClick = () => {
-    navigate(`/admin/movie/detail${item.id}`);
+    if (target === 'db') {
+      navigate(`/admin/movie/detail/${item.id}`, { state: { id: item.id } });
+    } else {
+      navigate(`/admin/movie/tmdb/apply/${item.id}`, { state: { id: item.id } });
+    }
   };
 
   const src = {
-    url: 'https://s3-alpha-sig.figma.com/img/e6e7/2525/ff55062ea84c1c29644c11b52ffd3e4e?Expires=1733702400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=OGpweIGZMfE-f19r-yrQPCtuMFKPyyoRL5IyWBBhvLVsQdo4dKjksz8~-rPhxIDSpDVmJ3ZenNTlQEuk-sGkE9m~Fftn-KPVTpACV0F2V2z9AFo1JVovVPk9lN8talydRJEftN-SgZECwsjNIXPq26zqZMEOq-VBHKXkwN~bmrrjbTjEINB5IWX6h4Qs0D2Yn6w3kmfU2hwa~zdzJ42LpezDQ2bHEQtIoxC56kao2nFKhFztc7Lxx78JPHE9tEyejvBYg-PZdCJf~78DXtIBMlAsGkXk6Mt96aRYVxxaoNezfHz7OiyWFLPGV0p8Vp1oHq61SPrJM8ahO7GSYu2qMA__',
+    url: item.poster,
     MobileHeight: 220,
     PcHeight: 260,
     br: '8',
   };
 
   return (
-    <Container onClick={() => handleDetailClick}>
+    <Container onClick={handleDetailClick}>
       <ImageLayer src={src} />
       <Heading size="medium">{item.title}</Heading>
       <Body size="large" style={{ color: '#ADACAF' }}>
@@ -45,4 +53,5 @@ const Container = styled.div`
   min-width: 150px;
   max-width: 170px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
 `;

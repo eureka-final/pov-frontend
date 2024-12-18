@@ -1,59 +1,39 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import AdminTemplate from '../../../components/templates/Admin/AdminTemplate';
 import { Container, Header, Card, Info, InfoContainer, Wrapper, Input, ButtonContainer, Badges } from './Detail.styles';
 import { Heading, Body, Button, Badge } from 'pov-design-system';
+import { useLocation } from 'react-router-dom';
+import { useMovieDetailQuery } from '../../../hooks/queries/useMovieQuery';
+import { MovieResponse } from '../../../types/movie';
+import { useEditMovieMutation } from '../../../hooks/queries/useEditMovieMutation';
+import { useToast } from '../../../hooks/common/useToast';
 
 const Index = () => {
-  const [searchKeyword, setSearchKeyword] = useState('');
-  const movie = {
-    title: '다크 나이트',
-    applied: true,
-    genres: ['스릴러', '라마'],
-    country: ['영국', '미국'],
-    release: '2008-07-18',
-    plot: '조커라는 위협이 그의 신비한 과거에서 등장하면서, 고담 시민들에게 혼란과 혼돈을 초래합니다. 다크 나이트는 정의를 지키기 위해 그의 심리적, 신체적 한계를 시험해야 합니다.',
-    peoples: {
-      cast: [
-        {
-          id: 10,
-          tmdbId: 12345,
-          name: 'Christian Bale',
-          profile_path: '/abc123.jpg',
-          character: 'Bruce Wayne / Batman',
-          order: 1,
-        },
-        {
-          id: 20,
-          tmdbId: 54321,
-          name: 'Christopher Nolan',
-          original_name: 'Christopher Nolan',
-          profile_path: '/ghi789.jpg',
-          department: 'Directing',
-          job: 'Director',
-        },
-      ],
-      crew: [
-        {
-          id: 20,
-          tmdbId: 54321,
-          name: 'Christopher Nolan',
-          original_name: 'Christopher Nolan',
-          profile_path: '/ghi789.jpg',
-          department: 'Directing',
-          job: 'Director',
-        },
-        {
-          id: 20,
-          tmdbId: 54321,
-          name: 'Christopher Nolan',
-          original_name: 'Christopher Nolan',
-          profile_path: '/ghi789.jpg',
-          department: 'Directing',
-          job: 'Director',
-        },
-      ],
+  const location = useLocation();
+  const { id } = (location.state as { id: string }) || '';
+  const { detailData } = useMovieDetailQuery(id);
+  const editMovieMutaion = useEditMovieMutation();
+  const { createToast } = useToast();
+
+  const [movie, setMovie] = useState<MovieResponse | null>({
+    message: '',
+    data: {
+      title: '',
+      released: '',
+      genre: [],
+      movieLikeCount: 0,
+      preferenceCounts: [],
+      plot: '',
+      directors: [],
+      actors: [],
+      poster: '',
+      country: [],
+      images: [],
+      videos: [],
+      reviews: [],
+      backdrop: '',
     },
-  };
+  });
 
   const [genres, setGenres] = useState([
     {
@@ -132,7 +112,66 @@ const Index = () => {
 
   const handleBadgeClick = (genreName: string) => {
     setGenres((prevGenres) => prevGenres.map((genre) => (genre.name === genreName ? { ...genre, target: !genre.target } : genre)));
+    setMovie((prevMovie) => {
+      if (!prevMovie) return prevMovie;
+
+      const updatedGenres = prevMovie.data.genre.includes(genreName)
+        ? prevMovie.data.genre.filter((name) => name !== genreName)
+        : [...prevMovie.data.genre, genreName];
+
+      return {
+        ...prevMovie,
+        data: {
+          ...prevMovie.data,
+          genre: updatedGenres,
+        },
+      };
+    });
   };
+
+  const handleInputChange = (field: string, value: string | number) => {
+    setMovie((prevMovie) => {
+      if (!prevMovie) return prevMovie;
+
+      return {
+        ...prevMovie,
+        data: {
+          ...prevMovie.data,
+          [field]: value,
+        },
+      };
+    });
+  };
+
+  const handleUpdateMovie = () => {
+    if (!movie || !movie.data) {
+      createToast('수정할 영화 데이터가 없습니다.', 'error');
+      return;
+    }
+
+    editMovieMutaion.mutate(
+      { movieId: id!, ...movie.data },
+      //data format이 일단 다름
+      {
+        onSuccess: () => {
+          createToast('영화 수정 성공!', 'success');
+        },
+      }
+    );
+  };
+
+  useEffect(() => {
+    if (detailData) {
+      setMovie(detailData);
+
+      setGenres((prevGenres) =>
+        prevGenres.map((genre) => ({
+          ...genre,
+          target: detailData.data.genre.includes(genre.name),
+        }))
+      );
+    }
+  }, [detailData]);
 
   return (
     <AdminTemplate>
@@ -152,8 +191,8 @@ const Index = () => {
                 </Body>
                 <Input
                   placeholder="입력해 주세요"
-                  value={searchKeyword}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchKeyword(e.target.value)}
+                  value={movie?.data.title}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleInputChange('title', e.target.value)}
                 />
               </Wrapper>
               <Wrapper>
@@ -174,28 +213,28 @@ const Index = () => {
                 </Body>
                 <Input
                   placeholder="입력해 주세요"
-                  value={movie.peoples.cast.map((person) => person.name).join(', ')}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchKeyword(e.target.value)}
+                  value={movie?.data.directors.map((person) => person.name).join(', ')}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleInputChange('directors', e.target.value)}
                 />
               </Wrapper>
-              <Wrapper>
+              {/* <Wrapper>
                 <Body size="xLarge" style={{ color: '#ADACAF', marginRight: '32px', width: '80px' }}>
                   작가
                 </Body>
                 <Input
                   placeholder="입력해 주세요"
                   value={movie.peoples.cast.map((person) => person.name).join(', ')}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchKeyword(e.target.value)}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleInputChange('directors', e.target.value)}
                 />
-              </Wrapper>
+              </Wrapper> */}
               <Wrapper>
                 <Body size="xLarge" style={{ color: '#ADACAF', marginRight: '32px', width: '80px' }}>
                   출연진
                 </Body>
                 <Input
                   placeholder="입력해 주세요"
-                  value={movie.peoples.crew.map((person) => person.name).join(', ')}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchKeyword(e.target.value)}
+                  value={movie?.data.actors.map((person) => person.name).join(', ')}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleInputChange('actors', e.target.value)}
                 />
               </Wrapper>
               <Wrapper>
@@ -204,8 +243,8 @@ const Index = () => {
                 </Body>
                 <Input
                   placeholder="입력해 주세요"
-                  value={movie.country.join(', ')}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchKeyword(e.target.value)}
+                  value={movie?.data.country.join(', ')}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleInputChange('country', e.target.value)}
                 />
               </Wrapper>
               <Wrapper>
@@ -214,20 +253,24 @@ const Index = () => {
                 </Body>
                 <Input
                   placeholder="입력해 주세요"
-                  value={movie.release}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchKeyword(e.target.value)}
+                  value={movie?.data.released}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleInputChange('released', e.target.value)}
                 />
               </Wrapper>
               <Wrapper>
                 <Body size="xLarge" style={{ color: '#ADACAF', marginRight: '32px', width: '80px' }}>
                   줄거리
                 </Body>
-                <Input placeholder="입력해 주세요" value={movie.plot} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchKeyword(e.target.value)} />
+                <Input
+                  placeholder="입력해 주세요"
+                  value={movie?.data.plot}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleInputChange('plot', e.target.value)}
+                />
               </Wrapper>
             </Info>
           </InfoContainer>
           <ButtonContainer>
-            <Button variant="primary" css={{ width: '100%' }}>
+            <Button variant="primary" css={{ width: '100%' }} onClick={handleUpdateMovie}>
               저장하기
             </Button>
           </ButtonContainer>

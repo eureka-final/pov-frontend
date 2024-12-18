@@ -2,11 +2,11 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 import { MoviesAdmin } from '../../types/admins';
 import { getMoviesByAdmin } from '../../apis/admin/getMovies';
 
-export const useAdminMoviesQuery = () => {
+export const useAdminMoviesQuery = (searchKeyword: string) => {
   const { data, isLoading, hasNextPage, fetchNextPage, isFetchingNextPage } = useInfiniteQuery<MoviesAdmin, Error>({
-    queryKey: ['movies'],
+    queryKey: ['movies-admin', searchKeyword],
     queryFn: async ({ pageParam = 0 }) => {
-      const response = await getMoviesByAdmin(pageParam);
+      const response = await getMoviesByAdmin(pageParam, searchKeyword);
 
       if (!response || !response.data || !response.data.curationMovies) {
         throw new Error('Invalid API response structure');
