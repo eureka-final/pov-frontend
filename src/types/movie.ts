@@ -19,8 +19,25 @@ export interface Movie {
   title: string;
   poster: string;
   released: string;
-  movieLikeCount: number;
   isLiked: boolean;
+  movieLikeCount: number;
+  movieReviewCount: number;
+}
+
+export interface TrendingMoviesResponse {
+  message: string;
+  data: {
+      movies: TrendingMovieData[];
+  };
+}
+
+export interface TrendingMovieData {
+  id: string;
+  title: string;
+  poster: string;
+  released: string;
+  isLiked: boolean;
+  movieLikeCount: number;
   movieReviewCount: number;
 }
 
