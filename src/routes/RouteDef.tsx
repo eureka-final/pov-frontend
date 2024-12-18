@@ -44,6 +44,8 @@ import AdminCurations from '../admins/Movie/curations/Index';
 import AdminCurationsApply from '../admins/Movie/curationsApply/Index';
 import AdminCurationsDetail from '../admins/Movie/curationDetail/Index';
 import AdminCurationUpdate from '../admins/Movie/curationUpdate/Index';
+import AdminReviews from '../admins/reviews/Index';
+import AdminReviewDetail from '../admins/reviews/reviewDetail/Index';
 
 const MovieScreens = {
   Main: {
@@ -218,6 +220,14 @@ const AdminScreens = {
   AdminCurationUpdate: {
     path: '/admin/movie/curations/detail/update/:id',
     element: <AdminCurationUpdate />,
+  },
+  AdminReviews: {
+    path: '/admin/reviews',
+    element: <AdminReviews />,
+  },
+  AdminReviewDetail: {
+    path: '/admin/reviews/detail/:id',
+    element: <AdminReviewDetail />,
   },
 };
 

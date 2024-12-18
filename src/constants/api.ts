@@ -36,6 +36,7 @@ export const END_POINTS = {
   TMDB_MOVIES: (pageParam: number | unknown, query: string) => `/api/movies/tmdb-search?query=${query}&page=${pageParam}`,
   TMDB_DETAIL: (tmdbId: string) => `/api/movies/tmdb-search/${tmdbId}`,
   CURATION_DETAIL: (curationId: string) => `/api/movies/curations/${curationId}`,
+  BLIND_REVIEW: (movieId: string, reviewId: string) => `/api/movies/${movieId}/reviews/${reviewId}/blind`,
 } as const;
 
 export const EXCEPTION_POINTS = {
