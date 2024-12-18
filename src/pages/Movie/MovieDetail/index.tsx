@@ -177,7 +177,7 @@ const Index = () => {
                   <ShowMoreBtn onClick={() => navigate('/movie/review')} />
                 </Div>
               </HeadingContainer>
-              {movieData.data.reviews.slice(0, 1).map((review) => (
+              {movieData.data.reviews.slice(0, 3).map((review) => (
                 <Review key={review.reviewId} reviewers={review} />
               ))}
             </Section>
