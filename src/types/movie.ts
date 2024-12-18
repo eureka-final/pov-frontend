@@ -44,6 +44,7 @@ export interface MovieDetailData {
   images: string[];
   videos: string[];
   reviews: MovieReview[];
+  isLiked: boolean;
 }
 
 export interface MovieDirector {

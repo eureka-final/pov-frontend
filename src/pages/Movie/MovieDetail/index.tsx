@@ -27,6 +27,8 @@ import Productions from '../../../components/movies/Productions/Productions';
 import Review from '../../../components/movies/Review/Review';
 import { useMovieDetailQuery } from '../../../hooks/queries/useMoviesQuery';
 import { useNavigate, useParams } from 'react-router-dom';
+import { useState } from 'react';
+import { useLikeMovieMutation, useDisLikeMovieMutation } from '../../../hooks/queries/useLikeMovieMutation';
 
 const Index = () => {
   const navigate = useNavigate();
@@ -34,6 +36,35 @@ const Index = () => {
   const { movieId } = useParams<{ movieId: string }>();
 
   const { movieData } = useMovieDetailQuery(movieId!);
+
+  const [likes, setLikes] = useState(movieData?.data?.movieLikeCount || 0);
+  const [likeAction, setLikeAction] = useState<boolean>(movieData?.data.isLiked || false);
+  const likeMutation = useLikeMovieMutation();
+  const disLikeMutation = useDisLikeMovieMutation();
+
+  const onLike = () => {
+    if (likeAction === false) {
+      likeMutation.mutate(
+        { movieId: movieId! },
+        {
+          onSuccess: () => {
+            setLikes(likes + 1);
+            setLikeAction(true);
+          },
+        }
+      );
+    } else {
+      disLikeMutation.mutate(
+        { movieId: movieId! },
+        {
+          onSuccess: () => {
+            setLikes(likes - 1);
+            setLikeAction(false);
+          },
+        }
+      );
+    }
+  };
 
   const src = {
     url: movieData && movieData.data.poster,
@@ -85,9 +116,9 @@ const Index = () => {
               </BodyContainer>
 
               <AdditionalsContainer>
-                <Additionals>
-                  <Icon icon="heartfill" color="#0DE781" />
-                  <Count color="#0DE781">{movieData.data.movieLikeCount}</Count>
+                <Additionals onClick={onLike}>
+                  <Icon icon={likeAction ? 'heartfill' : 'heartline'} width="20px" height="20px" />
+                  <Count color="#0DE781">{likes}</Count>
                 </Additionals>
                 <Additionals>
                   <Icon icon="reviewline" color="#0DE781" />
