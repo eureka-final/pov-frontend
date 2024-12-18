@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { getGoogleUserInfoApi } from '../../../apis/auth/oauthApi';
-import { postLoginApi } from '../../../apis/auth/loginApi';
+import { getGoogleUserInfoApi } from '../../../apis/auth/getGoogleOauth';
 import { useAuthStore } from '../../../stores/useAuthStore';
 import CircularProgress from '../../../components/common/Progress';
 import { LoadingSection } from '../Index.styles';
+import { postLogin } from '../../../apis/auth/postAuth';
 
 const Index = () => {
   const navigate = useNavigate();
@@ -35,7 +35,7 @@ const Index = () => {
 
       // 서버로 로그인 요청
       try {
-        const response = await postLoginApi(data.email, 'GOOGLE');
+        const response = await postLogin(data.email, 'GOOGLE');
 
         if (response.data.exists) {
           // 회원 정보가 이미 존재하는 경우 홈으로 이동

@@ -4,10 +4,10 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 import type { User } from '../../types/user';
-import { postSignUpApi } from '../../apis/auth/signupApi';
 import { useAuthStore } from '../../stores/useAuthStore';
 import useFunnel from '../../hooks/funnel/useFunnel';
 import SignUpFunnel from '../../components/signUp/SignUpFunnel';
+import { postSignUp } from '../../apis/auth/postAuth';
 
 const signInSteps = ['nickname', 'birth', 'favorGenres', 'success'];
 
@@ -57,7 +57,7 @@ const Index = () => {
   const onSubmit = async (data: User) => {
     console.log(data);
     try {
-      const response = await postSignUpApi(data);
+      const response = await postSignUp(data);
       console.log(response);
       setLoggedIn(true);
       setUser(response.data.memberInfo);

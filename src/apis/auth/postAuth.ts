@@ -1,22 +1,17 @@
 import axios from 'axios';
 import { axiosInstance } from '../axiosInstance';
 import { ACCESS_TOKEN_KEY } from '../../constants/api';
+import { User } from '../../types/user';
 
 /* 회원가입 요청 API */
-export const postSignUp = async (nickname: string, birth: string, favorGenres: string[]) => {
+export const postSignUp = async (user: User) => {
   try {
-    const response = await axiosInstance.post('/api/auth/signup', {
-      nickname: nickname,
-      birth: birth,
-      favorGenres: favorGenres,
-    });
+    const response = await axiosInstance.post('/api/auth/signup', user);
     console.log(response);
 
     // Access Token을 Session Storage에 저장
     const headers = response.headers;
     const accessToken = headers['authorization'];
-    console.log('accessToken =', accessToken);
-
     if (accessToken) {
       localStorage.setItem(ACCESS_TOKEN_KEY, accessToken);
     }
@@ -50,6 +45,20 @@ export const postLogin = async (email: string, socialType: string) => {
 
     console.log(response);
     return response.data;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+
+/* 로그아웃 요청 API */
+export const postLogout = async () => {
+  try {
+    const response = await axiosInstance.post('/api/members/logout');
+    localStorage.removeItem(ACCESS_TOKEN_KEY);
+
+    console.log(response);
+    return response;
   } catch (error) {
     console.log(error);
     throw error;
