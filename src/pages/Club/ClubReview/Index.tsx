@@ -20,7 +20,6 @@ import dompurify from 'dompurify';
 import LikeButton from '../../../components/common/LikeButton/LikeButton';
 import { useInView } from 'react-intersection-observer';
 import ReviewPageSkeleton from '../../../components/review/ReviewPageSkeleton';
-import { ResponsiveArea } from '../../../components/templates/Area/Area.styled';
 
 function Index() {
   const navigate = useNavigate();

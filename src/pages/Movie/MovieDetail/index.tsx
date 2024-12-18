@@ -19,6 +19,10 @@ import {
   Section,
   Div,
   ScrollContainer,
+  BadgeWrapper,
+  PosterImg,
+  StillCutImage,
+  ProductionGridContainer,
 } from './MovieDetail.styles';
 import ImageLayer from '../../../components/styles/ImageLayer';
 import ResponsiveContainer from '../../../components/styles/ResponsiveContainer';
@@ -27,9 +31,12 @@ import Productions from '../../../components/movies/Productions/Productions';
 import Review from '../../../components/movies/Review/Review';
 import { useMovieDetailQuery } from '../../../hooks/queries/useMoviesQuery';
 import { useNavigate, useParams } from 'react-router-dom';
+import { formatDate } from '../../../utils/formatDateTime';
+import { useTheme } from '@emotion/react';
 
 const Index = () => {
   const navigate = useNavigate();
+  const theme = useTheme();
 
   const { movieId } = useParams<{ movieId: string }>();
 
@@ -69,28 +76,30 @@ const Index = () => {
             <HeaderInfo>
               <Heading size="xxLarge">{movieData.data.title}</Heading>
               <BodyContainer>
-                <Badge>{movieData.data.released}</Badge>
+                <Body size="large" css={{ marginBottom: '8px', color: theme.muted }}>
+                  {formatDate(movieData.data.released)}
+                </Body>
                 {movieData.data.directors.map((item, index) => (
-                  <Body size="large" key={item.id + index}>
+                  <Body size="xLarge" key={item.id + index} css={{ color: theme.secondary }}>
                     {item.name}
                   </Body>
                 ))}
-                <AdditionalsContainer>
+                <BadgeWrapper>
                   {movieData.data.genre.map((genre, index) => (
                     <Badge key={index} variant="keyword" cancel={true}>
                       {genre}
                     </Badge>
                   ))}
-                </AdditionalsContainer>
+                </BadgeWrapper>
               </BodyContainer>
 
               <AdditionalsContainer>
                 <Additionals>
-                  <Icon icon="heartfill" color="#0DE781" />
+                  <Icon icon="heartfill" color="#0DE781" css={{ width: '20px' }} />
                   <Count color="#0DE781">{movieData.data.movieLikeCount}</Count>
                 </Additionals>
                 <Additionals>
-                  <Icon icon="reviewline" color="#0DE781" />
+                  <Icon icon="reviewline" color="#0DE781" css={{ width: '20px' }} />
                   <Count color="#0DE781">{preference && preference.reduce((acc, item) => acc + item.reviewCount, 0)}</Count>
                 </Additionals>
               </AdditionalsContainer>
@@ -99,31 +108,29 @@ const Index = () => {
 
           <PaddedContainer>
             <InfoContainer>
-              <ResponsiveContainer minMobile={150} minPC={220}>
-                <ImageLayer src={src} />
-              </ResponsiveContainer>
+              <PosterImg src={src.url} />
 
               <Wrapper gap={32} direction="column">
-                <ResponsiveContainer mobDirection="column" pcDirection="row" gap={16}>
-                  <Additionals>
-                    <Icon icon="heartline" />
-                    <Count>{constants.movies.main.likes}</Count>
-                  </Additionals>
-                  <Additionals>
-                    <Icon icon="reviewline" />
-                    <Count>{constants.movies.main.reviews}</Count>
-                  </Additionals>
-                  <Additionals>
-                    <Icon icon="bookmarkline" />
-                    <Count>{constants.movies.main.bookmark}</Count>
-                  </Additionals>
-                </ResponsiveContainer>
                 <Wrapper>
                   {preference &&
                     preference.map((item, index) => (
                       <ProgressBar key={item.percentage + index} percentage={item.percentage} like={item.like} unlike={item.unlike} />
                     ))}
                 </Wrapper>
+                <ResponsiveContainer mobDirection="column" pcDirection="row" gap={16}>
+                  <Additionals justify="start">
+                    <Icon icon="heartline" css={{ width: '20px', color: theme.secondary }} />
+                    <Count color={theme.secondary}>{constants.movies.main.likes}</Count>
+                  </Additionals>
+                  <Additionals>
+                    <Icon icon="reviewline" css={{ width: '20px', color: theme.secondary }} />
+                    <Count color={theme.secondary}>{constants.movies.main.reviews}</Count>
+                  </Additionals>
+                  <Additionals>
+                    <Icon icon="bookmarkline" css={{ width: '20px', color: theme.secondary }} />
+                    <Count color={theme.secondary}>{constants.movies.main.bookmark}</Count>
+                  </Additionals>
+                </ResponsiveContainer>
                 <Content>{movieData.data.plot}</Content>
               </Wrapper>
             </InfoContainer>
@@ -131,8 +138,10 @@ const Index = () => {
             <Section>
               <HeadingContainer>
                 <Div>
-                  <Heading>{constants.movies.detail.heading.review}</Heading>
-                  <Body style={{ color: '#0DE781' }}>{preference && preference.reduce((acc, item) => acc + item.reviewCount, 0)}</Body>
+                  <Heading size="xLarge">{constants.movies.detail.heading.review}</Heading>
+                  <Body size="xLarge" style={{ color: '#0DE781' }}>
+                    {preference && preference.reduce((acc, item) => acc + item.reviewCount, 0)}
+                  </Body>
                 </Div>
                 <Div>
                   <ShowMoreBtn onClick={() => navigate('/movie/review')} />
@@ -145,27 +154,27 @@ const Index = () => {
 
             <Section>
               <HeadingContainer>
-                <Heading>{constants.movies.detail.heading.production}</Heading>
+                <Heading size="xLarge">{constants.movies.detail.heading.production}</Heading>
               </HeadingContainer>
-              <ImageContainer>
+              <ProductionGridContainer>
                 {movieData.data.directors.map((item, index) => (
                   <Productions productions={item} key={item.id + index} />
                 ))}
                 {movieData.data.actors.map((item, index) => (
                   <Productions productions={item} key={item.id + index} />
                 ))}
-              </ImageContainer>
+              </ProductionGridContainer>
             </Section>
 
             <Section>
               <HeadingContainer>
-                <Heading>{constants.movies.detail.heading.steel}</Heading>
+                <Heading size="xLarge">{constants.movies.detail.heading.steel}</Heading>
               </HeadingContainer>
-              <ScrollContainer>{steels && steels.map((item, index) => <ImageLayer src={item} key={item.url + index} />)}</ScrollContainer>
+              <ScrollContainer>{steels && steels.map((item, index) => <StillCutImage key={index + item.url} src={item.url} />)}</ScrollContainer>
             </Section>
             <Section>
               <HeadingContainer>
-                <Heading>{constants.movies.detail.heading.videos}</Heading>
+                <Heading size="xLarge">{constants.movies.detail.heading.videos}</Heading>
               </HeadingContainer>
               <ScrollContainer>
                 {movieData.data.videos.map((item, index) => (
