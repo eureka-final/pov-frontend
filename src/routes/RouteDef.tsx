@@ -41,10 +41,10 @@ import AdminMovieDetail from '../admins/Movie/MovieDetail/Index';
 import AdminMovieUpdate from '../admins/Movie/detailUpdate/Index';
 import TMDBMovies from '../admins/Movie/tmdbMovies/Index';
 import TMDBMoviesApply from '../admins/Movie/tmdbApply/Index';
-import AdminQurations from '../admins/Movie/qurations/Index';
-import AdminQurationsApply from '../admins/Movie/qurationsApply/Index';
-import AdminQurationsDetail from '../admins/Movie/qurationDetail/Index';
-import AdminQurationUpdate from '../admins/Movie/qurationUpdate/Index';
+import AdminCurations from '../admins/Movie/curations/Index';
+import AdminCurationsApply from '../admins/Movie/curationsApply/Index';
+import AdminCurationsDetail from '../admins/Movie/curationDetail/Index';
+import AdminCurationUpdate from '../admins/Movie/curationUpdate/Index';
 
 const MovieScreens = {
   Main: {
@@ -200,21 +200,21 @@ const AdminScreens = {
     path: '/admin/movie/tmdb/apply/:id',
     element: <TMDBMoviesApply />,
   },
-  AdminQurations: {
-    path: '/admin/movie/qurations',
-    element: <AdminQurations />,
+  AdminCurations: {
+    path: '/admin/movie/curations',
+    element: <AdminCurations />,
   },
-  AdminQurationsApply: {
-    path: '/admin/movie/qurations/apply',
-    element: <AdminQurationsApply />,
+  AdminCurationsApply: {
+    path: '/admin/movie/curations/apply',
+    element: <AdminCurationsApply />,
   },
-  AdminQurationsDetail: {
-    path: '/admin/movie/qurations/detail',
-    element: <AdminQurationsDetail />,
+  AdminCurationsDetail: {
+    path: '/admin/movie/curations/detail/:id',
+    element: <AdminCurationsDetail />,
   },
-  AdminQurationUpdate: {
-    path: '/admin/movie/qurations/detail/update',
-    element: <AdminQurationUpdate />,
+  AdminCurationUpdate: {
+    path: '/admin/movie/curations/detail/update/:id',
+    element: <AdminCurationUpdate />,
   },
 };
 

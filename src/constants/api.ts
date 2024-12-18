@@ -8,6 +8,8 @@ export const END_POINTS = {
   PAYMENT_TEMP: '/api/payments/temp',
   PAYMENT: `/api/payments`,
   PREMIERES: `/api/premieres`,
+  MOVIE: `/api/movies`,
+  CURATIONS: `/api/movies/curations`,
   PREMIERE_DETAIL: (premiereId: string) => `/api/premieres/${premiereId}`,
   PREMIERE_ENTRY: (premiereId: string) => `/api/premieres/${premiereId}/entry`,
   PREMIERE_CANCEL_ENTRY: (premiereId: string) => `/api/premieres/${premiereId}/entry/cancel`,
@@ -28,6 +30,7 @@ export const END_POINTS = {
   ADMIN_MOVIES: (pageParam: number | unknown, query: string) => `/api/movies/admin-search?query=${query}&page=${pageParam}`,
   TMDB_MOVIES: (pageParam: number | unknown, query: string) => `/api/movies/tmdb-search?query=${query}&page=${pageParam}`,
   TMDB_DETAIL: (tmdbId: string) => `/api/movies/tmdb-search/${tmdbId}`,
+  CURATION_DETAIL: (curationId: string) => `/api/movies/curations/${curationId}`,
 } as const;
 
 export const NETWORK = {

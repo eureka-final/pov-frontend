@@ -37,12 +37,11 @@ export const Wrapper = styled.div`
   align-items: center;
 `;
 
-export const Input = styled.input`
+export const Input = styled.div`
   display: flex;
   width: 100%;
-  height: 64px;
+  padding: 20px;
   border-radius: 8px;
-  padding: 0 16px;
   color: #ffffff;
   background: var(--color-base-faint, #676668);
   align-items: center;

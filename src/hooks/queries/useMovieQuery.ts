@@ -13,12 +13,12 @@ export const useMovieDetailQuery = (movieId: string) => {
 };
 
 export const useTMDBMovieDetailQuery = (movieId: string) => {
-  const { data: detailData } = useQuery<TMDBMovieDetailResponse>({
+  const { data: dbData } = useQuery<TMDBMovieDetailResponse>({
     queryKey: ['tmdb-movieDetail', movieId],
     queryFn: () => getTMDBMovieDetail(movieId),
   });
 
-  return { detailData };
+  return { dbData };
 };
 
 export const useMoviesQuery = (searchKeyword: string) => {

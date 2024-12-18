@@ -1,59 +1,60 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import AdminTemplate from '../../../components/templates/Admin/AdminTemplate';
 import { Container, Header, Card, Info, InfoContainer, Wrapper, Input, ButtonContainer, Badges } from './Index.styles';
 import { Heading, Body, Button, Badge } from 'pov-design-system';
+import { useTMDBMovieDetailQuery } from '../../../hooks/queries/useMovieQuery';
+import { TMDBMovieDetailResponse } from '../../../types/movie';
+import { formatDate } from '../../../utils/formatTade';
+import { useCreateMovieMutation } from '../../../hooks/queries/useCreateMovieMutation';
+import { useToast } from '../../../hooks/common/useToast';
 
 const Index = () => {
-  const [searchKeyword, setSearchKeyword] = useState('');
-  const movie = {
-    title: '다크 나이트',
-    applied: true,
-    genres: ['스릴러', '라마'],
-    country: ['영국', '미국'],
-    release: '2008-07-18',
-    plot: '조커라는 위협이 그의 신비한 과거에서 등장하면서, 고담 시민들에게 혼란과 혼돈을 초래합니다. 다크 나이트는 정의를 지키기 위해 그의 심리적, 신체적 한계를 시험해야 합니다.',
-    peoples: {
-      cast: [
-        {
-          id: 10,
-          tmdbId: 12345,
-          name: 'Christian Bale',
-          profile_path: '/abc123.jpg',
-          character: 'Bruce Wayne / Batman',
-          order: 1,
-        },
-        {
-          id: 20,
-          tmdbId: 54321,
-          name: 'Christopher Nolan',
-          original_name: 'Christopher Nolan',
-          profile_path: '/ghi789.jpg',
-          department: 'Directing',
-          job: 'Director',
-        },
-      ],
-      crew: [
-        {
-          id: 20,
-          tmdbId: 54321,
-          name: 'Christopher Nolan',
-          original_name: 'Christopher Nolan',
-          profile_path: '/ghi789.jpg',
-          department: 'Directing',
-          job: 'Director',
-        },
-        {
-          id: 20,
-          tmdbId: 54321,
-          name: 'Christopher Nolan',
-          original_name: 'Christopher Nolan',
-          profile_path: '/ghi789.jpg',
-          department: 'Directing',
-          job: 'Director',
-        },
-      ],
+  const location = useLocation();
+  const { id } = (location.state as { id: string }) || '';
+  const { dbData } = useTMDBMovieDetailQuery(id);
+  const createMovieMutation = useCreateMovieMutation();
+  const { createToast } = useToast();
+  const [movie, setMovie] = useState<TMDBMovieDetailResponse>({
+    message: '',
+    data: {
+      tmdbId: 0,
+      title: '',
+      plot: '',
+      poster: '',
+      backdrop: '',
+      originCountries: [],
+      released: '',
+      filmRating: '',
+      genres: [],
+      peoples: {
+        cast: [
+          {
+            gender: 0,
+            id: 0,
+            name: '',
+            original_name: '',
+            profile_path: '',
+            cast_id: 0,
+            character: '',
+            order: 0,
+          },
+        ],
+        crew: [
+          {
+            gender: 0,
+            id: 0,
+            name: '',
+            original_name: '',
+            popularity: 0,
+            profile_path: '',
+            department: '',
+            job: '',
+          },
+        ],
+      },
     },
-  };
+  });
 
   const [genres, setGenres] = useState([
     {
@@ -130,9 +131,28 @@ const Index = () => {
     },
   ]);
 
-  const handleBadgeClick = (genreName: string) => {
-    setGenres((prevGenres) => prevGenres.map((genre) => (genre.name === genreName ? { ...genre, target: !genre.target } : genre)));
+  const handleSubmit = () => {
+    createMovieMutation.mutate(
+      { ...movie.data },
+      {
+        onSuccess: () => {
+          createToast('영화 등록 성공', 'success');
+        },
+      }
+    );
   };
+
+  useEffect(() => {
+    if (dbData) {
+      setMovie(dbData);
+      setGenres((prevGenres) =>
+        prevGenres.map((genre) => ({
+          ...genre,
+          target: dbData.data.genres.includes(genre.name),
+        }))
+      );
+    }
+  }, [dbData]);
 
   return (
     <AdminTemplate>
@@ -151,30 +171,30 @@ const Index = () => {
                   제목
                 </Body>
                 <Input
-                  placeholder="입력해 주세요"
-                  value={searchKeyword}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchKeyword(e.target.value)}
-                />
+                // onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleInputChange('title', e.target.value)}
+                >
+                  <Body size="large">{movie.data.title}</Body>
+                </Input>
               </Wrapper>
               <Wrapper>
                 <Body size="xLarge" style={{ color: '#ADACAF', marginRight: '32px', width: '80px' }}>
                   포스터 URL
                 </Body>
                 <Input
-                  placeholder="입력해 주세요"
-                  value={searchKeyword}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchKeyword(e.target.value)}
-                />
+                // onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleInputChange('title', e.target.value)}
+                >
+                  <Body size="large">{movie.data.poster}</Body>
+                </Input>
               </Wrapper>
               <Wrapper>
                 <Body size="xLarge" style={{ color: '#ADACAF', marginRight: '32px', width: '80px' }}>
                   커버 사진 URL
                 </Body>
                 <Input
-                  placeholder="입력해 주세요"
-                  value={searchKeyword}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchKeyword(e.target.value)}
-                />
+                // onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleInputChange('title', e.target.value)}
+                >
+                  <Body size="large">{movie.data.poster}</Body>
+                </Input>
               </Wrapper>
               <Wrapper>
                 <Body size="xLarge" style={{ color: '#ADACAF', marginRight: '32px', width: '80px' }}>
@@ -182,7 +202,7 @@ const Index = () => {
                 </Body>
                 <Badges>
                   {genres.map((genre) => (
-                    <Badge variant="keyword" cancel={genre.target} key={genre.name} onClick={() => handleBadgeClick(genre.name)}>
+                    <Badge variant="keyword" cancel={genre.target} key={genre.name}>
                       {genre.name}
                     </Badge>
                   ))}
@@ -192,62 +212,56 @@ const Index = () => {
                 <Body size="xLarge" style={{ color: '#ADACAF', marginRight: '32px', width: '80px' }}>
                   감독
                 </Body>
-                <Input
-                  placeholder="입력해 주세요"
-                  value={movie.peoples.cast.map((person) => person.name).join(', ')}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchKeyword(e.target.value)}
-                />
+                <Input>
+                  <Body size="large">{movie.data.peoples.cast.map((person) => person.name).join(', ')}</Body>
+                </Input>
               </Wrapper>
-              <Wrapper>
+              {/* <Wrapper>
                 <Body size="xLarge" style={{ color: '#ADACAF', marginRight: '32px', width: '80px' }}>
                   작가
                 </Body>
                 <Input
                   placeholder="입력해 주세요"
-                  value={movie.peoples.cast.map((person) => person.name).join(', ')}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchKeyword(e.target.value)}
+                  value={movie.data.peoples.cast.map((person) => person.name).join(', ')}
+                  // onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleInputChange('title', e.target.value)}
                 />
-              </Wrapper>
+              </Wrapper> */}
               <Wrapper>
                 <Body size="xLarge" style={{ color: '#ADACAF', marginRight: '32px', width: '80px' }}>
                   출연진
                 </Body>
-                <Input
-                  placeholder="입력해 주세요"
-                  value={movie.peoples.crew.map((person) => person.name).join(', ')}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchKeyword(e.target.value)}
-                />
+                <Input>
+                  <Body size="large">{movie.data.peoples.crew.map((person) => person.name).join(', ')}</Body>
+                </Input>
               </Wrapper>
               <Wrapper>
                 <Body size="xLarge" style={{ color: '#ADACAF', marginRight: '32px', width: '80px' }}>
                   국가
                 </Body>
-                <Input
-                  placeholder="입력해 주세요"
-                  value={movie.country.join(', ')}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchKeyword(e.target.value)}
-                />
+                <Input>
+                  <Body size="large">{movie.data.originCountries.join(', ')}</Body>
+                </Input>
               </Wrapper>
               <Wrapper>
                 <Body size="xLarge" style={{ color: '#ADACAF', marginRight: '32px', width: '80px' }}>
                   개봉일자
                 </Body>
-                <Input
-                  placeholder="입력해 주세요"
-                  value={movie.release}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchKeyword(e.target.value)}
-                />
+                <Input>
+                  <Body size="large">{formatDate(movie.data.released)}</Body>
+                </Input>
               </Wrapper>
               <Wrapper>
                 <Body size="xLarge" style={{ color: '#ADACAF', marginRight: '32px', width: '80px' }}>
                   줄거리
                 </Body>
-                <Input placeholder="입력해 주세요" value={movie.plot} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchKeyword(e.target.value)} />
+                <Input>
+                  <Body size="large">{movie.data.plot}</Body>
+                </Input>
               </Wrapper>
             </Info>
           </InfoContainer>
           <ButtonContainer>
-            <Button variant="primary" css={{ width: '100%' }}>
+            <Button variant="primary" css={{ width: '100%' }} onClick={handleSubmit}>
               저장하기
             </Button>
           </ButtonContainer>

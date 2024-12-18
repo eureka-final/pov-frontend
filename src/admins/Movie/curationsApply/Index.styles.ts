@@ -68,13 +68,33 @@ export const ModalInput = styled.input`
   }
 `;
 
-export const ModalItem = styled.div`
+export const List = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+  overflow-y: auto;
+  gap: 8px;
+  height: 310px;
+`;
+
+export const MovieList = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+  overflow-y: auto;
+  gap: 8px;
+  width: 100%;
+`;
+
+export const ModalItem = styled.div<{ isSelected: boolean }>`
   display: flex;
   align-items: center;
   gap: 16px;
   padding: 20px;
   border-radius: 8px;
   background: var(--color-base-faint, #676668);
+  background: ${({ isSelected }) => (isSelected ? 'var(--color-primary, #ADACAF)' : 'var(--color-base-faint, #676668)')};
+  color: ${({ isSelected }) => (isSelected ? '#FFF' : '#FFF')};
 `;
 
 export const Badges = styled.div`
@@ -104,20 +124,14 @@ export const MovieButton = styled.button`
   cursor: pointer;
 `;
 
-export const List = styled.div`
+export const MovieItem = styled.div`
   display: flex;
-  flex-direction: column;
-  margin-top: 10px;
-  overflow-y: auto;
-  gap: 8px;
   width: 100%;
-`;
-
-export const Item = styled.div`
-  width: 100%;
-  display: flex;
-  align-items: center;
-  padding: 20px;
+  height: 64px;
   border-radius: 8px;
+  padding: 0 16px;
+  color: #ffffff;
   background: var(--color-base-faint, #676668);
+  align-items: center;
+  justify-content: space-between;
 `;

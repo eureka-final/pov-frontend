@@ -19,6 +19,6 @@ export const getMoviesByAdmin = async (pageParam: number | unknown, searchKeywor
 };
 
 export const getTMDBMovieDetail = async (movieId: string) => {
-  const { data } = await axiosInstance.get<TMDBMovieDetailResponse>(END_POINTS.MOVIE_DETAIL(movieId));
+  const { data } = await axiosInstance.get<TMDBMovieDetailResponse>(END_POINTS.TMDB_DETAIL(movieId));
   return data;
 };

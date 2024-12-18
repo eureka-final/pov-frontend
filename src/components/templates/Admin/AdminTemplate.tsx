@@ -21,11 +21,11 @@ const categories = [
       },
       {
         name: '큐레이션 조회하기',
-        target: '/admin/movie/qurations',
+        target: '/admin/movie/curations',
       },
       {
         name: '큐레이션 등록하기',
-        target: '/admin/movie/qurations/apply',
+        target: '/admin/movie/curations/apply',
       },
       {
         name: '인기 영화 통계',

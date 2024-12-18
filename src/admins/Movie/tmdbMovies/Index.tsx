@@ -47,7 +47,7 @@ const Index = () => {
                 id: item.id,
                 title: item.title,
                 released: item.release_date,
-                poster: item.poster_path,
+                poster: 'https://image.tmdb.org/t/p/w154/' + item.poster_path,
                 movieLikeCount: 1,
                 reviewCount: 1,
               }}
