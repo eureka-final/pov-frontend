@@ -31,7 +31,7 @@ const Index = () => {
     <ReviewPagePadded>
       <BadgeWrapper>
         {sections.map((section, index) => (
-          <Badge key={index} variant="section" click={section.click} onClick={() => handleBadgeClick(index)} css={{ cursor: 'pointer' }}>
+          <Badge size="large" key={index} variant="section" click={section.click} onClick={() => handleBadgeClick(index)} css={{ cursor: 'pointer' }}>
             {section.text}
           </Badge>
         ))}

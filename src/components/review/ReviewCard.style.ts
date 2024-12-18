@@ -24,9 +24,9 @@ export const ClubReviewListContainer = styled.div`
   }
 
   @media (min-width: 600px) {
-    width: calc(1200px - 32px * 2);
+    width: calc(1200px - 116px * 2);
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3열로 구성 */
+    grid-template-columns: repeat(2, 1fr);
     margin-bottom: 64px;
   }
 `;
