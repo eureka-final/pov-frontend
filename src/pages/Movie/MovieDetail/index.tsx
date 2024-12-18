@@ -9,7 +9,6 @@ import {
   HeaderInfo,
   Count,
   InfoContainer,
-  Content,
   AdditionalsContainer,
   BodyContainer,
   Wrapper,
@@ -24,7 +23,6 @@ import {
   StillCutImage,
   ProductionGridContainer,
 } from './MovieDetail.styles';
-import ImageLayer from '../../../components/styles/ImageLayer';
 import ResponsiveContainer from '../../../components/styles/ResponsiveContainer';
 import ProgressBar from '../../../components/styles/ProgressBar';
 import Productions from '../../../components/movies/Productions/Productions';
