@@ -4,6 +4,7 @@ import { Heading, Body, Icon } from 'pov-design-system';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { useLikeMovieMutation, useDisLikeMovieMutation } from '../../../hooks/queries/useLikeMovieMutation';
+import NoPoster from '/public/NoPoster.svg?react';
 
 interface CardProps {
   item: Movie;
@@ -44,7 +45,7 @@ const Card = ({ item }: CardProps) => {
   return (
     <CardWapper>
       <div onClick={() => navigate(`/movie/${item.id}/detail`)}>
-        <img src={item.poster} />
+        {item.poster && item.poster.endsWith('null') ? <NoPoster /> : <img src={item.poster} />}
         <Heading size="medium">{item.title}</Heading>
         <Body size="large" style={{ color: '#ADACAF' }}>
           {item.released}
