@@ -43,7 +43,7 @@ const NotJoinClub = () => {
       {
         onSuccess: () => {
           saveClose();
-          createToast('클럽 가입 성공!', 'success');
+          createToast('클럽 가입에 성공했어요.', 'success');
         },
       }
     );
