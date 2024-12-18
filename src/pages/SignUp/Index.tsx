@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useForm, FormProvider } from 'react-hook-form';
 import { z } from 'zod';
@@ -7,8 +6,6 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import type { User } from '../../types/user';
 import { postSignUpApi } from '../../apis/auth/signupApi';
 import { useAuthStore } from '../../stores/useAuthStore';
-
-import Padded from '../../components/templates/Padded/Padded';
 import useFunnel from '../../hooks/funnel/useFunnel';
 import SignUpFunnel from '../../components/signUp/SignUpFunnel';
 
@@ -23,7 +20,6 @@ const Index = () => {
 
   /*zod 유효성 검사 스키마 정의 */
   const schema = z.object({
-    nickname: z.string().min(1, { message: '닉네임은 필수 입력값이에요.' }).max(12, { message: '닉네임은 최대 12자까지 입력 가능해요.' }),
     birth: z
       .string()
       .min(1, { message: '날짜는 필수 입력값이에요.' })
@@ -42,18 +38,15 @@ const Index = () => {
     mode: 'onChange', // form의 값이 변경될 때마다 validation check 실행
     resolver: zodResolver(schema),
     defaultValues: {
-      email: '',
-      socialType: '',
       nickname: '',
       birth: '',
       favorGenres: [],
-      profileImage: '',
+      email: location.state.email,
+      profileImage: location.state.profileImage,
+      socialType: location.state.socialType,
     },
-    shouldFocusError: false,
   });
-  const { setValue, getValues } = methods;
-
-  const userOauthData = location.state;
+  const { getValues } = methods;
 
   /* Funnel Step handler 함수 */
   const stepHandler = (nextStep: string) => {
@@ -62,6 +55,7 @@ const Index = () => {
 
   /* Form 제출 시 실행될 handler 함수 */
   const onSubmit = async (data: User) => {
+    console.log(data);
     try {
       const response = await postSignUpApi(data);
       console.log(response);
@@ -74,20 +68,10 @@ const Index = () => {
     }
   };
 
-  // 컴포넌트 렌더링 시 Form의 email, socialType, profileImage 값 지정
-  useEffect(() => {
-    // TODO Step 초기화?
-    setValue('email', userOauthData.email);
-    setValue('socialType', userOauthData.socialType);
-    setValue('profileImage', userOauthData.profileImage);
-  }, []);
-
   return (
-    <Padded>
-      <FormProvider {...methods}>
-        <SignUpFunnel steps={signInSteps} Funnel={Funnel} Step={Step} stepHandler={stepHandler} onSubmit={() => onSubmit(getValues())}></SignUpFunnel>
-      </FormProvider>
-    </Padded>
+    <FormProvider {...methods}>
+      <SignUpFunnel steps={signInSteps} Funnel={Funnel} Step={Step} stepHandler={stepHandler} onSubmit={() => onSubmit(getValues())}></SignUpFunnel>
+    </FormProvider>
   );
 };
 

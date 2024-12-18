@@ -1,10 +1,9 @@
 import AdminTemplate from '../../../components/templates/Admin/AdminTemplate';
-import { Container, Header, Card, Info, InfoContainer, Wrapper, Buttons, ImageContainer, HeadingContainer, Div, Layer } from './MovieDetail.styles';
+import { Container, Header, Card, Info, InfoContainer, Wrapper, Buttons, ImageContainer, HeadingContainer, Div, Layer, List } from './MovieDetail.styles';
 import { Heading, Body, Button, Icon } from 'pov-design-system';
 import ImageLayer from '../../../components/styles/ImageLayer';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useMovieDetailQuery } from '../../../hooks/queries/useMovieQuery';
-import { List } from '../Movie.styles';
+import { useMovieDetailQuery } from '../../../hooks/queries/useMoviesQuery';
 import { useDeleteMovieMutation } from '../../../hooks/queries/useDeleteMovieMutation';
 import { useToast } from '../../../hooks/common/useToast';
 
@@ -12,12 +11,12 @@ const Index = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { id } = location.state || '';
-  const { detailData } = useMovieDetailQuery(id);
+  const { movieData } = useMovieDetailQuery(id);
   const deleteMovieMutation = useDeleteMovieMutation();
   const { createToast } = useToast();
 
   const src = {
-    url: detailData?.data?.poster || '',
+    url: movieData?.data?.poster || '',
     MobileHeight: 260,
     PcHeight: 260,
     br: '8',
@@ -53,55 +52,55 @@ const Index = () => {
               <ImageLayer src={src} />
             </div>
             <Info>
-              <Heading size="large">{detailData?.data.title}</Heading>
+              <Heading size="large">{movieData?.data.title}</Heading>
               {/* <Wrapper>
                 <Body size="xLarge" style={{ color: '#ADACAF', marginRight: '32px', width: '80px' }}>
                   등록여부
                 </Body>
-                <Body size="xLarge">{detailData?.data.applied ? '등록' : '미등록'}</Body>
+                <Body size="xLarge">{movieData?.data.applied ? '등록' : '미등록'}</Body>
               </Wrapper> */}
               <Wrapper>
                 <Body size="xLarge" style={{ color: '#ADACAF', marginRight: '32px', width: '80px' }}>
                   장르
                 </Body>
-                <Body size="xLarge">{detailData?.data.genre.join(', ')}</Body>
+                <Body size="xLarge">{movieData?.data.genre.join(', ')}</Body>
               </Wrapper>
               <Wrapper>
                 <Body size="xLarge" style={{ color: '#ADACAF', marginRight: '32px', width: '80px' }}>
                   감독
                 </Body>
-                <Body size="xLarge">{detailData?.data.directors.map((person) => person.name).join(', ')}</Body>
+                <Body size="xLarge">{movieData?.data.directors.map((person) => person.name).join(', ')}</Body>
               </Wrapper>
               {/* <Wrapper>
                 <Body size="xLarge" style={{ color: '#ADACAF', marginRight: '32px', width: '80px' }}>
                   작가
                 </Body>
-                <Body size="xLarge">{detailData?.data.peoples.cast.map((person) => person.name).join(', ')}</Body>
+                <Body size="xLarge">{movieData?.data.peoples.cast.map((person) => person.name).join(', ')}</Body>
               </Wrapper> */}
               <Wrapper>
                 <Body size="xLarge" style={{ color: '#ADACAF', marginRight: '32px', width: '80px' }}>
                   출연진
                 </Body>
-                <Body size="xLarge">{detailData?.data.actors.map((person) => person.name).join(', ')}</Body>
+                <Body size="xLarge">{movieData?.data.actors.map((person) => person.name).join(', ')}</Body>
               </Wrapper>
               <Wrapper>
                 <Body size="xLarge" style={{ color: '#ADACAF', marginRight: '32px', width: '80px' }}>
                   국가
                 </Body>
-                <Body size="xLarge">{detailData?.data.country.join(', ')}</Body>
+                <Body size="xLarge">{movieData?.data.country.join(', ')}</Body>
               </Wrapper>
               <Wrapper>
                 <Body size="xLarge" style={{ color: '#ADACAF', marginRight: '32px', width: '80px' }}>
                   개봉일자
                 </Body>
-                <Body size="xLarge">{detailData?.data.released}</Body>
+                <Body size="xLarge">{movieData?.data.released}</Body>
               </Wrapper>
               <Wrapper>
                 <Body size="xLarge" style={{ color: '#ADACAF', marginRight: '32px', width: '80px' }}>
                   줄거리
                 </Body>
                 <Body size="xLarge" style={{ width: '380px' }}>
-                  {detailData?.data.plot}
+                  {movieData?.data.plot}
                 </Body>
               </Wrapper>
             </Info>
@@ -125,7 +124,7 @@ const Index = () => {
               </Div>
             </HeadingContainer>
             <List>
-              {detailData?.data.images.map((image) => (
+              {movieData?.data.images.map((image) => (
                 <Layer key={image}>
                   <Body size="xLarge">{image}</Body>
                   <Body size="xLarge" style={{ color: '#ADACAF' }}>
@@ -145,7 +144,16 @@ const Index = () => {
                 <Icon icon="angleright" color="#ADACAF" style={{ width: '16px', height: '16px' }} />
               </Div>
             </HeadingContainer>
-            <List>{detailData?.data.videos.map((image) => <Layer key={image}>{image}</Layer>)}</List>
+            <List>
+              {movieData?.data.videos.map((video) => (
+                <Layer key={video}>
+                  <Body size="xLarge">{video}</Body>
+                  <Body size="xLarge" style={{ color: '#ADACAF' }}>
+                    미리보기
+                  </Body>
+                </Layer>
+              ))}
+            </List>
           </ImageContainer>
         </Card>
       </Container>

@@ -5,10 +5,11 @@ import { useNavigate } from 'react-router-dom';
 
 interface CardProps {
   item: {
-    id: number;
+    id: string;
     title: string;
     released: string;
     poster: string;
+    isLiked: boolean;
     movieLikeCount: number;
     reviewCount: number;
   };

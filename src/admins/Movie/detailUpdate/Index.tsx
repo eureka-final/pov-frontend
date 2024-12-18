@@ -3,19 +3,19 @@ import AdminTemplate from '../../../components/templates/Admin/AdminTemplate';
 import { Container, Header, Card, Info, InfoContainer, Wrapper, Input, ButtonContainer, Badges } from './Detail.styles';
 import { Heading, Body, Button, Badge } from 'pov-design-system';
 import { useLocation } from 'react-router-dom';
-import { useMovieDetailQuery } from '../../../hooks/queries/useMovieQuery';
-import { MovieResponse } from '../../../types/movie';
+import { useMovieDetailQuery } from '../../../hooks/queries/useMoviesQuery';
+import { MovieDetailResponse } from '../../../types/movie';
 import { useEditMovieMutation } from '../../../hooks/queries/useEditMovieMutation';
 import { useToast } from '../../../hooks/common/useToast';
 
 const Index = () => {
   const location = useLocation();
   const { id } = (location.state as { id: string }) || '';
-  const { detailData } = useMovieDetailQuery(id);
+  const { movieData } = useMovieDetailQuery(id);
   const editMovieMutaion = useEditMovieMutation();
   const { createToast } = useToast();
 
-  const [movie, setMovie] = useState<MovieResponse | null>({
+  const [movie, setMovie] = useState<MovieDetailResponse | null>({
     message: '',
     data: {
       title: '',
@@ -30,7 +30,16 @@ const Index = () => {
       country: [],
       images: [],
       videos: [],
-      reviews: [],
+      reviews: {
+        id: 0,
+        title: '',
+        contents: '',
+        isSpoiler: false,
+        modifiedAt: '',
+        likeCount: 0,
+        profileImage: '',
+        name: '',
+      },
       backdrop: '',
     },
   });
@@ -161,17 +170,17 @@ const Index = () => {
   };
 
   useEffect(() => {
-    if (detailData) {
-      setMovie(detailData);
+    if (movieData) {
+      setMovie(movieData);
 
       setGenres((prevGenres) =>
         prevGenres.map((genre) => ({
           ...genre,
-          target: detailData.data.genre.includes(genre.name),
+          target: movieData.data.genre.includes(genre.name),
         }))
       );
     }
-  }, [detailData]);
+  }, [movieData]);
 
   return (
     <AdminTemplate>

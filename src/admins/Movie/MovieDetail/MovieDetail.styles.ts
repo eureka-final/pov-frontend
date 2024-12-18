@@ -85,4 +85,5 @@ export const Layer = styled.div`
   color: #ffffff;
   background: var(--color-base-faint, #676668);
   align-items: center;
+  justify-content: space-between;
 `;

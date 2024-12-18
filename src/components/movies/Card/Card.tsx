@@ -1,41 +1,66 @@
-import ImageLayer from '../../styles/ImageLayer';
-import { Container, InfoContainer, Info, Count } from './Card.styles';
+import { Movie } from '../../../types/movie';
+import { CardWapper, InfoContainer, Info, LikeContainer } from './Card.styles';
 import { Heading, Body, Icon } from 'pov-design-system';
+import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { useLikeMovieMutation, useDisLikeMovieMutation } from '../../../hooks/queries/useLikeMovieMutation';
 
 interface CardProps {
-  item: {
-    name: string;
-    date: string;
-    likes: string;
-    reviews: string;
-    src: {
-      url: string;
-      MobileHeight: number;
-      PcHeight: number;
-      br: string;
-    };
-  };
+  item: Movie;
 }
 
 const Card = ({ item }: CardProps) => {
+  const navigate = useNavigate();
+
+  const [likes, setLikes] = useState(item?.movieLikeCount || 0);
+  const [likeAction, setLikeAction] = useState<boolean>(item.isLiked || false);
+  const likeMutation = useLikeMovieMutation();
+  const disLikeMutation = useDisLikeMovieMutation();
+
+  const onLike = () => {
+    if (likeAction === false) {
+      likeMutation.mutate(
+        { movieId: item.id! },
+        {
+          onSuccess: () => {
+            setLikes(likes + 1);
+            setLikeAction(true);
+          },
+        }
+      );
+    } else {
+      disLikeMutation.mutate(
+        { movieId: item.id! },
+        {
+          onSuccess: () => {
+            setLikes(likes - 1);
+            setLikeAction(false);
+          },
+        }
+      );
+    }
+  };
+
   return (
-    <Container>
-      <ImageLayer src={item.src} />
-      <Heading size="medium">{item.name}</Heading>
+    <CardWapper onClick={() => navigate(`/movie/${item.id}/detail`)}>
+      <img src={item.poster} />
+      <Heading size="medium">{item.title}</Heading>
       <Body size="large" style={{ color: '#ADACAF' }}>
-        {item.date}
+        {item.released}
       </Body>
       <Info>
         <InfoContainer>
-          <Icon icon="heartline" color="#ffffff" />
-          <Count>{item.likes}</Count>
+          <LikeContainer onClick={onLike}>
+            <Icon icon={likeAction ? 'heartfill' : 'heartline'} width="20px" height="20px" /> {likes}
+          </LikeContainer>
         </InfoContainer>
         <InfoContainer>
-          <Icon icon="reviewline" color="#ffffff" />
-          <Count>{item.reviews}</Count>
+          <LikeContainer>
+            <Icon icon="reviewline" width="20px" height="20px" /> {item.reviewCount}
+          </LikeContainer>
         </InfoContainer>
       </Info>
-    </Container>
+    </CardWapper>
   );
 };
 

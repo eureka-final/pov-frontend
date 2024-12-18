@@ -144,7 +144,7 @@ const Index = () => {
       setCuration(curationData.data);
 
       const initialSelectedMovies = curationData.data.readAdminCurationMovieResponseList.map((movie) => ({
-        id: 0,
+        id: movie.id,
         title: movie.title,
         released: movie.released,
       }));

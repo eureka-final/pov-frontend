@@ -1,178 +1,78 @@
-// export interface Movie {
-//   item: {
-//     title: string;
-//     poster: string;
-//     released: string;
-//     movieLikeCount: number;
-//     movieReviewCount: number;
-//   };
-// }
-
-export interface MovieResponse {
-  message: string;
-  data: MovieData;
-}
-
 export interface MoviesResponse {
   message: string;
   data: {
-    movies: Movies;
+      movies: MovieData;
   };
 }
 
-export interface TMDBMoviesResponse {
-  message: string;
-  data: TMDBS
-}
-
-export interface TMDBS {
-  page: number;
-  total_pages: number;
-  total_results: number;
-  results: MovieResult[];
-}
-
-export interface MovieResult {
-  adult: boolean;
-  genre_ids: number[];
-  id: number;
-  poster_path: string;
-  release_date: string;
-  title: string;
-}
-
-export interface Movies {
+export interface MovieData {
   size: number;
   content: Movie[];
-  number: number;
-  sort: Sort[];
-  numberOfElements: number;
-  pageable: Pageable;
-  first: boolean;
-  last: boolean;
-  empty: boolean;
+  number: number; // 현재 페이지 번호
+  first: boolean; // 첫 페이지 여부
+  last: boolean; // 마지막 페이지 여부
+  empty: boolean; // 비어있는지 여부
 }
 
 export interface Movie {
-  id: number;
+  id: string;
   title: string;
-  released: string;
   poster: string;
+  released: string;
   movieLikeCount: number;
+  isLiked: boolean;
   reviewCount: number;
 }
 
-export interface Sort {
-  direction: string;
-  nullHandling: string;
-  ascending: boolean;
-  property: string;
-  ignoreCase: boolean;
-}
-
-export interface Pageable {
-  offset: number;
-  sort: Sort[];
-  paged: boolean;
-  pageNumber: number;
-  pageSize: number;
-  unpaged: boolean;
-}
-
-export interface MovieData {
-  title: string;
-  released: string;
-  genre: string[];
-  movieLikeCount: number;
-  preferenceCounts: PreferenceCount[];
-  plot: string;
-  directors: Director[];
-  actors: Actor[];
-  poster: string;
-  country: string[];
-  images: string[];
-  videos: string[];
-  reviews: Review[];
-  backdrop: string;
-}
-
-export interface PreferenceCount {
-  goodCount: number;
-  badCount: number;
-}
-
-export interface Director {
-  id: number;
-  name: string;
-  profileImage: string;
-  role: string;
-}
-
-export interface Actor {
-  id: number;
-  name: string;
-  profileImage: string;
-  role: string;
-  order: number;
-}
-
-export interface Review {
-  review: ReviewDetail;
-  likeCount: number;
-}
-
-export interface ReviewDetail {
-  id: number;
-  title: string;
-  contents: string;
-  thumbnail: string;
-  preference: string;
-  isSpoiler: boolean;
-  disabled: boolean;
-  modifiedAt: string;
-}
-
-export interface TMDBMovieDetailResponse {
+export interface MovieDetailResponse {
   message: string;
   data: MovieDetailData;
 }
 
 export interface MovieDetailData {
-  tmdbId: number;
+  backdrop: string;  // 추가 데이터
   title: string;
-  plot: string;
-  poster: string;
-  backdrop: string;
-  originCountries: string[];
   released: string;
-  filmRating: string;
-  genres: string[];
-  peoples: Peoples;
+  genre: string[];
+  movieLikeCount: number;
+  preferenceCounts: MoviePrefer[]; // 추가 데이터
+  plot: string;
+  directors: MovieDirector[];
+  actors: MovieActor[];
+  poster: string;
+  country: string[];
+  images: string[];
+  videos: string[];
+  reviews: MovieReview; // 추가 데이터 ()
 }
 
-export interface Peoples {
-  cast: Cast[];
-  crew: Crew[];
-}
-
-export interface Cast {
-  gender: number;
+export interface MovieDirector {
   id: number;
   name: string;
-  original_name: string;
-  profile_path: string;
-  cast_id: number;
-  character: string;
+  profileImage: string;
+  role: string;
+}
+
+export interface MovieActor {
+  id: number;
+  name: string;
+  profileImage: string;
+  role: string;
   order: number;
 }
 
-export interface Crew {
-  gender: number;
+export interface MoviePrefer {
+  goodCount: number;
+  badCount: number;
+}
+
+export interface MovieReview {
   id: number;
+  title: string;
+  contents: string;
+  isSpoiler: boolean;
+  modifiedAt: string;
+  likeCount: number;
+  profileImage: string;
   name: string;
-  original_name: string;
-  profile_path: string;
-  department: string;
-  job: string;
-  popularity?: number;
 }

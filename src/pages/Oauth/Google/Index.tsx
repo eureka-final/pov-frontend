@@ -21,6 +21,7 @@ const Index = () => {
 
       if (code) {
         const data = await getGoogleUserInfoApi(code);
+        console.log(data);
 
         if (data) {
           try {
@@ -44,7 +45,7 @@ const Index = () => {
           } catch (error) {
             console.error(error);
             alert('로그인 실패');
-            navigate('/login');
+            window.location.href = '/login';
             return;
           }
         }

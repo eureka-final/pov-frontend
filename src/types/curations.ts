@@ -42,8 +42,7 @@ export interface ReadAdminCurationResponse {
 }
 
 export interface CurationMovie {
+  id: number;
   title: string;
   released: string;
 }
-
-

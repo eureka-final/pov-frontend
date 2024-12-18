@@ -3,11 +3,11 @@ import { Heading, Body, Icon } from 'pov-design-system';
 
 interface ReviewProps {
   reviewers: {
-    profile: string;
+    profileImage: string;
     name: string;
-    content: string;
-    date: string;
-    likes: string;
+    contents: string;
+    modifiedAt: string;
+    likeCount: number;
   };
 }
 
@@ -15,16 +15,16 @@ const Review = ({ reviewers }: ReviewProps) => {
   return (
     <ReviewContainer>
       <Wrapper>
-        <img src={reviewers.profile} />
+        <img src={reviewers.profileImage} />
         <Heading size="small">{reviewers.name}</Heading>
       </Wrapper>
-      <Content>{reviewers.content}</Content>
+      <Content>{reviewers.contents}</Content>
       <Body size="small" style={{ color: '#ADACAF' }}>
-        {reviewers.date}
+        {reviewers.modifiedAt}
       </Body>
       <Additionals justify="flex-end">
         <Icon icon="heartline" color="#ADACAF" />
-        <Count color="#ADACAF">{reviewers.likes}</Count>
+        <Count color="#ADACAF">{reviewers.likeCount}</Count>
       </Additionals>
     </ReviewContainer>
   );

@@ -80,8 +80,8 @@ function Index() {
     return <div dangerouslySetInnerHTML={{ __html: sanitizer(text).replace(/<img[^>]*>/g, '') }} />;
   };
 
-  const handleLikeCount = (index: number, newCount: number) => {
-    setLikeCounts((prev) => prev.map((count, i) => (i === index ? newCount : count)));
+  const handleLikeCount = (index: number, newCount: React.SetStateAction<number>) => {
+    setLikeCounts((prevCounts) => prevCounts.map((count, i) => (i === index ? (typeof newCount === 'function' ? newCount(count) : newCount) : count)));
   };
 
   return (

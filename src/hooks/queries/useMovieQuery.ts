@@ -1,16 +1,6 @@
 import { useQuery, useInfiniteQuery } from '@tanstack/react-query';
-import { getMovieDetail } from '../../apis/movie/getMovieDetail';
-import { getMovies, getTMDBMovies, getTMDBMovieDetail } from '../../apis/admin/getMovies';
-import { MovieResponse, MoviesResponse, TMDBMoviesResponse, TMDBMovieDetailResponse } from '../../types/movie';
-
-export const useMovieDetailQuery = (movieId: string) => {
-  const { data: detailData } = useQuery<MovieResponse>({
-    queryKey: ['movieDetail', movieId],
-    queryFn: () => getMovieDetail(movieId),
-  });
-
-  return { detailData };
-};
+import { getTMDBMovies, getTMDBMovieDetail } from '../../apis/admin/getMovies';
+import { TMDBMoviesResponse, TMDBMovieDetailResponse } from '../../types/movie_admins';
 
 export const useTMDBMovieDetailQuery = (movieId: string) => {
   const { data: dbData } = useQuery<TMDBMovieDetailResponse>({
@@ -19,31 +9,6 @@ export const useTMDBMovieDetailQuery = (movieId: string) => {
   });
 
   return { dbData };
-};
-
-export const useMoviesQuery = (searchKeyword: string) => {
-  const { data, isLoading, hasNextPage, fetchNextPage, isFetchingNextPage } = useInfiniteQuery<MoviesResponse, Error>({
-    queryKey: ['movies', searchKeyword],
-    queryFn: async ({ pageParam = 0 }) => {
-      const response = await getMovies(pageParam, searchKeyword);
-
-      if (!response || !response.data || !response.data.movies) {
-        throw new Error('Invalid API response structure');
-      }
-
-      return response;
-    },
-    getNextPageParam: (lastPage) => {
-      const movies = lastPage?.data?.movies;
-      if (!movies) return undefined;
-      return movies.last ? undefined : movies.number + 1;
-    },
-    initialPageParam: 0,
-  });
-
-  const moviesData = data?.pages.flatMap((page) => page?.data?.movies?.content || []) || [];
-
-  return { moviesData, isLoading, hasNextPage, fetchNextPage, isFetchingNextPage };
 };
 
 export const useTMDBMoviesQuery = (searchKeyword: string) => {
