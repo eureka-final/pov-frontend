@@ -149,6 +149,7 @@ export const Section = styled.div`
 
 export const SectionWrapper = styled.div`
   width: 100%;
+  margin-bottom: 16px;
   display: flex;
   justify-content: space-between;
 `;

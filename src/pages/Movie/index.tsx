@@ -1,6 +1,5 @@
-import Padded from '../../components/templates/Padded/Padded';
 import Section from '../../components/movies/Section/Section';
-import { Container } from './Movie.styles';
+import { Container, HomeContainer } from './Movie.styles';
 import { useAuthStore } from '../../stores/useAuthStore';
 import { constants } from '../../constants/constants';
 import { useMoviesQuery } from '../../hooks/queries/useMoviesQuery';
@@ -35,7 +34,7 @@ const Index = () => {
   }
 
   return (
-    <Padded>
+    <HomeContainer>
       <Container>
         <Section items={moviesData || []} heading={heading} />
 
@@ -45,7 +44,7 @@ const Index = () => {
         {/* 트리거 ref 위치 */}
         {hasNextPage && <div ref={ref} style={{ height: '1px' }} />}
       </Container>
-    </Padded>
+    </HomeContainer>
   );
 };
 

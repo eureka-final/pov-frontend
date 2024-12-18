@@ -11,7 +11,7 @@ interface SectionProps {
 const Section = ({ items, heading }: SectionProps) => {
   return (
     <SectionContainer>
-      <Heading size="large">{heading}</Heading>
+      <Heading size="xLarge">{heading}</Heading>
       <CardContainer>
         {items.map((item, index) => (
           <Card key={item.title + index} item={item} />
