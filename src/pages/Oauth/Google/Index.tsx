@@ -30,7 +30,7 @@ const Index = () => {
               setLoggedIn(true);
               setUser(response.data.memberInfo);
               alert('로그인 성공');
-              navigate('/main');
+              navigate('/');
             } else {
               alert('최초 로그인, 회원가입으로 이동');
               navigate('/signup', {

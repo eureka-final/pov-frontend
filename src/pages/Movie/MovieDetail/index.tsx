@@ -135,7 +135,7 @@ const Index = () => {
                   <Body style={{ color: '#0DE781' }}>{preference && preference.reduce((acc, item) => acc + item.reviewCount, 0)}</Body>
                 </Div>
                 <Div>
-                  <ShowMoreBtn onClick={() => navigate('/movie/review')} />
+                  <ShowMoreBtn onClick={() => navigate(`/movie/${movieId}/reviews`)} />
                 </Div>
               </HeadingContainer>
               {movieData.data.reviews.map((review) => (
