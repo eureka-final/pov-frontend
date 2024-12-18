@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useAuthStore } from '../../../stores/useAuthStore';
-
-import Padded from '../../../components/templates/Padded/Padded';
 import { postLogin } from '../../../apis/auth/postAuth';
+import { LoadingSection } from '../Index.styles';
+import CircularProgress from '../../../components/common/Progress';
 
 const Index = () => {
   const navigate = useNavigate();
@@ -41,7 +41,9 @@ const Index = () => {
         console.log(response);
         setLoggedIn(true);
         setUser(response.data.memberInfo);
-        window.location.href = '/';
+
+        if (response.data.memberInfo.role === 'USER') window.location.href = '/';
+        if (response.data.memberInfo.role === 'ADMIN') window.location.href = '/admin/movies';
       } else {
         // 회원 정보가 존재하지 않는 경우 회원가입 페이지로 이동
         navigate('/signup', { state: { email: email, profileImage: profileImage, socialType: 'NAVER' } });
@@ -52,9 +54,9 @@ const Index = () => {
   }, []);
 
   return (
-    <Padded>
-      <div>waiting naver oauth login</div>
-    </Padded>
+    <LoadingSection>
+      <CircularProgress></CircularProgress>
+    </LoadingSection>
   );
 };
 
