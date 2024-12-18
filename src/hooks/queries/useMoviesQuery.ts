@@ -79,7 +79,7 @@ export const useMovieTrendingQuery = () => {
 
   const { handleError } = useApiError();
 
-  const { data: moviesData, error } = useQuery<TrendingMoviesResponse>({
+  const { data: moviesData, error, isLoading } = useQuery<TrendingMoviesResponse>({
     queryKey: ['movie'],
     queryFn: getTrendingMovies,
     onError: (error: Error) => {
@@ -87,7 +87,7 @@ export const useMovieTrendingQuery = () => {
     }
   } as UseQueryOptions<TrendingMoviesResponse, Error>);
 
-  return { moviesData, error };
+  return { moviesData, error, isLoading };
 };
 
 

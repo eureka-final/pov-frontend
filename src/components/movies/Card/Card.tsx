@@ -46,12 +46,14 @@ const Card = ({ item }: CardProps) => {
   };
 
   return (
-    <CardContainer onClick={() => navigate(`/movie/${item.id}/detail`)}>
-      {item.poster && item.poster.endsWith('null') ? <NoPoster /> : <ThumbnailImage src={item.poster} />}
-      <SingleLineHeading size="medium">{item.title}</SingleLineHeading>
-      <Body size="large" style={{ color: '#ADACAF' }}>
-        {formatDate(item.released)}
-      </Body>
+    <CardContainer>
+      <div onClick={() => navigate(`/movie/${item.id}/detail`)}>
+        {item.poster && item.poster.endsWith('null') ? <NoPoster /> : <ThumbnailImage src={item.poster} />}
+        <SingleLineHeading size="medium">{item.title}</SingleLineHeading>
+        <Body size="large" style={{ color: '#ADACAF' }}>
+          {formatDate(item.released)}
+        </Body>
+      </div>
       <Info>
         <InfoContainer>
           <LikeContainer onClick={onLike}>
