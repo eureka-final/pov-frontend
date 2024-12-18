@@ -1,21 +1,20 @@
 import Basic from '../../../components/templates/Basic/Basic';
 import { constants } from '../../../constants/constants';
-import { Heading, Badge, Body, Icon, ShowMoreBtn } from 'pov-design-system';
+import { Heading, Badge, Body, Icon, ShowMoreBtn, Paragraph } from 'pov-design-system';
 import {
   Container,
   HeaderContainer,
   Additionals,
+  LikeContainer,
   HeaderInfo,
   Count,
   InfoContainer,
-  ImageContainer,
   AdditionalsContainer,
   BodyContainer,
   Wrapper,
   BackgroundLayer,
   PaddedContainer,
   HeadingContainer,
-  Content,
   Section,
   Div,
   ScrollContainer,
@@ -24,7 +23,6 @@ import {
   StillCutImage,
   ProductionGridContainer,
 } from './MovieDetail.styles';
-import ImageLayer from '../../../components/styles/ImageLayer';
 import ResponsiveContainer from '../../../components/styles/ResponsiveContainer';
 import ProgressBar from '../../../components/styles/ProgressBar';
 import Productions from '../../../components/movies/Productions/Productions';
@@ -33,6 +31,8 @@ import { useMovieDetailQuery } from '../../../hooks/queries/useMoviesQuery';
 import { useNavigate, useParams } from 'react-router-dom';
 import { formatDate } from '../../../utils/formatDateTime';
 import { useTheme } from '@emotion/react';
+import { useState } from 'react';
+import { useLikeMovieMutation, useDisLikeMovieMutation } from '../../../hooks/queries/useLikeMovieMutation';
 
 const Index = () => {
   const navigate = useNavigate();
@@ -41,6 +41,35 @@ const Index = () => {
   const { movieId } = useParams<{ movieId: string }>();
 
   const { movieData } = useMovieDetailQuery(movieId!);
+
+  const [likes, setLikes] = useState(movieData?.data?.movieLikeCount || 0);
+  const [likeAction, setLikeAction] = useState<boolean>(movieData?.data.isLiked || false);
+  const likeMutation = useLikeMovieMutation();
+  const disLikeMutation = useDisLikeMovieMutation();
+
+  const onLike = () => {
+    if (likeAction === false) {
+      likeMutation.mutate(
+        { movieId: movieId! },
+        {
+          onSuccess: () => {
+            setLikes(likes + 1);
+            setLikeAction(true);
+          },
+        }
+      );
+    } else {
+      disLikeMutation.mutate(
+        { movieId: movieId! },
+        {
+          onSuccess: () => {
+            setLikes(likes - 1);
+            setLikeAction(false);
+          },
+        }
+      );
+    }
+  };
 
   const src = {
     url: movieData && movieData.data.poster,
@@ -74,7 +103,7 @@ const Index = () => {
           <BackgroundLayer src={movieData.data.backdrop.replace('/w154/', '/original/')}></BackgroundLayer>
           <HeaderContainer src={movieData.data.backdrop.replace('/w154/', '/original/')}>
             <HeaderInfo>
-              <Heading size="xxLarge">{movieData.data.title}</Heading>
+              <Heading size="large">{movieData.data.title}</Heading>
               <BodyContainer>
                 <Body size="large" css={{ marginBottom: '8px', color: theme.muted }}>
                   {formatDate(movieData.data.released)}
@@ -94,14 +123,14 @@ const Index = () => {
               </BodyContainer>
 
               <AdditionalsContainer>
-                <Additionals>
-                  <Icon icon="heartfill" color="#0DE781" css={{ width: '20px' }} />
-                  <Count color="#0DE781">{movieData.data.movieLikeCount}</Count>
-                </Additionals>
-                <Additionals>
-                  <Icon icon="reviewline" color="#0DE781" css={{ width: '20px' }} />
-                  <Count color="#0DE781">{preference && preference.reduce((acc, item) => acc + item.reviewCount, 0)}</Count>
-                </Additionals>
+                <LikeContainer onClick={onLike}>
+                  <Icon icon={likeAction ? 'heartfill' : 'heartline'} width="20px" height="20px" />
+                  {likes}
+                </LikeContainer>
+                <LikeContainer>
+                  <Icon icon="reviewline" color="#0DE781" />
+                  {preference && preference.reduce((acc, item) => acc + item.reviewCount, 0)}
+                </LikeContainer>
               </AdditionalsContainer>
             </HeaderInfo>
           </HeaderContainer>
@@ -111,18 +140,12 @@ const Index = () => {
               <PosterImg src={src.url} />
 
               <Wrapper gap={32} direction="column">
-                <Wrapper>
-                  {preference &&
-                    preference.map((item, index) => (
-                      <ProgressBar key={item.percentage + index} percentage={item.percentage} like={item.like} unlike={item.unlike} />
-                    ))}
-                </Wrapper>
                 <ResponsiveContainer mobDirection="column" pcDirection="row" gap={16}>
-                  <Additionals justify="start">
-                    <Icon icon="heartline" css={{ width: '20px', color: theme.secondary }} />
-                    <Count color={theme.secondary}>{constants.movies.main.likes}</Count>
+                  <Additionals justify="start" onClick={onLike}>
+                    <Icon icon={likeAction ? 'heartfill' : 'heartline'} />
+                    <Count>{likes}</Count>
                   </Additionals>
-                  <Additionals>
+                  <Additionals onClick={() => navigate(`/review/${movieId}/write`)}>
                     <Icon icon="reviewline" css={{ width: '20px', color: theme.secondary }} />
                     <Count color={theme.secondary}>{constants.movies.main.reviews}</Count>
                   </Additionals>
@@ -131,7 +154,14 @@ const Index = () => {
                     <Count color={theme.secondary}>{constants.movies.main.bookmark}</Count>
                   </Additionals>
                 </ResponsiveContainer>
-                <Content>{movieData.data.plot}</Content>
+                <Wrapper>
+                  {preference &&
+                    preference.map((item, index) => (
+                      <ProgressBar key={item.percentage + index} percentage={item.percentage} like={item.like} unlike={item.unlike} />
+                    ))}
+                </Wrapper>
+
+                <Paragraph>{movieData.data.plot}</Paragraph>
               </Wrapper>
             </InfoContainer>
 
@@ -147,8 +177,8 @@ const Index = () => {
                   <ShowMoreBtn onClick={() => navigate('/movie/review')} />
                 </Div>
               </HeadingContainer>
-              {movieData.data.reviews.map((review) => (
-                <Review key={review.id} reviewers={review} />
+              {movieData.data.reviews.slice(0, 1).map((review) => (
+                <Review key={review.reviewId} reviewers={review} />
               ))}
             </Section>
 
