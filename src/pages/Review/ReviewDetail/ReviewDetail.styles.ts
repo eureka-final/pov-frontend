@@ -86,14 +86,13 @@ export const Additionals = styled.div<{ justify?: string }>`
 `;
 
 export const Count = styled.span<{ color?: string }>`
-  color: ${({ color }) => (color ? `${color}` : '#FFFFFF')};
 `;
 
 export const ReviewContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
-  background: var(--Color-background-background-elevated, #4c494e);
+  background: ${({ theme }) => theme.backgroundElevated};
   border-radius: 8px;
   padding: 20px;
 `;

@@ -76,7 +76,7 @@ export const NaverSignInButton = styled(OAuthSignInButton)`
 
 export const GoogleSignInButton = styled(OAuthSignInButton)`
   background: #f2f2f2;
-  border: 1px solid var(--color-base-faint, #e5e5e5);
+  background: ${({ theme }) => theme.secondary};
   box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
 
   &:hover {
