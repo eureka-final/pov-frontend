@@ -3,7 +3,6 @@ import { defineConfig } from 'vite';
 // import mkcert from 'vite-plugin-mkcert';
 
 import react from '@vitejs/plugin-react';
-import svgr from 'vite-plugin-svgr';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -15,7 +14,6 @@ export default defineConfig({
         plugins: ['@emotion/babel-plugin'],
       },
     }),
-    svgr(),
     // VitePWA({
     //   registerType: 'autoUpdate',
     //   // devOptions: {

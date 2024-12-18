@@ -21,7 +21,7 @@ export interface Movie {
   released: string;
   movieLikeCount: number;
   isLiked: boolean;
-  movieReviewCount: number;
+  reviewCount: number;
 }
 
 export interface MovieDetailResponse {
@@ -44,7 +44,6 @@ export interface MovieDetailData {
   images: string[];
   videos: string[];
   reviews: MovieReview[];
-  isLiked: boolean;
 }
 
 export interface MovieDirector {
@@ -68,14 +67,13 @@ export interface MoviePrefer {
 }
 
 export interface MovieReview {
-  reviewId: string;
+  id: number;
   title: string;
   contents: string;
   isSpoiler: boolean;
   disabled: boolean;
-  createdAt: string;
+  modifiedAt: string;
   likeCount: number;
   profileImage: string;
   nickname: string;
-  isLiked: boolean;
 }

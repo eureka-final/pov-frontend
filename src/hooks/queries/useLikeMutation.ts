@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useToast } from '../../hooks/common/useToast';
-import { postLike, postDisLike } from '../../apis/review/postLike';
+import { putLike, putDisLike } from '../../apis/review/putLike';
 
 
 export const useLikeMutation = () => {
@@ -8,7 +8,7 @@ export const useLikeMutation = () => {
   const { createToast } = useToast();
 
   const likeMutation = useMutation({
-    mutationFn: postLike,
+    mutationFn: putLike,
     onSuccess: (_, { movieId, reviewId }) => {
       queryClient.invalidateQueries({ queryKey: ['movies', movieId, 'reviews', reviewId] });
     },
@@ -25,7 +25,7 @@ export const useDisLikeMutation = () => {
   const { createToast } = useToast();
 
   const disLikeMutation = useMutation({
-    mutationFn: postDisLike,
+    mutationFn: putDisLike,
     onSuccess: (_, { movieId, reviewId }) => {
       queryClient.invalidateQueries({ queryKey: ['movies', movieId, 'reviews', reviewId] });
     },
