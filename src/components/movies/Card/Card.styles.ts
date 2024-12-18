@@ -47,6 +47,7 @@ export const ThumbnailImage = styled.img`
   border-radius: 4px;
   margin-bottom: 8px;
   aspect-ratio: 9 / 15;
+  max-height: 380px;
 
   @media (min-width: 0px) and (max-width: 600px) {
     max-height: 380px;

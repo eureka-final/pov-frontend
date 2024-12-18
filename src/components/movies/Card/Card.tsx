@@ -47,7 +47,7 @@ const Card = ({ item }: CardProps) => {
 
   return (
     <CardContainer onClick={() => navigate(`/movie/${item.id}/detail`)}>
-      <ThumbnailImage src={item.poster} />
+      {item.poster && item.poster.endsWith('null') ? <NoPoster /> : <ThumbnailImage src={item.poster} />}
       <SingleLineHeading size="medium">{item.title}</SingleLineHeading>
       <Body size="large" style={{ color: '#ADACAF' }}>
         {formatDate(item.released)}
@@ -63,7 +63,7 @@ const Card = ({ item }: CardProps) => {
           <LikeContainer>
             <Icon icon="reviewline" width="16px" height="16px" css={{ color: theme.secondary }} />{' '}
             <Body size="large" css={{ color: theme.secondary }}>
-              {item.reviewCount}
+              {item.movieReviewCount}
             </Body>
           </LikeContainer>
         </InfoContainer>
