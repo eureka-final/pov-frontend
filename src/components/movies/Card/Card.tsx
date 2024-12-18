@@ -1,9 +1,11 @@
 import { Movie } from '../../../types/movie';
-import { CardWapper, InfoContainer, Info, LikeContainer } from './Card.styles';
-import { Heading, Body, Icon } from 'pov-design-system';
+import { CardContainer, InfoContainer, SingleLineHeading, Info, LikeContainer, ThumbnailImage } from './Card.styles';
+import { Body, Icon } from 'pov-design-system';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { useLikeMovieMutation, useDisLikeMovieMutation } from '../../../hooks/queries/useLikeMovieMutation';
+import { formatDate } from '../../../utils/formatDateTime';
+import { useTheme } from '@emotion/react';
 
 interface CardProps {
   item: Movie;
@@ -11,6 +13,7 @@ interface CardProps {
 
 const Card = ({ item }: CardProps) => {
   const navigate = useNavigate();
+  const theme = useTheme();
 
   const [likes, setLikes] = useState(item?.movieLikeCount || 0);
   const [likeAction, setLikeAction] = useState<boolean>(item.isLiked || false);
@@ -42,25 +45,29 @@ const Card = ({ item }: CardProps) => {
   };
 
   return (
-    <CardWapper onClick={() => navigate(`/movie/${item.id}/detail`)}>
-      <img src={item.poster} />
-      <Heading size="medium">{item.title}</Heading>
+    <CardContainer onClick={() => navigate(`/movie/${item.id}/detail`)}>
+      <ThumbnailImage src={item.poster} />
+      <SingleLineHeading size="medium">{item.title}</SingleLineHeading>
       <Body size="large" style={{ color: '#ADACAF' }}>
-        {item.released}
+        {formatDate(item.released)}
       </Body>
       <Info>
         <InfoContainer>
           <LikeContainer onClick={onLike}>
-            <Icon icon={likeAction ? 'heartfill' : 'heartline'} width="20px" height="20px" /> {likes}
+            <Icon icon={likeAction ? 'heartfill' : 'heartline'} width="16px" height="16px" css={{ color: theme.secondary }} />{' '}
+            <Body size="medium">{likes}</Body>
           </LikeContainer>
         </InfoContainer>
         <InfoContainer>
           <LikeContainer>
-            <Icon icon="reviewline" width="20px" height="20px" /> {item.reviewCount}
+            <Icon icon="reviewline" width="16px" height="16px" css={{ color: theme.secondary }} />{' '}
+            <Body size="large" css={{ color: theme.secondary }}>
+              {item.reviewCount}
+            </Body>
           </LikeContainer>
         </InfoContainer>
       </Info>
-    </CardWapper>
+    </CardContainer>
   );
 };
 
