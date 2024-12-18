@@ -159,20 +159,22 @@ const Index = () => {
               </Wrapper>
             </InfoContainer>
 
-            <Section>
-              <HeadingContainer>
-                <Div>
-                  <Heading>{constants.movies.detail.heading.review}</Heading>
-                  <Body style={{ color: '#0DE781' }}>{preference && preference.reduce((acc, item) => acc + item.reviewCount, 0)}</Body>
-                </Div>
-                <Div>
-                  <ShowMoreBtn onClick={() => navigate(`/movie/${movieId}/reviews`)} />
-                </Div>
-              </HeadingContainer>
-              {movieData.data.reviews.map((review) => (
-                <Review key={review.id} reviewers={review} />
-              ))}
-            </Section>
+            {movieData.data.reviews.length > 0 && (
+              <Section>
+                <HeadingContainer>
+                  <Div>
+                    <Heading>{constants.movies.detail.heading.review}</Heading>
+                    <Body style={{ color: '#0DE781' }}>{preference && preference.reduce((acc, item) => acc + item.reviewCount, 0)}</Body>
+                  </Div>
+                  <Div>
+                    <ShowMoreBtn onClick={() => navigate(`/movie/${movieId}/reviews`)} />
+                  </Div>
+                </HeadingContainer>
+                {movieData.data.reviews.slice(0, 1).map((review) => (
+                  <Review key={review.id} reviewers={review} />
+                ))}
+              </Section>
+            )}
 
             <Section>
               <HeadingContainer>

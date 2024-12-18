@@ -30,6 +30,33 @@ export interface Review {
   spoiler: boolean;
 }
 
+export interface MovieReviewsResponse {
+  message: string;
+  data: {
+    reviews: MovieReviewData;
+  };
+}
+
+export interface MovieReviewData {
+  size: number;
+  content: MovieReviews[];
+  number: number; // 현재 페이지 번호
+  first: boolean; // 첫 페이지 여부
+  last: boolean; // 마지막 페이지 여부
+  empty: boolean; // 비어있는지 여부
+}
+
+export interface MovieReviews {
+  id: string;
+  profileImage: string;
+  nickname: string;
+  contents: string;
+  modifiedAt: string;
+  likeCount: number;
+  isSpoiler: boolean;
+  isLiked: boolean;
+}
+
 export interface JoinClubResponse {
   message: string;
   data: {
