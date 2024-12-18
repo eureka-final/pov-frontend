@@ -1,5 +1,5 @@
 import { useNavigate, useParams } from 'react-router-dom';
-import Profile from '../../common/Profile';
+import Profile from '../../common/Profile/Profile';
 import { Additionals, ReviewContainer, Contents, Wrapper } from './Review.styles';
 import { Body, Icon } from 'pov-design-system';
 import { useState } from 'react';

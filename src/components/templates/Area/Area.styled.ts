@@ -8,6 +8,7 @@ export const FullArea = styled.div<{ width?: number; height?: number }>`
 
 export const ResponsiveArea = styled.div<{ width?: number; height?: number }>`
   height: ${({ height }) => (height ? `${height}px` : `100%`)};
+
   @media (min-width: 0px) and (max-width: 600px) {
     min-width: 360px;
     width: ${({ width }) => (width ? `${width}px` : `100%`)};
