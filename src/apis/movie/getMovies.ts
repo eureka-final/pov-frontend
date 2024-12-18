@@ -1,9 +1,14 @@
 import { axiosInstance } from '../axiosInstance';
 import { END_POINTS } from '../../constants/api';
-import { MoviesResponse, MovieDetailResponse } from '../../types/movie';
+import { MoviesResponse, MovieDetailResponse, TrendingMoviesResponse } from '../../types/movie';
 
 export const getMovies  = async (pageParam: string | unknown) => {
   const { data } = await axiosInstance.get<MoviesResponse>(END_POINTS.MOVIE(pageParam));
+  return data;
+};
+
+export const getTrendingMovies  = async () => {
+  const { data } = await axiosInstance.get<TrendingMoviesResponse>(END_POINTS.MOVIE_TRENDING);
   return data;
 };
 

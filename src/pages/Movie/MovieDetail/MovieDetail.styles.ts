@@ -77,7 +77,6 @@ export const Additionals = styled.div<{ justify?: string }>`
 `;
 
 export const Count = styled.div<{ color?: string }>`
-  color: ${({ color }) => (color ? `${color}` : '#FFFFFF')};
   font-size: 14px;
   font-weight: 500;
 `;
@@ -115,13 +114,13 @@ export const Wrapper = styled.div<{ gap?: number; direction?: string; width?: nu
   width: ${({ width }) => (width ? `${width}px` : `100%`)};
 `;
 
-export const Content = styled.div`
-  color: var(--Color-base-secondary, #e5e5e5);
-  font-family: Pretendard;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 22.4px;
+export const LikeContainer = styled.div<{ justify?: string }>`
+  display: flex;
+  justify-content: ${({ justify }) => (justify ? `${justify}` : 'flex-start')};
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  color: ${({ theme }) => theme.color.green600};
 `;
 
 export const Section = styled.div`
@@ -146,7 +145,7 @@ export const ReviewContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
-  background: var(--Color-background-background-elevated, #4c494e);
+  background: ${({ theme }) => theme.backgroundElevated};
   border-radius: 8px;
   padding: 20px;
 `;

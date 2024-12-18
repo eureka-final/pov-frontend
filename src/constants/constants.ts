@@ -4,6 +4,7 @@ export const constants = {
       topic: {
         recommendation: '님을 위한 추천 영화',
         search: '에 대한 검색 결과에요.',
+        trending: `POV's 선정 영화 🎞️ 이런 영화 어때요?`
       },
       genres: {
         action: '액션',
