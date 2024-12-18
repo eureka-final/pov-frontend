@@ -14,7 +14,7 @@ import {
   TitleInfo,
 } from './ReviewCard.style';
 import { Body, Paragraph, Icon, Heading, Logo, Button } from 'pov-design-system';
-import Profile from '../common/Profile/Profile';
+import Profile from '../common/Profile';
 import dompurify from 'dompurify';
 import { Review } from '../../types/review';
 import { useState } from 'react';

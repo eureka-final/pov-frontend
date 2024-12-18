@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { Body, Paragraph, Heading, Logo, Button, Icon } from 'pov-design-system';
-import Profile from '../common/Profile/Profile';
-// import dompurify from 'dompurify';
+import Profile from '../common/Profile';
+import dompurify from 'dompurify';
 import { useState } from 'react';
 import { useLikeMutation, useDisLikeMutation } from '../../hooks/queries/useLikeMutation';
 import {
@@ -12,13 +12,10 @@ import {
   LikeContainer,
   FlexBetween,
   TitleInfo,
-  // ReadMore,
+  ReadMore,
   Spoiler,
   SpoMore,
-  WordWrapText,
 } from '../club/ClubCard.style';
-import { useTheme } from '@emotion/react';
-// import useWindowSize from '../../hooks/utils/useWindowSize';
 
 interface ReviewCardProps {
   key: string;
@@ -41,7 +38,7 @@ function ClubReviewCard({
   reviewId,
   movieTitle,
   title,
-  // contents,
+  contents,
   reviewer,
   profileImage,
   thumbnail,
@@ -51,25 +48,23 @@ function ClubReviewCard({
   spoiler,
 }: ReviewCardProps) {
   const navigate = useNavigate();
-  const theme = useTheme();
-  // NOTE) width가 작은 reviewCard의 경우, 40자 제목만 표시하고 Content Body는 표시하지 않도록 수정
-  // NOTE) 사용하지 않는 Content Body는 주석 처리
-  // const sanitizer = dompurify.sanitize;
 
-  // const truncateContents = (text: string | undefined, maxLength: number) => {
-  //   if (!text) return '';
-  //   if (text.length > maxLength) {
-  //     const truncatedText = text.substring(0, maxLength);
-  //     return (
-  //       <>
-  //         <div dangerouslySetInnerHTML={{ __html: sanitizer(truncatedText) }} />
-  //         <span>...</span>
-  //         <ReadMore>더보기</ReadMore>
-  //       </>
-  //     );
-  //   }
-  //   return <div dangerouslySetInnerHTML={{ __html: sanitizer(text) }} />;
-  // };
+  const sanitizer = dompurify.sanitize;
+
+  const truncateContents = (text: string | undefined, maxLength: number) => {
+    if (!text) return '';
+    if (text.length > maxLength) {
+      const truncatedText = text.substring(0, maxLength);
+      return (
+        <>
+          <div dangerouslySetInnerHTML={{ __html: sanitizer(truncatedText) }} />
+          <span>...</span>
+          <ReadMore>더보기</ReadMore>
+        </>
+      );
+    }
+    return <div dangerouslySetInnerHTML={{ __html: sanitizer(text) }} />;
+  };
 
   const [likes, setLikes] = useState(likeAmount);
   const [likeAction, setLikeAction] = useState<boolean | null>(isLiked);
@@ -109,48 +104,29 @@ function ClubReviewCard({
           }}
         >
           <Poster>
-            <img src={thumbnail.replace('/w154/', '/w92/')} alt={movieTitle} style={{ borderRadius: '4px' }} />
-
-            <WordWrapText
-              size="large"
-              css={{
-                width: '92px',
-                color: theme.teritary,
-                whiteSpace: 'wrap',
-
-                textAlign: 'center',
-              }}
-            >
-              {movieTitle}
-            </WordWrapText>
+            <img src={thumbnail.replace('/w154/', '/w92/')} alt={movieTitle} />
+            <Body size="small">{movieTitle}</Body>
           </Poster>
           <ReviewCardContainer>
             <Profile name={reviewer} avatarUrl={profileImage} />
-            {/* <Body size="xLarge" css={{ marginTop: '8px' }}>
-              {title}
-            </Body> */}
+            <Paragraph>{title}</Paragraph>
 
             {spoiler ? (
-              <Spoiler style={{ marginTop: '8px' }}>
-                <Body size="xLarge">스포일러가 있어요!</Body>
-                <Body size="xLarge">
+              <Spoiler>
+                <Body size="large">스포일러가 있어요!</Body>
+                <Body size="large">
                   <SpoMore>더보기</SpoMore>
                 </Body>
               </Spoiler>
             ) : (
-              // <Paragraph css={{ color: theme.teritary }}>{truncateContents(contents, 100)}</Paragraph>
-              <Paragraph size="xLarge" css={{ marginTop: '8px' }}>
-                {title}
-              </Paragraph>
+              <Body size="large">{truncateContents(contents, 100)}</Body>
             )}
-            <Body size="large" css={{ color: theme.muted, marginTop: '12px' }}>
-              {new Date(createdAt).toLocaleDateString()}
-            </Body>
           </ReviewCardContainer>
         </CardFlex>
         <FlexBetween>
+          <Body>{new Date(createdAt).toLocaleDateString()}</Body>
           <LikeContainer onClick={onLike}>
-            <Icon icon={likeAction ? 'heartfill' : 'heartline'} css={{ width: '16px' }} /> {likes}
+            <Icon icon={likeAction ? 'heartfill' : 'heartline'} /> {likes}
           </LikeContainer>
         </FlexBetween>
       </CardContainer>

@@ -1,4 +1,5 @@
-import { Container, HomeContainer } from '../Movie/Movie.styles';
+import Padded from '../../components/templates/Padded/Padded';
+import { Container } from '../Movie/Movie.styles';
 import ClubReviewCard from '../../components/review/ClubReviewCard';
 import { ClubReviewListContainer } from '../../components/review/ReviewCard.style';
 import { useReviewsQuery } from '../../hooks/queries/useReviewsQuery';
@@ -22,10 +23,10 @@ const Index = () => {
   }, []);
 
   return (
-    <HomeContainer>
+    <Padded>
       <Container>
         <SectionWrapper>
-          <Heading size="xLarge">이런 영화 어때요? 🎞️</Heading>
+          <Heading size="large">이런 영화 어때요? 🎞️</Heading>
           <ShowMoreBtn onClick={() => navigate(`/movie`)} />
         </SectionWrapper>
         <CardContainer>
@@ -35,7 +36,7 @@ const Index = () => {
         </CardContainer>
 
         <SectionWrapper>
-          <Heading size="xLarge">지금 인기있는 리뷰 💬</Heading>
+          <Heading size="large">지금 인기있는 리뷰 💬</Heading>
           <ShowMoreBtn onClick={() => navigate(`/review`)} />
         </SectionWrapper>
         <ClubReviewListContainer>
@@ -57,9 +58,8 @@ const Index = () => {
             />
           ))}
         </ClubReviewListContainer>
-        <div style={{ marginBottom: '48px' }}></div>
       </Container>
-    </HomeContainer>
+    </Padded>
   );
 };
 

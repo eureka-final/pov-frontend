@@ -24,8 +24,3 @@ export function formatDateTime(inputDate: string): string {
     return `${year}.${month}.${day}`;
   }
 }
-
-export function formatDate(inputDate: string): string {
-  const [year, month] = inputDate.split('-'); // 날짜를 '-' 기준으로 나눔
-  return `${year}.${month}`; // 년도와 월을 조합하여 반환
-}

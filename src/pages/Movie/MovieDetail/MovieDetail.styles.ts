@@ -22,7 +22,7 @@ export const PaddedContainer = styled.div`
 
 export const BackgroundLayer = styled.div<{ src: string }>`
   width: 100%;
-  height: 520px;
+  height: 480px;
   position: absolute;
   top: 0;
   left: 0;
@@ -40,16 +40,16 @@ export const HeaderInfo = styled.div`
   flex-direction: column;
   position: absolute;
   bottom: 55px;
-  /* left: 24px; */
+  left: 24px;
   z-index: 20;
   gap: 16px;
-  /* @media (min-width: 0px) and (max-width: 600px) {
+  @media (min-width: 0px) and (max-width: 600px) {
     left: 24px;
   }
 
   @media (min-width: 600px) {
     left: 76px;
-  } */
+  }
 `;
 
 export const BodyContainer = styled.div`

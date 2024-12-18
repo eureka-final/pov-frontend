@@ -14,21 +14,10 @@ export const ClubContainer = styled.div`
 `;
 
 export const ClubReviewListContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3열로 구성 */
   gap: 16px; /* 카드 간격 */
   margin-top: 16px;
-
-  @media (min-width: 0px) and (max-width: 600px) {
-    display: flex;
-    padding-bottom: 48px;
-    flex-direction: column;
-  }
-
-  @media (min-width: 600px) {
-    width: calc(1200px - 32px * 2);
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3열로 구성 */
-    margin-bottom: 64px;
-  }
 `;
 
 export const CardContainer = styled.div`
@@ -42,13 +31,12 @@ export const CardContainer = styled.div`
 `;
 
 export const ClubItem = styled.div`
-  transition:
-    transform 0.3s ease,
-    color 0.3s ease; /* 애니메이션 효과 */
+  transition: transform 0.3s ease, color 0.3s ease; /* 애니메이션 효과 */
   &:hover {
     transform: scale(1.1); /* 크기 확대 */
   }
 `;
+
 
 export const CardFlex = styled.div`
   display: flex;
@@ -57,9 +45,8 @@ export const CardFlex = styled.div`
 
 export const Poster = styled.div`
   display: flex;
-  flex-direction: column;
-  gap: 8px;
-
+  flex-direction: column; 
+  gap: 5px;
   align-items: center;
   text-align: center;
 `;
@@ -72,20 +59,17 @@ export const ReviewCardContainer = styled.div`
 `;
 
 export const FlexBetween = styled.div`
-  width: 100%;
   display: flex;
-  flex-direction: row;
-  justify-content: end;
-  align-items: end;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 12%;
 `;
 
 export const LikeContainer = styled.div`
   display: flex;
-  flex-direction: row;
   align-items: center;
   gap: 8px; /* 아이콘과 좋아요 수 사이 간격 */
   color: ${({ theme }) => theme.color.green600};
-  font-size: 16px;
 `;
 
 export const Spoiler = styled.div`
@@ -93,17 +77,17 @@ export const Spoiler = styled.div`
   gap: 5px;
 `;
 
-export const SpoMore = styled.div`
+export const SpoMore  = styled.div`
   color: ${({ theme }) => theme.color.green600};
 `;
 
-export const ReadMore = styled.div`
+export const ReadMore  = styled.div`
   color: ${({ theme }) => theme.color.gray400};
 `;
 
 export const TitleInfo = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: column; 
   align-items: center;
   margin-top: 15%;
   gap: 20px;
