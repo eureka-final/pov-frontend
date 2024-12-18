@@ -21,10 +21,14 @@ import { useToast } from '../../../hooks/common/useToast';
 
 import { useState } from 'react';
 import { useLikeMutation, useDisLikeMutation } from '../../../hooks/queries/useLikeMutation';
+import { useAuthStore } from '../../../stores/useAuthStore';
 
 const Index = () => {
   const { movieId, reviewId } = useParams<{ movieId: string; reviewId: string }>();
   const navigate = useNavigate();
+
+  const user = useAuthStore((state) => state.user);
+
   const { createToast } = useToast();
 
   const { isOpen: isSaveOpen, open: saveOpen, close: saveClose } = useOverlay();
@@ -103,14 +107,18 @@ const Index = () => {
                 </Additionals>
               </ReviewInfo>
               <Wrapper>
-                <Menu onClick={() => navigate(`/review/${movieId}/edit/${reviewId}`)}>
-                  <Icon icon="edit" />
-                  <Body>수정</Body>
-                </Menu>
-                <Menu onClick={saveOpen}>
-                  <Icon icon="delete" />
-                  <Body>삭제</Body>
-                </Menu>
+                {reviewData.data.reviewer == user?.nickname && (
+                  <>
+                    <Menu onClick={() => navigate(`/review/${movieId}/edit/${reviewId}`)}>
+                      <Icon icon="edit" />
+                      <Body>수정</Body>
+                    </Menu>
+                    <Menu onClick={saveOpen}>
+                      <Icon icon="delete" />
+                      <Body>삭제</Body>
+                    </Menu>
+                  </>
+                )}
               </Wrapper>
             </HeaderContainer>
 
