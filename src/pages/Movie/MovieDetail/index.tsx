@@ -140,7 +140,7 @@ const Index = () => {
                     <Icon icon={likeAction ? 'heartfill' : 'heartline'} />
                     <Count>{likes}</Count>
                   </Additionals>
-                  <Additionals>
+                  <Additionals onClick={() => navigate(`/review/${movieId}/write`)}>
                     <Icon icon="reviewline" />
                     <Count>{constants.movies.main.reviews}</Count>
                   </Additionals>
