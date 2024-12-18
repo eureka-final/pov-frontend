@@ -113,10 +113,6 @@ export const Wrapper = styled.div<{ gap?: number; direction?: string; width?: nu
 `;
 
 
-export const ParagraphWrapper = styled.div`
-  width: 200%;
-`;
-
 export const Section = styled.div`
   display: flex;
   flex-direction: column;

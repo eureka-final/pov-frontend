@@ -74,7 +74,7 @@ export interface MovieReview {
   isSpoiler: boolean;
   disabled: boolean;
   createdAt: string;
-  likeAmount: number;
+  likeCount: number;
   profileImage: string;
   nickname: string;
   isLiked: boolean;

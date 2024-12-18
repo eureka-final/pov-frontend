@@ -14,7 +14,7 @@ interface ReviewProps {
     nickname: string;
     contents: string;
     createdAt: string;
-    likeAmount: number;
+    likeCount: number;
     isSpoiler: boolean;
     isLiked: boolean;
   };
@@ -41,7 +41,7 @@ const Review = ({ reviewers }: ReviewProps) => {
     return <div dangerouslySetInnerHTML={{ __html: sanitizer(text).replace(/<img[^>]*>/g, '') }} />;
   };
 
-  const [likes, setLikes] = useState(reviewers.likeAmount);
+  const [likes, setLikes] = useState(reviewers.likeCount);
   const [likeAction, setLikeAction] = useState<boolean | null>(reviewers.isLiked);
   const likeMutation = useLikeMutation();
   const disLikeMutation = useDisLikeMutation();

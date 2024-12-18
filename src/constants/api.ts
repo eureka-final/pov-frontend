@@ -8,6 +8,7 @@ export const END_POINTS = {
   PAYMENT_TEMP: '/api/payments/temp',
   PAYMENT: `/api/payments`,
   PREMIERES: `/api/premieres`,
+  MOVIE_TRENDING: '/api/movies/trending',
   MOVIE: (premiereId: string | unknown) => `/api/movies?page=${premiereId}&size=12`,
   MOVIE_SEARCH: (premiereId: string | unknown, query: string) => `/api/movies/search?page=${premiereId}&size=12&query=${query}`,
   MOVIE_DETAIL: (movieId: string) => `/api/movies/${movieId}`,

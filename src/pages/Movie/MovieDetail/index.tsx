@@ -19,7 +19,6 @@ import {
   Section,
   Div,
   ScrollContainer,
-  ParagraphWrapper,
 } from './MovieDetail.styles';
 import ImageLayer from '../../../components/styles/ImageLayer';
 import ResponsiveContainer from '../../../components/styles/ResponsiveContainer';
@@ -157,9 +156,7 @@ const Index = () => {
                     ))}
                 </Wrapper>
 
-                <ParagraphWrapper>
-                  <Paragraph>{movieData.data.plot}</Paragraph>
-                </ParagraphWrapper>
+                <Paragraph>{movieData.data.plot}</Paragraph>
               </Wrapper>
             </InfoContainer>
 
