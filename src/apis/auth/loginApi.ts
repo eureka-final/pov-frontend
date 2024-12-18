@@ -13,7 +13,7 @@ export const postLoginApi = async (email: string, socialType: string) => {
     const headers = response.headers;
     const accessToken = headers['authorization'];
     if (accessToken) {
-      sessionStorage.setItem(ACCESS_TOKEN_KEY, accessToken);
+      localStorage.setItem(ACCESS_TOKEN_KEY, accessToken);
     }
 
     console.log(response);
