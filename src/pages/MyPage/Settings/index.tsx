@@ -4,8 +4,8 @@ import ThemeToggle from '../../../components/common/Toggle/ThemeToggle';
 import NoticeToggle from '../../../components/common/Toggle/NoticeToggle';
 import { useClearUser } from '../../../stores/useAuthStore';
 import { deleteMember } from '../../../apis/member/deleteMember';
-import { postLogoutApi } from '../../../apis/auth/logoutApi';
 import { useToast } from '../../../hooks/common/useToast';
+import { postLogout } from '../../../apis/auth/postAuth';
 
 const index = () => {
   const { isOpen: isLogoutConfirmOpen, open: logoutConfirmOpen, close: logoutConfirmClose } = useOverlay();
@@ -13,8 +13,9 @@ const index = () => {
   const { isOpen: isSignOutConfirmOpen, open: signOutConfirmOpen, close: signOutConfirmClose } = useOverlay();
   const { isOpen: isSignOutOpen, open: signOutOpen, close: signOutClose } = useOverlay();
   const { createToast } = useToast();
+
   const handleLogoutClick = async () => {
-    const response = await postLogoutApi();
+    const response = await postLogout();
     logoutConfirmClose();
     if (response) {
       useClearUser();

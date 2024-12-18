@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { getGoogleUserInfoApi } from '../../../apis/auth/oauthApi';
-import { postLoginApi } from '../../../apis/auth/loginApi';
+import { getGoogleUserInfoApi } from '../../../apis/auth/getGoogleOauth';
 import { useAuthStore } from '../../../stores/useAuthStore';
 import CircularProgress from '../../../components/common/Progress';
+import { LoadingSection } from '../Index.styles';
+import { postLogin } from '../../../apis/auth/postAuth';
 import { LoadingSection, ModalWrapper, ModalBodyWrapper } from '../Index.styles';
 import { Heading, Body, Button, useOverlay, Modal } from 'pov-design-system';
 
@@ -38,13 +39,15 @@ const Index = () => {
 
       // 서버로 로그인 요청
       try {
-        const response = await postLoginApi(data.email, 'GOOGLE');
+        const response = await postLogin(data.email, 'GOOGLE');
 
         if (response.data.exists) {
           // 회원 정보가 이미 존재하는 경우 홈으로 이동
           setLoggedIn(true);
           setUser(response.data.memberInfo);
 
+          if (response.data.memberInfo.role === 'USER') window.location.href = '/';
+          if (response.data.memberInfo.role === 'ADMIN') window.location.href = '/admin/movies';
           if (response.data.memberInfo.role === 'USER') window.location.href = '/';
           if (response.data.memberInfo.role === 'ADMIN') window.location.href = '/admin/movies';
         } else {
