@@ -44,9 +44,9 @@ const NotJoinClub = () => {
     <Basic>
       {clubsData && (
         <>
+          <BackgroundLayer src={clubsData.data.clubImage}></BackgroundLayer>
           <Container>
             <HeaderContainer src={clubsData.data.clubImage}>
-              <BackgroundLayer src={clubsData.data.clubImage}></BackgroundLayer>
               <ReviewInfo>
                 <Heading size="xLarge">{clubsData.data.clubName}</Heading>
                 <Body size="large">{clubsData.data.clubDescription}</Body>

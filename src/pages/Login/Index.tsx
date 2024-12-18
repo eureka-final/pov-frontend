@@ -7,7 +7,7 @@ const Index = () => {
   /* POV Server Login URL로 리디렉션 */
   const redirectToNaverLogin = () => {
     const authUrl = `${import.meta.env.VITE_BASE_URL}/oauth2/authorization/naver`;
-    window.alert(authUrl);
+    console.log(authUrl);
     window.location.href = authUrl;
   };
 
@@ -25,6 +25,7 @@ const Index = () => {
     window.location.href = authUrl;
   };
 
+  //www.point-of-views.com/oauth2/authorization/naver
   return (
     <Padded>
       <SignInSection>

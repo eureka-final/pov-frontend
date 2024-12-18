@@ -19,6 +19,8 @@ export const BackgroundLayer = styled.div<{ src: string }>`
   width: 100%;
   height: 100%;
   position: absolute;
+  top: 0;
+  left: 0;
   background: ${({ src }) => (src ? `url(${src})` : '#ffffff')};
   background-size: cover;
   background-position: center;
@@ -27,7 +29,6 @@ export const BackgroundLayer = styled.div<{ src: string }>`
   mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
   z-index: 1;
 `;
-
 
 export const Layar = styled.div`
   display: flex;
@@ -73,8 +74,8 @@ export const Wrapper = styled.div`
   }
 
   @media (min-width: 600px) {
-    top: 55%; 
-    right: 20%; 
+    top: 55%;
+    right: 20%;
   }
 `;
 
@@ -132,7 +133,6 @@ export const Additionals = styled.div<{ justify?: string }>`
   gap: 4px;
 `;
 
-
 export const ReviewContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -141,7 +141,6 @@ export const ReviewContainer = styled.div`
   border-radius: 8px;
   padding: 20px;
 `;
-
 
 export const Section = styled.div`
   gap: 10px;
