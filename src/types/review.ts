@@ -47,11 +47,11 @@ export interface MovieReviewData {
 }
 
 export interface MovieReviews {
-  id: string;
+  reviewId: string;
   profileImage: string;
   nickname: string;
   contents: string;
-  modifiedAt: string;
+  createdAt: string;
   likeCount: number;
   isSpoiler: boolean;
   isLiked: boolean;

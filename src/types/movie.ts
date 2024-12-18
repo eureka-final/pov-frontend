@@ -68,13 +68,13 @@ export interface MoviePrefer {
 }
 
 export interface MovieReview {
-  id: string;
+  reviewId: string;
   title: string;
   contents: string;
   isSpoiler: boolean;
   disabled: boolean;
-  modifiedAt: string;
-  likeCount: number;
+  createdAt: string;
+  likeAmount: number;
   profileImage: string;
   nickname: string;
   isLiked: boolean;

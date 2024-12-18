@@ -41,7 +41,7 @@ const Index = () => {
           </Div>
         </HeadingContainer>
         {reviewsData.map((review) => (
-          <Review key={review.id} reviewers={review} {...review} />
+          <Review key={review.reviewId} reviewers={review} {...review} />
         ))}
 
         {/* 추가 로드 중 스켈레톤 렌더링 */}

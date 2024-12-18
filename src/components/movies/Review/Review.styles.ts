@@ -4,7 +4,7 @@ export const ReviewContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
-  background: var(--Color-background-background-elevated, #4c494e);
+  background: ${({ theme }) => theme.backgroundElevated};
   border-radius: 8px;
   padding: 20px;
   /* @media (min-width: 0px) and (max-width: 600px) {

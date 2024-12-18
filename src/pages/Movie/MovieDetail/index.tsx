@@ -1,10 +1,11 @@
 import Basic from '../../../components/templates/Basic/Basic';
 import { constants } from '../../../constants/constants';
-import { Heading, Badge, Body, Icon, ShowMoreBtn } from 'pov-design-system';
+import { Heading, Badge, Body, Icon, ShowMoreBtn, Paragraph } from 'pov-design-system';
 import {
   Container,
   HeaderContainer,
   Additionals,
+  LikeContainer,
   HeaderInfo,
   Count,
   InfoContainer,
@@ -15,10 +16,10 @@ import {
   BackgroundLayer,
   PaddedContainer,
   HeadingContainer,
-  Content,
   Section,
   Div,
   ScrollContainer,
+  ParagraphWrapper,
 } from './MovieDetail.styles';
 import ImageLayer from '../../../components/styles/ImageLayer';
 import ResponsiveContainer from '../../../components/styles/ResponsiveContainer';
@@ -116,14 +117,14 @@ const Index = () => {
               </BodyContainer>
 
               <AdditionalsContainer>
-                <Additionals onClick={onLike}>
+                <LikeContainer onClick={onLike}>
                   <Icon icon={likeAction ? 'heartfill' : 'heartline'} width="20px" height="20px" />
-                  <Count color="#0DE781">{likes}</Count>
-                </Additionals>
-                <Additionals>
+                  {likes}
+                </LikeContainer>
+                <LikeContainer>
                   <Icon icon="reviewline" color="#0DE781" />
-                  <Count color="#0DE781">{preference && preference.reduce((acc, item) => acc + item.reviewCount, 0)}</Count>
-                </Additionals>
+                  {preference && preference.reduce((acc, item) => acc + item.reviewCount, 0)}
+                </LikeContainer>
               </AdditionalsContainer>
             </HeaderInfo>
           </HeaderContainer>
@@ -155,7 +156,10 @@ const Index = () => {
                       <ProgressBar key={item.percentage + index} percentage={item.percentage} like={item.like} unlike={item.unlike} />
                     ))}
                 </Wrapper>
-                <Content>{movieData.data.plot}</Content>
+
+                <ParagraphWrapper>
+                  <Paragraph>{movieData.data.plot}</Paragraph>
+                </ParagraphWrapper>
               </Wrapper>
             </InfoContainer>
 
@@ -171,7 +175,7 @@ const Index = () => {
                   </Div>
                 </HeadingContainer>
                 {movieData.data.reviews.slice(0, 1).map((review) => (
-                  <Review key={review.id} reviewers={review} />
+                  <Review key={review.reviewId} reviewers={review} />
                 ))}
               </Section>
             )}
