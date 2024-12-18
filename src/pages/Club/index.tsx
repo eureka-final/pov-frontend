@@ -1,7 +1,5 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
-import Padded from '../../components/templates/Padded/Padded';
 import { Badge, Body } from 'pov-design-system';
 import { BadgeWrapper, Wrapper, ClubBtn } from '../Review/Review.style';
 import ClubList from '../../components/club/ClubList';

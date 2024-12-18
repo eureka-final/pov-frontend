@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import Padded from '../../components/templates/Padded/Padded';
 import { Badge } from 'pov-design-system';
 import { BadgeWrapper } from './Review.style';
 import ReviewList from '../../components/review/ReviewList';

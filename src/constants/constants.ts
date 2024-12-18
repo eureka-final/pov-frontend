@@ -20,7 +20,7 @@ export const constants = {
       heading: {
         review: '리뷰',
         production: '제작 및 출연',
-        steel: '스틸 컷',
+        steel: '스틸컷',
         videos: '관련 영상',
       },
       body: {
