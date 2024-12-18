@@ -1,6 +1,7 @@
 import { useTheme } from '@emotion/react';
 import { DetailHeaderWrapper, IconContainer } from './DetailHeader.style';
 import { Icon, Body } from 'pov-design-system';
+import Padded from '../templates/Padded/Padded';
 
 interface DetailHeaderProps {
   headerTitle: string;
