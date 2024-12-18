@@ -137,8 +137,8 @@ const Index = () => {
               <Wrapper gap={32} direction="column">
                 <ResponsiveContainer mobDirection="column" pcDirection="row" gap={16}>
                   <Additionals>
-                    <Icon icon="heartline" />
-                    <Count>{constants.movies.main.likes}</Count>
+                    <Icon icon={likeAction ? 'heartfill' : 'heartline'} />
+                    <Count>{likes}</Count>
                   </Additionals>
                   <Additionals>
                     <Icon icon="reviewline" />
