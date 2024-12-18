@@ -1,6 +1,6 @@
 import { Container, HomeContainer } from '../Movie/Movie.styles';
 import ClubReviewCard from '../../components/review/ClubReviewCard';
-import { ClubReviewListContainer } from '../../components/review/ReviewCard.style';
+import { PopularReviewListContainer } from '../../components/review/ReviewCard.style';
 import { useReviewsQuery } from '../../hooks/queries/useReviewsQuery';
 import { useMovieTrendingQuery } from '../../hooks/queries/useMoviesQuery';
 import { Heading, ShowMoreBtn } from 'pov-design-system';
@@ -34,7 +34,7 @@ const Index = () => {
           <Heading size="xLarge">지금 인기있는 리뷰 💬</Heading>
           <ShowMoreBtn onClick={() => navigate(`/review`)} />
         </SectionWrapper>
-        <ClubReviewListContainer>
+        <PopularReviewListContainer>
           {reviewsData.slice(0, 3).map((review) => (
             <ClubReviewCard
               key={review.reviewId}
@@ -52,7 +52,7 @@ const Index = () => {
               spoiler={review.spoiler}
             />
           ))}
-        </ClubReviewListContainer>
+        </PopularReviewListContainer>
         <div style={{ marginBottom: '48px' }}></div>
       </Container>
     </HomeContainer>
