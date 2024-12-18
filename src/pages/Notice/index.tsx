@@ -24,7 +24,7 @@ const AlarmCard = ({ content, createdAt, onClick }: AlarmCardProps) => {
   );
 };
 
-const index = () => {
+const Index = () => {
   const { noticesData } = useNoticesQuery();
   const navigate = useNavigate();
   const { createToast } = useToast();
@@ -66,4 +66,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default Index;

@@ -22,7 +22,7 @@ import PaymentLogSection from '../../components/premieres/Section/PaymentLogSect
 import { useNavigate } from 'react-router-dom';
 import { useToast } from '../../hooks/common/useToast';
 
-const index = () => {
+const Index = () => {
   const theme = useTheme();
   const navigate = useNavigate();
   const { createToast } = useToast();
@@ -137,4 +137,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default Index;

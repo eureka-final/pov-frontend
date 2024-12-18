@@ -7,7 +7,7 @@ import { deleteMember } from '../../../apis/member/deleteMember';
 import { postLogoutApi } from '../../../apis/auth/logoutApi';
 import { useToast } from '../../../hooks/common/useToast';
 
-const index = () => {
+const Index = () => {
   const { isOpen: isLogoutConfirmOpen, open: logoutConfirmOpen, close: logoutConfirmClose } = useOverlay();
   const { isOpen: isLogoutOpen, open: logoutOpen, close: logoutClose } = useOverlay();
   const { isOpen: isSignOutConfirmOpen, open: signOutConfirmOpen, close: signOutConfirmClose } = useOverlay();
@@ -123,4 +123,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default Index;
