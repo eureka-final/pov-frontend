@@ -1,19 +1,15 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useAuthStore } from '../../../stores/useAuthStore';
 import { postLogin } from '../../../apis/auth/postAuth';
+import { LoadingSection } from '../Index.styles';
 import CircularProgress from '../../../components/common/Progress';
-import { LoadingSection, ModalWrapper, ModalBodyWrapper } from '../Index.styles';
-import { Heading, Body, Button, useOverlay, Modal } from 'pov-design-system';
 
 const Index = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const setLoggedIn = useAuthStore((state) => state.setLoggedIn);
   const setUser = useAuthStore((state) => state.setUser);
-  const { isOpen: isErrorOpen, open: errorOpen, close: errorClose } = useOverlay();
-
-  const [errorMsg, setErrorMsg] = useState<string>('');
 
   useEffect(() => {
     const loginWithNaver = async () => {
@@ -27,8 +23,8 @@ const Index = () => {
 
       // 쿼리 파라미터에 이메일 정보가 없는 경우 에러 처리
       if (!email) {
-        setErrorMsg('네이버에서 사용자 정보를 받아오는 데 실패했어요.');
-        errorOpen();
+        alert('네이버에서 사용자 정보를 받아오는 데 실패했어요.');
+        window.location.href = '/login';
         return;
       }
 
@@ -36,8 +32,8 @@ const Index = () => {
       const response = await postLogin(email, 'NAVER');
       // 서버 측 응답이 잘못된 경우 에러 처리
       if (!response) {
-        setErrorMsg('서비스의 문제로 로그인에 실패했어요.');
-        errorOpen();
+        alert('로그인에 실패했어요. 다시 시도해주세요.');
+        window.location.href = '/login';
       }
 
       if (response.data.exists) {
@@ -58,29 +54,9 @@ const Index = () => {
   }, []);
 
   return (
-    <>
-      <LoadingSection>
-        <CircularProgress></CircularProgress>
-      </LoadingSection>
-      <Modal isOpen={isErrorOpen} closeModal={errorClose}>
-        <ModalWrapper>
-          <Heading size="medium">로그인 실패</Heading>
-          <ModalBodyWrapper>
-            <Body size="large">{`${errorMsg}`}</Body>
-            <Body size="large">{`다시 시도해주세요.`}</Body>
-          </ModalBodyWrapper>
-          <Button
-            variant="primary"
-            onClick={() => {
-              window.location.href = '/login';
-            }}
-            css={{ width: '100%', marginTop: '8px' }}
-          >
-            확인
-          </Button>
-        </ModalWrapper>
-      </Modal>
-    </>
+    <LoadingSection>
+      <CircularProgress></CircularProgress>
+    </LoadingSection>
   );
 };
 

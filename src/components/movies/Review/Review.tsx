@@ -1,5 +1,5 @@
 import { useNavigate, useParams } from 'react-router-dom';
-import Profile from '../../common/Profile/Profile';
+import Profile from '../../common/Profile';
 import { Additionals, ReviewContainer, Contents, Wrapper } from './Review.styles';
 import { Body, Icon } from 'pov-design-system';
 import { useState } from 'react';
@@ -9,11 +9,11 @@ import { LikeContainer, Spoiler, SpoMore, ReadMore } from '../../../components/r
 
 interface ReviewProps {
   reviewers: {
-    id: string;
+    reviewId: string;
     profileImage: string;
     nickname: string;
     contents: string;
-    modifiedAt: string;
+    createdAt: string;
     likeCount: number;
     isSpoiler: boolean;
     isLiked: boolean;
@@ -49,7 +49,7 @@ const Review = ({ reviewers }: ReviewProps) => {
   const onLike = () => {
     if (likeAction === false) {
       likeMutation.mutate(
-        { movieId: movieId!, reviewId: reviewers.id! },
+        { movieId: movieId!, reviewId: reviewers.reviewId! },
         {
           onSuccess: () => {
             setLikes(likes + 1);
@@ -59,7 +59,7 @@ const Review = ({ reviewers }: ReviewProps) => {
       );
     } else {
       disLikeMutation.mutate(
-        { movieId: movieId!, reviewId: reviewers.id! },
+        { movieId: movieId!, reviewId: reviewers.reviewId! },
         {
           onSuccess: () => {
             setLikes(likes - 1);
@@ -74,7 +74,7 @@ const Review = ({ reviewers }: ReviewProps) => {
     <ReviewContainer>
       <Contents
         onClick={() => {
-          navigate(`/review/${movieId}/detail/${reviewers.id}`);
+          navigate(`/review/${movieId}/detail/${reviewers.reviewId}`);
         }}
       >
         <Wrapper>
@@ -91,7 +91,7 @@ const Review = ({ reviewers }: ReviewProps) => {
           <Body size="large">{truncateContents(reviewers.contents, 300)}</Body>
         )}
         <Body size="small" style={{ color: '#ADACAF' }}>
-          {new Date(reviewers.modifiedAt).toLocaleDateString()}
+          {new Date(reviewers.createdAt).toLocaleDateString()}
         </Body>
       </Contents>
       <Additionals justify="flex-end">

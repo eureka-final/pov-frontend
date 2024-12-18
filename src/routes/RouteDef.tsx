@@ -48,7 +48,7 @@ const MovieScreens = {
     element: <MovieDetail />,
   },
   MovieReviews: {
-    path: '/movie/reviews',
+    path: '/movie/:movieId/reviews',
     element: <MovieReviews />,
   },
 };

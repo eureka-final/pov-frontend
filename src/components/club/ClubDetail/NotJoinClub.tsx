@@ -14,7 +14,7 @@ import {
 import { useClubDetailQuery } from '../../../hooks/queries/useClubsQuery';
 import { useJoinClubMutation } from '../../../hooks/queries/useJoinClubMutation';
 import { useToast } from '../../../hooks/common/useToast';
-import Profile from '../../common/Profile/Profile';
+import Profile from '../../../components/common/Profile';
 
 const NotJoinClub = () => {
   const { clubId } = useParams<{ clubId: string }>();

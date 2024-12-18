@@ -22,7 +22,7 @@ export const PaddedContainer = styled.div`
 
 export const BackgroundLayer = styled.div<{ src: string }>`
   width: 100%;
-  height: 520px;
+  height: 480px;
   position: absolute;
   top: 0;
   left: 0;
@@ -40,16 +40,16 @@ export const HeaderInfo = styled.div`
   flex-direction: column;
   position: absolute;
   bottom: 55px;
-  /* left: 24px; */
+  left: 24px;
   z-index: 20;
   gap: 16px;
-  /* @media (min-width: 0px) and (max-width: 600px) {
+  @media (min-width: 0px) and (max-width: 600px) {
     left: 24px;
   }
 
   @media (min-width: 600px) {
     left: 76px;
-  } */
+  }
 `;
 
 export const BodyContainer = styled.div`
@@ -67,12 +67,22 @@ export const Additionals = styled.div<{ justify?: string }>`
   display: flex;
   justify-content: ${({ justify }) => (justify ? `${justify}` : 'flex-start')};
   align-items: center;
-  gap: 4px;
   cursor: pointer;
+  gap: 10px;
+  white-space: nowrap;
 `;
 
-export const Count = styled.span<{ color?: string }>`
-  color: ${({ color }) => (color ? `${color}` : '#FFFFFF')};
+export const LikeContainer = styled.div<{ justify?: string }>`
+  display: flex;
+  justify-content: ${({ justify }) => (justify ? `${justify}` : 'flex-start')};
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  color: ${({ theme }) => theme.color.green600};
+`;
+
+export const Count = styled.span`
+  
 `;
 
 export const InfoContainer = styled.div`
@@ -82,7 +92,7 @@ export const InfoContainer = styled.div`
   padding: 24px 20px;
   margin-top: 24px;
   border-radius: 8px;
-  background: var(--Color-background-background-elevated, #4c494e);
+  background: ${({ theme }) => theme.backgroundElevated};
   @media (max-width: 600px) {
     flex-direction: column;
     gap: 16px;
@@ -102,14 +112,6 @@ export const Wrapper = styled.div<{ gap?: number; direction?: string; width?: nu
   width: ${({ width }) => (width ? `${width}px` : `100%`)};
 `;
 
-export const Content = styled.div`
-  color: var(--Color-base-secondary, #e5e5e5);
-  font-family: Pretendard;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 22.4px;
-`;
 
 export const Section = styled.div`
   display: flex;
@@ -128,7 +130,7 @@ export const ReviewContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
-  background: var(--Color-background-background-elevated, #4c494e);
+  background: ${({ theme }) => theme.backgroundElevated};
   border-radius: 8px;
   padding: 20px;
 `;
