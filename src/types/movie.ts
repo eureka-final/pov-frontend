@@ -19,9 +19,26 @@ export interface Movie {
   title: string;
   poster: string;
   released: string;
-  movieLikeCount: number;
   isLiked: boolean;
-  reviewCount: number;
+  movieLikeCount: number;
+  movieReviewCount: number;
+}
+
+export interface TrendingMoviesResponse {
+  message: string;
+  data: {
+      movies: TrendingMovieData[];
+  };
+}
+
+export interface TrendingMovieData {
+  id: string;
+  title: string;
+  poster: string;
+  released: string;
+  isLiked: boolean;
+  movieLikeCount: number;
+  movieReviewCount: number;
 }
 
 export interface MovieDetailResponse {
@@ -44,6 +61,7 @@ export interface MovieDetailData {
   images: string[];
   videos: string[];
   reviews: MovieReview[];
+  isLiked: boolean;
 }
 
 export interface MovieDirector {
@@ -67,13 +85,14 @@ export interface MoviePrefer {
 }
 
 export interface MovieReview {
-  id: number;
+  reviewId: string;
   title: string;
   contents: string;
   isSpoiler: boolean;
   disabled: boolean;
-  modifiedAt: string;
+  createdAt: string;
   likeCount: number;
   profileImage: string;
   nickname: string;
+  isLiked: boolean;
 }

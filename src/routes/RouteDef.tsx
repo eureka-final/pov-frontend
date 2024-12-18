@@ -1,5 +1,6 @@
 import Main from '../pages/Main';
 import Movie from '../pages/Movie';
+import MovieTrending from '../pages/Movie/MovieTrending/Index';
 import MovieSearch from '../pages/Movie/MovieSearch/Index';
 import MovieDetail from '../pages/Movie/MovieDetail/Index';
 import MovieReviews from '../pages/Movie/MovieReviews/Index';
@@ -39,6 +40,10 @@ const MovieScreens = {
     path: '/movie',
     element: <Movie />,
   },
+  MovieTrending: {
+    path: '/movie/trending',
+    element: <MovieTrending />,
+  },
   MovieSearch: {
     path: '/movie/search',
     element: <MovieSearch />,
@@ -48,7 +53,7 @@ const MovieScreens = {
     element: <MovieDetail />,
   },
   MovieReviews: {
-    path: '/movie/reviews',
+    path: '/movie/:movieId/reviews',
     element: <MovieReviews />,
   },
 };
