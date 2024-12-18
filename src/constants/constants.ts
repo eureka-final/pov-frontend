@@ -3,7 +3,7 @@ export const constants = {
     main: {
       topic: {
         recommendation: '님을 위한 추천 영화',
-        search: '(으)로 검색한 결과입니다.'
+        search: '에 대한 검색 결과에요.',
       },
       genres: {
         action: '액션',

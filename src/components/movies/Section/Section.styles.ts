@@ -5,6 +5,8 @@ export const SectionContainer = styled.section`
   flex-direction: column;
   gap: 16px;
   width: 100%;
+
+  margin-top: 24px;
   margin-bottom: 48px;
 
   &:last-child {
@@ -27,7 +29,6 @@ export const SectionContainer = styled.section`
 
 export const CardContainer = styled.section`
   display: grid;
-  margin-top: 16px;
   @media (min-width: 0px) and (max-width: 600px) {
     grid-template-columns: repeat(2, 1fr);
     margin-bottom: 48px;

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import NavigationTabs from '../common/NavigationTabs';
-import { Logo, Input, Icon, Heading, Body } from 'pov-design-system';
+import { Logo, Input, Icon, Heading } from 'pov-design-system';
 import { HeaderWrapper, LeftWrapper, RightWrapper, NoticeButton, LoginButton, LogoItem, FlexWrapper } from './Header.style';
 import { useAuthStore } from '../../stores/useAuthStore';
 import { useNavigate } from 'react-router-dom';
@@ -17,13 +17,17 @@ function Header() {
     setText(e.target.value);
   }
 
-  function onSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    if (text.trim()) {
-      navigate(`/movie/search?query=${text}`);
+  // 폼 제출 시 Enter로 입력 처리
+  const handleSearchSubmit = (e?: React.FormEvent<HTMLFormElement> | React.KeyboardEvent) => {
+    if (e) e.preventDefault();
+
+    const trimmedText = text.trim();
+    if (trimmedText) {
+      navigate(`/movie/search?query=${trimmedText}`);
       setText('');
     }
-  }
+  };
+
   return (
     <>
       <HeaderWrapper>
@@ -32,17 +36,15 @@ function Header() {
             <Logo icon="logo" onClick={() => (window.location.href = '/')} />
           </LogoItem>
           <NavigationTabs />
-          <form onSubmit={onSubmit}>
+          <form onSubmit={handleSearchSubmit}>
             <FlexWrapper>
               <Input
                 placeholder="검색어를 입력해 주세요"
                 value={text} // Input 컴포넌트에 상태 연결
                 onChange={onChange} // 입력 핸들러 연결
+                onKeyPress={(e: React.KeyboardEvent) => e.key === 'Enter' && handleSearchSubmit(e)}
                 icon={<Icon icon="search" color="#ADACAF" />} // 아이콘 추가
               />
-              <Body size="large" onClick={onSubmit} style={{ cursor: 'pointer' }}>
-                검색
-              </Body>
             </FlexWrapper>
           </form>
         </LeftWrapper>

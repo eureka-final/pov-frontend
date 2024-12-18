@@ -29,6 +29,7 @@ export const CardContainer = styled.div`
   }
 
   @media (min-width: 600px) {
+    min-width: 168px;
     width: 100%;
   }
 `;
@@ -50,6 +51,11 @@ export const ThumbnailImage = styled.img`
 
   @media (min-width: 0px) and (max-width: 600px) {
     max-height: 380px;
+  }
+
+  @media (min-width: 600px) {
+    width: 100%;
+    /* height: 380px; */
   }
 `;
 

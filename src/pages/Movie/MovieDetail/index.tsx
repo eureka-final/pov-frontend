@@ -67,7 +67,7 @@ const Index = () => {
           <BackgroundLayer src={movieData.data.backdrop.replace('/w154/', '/original/')}></BackgroundLayer>
           <HeaderContainer src={movieData.data.backdrop.replace('/w154/', '/original/')}>
             <HeaderInfo>
-              <Heading size="large">{movieData.data.title}</Heading>
+              <Heading size="xxLarge">{movieData.data.title}</Heading>
               <BodyContainer>
                 <Badge>{movieData.data.released}</Badge>
                 {movieData.data.directors.map((item, index) => (
