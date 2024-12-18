@@ -17,7 +17,7 @@ export const HeaderContainer = styled.div<{ src: string }>`
 
 export const BackgroundLayer = styled.div<{ src: string }>`
   width: 100%;
-  height: 100%;
+  height: 520px;
   position: absolute;
   top: 0;
   left: 0;
@@ -144,10 +144,11 @@ export const ReviewContainer = styled.div`
 
 export const Section = styled.div`
   gap: 10px;
-  margin-bottom: 46px;
+  margin-bottom: 48px;
 `;
 
 export const SectionWrapper = styled.div`
+  width: 100%;
   display: flex;
   justify-content: space-between;
 `;

@@ -1,13 +1,13 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useToast } from '../common/useToast';
-import { postLike, postDisLike } from '../../apis/movie/postLike';
+import { putLike, putDisLike } from '../../apis/movie/putLike';
 
 export const useLikeMovieMutation = () => {
   const queryClient = useQueryClient();
   const { createToast } = useToast();
 
   const likeMutation = useMutation({
-    mutationFn: postLike,
+    mutationFn: putLike,
     onSuccess: (_, { movieId }) => {
       queryClient.invalidateQueries({ queryKey: ['movies', movieId] });
     },
@@ -24,7 +24,7 @@ export const useDisLikeMovieMutation = () => {
   const { createToast } = useToast();
 
   const disLikeMutation = useMutation({
-    mutationFn: postDisLike,
+    mutationFn: putDisLike,
     onSuccess: (_, { movieId }) => {
       queryClient.invalidateQueries({ queryKey: ['movies', movieId] });
     },
