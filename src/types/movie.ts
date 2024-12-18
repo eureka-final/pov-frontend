@@ -19,9 +19,26 @@ export interface Movie {
   title: string;
   poster: string;
   released: string;
-  movieLikeCount: number;
   isLiked: boolean;
-  reviewCount: number;
+  movieLikeCount: number;
+  movieReviewCount: number;
+}
+
+export interface TrendingMoviesResponse {
+  message: string;
+  data: {
+      movies: TrendingMovieData[];
+  };
+}
+
+export interface TrendingMovieData {
+  id: string;
+  title: string;
+  poster: string;
+  released: string;
+  isLiked: boolean;
+  movieLikeCount: number;
+  movieReviewCount: number;
 }
 
 export interface MovieDetailResponse {
@@ -30,12 +47,12 @@ export interface MovieDetailResponse {
 }
 
 export interface MovieDetailData {
-  backdrop: string;  // 추가 데이터
+  backdrop: string;
   title: string;
   released: string;
   genre: string[];
   movieLikeCount: number;
-  preferenceCounts: MoviePrefer[]; // 추가 데이터
+  preferenceCounts: MoviePrefer[];
   plot: string;
   directors: MovieDirector[];
   actors: MovieActor[];
@@ -43,7 +60,8 @@ export interface MovieDetailData {
   country: string[];
   images: string[];
   videos: string[];
-  reviews: MovieReview; // 추가 데이터 ()
+  reviews: MovieReview[];
+  isLiked: boolean;
 }
 
 export interface MovieDirector {
@@ -67,12 +85,14 @@ export interface MoviePrefer {
 }
 
 export interface MovieReview {
-  id: number;
+  reviewId: string;
   title: string;
   contents: string;
   isSpoiler: boolean;
-  modifiedAt: string;
-  likeCount: number;
+  disabled: boolean;
+  createdAt: string;
+  likeAmount: number;
   profileImage: string;
-  name: string;
+  nickname: string;
+  isLiked: boolean;
 }

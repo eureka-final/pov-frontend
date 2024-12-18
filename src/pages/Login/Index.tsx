@@ -25,6 +25,7 @@ const Index = () => {
     window.location.href = authUrl;
   };
 
+  //www.point-of-views.com/oauth2/authorization/naver
   return (
     <Padded>
       <SignInSection>

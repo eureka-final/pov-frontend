@@ -1,7 +1,6 @@
 import { useTheme } from '@emotion/react';
 import { DetailHeaderWrapper, IconContainer } from './DetailHeader.style';
 import { Icon, Body } from 'pov-design-system';
-
 interface DetailHeaderProps {
   headerTitle: string;
   onClick: () => void;

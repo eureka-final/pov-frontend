@@ -21,9 +21,10 @@ export const Item = styled.div<{ isSelected: boolean }>`
   align-items: center; /* 수직 가운데 정렬 */
   gap: 10px; /* 아이템 간 간격 */
   cursor: pointer;
-  transition: transform 0.3s ease, color 0.3s ease; /* 애니메이션 효과 */
-  color: ${({ isSelected, theme }) =>
-    isSelected ? theme.color.green600 : theme.primary};
+  transition:
+    transform 0.3s ease,
+    color 0.3s ease; /* 애니메이션 효과 */
+  color: ${({ isSelected, theme }) => (isSelected ? theme.color.green600 : theme.primary)};
   &:hover {
     transform: scale(1.1); /* 크기 확대 */
     color: ${({ theme }) => theme.color.green600};

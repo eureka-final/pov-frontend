@@ -1,9 +1,8 @@
-import Padded from '../../components/templates/Padded/Padded';
-import { Container } from '../Movie/Movie.styles';
+import { Container, HomeContainer } from '../Movie/Movie.styles';
 import ClubReviewCard from '../../components/review/ClubReviewCard';
 import { ClubReviewListContainer } from '../../components/review/ReviewCard.style';
 import { useReviewsQuery } from '../../hooks/queries/useReviewsQuery';
-import { useMoviesQuery } from '../../hooks/queries/useMoviesQuery';
+import { useMovieTrendingQuery } from '../../hooks/queries/useMoviesQuery';
 import { Heading, ShowMoreBtn } from 'pov-design-system';
 import { useNavigate } from 'react-router-dom';
 import { SectionWrapper } from '../../components/club/ClubDetail/ClubDetail.styles';
@@ -15,7 +14,7 @@ import { requestPermission } from '../../utils/firebase/notificationPermission';
 const Index = () => {
   const navigate = useNavigate();
 
-  const { moviesData } = useMoviesQuery();
+  const { moviesData } = useMovieTrendingQuery();
   const { reviewsData } = useReviewsQuery();
 
   useEffect(() => {
@@ -23,20 +22,16 @@ const Index = () => {
   }, []);
 
   return (
-    <Padded>
+    <HomeContainer>
       <Container>
         <SectionWrapper>
-          <Heading size="large">이런 영화 어때요? 🎞️</Heading>
-          <ShowMoreBtn onClick={() => navigate(`/movie`)} />
+          <Heading size="large">POV&apos;s 선정 영화 🎞️</Heading>
+          <ShowMoreBtn onClick={() => navigate(`/movie/trending`)} />
         </SectionWrapper>
-        <CardContainer>
-          {moviesData.slice(0, 6).map((item, index) => (
-            <Card key={item.title + index} item={item} />
-          ))}
-        </CardContainer>
+        <CardContainer>{moviesData && moviesData.data.movies.slice(0, 6).map((item, index) => <Card key={item.title + index} item={item} />)}</CardContainer>
 
         <SectionWrapper>
-          <Heading size="large">지금 인기있는 리뷰 💬</Heading>
+          <Heading size="xLarge">지금 인기있는 리뷰 💬</Heading>
           <ShowMoreBtn onClick={() => navigate(`/review`)} />
         </SectionWrapper>
         <ClubReviewListContainer>
@@ -58,8 +53,9 @@ const Index = () => {
             />
           ))}
         </ClubReviewListContainer>
+        <div style={{ marginBottom: '48px' }}></div>
       </Container>
-    </Padded>
+    </HomeContainer>
   );
 };
 

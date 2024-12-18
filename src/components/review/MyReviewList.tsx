@@ -1,8 +1,9 @@
-import MyReviewCard, { EmptyMyReviewCard } from './MyReviewCard';
+import { EmptyMyReviewCard } from './MyReviewCard';
 import { useMyReviewsQuery } from '../../hooks/queries/useReviewsQuery';
 import { useInView } from 'react-intersection-observer';
 import { useEffect } from 'react';
 import ReviewPageSkeleton from './ReviewPageSkeleton';
+import ReviewCard from './ReviewCard';
 
 function MyReviewList() {
   const pageSize = 10;
@@ -34,7 +35,7 @@ function MyReviewList() {
     <>
       {/* 리뷰 데이터 렌더링 */}
       {reviewsData.map((review) => (
-        <MyReviewCard key={review.reviewId} {...review} />
+        <ReviewCard key={review.reviewId} {...review} />
       ))}
 
       {/* 추가 로드 중 스켈레톤 렌더링 */}

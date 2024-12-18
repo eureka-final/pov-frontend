@@ -8,7 +8,7 @@ const Container = styled.div`
 
 const Bar = styled.div`
   width: 100%;
-  height: 30px;
+  height: 24px;
   background-color: #dedede;
   border-radius: 12px;
   font-weight: 600;
@@ -19,7 +19,7 @@ const Bar = styled.div`
 
 const Progress = styled.div<{ width?: number }>`
   width: ${({ width }) => (width ? `${width}%` : '0%')};
-  height: 30px;
+  height: 24px;
   padding: 0;
   text-align: center;
   background-color: #1bd27d;
@@ -46,9 +46,9 @@ const ProgressBar = ({ percentage, like, unlike }: Progess) => {
         <Progress width={percentage} />
       </Bar>
       <Count>
-        <Body size="large" style={{ color: '#1BD27D' }}>
+        <Heading size="small" style={{ color: '#1BD27D' }}>
           {constants.movies.progress.like + ' ' + like}
-        </Body>
+        </Heading>
         <Body size="large">{constants.movies.progress.unlike + ' ' + unlike}</Body>
       </Count>
     </Container>

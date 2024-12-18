@@ -13,7 +13,7 @@ import {
   Menu,
   LikeContainer,
 } from './ReviewDetail.styles';
-import Profile from '../../../components/common/Profile';
+import Profile from '../../../components/common/Profile/Profile';
 import { useReviewDetailQuery } from '../../../hooks/queries/useReviewsQuery';
 import { useDeleteReviewMutation } from '../../../hooks/queries/useDeleteReviewMutation';
 import dompurify from 'dompurify';
@@ -21,10 +21,14 @@ import { useToast } from '../../../hooks/common/useToast';
 
 import { useState } from 'react';
 import { useLikeMutation, useDisLikeMutation } from '../../../hooks/queries/useLikeMutation';
+import { useAuthStore } from '../../../stores/useAuthStore';
 
 const Index = () => {
   const { movieId, reviewId } = useParams<{ movieId: string; reviewId: string }>();
   const navigate = useNavigate();
+
+  const user = useAuthStore((state) => state.user);
+
   const { createToast } = useToast();
 
   const { isOpen: isSaveOpen, open: saveOpen, close: saveClose } = useOverlay();
@@ -81,8 +85,8 @@ const Index = () => {
       {reviewData && (
         <>
           <Container>
+            <BackgroundLayer src={reviewData.data.thumbnail.replace('/w154/', '/original/')}></BackgroundLayer>
             <HeaderContainer src={reviewData.data.thumbnail.replace('/w154/', '/original/')}>
-              <BackgroundLayer src={reviewData.data.thumbnail.replace('/w154/', '/original/')}></BackgroundLayer>
               <TitleInfo>
                 <Heading size="xLarge">{reviewData.data.title}</Heading>
               </TitleInfo>
@@ -103,21 +107,25 @@ const Index = () => {
                 </Additionals>
               </ReviewInfo>
               <Wrapper>
-                <Menu onClick={() => navigate(`/review/${movieId}/edit/${reviewId}`)}>
-                  <Icon icon="edit" />
-                  <Body>수정</Body>
-                </Menu>
-                <Menu onClick={saveOpen}>
-                  <Icon icon="delete" />
-                  <Body>삭제</Body>
-                </Menu>
+                {reviewData.data.reviewer == user?.nickname && (
+                  <>
+                    <Menu onClick={() => navigate(`/review/${movieId}/edit/${reviewId}`)}>
+                      <Icon icon="edit" />
+                      <Body>수정</Body>
+                    </Menu>
+                    <Menu onClick={saveOpen}>
+                      <Icon icon="delete" />
+                      <Body>삭제</Body>
+                    </Menu>
+                  </>
+                )}
               </Wrapper>
             </HeaderContainer>
-          </Container>
 
-          <Paragraph>
-            <div dangerouslySetInnerHTML={{ __html: sanitizer(`${reviewData.data.contents}`) }} />
-          </Paragraph>
+            <Paragraph css={{ marginTop: '48px' }}>
+              <div dangerouslySetInnerHTML={{ __html: sanitizer(`${reviewData.data.contents}`) }} />
+            </Paragraph>
+          </Container>
 
           {/* 삭제 버튼 누르면 나오는 모달창 */}
           <Modal isOpen={isSaveOpen} closeModal={saveClose}>

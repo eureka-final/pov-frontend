@@ -2,7 +2,7 @@ import type { ComponentPropsWithoutRef } from 'react';
 import { useState } from 'react';
 import { Icon } from 'pov-design-system';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { putLike, putDisLike } from '../../../apis/review/putLike';
+import { postLike, postDisLike } from '../../../apis/review/postLike';
 
 interface LikeButtonProps extends ComponentPropsWithoutRef<'div'> {
   initialState: boolean;
@@ -17,7 +17,7 @@ const LikeButton = ({ initialState, movieId, reviewId, handleLikeCount }: LikeBu
   const queryClient = useQueryClient();
 
   const likeMutation = useMutation({
-    mutationFn: putLike,
+    mutationFn: postLike,
     onMutate: async () => {
       // 이전 쿼리 취소
       await queryClient.cancelQueries({ queryKey: ['clubReviews', movieId, reviewId] });
@@ -45,7 +45,7 @@ const LikeButton = ({ initialState, movieId, reviewId, handleLikeCount }: LikeBu
   });
 
   const disLikeMutation = useMutation({
-    mutationFn: putDisLike,
+    mutationFn: postDisLike,
     onMutate: async () => {
       await queryClient.cancelQueries({ queryKey: ['movies', movieId, 'reviews', reviewId] });
       const previousReviews = queryClient.getQueryData(['movies', movieId, 'reviews', reviewId]);

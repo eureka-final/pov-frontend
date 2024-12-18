@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import Padded from '../../../components/templates/Padded/Padded';
 import Section from '../../../components/movies/Section/Section';
 import { Container } from '../Movie.styles';
 import { constants } from '../../../constants/constants';
@@ -23,7 +22,7 @@ function Index() {
     setSearchQueries(searchQuery || '');
   }, [query]);
 
-  const heading = `${searchQueries}${constants.movies.main.topic.search}`;
+  const heading = `${searchQueries} ${constants.movies.main.topic.search}`;
 
   // searchQueries가 있을 때만 useSearchMoviesQuery 실행
   const { moviesData, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } = useSearchMoviesQuery(searchQueries || '', { enabled: !!searchQueries });
@@ -46,17 +45,15 @@ function Index() {
   }
 
   return (
-    <Padded>
-      <Container>
-        <Section items={moviesData || []} heading={heading} />
+    <Container>
+      <Section items={moviesData || []} heading={heading} />
 
-        {/* 추가 로드 중 스켈레톤 렌더링 */}
-        {isFetchingNextPage && Array.from({ length: pageSize }).map((_, index) => <MoviePageSkeleton key={`fetching-skeleton-${index}`} />)}
+      {/* 추가 로드 중 스켈레톤 렌더링 */}
+      {isFetchingNextPage && Array.from({ length: pageSize }).map((_, index) => <MoviePageSkeleton key={`fetching-skeleton-${index}`} />)}
 
-        {/* 트리거 ref 위치 */}
-        {hasNextPage && <div ref={ref} style={{ height: '1px' }} />}
-      </Container>
-    </Padded>
+      {/* 트리거 ref 위치 */}
+      {hasNextPage && <div ref={ref} style={{ height: '1px' }} />}
+    </Container>
   );
 }
 
