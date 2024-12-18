@@ -3,7 +3,6 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { getGoogleUserInfoApi } from '../../../apis/auth/getGoogleOauth';
 import { useAuthStore } from '../../../stores/useAuthStore';
 import CircularProgress from '../../../components/common/Progress';
-import { LoadingSection } from '../Index.styles';
 import { postLogin } from '../../../apis/auth/postAuth';
 import { LoadingSection, ModalWrapper, ModalBodyWrapper } from '../Index.styles';
 import { Heading, Body, Button, useOverlay, Modal } from 'pov-design-system';
