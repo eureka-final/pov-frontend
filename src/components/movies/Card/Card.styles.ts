@@ -1,4 +1,11 @@
 import styled from '@emotion/styled';
+import { Heading } from 'pov-design-system';
+
+export const InfoContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 4px;
+`;
 
 export const CardWapper = styled.div`
   display: flex;
@@ -10,15 +17,16 @@ export const CardWapper = styled.div`
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 `;
 
-export const InfoContainer = styled.div`
+export const CardContainer = styled.div`
   display: flex;
   align-items: center;
   gap: 4px;
 `;
 
 export const Info = styled.div`
+  margin-top: 4px;
   display: flex;
-  gap: 10px;
+  gap: 20px;
 `;
 
 export const Count = styled.span``;

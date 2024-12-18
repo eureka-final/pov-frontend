@@ -43,14 +43,12 @@ const Card = ({ item }: CardProps) => {
   };
 
   return (
-    <CardWapper>
-      <div onClick={() => navigate(`/movie/${item.id}/detail`)}>
-        {item.poster && item.poster.endsWith('null') ? <NoPoster /> : <img src={item.poster} />}
-        <Heading size="medium">{item.title}</Heading>
-        <Body size="large" style={{ color: '#ADACAF' }}>
-          {item.released}
-        </Body>
-      </div>
+    <CardContainer onClick={() => navigate(`/movie/${item.id}/detail`)}>
+      {item.poster && item.poster.endsWith('null') ? <NoPoster /> : <ThumbnailImage src={item.poster} />}
+      <SingleLineHeading size="medium">{item.title}</SingleLineHeading>
+      <Body size="large" style={{ color: '#ADACAF' }}>
+        {formatDate(item.released)}
+      </Body>
       <Info>
         <InfoContainer>
           <LikeContainer onClick={onLike}>
@@ -59,7 +57,10 @@ const Card = ({ item }: CardProps) => {
         </InfoContainer>
         <InfoContainer>
           <LikeContainer>
-            <Icon icon="reviewline" width="20px" height="20px" /> {item.movieReviewCount}
+            <Icon icon="reviewline" width="16px" height="16px" css={{ color: theme.secondary }} />{' '}
+            <Body size="large" css={{ color: theme.secondary }}>
+              {item.movieReviewCount}
+            </Body>
           </LikeContainer>
         </InfoContainer>
       </Info>
