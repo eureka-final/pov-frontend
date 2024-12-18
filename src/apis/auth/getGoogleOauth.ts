@@ -1,48 +1,5 @@
 import axios from 'axios';
 
-/* -------- Naver --------- */
-// Naver Access Token 발급
-const getNaverAccessToken = async (code: string, state: string) => {
-  try {
-    // Access Token 발급 API 호출
-    const tokenResponse = await axios.post('https://nid.naver.com/oauth2.0/token', null, {
-      params: {
-        grant_type: 'authorization_code',
-        client_id: import.meta.env.VITE_NAVER_CLIENT_ID,
-        client_secret: import.meta.env.VITE_NAVER_CLIENT_SECRET,
-        code,
-        state,
-      },
-    });
-
-    // Access Token 반환
-    const { access_token } = tokenResponse.data;
-    return access_token;
-  } catch (error) {
-    console.error(error);
-  }
-};
-
-// Naver 사용자 정보 요청
-const getNaverUserInfo = async (accessToken: string) => {
-  try {
-    // Access Token을 이용해 사용자 정보 요청
-    if (accessToken) {
-      const userResponse = await axios.get('https://openapi.naver.com/v1/nid/me', {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
-
-      const email = userResponse.data.response.email;
-      const profileImage = userResponse.data.response.profile_image;
-      return { email: email, profileImage: profileImage };
-    }
-  } catch (error) {
-    console.error('error occured during get user info :', error);
-  }
-};
-
 /* -------- Google --------- */
 // Google Access Token 발급
 const getGoogleAccessToken = async (code: string) => {
@@ -83,13 +40,6 @@ const getGoogleUserInfo = async (accessToken: string) => {
   } catch (error) {
     console.error('error occured during get google user info :', error);
   }
-};
-
-/* -------- export APIs --------- */
-export const getNaverUserInfoApi = async (code: string, state: string) => {
-  const naverAccessToken = await getNaverAccessToken(code, state);
-  const naverUserInfo = await getNaverUserInfo(naverAccessToken);
-  return naverUserInfo;
 };
 
 export const getGoogleUserInfoApi = async (code: string) => {
