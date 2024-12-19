@@ -31,7 +31,7 @@ const Index = () => {
       { movieId: id! },
       {
         onSuccess: () => {
-          createToast('클럽 삭제 성공!', 'success');
+          createToast('영화 삭제 성공!', 'success');
         },
       }
     );
