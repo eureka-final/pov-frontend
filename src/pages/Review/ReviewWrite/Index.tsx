@@ -72,7 +72,7 @@ const Index = () => {
         onSuccess: () => {
           saveClose();
           navigate(`/review`);
-          createToast('리뷰 작성 완료!', 'success');
+          createToast('리뷰가 작성되었어요.', 'success');
           localStorage.removeItem(`${movieId}`);
         },
       }
@@ -95,7 +95,7 @@ const Index = () => {
       console.log(tempData);
     } catch (error) {
       console.error('임시 저장 실패:', error);
-      createToast('임시 저장 중 문제가 발생했습니다.');
+      createToast('임시 저장 중 문제가 발생했어요. 다시 시도해주세요.');
     }
   };
 

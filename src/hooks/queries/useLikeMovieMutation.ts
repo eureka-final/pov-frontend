@@ -12,7 +12,7 @@ export const useLikeMovieMutation = () => {
       queryClient.invalidateQueries({ queryKey: ['movies', movieId] });
     },
     onError: () => {
-      createToast('영화 좋아요 실패');
+      createToast('좋아요에 실패했어요. 다시 시도해주세요.');
     },
   });
 

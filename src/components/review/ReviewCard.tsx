@@ -10,7 +10,6 @@ import {
   FlexBetween,
   Spoiler,
   SpoMore,
-  ReadMore,
   TitleInfo,
 } from './ReviewCard.style';
 import { Body, Paragraph, Icon, Heading, Logo, Button } from 'pov-design-system';
@@ -20,9 +19,11 @@ import { Review } from '../../types/review';
 import { useState } from 'react';
 import { useLikeMutation, useDisLikeMutation } from '../../hooks/queries/useLikeMutation';
 import { useTheme } from '@emotion/react';
+import useWindowSize from '../../hooks/utils/useWindowSize';
 
 function ReviewCard({ reviewId, movieId, thumbnail, movieTitle, reviewer, profileImage, title, spoiler, contents, createdAt, isLiked, likeAmount }: Review) {
   const navigate = useNavigate();
+  const windowSize = useWindowSize();
   const sanitizer = dompurify.sanitize;
   const theme = useTheme();
   const truncateContents = (text: string | undefined, maxLength: number) => {
@@ -33,7 +34,6 @@ function ReviewCard({ reviewId, movieId, thumbnail, movieTitle, reviewer, profil
         <>
           <div dangerouslySetInnerHTML={{ __html: sanitizer(truncatedText).replace(/<img[^>]*>/g, '') }} />
           <span>...</span>
-          <ReadMore>더보기</ReadMore>
         </>
       );
     }
@@ -86,28 +86,30 @@ function ReviewCard({ reviewId, movieId, thumbnail, movieTitle, reviewer, profil
           </Poster>
           <ReviewCardContainer>
             <Profile name={reviewer} avatarUrl={profileImage} />
-            <Body size="xLarge">{title}</Body>
+            <Paragraph size="xLarge">{title}</Paragraph>
 
             {spoiler ? (
               <Spoiler>
-                <Body size="large">스포일러가 있어요!</Body>
-                <Body size="large">
+                <Body size="xLarge" css={{ color: theme.teritary }}>
+                  스포일러가 있어요!
+                </Body>
+                <Body size="xLarge">
                   <SpoMore>더보기</SpoMore>
                 </Body>
               </Spoiler>
             ) : (
               <Paragraph size="large" css={{ color: theme.teritary }}>
-                {truncateContents(contents, 300)}
+                {windowSize.width! > 600 && truncateContents(contents, 208)}
               </Paragraph>
             )}
-            <Body size="small" css={{ color: theme.teritary }}>
+            <Body size="large" css={{ color: theme.teritary }}>
               {new Date(createdAt).toLocaleDateString()}
             </Body>
           </ReviewCardContainer>
         </CardFlex>
         <FlexBetween>
           <LikeContainer onClick={onLike}>
-            <Icon icon={likeAction ? 'heartfill' : 'heartline'} css={{ width: '20px' }} /> {likes}
+            <Icon icon={likeAction ? 'heartfill' : 'heartline'} css={{ width: '16px' }} /> {likes}
           </LikeContainer>
         </FlexBetween>
       </CardContainer>
