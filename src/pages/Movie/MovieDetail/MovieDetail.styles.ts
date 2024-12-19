@@ -14,7 +14,7 @@ export const PaddedContainer = styled.div`
   width: 100%;
 
   @media (min-width: 600px) {
-    width: 1200px;
+    width: calc(1200px - 72px);
   }
 `;
 

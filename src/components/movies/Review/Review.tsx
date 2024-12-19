@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import Profile from '../../common/Profile/Profile';
 import { Additionals, ReviewContainer, Contents, Wrapper } from './Review.styles';
-import { Body, Icon } from 'pov-design-system';
+import { Body, Icon, Paragraph } from 'pov-design-system';
 import { useState } from 'react';
 import dompurify from 'dompurify';
 import { useLikeMutation, useDisLikeMutation } from '../../../hooks/queries/useLikeMutation';
@@ -82,21 +82,21 @@ const Review = ({ reviewers }: ReviewProps) => {
         </Wrapper>
         {reviewers.isSpoiler ? (
           <Spoiler>
-            <Body size="large">스포일러가 있어요!</Body>
-            <Body size="large">
+            <Body size="xLarge">스포일러가 있어요!</Body>
+            <Body size="xLarge">
               <SpoMore>더보기</SpoMore>
             </Body>
           </Spoiler>
         ) : (
-          <Body size="large">{truncateContents(reviewers.contents, 300)}</Body>
+          <Paragraph size="large">{truncateContents(reviewers.contents, 300)}</Paragraph>
         )}
-        <Body size="small" style={{ color: '#ADACAF' }}>
+        <Body size="medium" style={{ color: '#ADACAF' }}>
           {new Date(reviewers.createdAt).toLocaleDateString()}
         </Body>
       </Contents>
       <Additionals justify="flex-end">
         <LikeContainer onClick={onLike}>
-          <Icon icon={likeAction ? 'heartfill' : 'heartline'} /> {likes}
+          <Icon icon={likeAction ? 'heartfill' : 'heartline'} css={{ width: '16px' }} /> {likes}
         </LikeContainer>
       </Additionals>
     </ReviewContainer>

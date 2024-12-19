@@ -17,8 +17,9 @@ import {
   numberStyling,
   SectionWrapper,
   ClubBookMarkContainer,
+  ClubMenu,
 } from './ClubDetail.styles';
-import { ClubReviewListContainer } from '../../../components/review/ReviewCard.style';
+import { PopularReviewListContainer } from '../../../components/review/ReviewCard.style';
 import { useClubDetailQuery } from '../../../hooks/queries/useClubsQuery';
 import { useDeleteClubMutation } from '../../../hooks/queries/useDeleteClubMutation';
 import { useLeaveClubMutaion } from '../../../hooks/queries/useLeaveClubMutaion';
@@ -26,11 +27,13 @@ import { useInviteCodeMutation } from '../../../hooks/queries/useCreateClubMutat
 import { useToast } from '../../../hooks/common/useToast';
 import { useAuthStore } from '../../../stores/useAuthStore';
 import ClubReviewCard from '../../review/ClubReviewCard';
+import { useTheme } from '@emotion/react';
 
 const JoinClub = () => {
   const user = useAuthStore((state) => state.user);
   const { clubId } = useParams<{ clubId: string }>();
   const navigate = useNavigate();
+  const theme = useTheme();
 
   const { isOpen: isSaveOpen, open: saveOpen, close: saveClose } = useOverlay();
   const { isOpen: isInviteSaveOpen, open: saveInviteOpen, close: saveInviteClose } = useOverlay();
@@ -109,8 +112,10 @@ const JoinClub = () => {
           <Container>
             <HeaderContainer src={clubsData.data.clubImage}>
               <ReviewInfo>
-                <Heading size="xLarge">{clubsData.data.clubName}</Heading>
-                <Body size="large">{clubsData.data.clubDescription}</Body>
+                <Heading size="xxLarge">{clubsData.data.clubName}</Heading>
+                <Body size="xLarge" css={{ color: theme.teritary }}>
+                  {clubsData.data.clubDescription}
+                </Body>
                 <Additionals>
                   {clubsData.data.clubFavorGenres.map((item, index) => (
                     <Badge variant="keyword" cancel={true} key={item + index}>
@@ -119,56 +124,58 @@ const JoinClub = () => {
                   ))}
                 </Additionals>
               </ReviewInfo>
+              <ClubMenu onClick={toggleMenu}>
+                <Menu>
+                  <Icon icon="menu" css={{ width: '20px' }} />
+                  <Body size="xLarge" css={{ paddingBottom: '6px' }}>
+                    클럽 메뉴
+                  </Body>
+                </Menu>
+                {/* 클럽 메뉴 */}
+                <Wrapper>
+                  {isMenuOpen && (
+                    <MenuWrapper>
+                      {clubsData.data.members.memberList.some((member) => member.isLeader && member.nickname === user?.nickname) ? (
+                        <>
+                          <Menu onClick={() => navigate(`/club/${clubId}/edit`)}>
+                            <Icon icon="edit" width="15px" height="12px" />
+                            <Heading size="small">수정하기</Heading>
+                          </Menu>
+                          <Menu onClick={saveOpen}>
+                            <Icon icon="delete" width="15px" height="12px" />
+                            <Heading size="small">삭제하기</Heading>
+                          </Menu>
+                          <Menu onClick={saveLeaderLeaveOpen}>
+                            <Icon icon="leave" width="15px" height="12px" />
+                            <Heading size="small">탈퇴하기</Heading>
+                          </Menu>
+                        </>
+                      ) : (
+                        <Menu onClick={saveLeaveOpen}>
+                          <Icon icon="leave" width="15px" height="12px" />
+                          <Heading size="small">탈퇴하기</Heading>
+                        </Menu>
+                      )}
+                      {clubsData.data.isPublic ? (
+                        <>
+                          <Menu onClick={saveInviteOpen}>
+                            <Icon icon="plusLarge" width="15px" height="12px" />
+                            <Heading size="small">초대하기</Heading>
+                          </Menu>
+                        </>
+                      ) : (
+                        <>
+                          <Menu onClick={handleCode}>
+                            <Icon icon="plusLarge" width="15px" height="12px" />
+                            <Heading size="small">초대하기</Heading>
+                          </Menu>
+                        </>
+                      )}
+                    </MenuWrapper>
+                  )}
+                </Wrapper>
+              </ClubMenu>
             </HeaderContainer>
-
-            {/* 클럽 메뉴 */}
-            <Wrapper>
-              <Menu onClick={toggleMenu}>
-                <Icon icon="menu" />
-                <Body>클럽 메뉴</Body>
-              </Menu>
-
-              {isMenuOpen && (
-                <MenuWrapper>
-                  {clubsData.data.members.memberList.some((member) => member.isLeader && member.nickname === user?.nickname) ? (
-                    <>
-                      <Menu onClick={() => navigate(`/club/${clubId}/edit`)}>
-                        <Icon icon="edit" width="15px" height="12px" />
-                        <Heading size="small">수정하기</Heading>
-                      </Menu>
-                      <Menu onClick={saveOpen}>
-                        <Icon icon="delete" width="15px" height="12px" />
-                        <Heading size="small">삭제하기</Heading>
-                      </Menu>
-                      <Menu onClick={saveLeaderLeaveOpen}>
-                        <Icon icon="leave" width="15px" height="12px" />
-                        <Heading size="small">탈퇴하기</Heading>
-                      </Menu>
-                    </>
-                  ) : (
-                    <Menu onClick={saveLeaveOpen}>
-                      <Icon icon="leave" width="15px" height="12px" />
-                      <Heading size="small">탈퇴하기</Heading>
-                    </Menu>
-                  )}
-                  {clubsData.data.isPublic ? (
-                    <>
-                      <Menu onClick={saveInviteOpen}>
-                        <Icon icon="plusLarge" width="15px" height="12px" />
-                        <Heading size="small">초대하기</Heading>
-                      </Menu>
-                    </>
-                  ) : (
-                    <>
-                      <Menu onClick={handleCode}>
-                        <Icon icon="plusLarge" width="15px" height="12px" />
-                        <Heading size="small">초대하기</Heading>
-                      </Menu>
-                    </>
-                  )}
-                </MenuWrapper>
-              )}
-            </Wrapper>
           </Container>
 
           <Section>
@@ -202,7 +209,7 @@ const JoinClub = () => {
               <ShowMoreBtn onClick={() => navigate(`/club/${clubId}/review`)} />
             </SectionWrapper>
 
-            <ClubReviewListContainer>
+            <PopularReviewListContainer>
               {clubsData.data.clubReviewList.reviews.content.slice(0, 3).map((review) => (
                 <ClubReviewCard
                   key={review.reviewId}
@@ -220,7 +227,7 @@ const JoinClub = () => {
                   spoiler={review.spoiler}
                 />
               ))}
-            </ClubReviewListContainer>
+            </PopularReviewListContainer>
           </Section>
 
           <Section>

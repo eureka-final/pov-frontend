@@ -22,6 +22,7 @@ import {
   PosterImg,
   StillCutImage,
   ProductionGridContainer,
+  ReviewCardGridContainer,
 } from './MovieDetail.styles';
 import ResponsiveContainer from '../../../components/styles/ResponsiveContainer';
 import ProgressBar from '../../../components/styles/ProgressBar';
@@ -33,6 +34,7 @@ import { formatDate } from '../../../utils/formatDateTime';
 import { useTheme } from '@emotion/react';
 import { useState } from 'react';
 import { useLikeMovieMutation, useDisLikeMovieMutation } from '../../../hooks/queries/useLikeMovieMutation';
+import { PopularReviewListContainer } from '../../../components/review/ReviewCard.style';
 
 const Index = () => {
   const navigate = useNavigate();
@@ -177,9 +179,11 @@ const Index = () => {
                   <ShowMoreBtn onClick={() => navigate(`/movie/${movieId}/reviews`)} />
                 </Div>
               </HeadingContainer>
-              {movieData.data.reviews.slice(0, 3).map((review) => (
-                <Review key={review.reviewId} reviewers={review} />
-              ))}
+              <PopularReviewListContainer>
+                {movieData.data.reviews.slice(0, 3).map((review) => (
+                  <Review key={review.reviewId} reviewers={review} />
+                ))}
+              </PopularReviewListContainer>
             </Section>
 
             <Section>
