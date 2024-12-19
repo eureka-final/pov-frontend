@@ -58,7 +58,7 @@ export const ReviewInfo = styled.div`
 
 export const Wrapper = styled.div`
   z-index: 30;
-
+  font-weight: 100;
   /* @media (min-width: 0px) and (max-width: 600px) {
     top: 60%;
     right: 5%;
