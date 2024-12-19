@@ -12,12 +12,12 @@ import {
   TitleInfo,
 } from './ReviewCard.styles';
 import { Body, Paragraph, Icon, Heading, Logo, Button } from 'pov-design-system';
-import Profile from '../../common/Profile';
+import Profile from '../../common/Profile/Profile';
 import dompurify from 'dompurify';
 import { Review } from '../../../types/review';
 import { useState } from 'react';
 
-function ReviewCard({ reviewId, movieId, thumbnail, movieTitle, reviewer, profileImage, title, spoiler, contents, createdAt, isLiked, likeAmount }: Review) {
+function ReviewCard({ reviewId, movieId, thumbnail, movieTitle, reviewer, profileImage, title, contents, createdAt, isLiked, likeAmount }: Review) {
   const navigate = useNavigate();
   const sanitizer = dompurify.sanitize;
 
@@ -35,8 +35,9 @@ function ReviewCard({ reviewId, movieId, thumbnail, movieTitle, reviewer, profil
     }
     return <div dangerouslySetInnerHTML={{ __html: sanitizer(text).replace(/<img[^>]*>/g, '') }} />;
   };
-
+  //@ts-ignore
   const [likes, setLikes] = useState(likeAmount);
+  //@ts-ignore
   const [likeAction, setLikeAction] = useState<boolean | null>(isLiked);
 
   const review = {

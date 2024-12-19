@@ -10,11 +10,10 @@ import debounce from 'lodash.debounce';
 const Index = () => {
   const [searchKeyword, setSearchKeyword] = useState<string>('');
   const [debouncedKeyword, setDebouncedKeyword] = useState<string>('');
-  const { moviesData, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } = useSearchMoviesQuery(debouncedKeyword || '', {
+  const { moviesData, fetchNextPage, hasNextPage } = useSearchMoviesQuery(debouncedKeyword || '', {
     enabled: !!debouncedKeyword,
   });
   const { ref, inView } = useInView();
-  const pageSize = 2;
 
   const debouncedSearch = useRef(
     debounce((keyword: string) => {
@@ -23,10 +22,10 @@ const Index = () => {
   ).current;
 
   useEffect(() => {
-    if (inView && hasNextPage) {
+    if (inView && debouncedKeyword) {
       fetchNextPage();
     }
-  }, [inView, fetchNextPage, hasNextPage]);
+  }, [inView, fetchNextPage, debouncedKeyword]);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchKeyword(e.target.value);

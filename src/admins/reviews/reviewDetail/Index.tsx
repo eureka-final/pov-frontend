@@ -1,7 +1,7 @@
 import AdminTemplate from '../../../components/templates/Admin/AdminTemplate';
 import { Container, Header, CardContainer, Info, Buttons, ReviewCardContainer, Poster, FlexBetween, LikeContainer } from './Index.styles';
 import { Heading, Body, Paragraph, Icon, Button } from 'pov-design-system';
-import Profile from '../../../components/common/Profile';
+import Profile from '../../../components/common/Profile/Profile';
 import { useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import dompurify from 'dompurify';
@@ -11,7 +11,9 @@ import { useToast } from '../../../hooks/common/useToast';
 const Index = () => {
   const location = useLocation();
   const { review } = location.state || {};
+  //@ts-ignore
   const [likes, setLikes] = useState(review.likeAmount);
+  //@ts-ignore
   const [likeAction, setLikeAction] = useState<boolean | null>(review.isLiked);
   const blindReviewMutation = useBlindReviewMutation();
   const { createToast } = useToast();

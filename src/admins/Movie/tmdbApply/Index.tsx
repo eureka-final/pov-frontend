@@ -4,7 +4,7 @@ import AdminTemplate from '../../../components/templates/Admin/AdminTemplate';
 import { Container, Header, Card, Info, InfoContainer, Wrapper, Input, ButtonContainer, Badges } from './Index.styles';
 import { Heading, Body, Button, Badge } from 'pov-design-system';
 import { useTMDBMovieDetailQuery } from '../../../hooks/queries/useMovieQuery';
-import { TMDBMovieDetailResponse } from '../../../types/movie';
+import { TMDBMovieDetailResponse, Cast, Crew } from '../../../types/movie_admins';
 import { formatDate } from '../../../utils/formatTade';
 import { useCreateMovieMutation } from '../../../hooks/queries/useCreateMovieMutation';
 import { useToast } from '../../../hooks/common/useToast';
@@ -213,7 +213,7 @@ const Index = () => {
                   감독
                 </Body>
                 <Input>
-                  <Body size="large">{movie.data.peoples.cast.map((person) => person.name).join(', ')}</Body>
+                  <Body size="large">{movie.data.peoples.cast.map((person: Cast) => person.name).join(', ')}</Body>
                 </Input>
               </Wrapper>
               {/* <Wrapper>
@@ -231,7 +231,7 @@ const Index = () => {
                   출연진
                 </Body>
                 <Input>
-                  <Body size="large">{movie.data.peoples.crew.map((person) => person.name).join(', ')}</Body>
+                  <Body size="large">{movie.data.peoples.crew.map((person: Crew) => person.name).join(', ')}</Body>
                 </Input>
               </Wrapper>
               <Wrapper>

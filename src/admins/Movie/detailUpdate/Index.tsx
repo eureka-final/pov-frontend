@@ -18,6 +18,7 @@ const Index = () => {
   const [movie, setMovie] = useState<MovieDetailResponse | null>({
     message: '',
     data: {
+      backdrop: '',
       title: '',
       released: '',
       genre: [],
@@ -30,17 +31,8 @@ const Index = () => {
       country: [],
       images: [],
       videos: [],
-      reviews: {
-        id: 0,
-        title: '',
-        contents: '',
-        isSpoiler: false,
-        modifiedAt: '',
-        likeCount: 0,
-        profileImage: '',
-        name: '',
-      },
-      backdrop: '',
+      reviews: [],
+      isLiked: false,
     },
   });
 

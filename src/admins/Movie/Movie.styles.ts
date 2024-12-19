@@ -5,7 +5,6 @@ export const Container = styled.div`
   flex-direction: column;
   gap: 24px;
   height: calc(100vh - 100px);
-  overflow-y: auto;
 `;
 
 export const Header = styled.div`
@@ -18,4 +17,6 @@ export const List = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 20px;
+  height: calc(100% - 141px);
+  overflow-y: auto;
 `;
