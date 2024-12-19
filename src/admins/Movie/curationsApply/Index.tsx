@@ -109,12 +109,16 @@ const Index = () => {
     debouncedSearch(e.target.value);
   };
 
-  const convertToISOString = (dateString: string): string => {
-    const [year, month, day] = dateString.split('.').map(Number);
+  const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedDate = e.target.value;
+    setFormData((prev) => {
+      if (!prev) return prev;
 
-    const date = new Date(Date.UTC(year, month - 1, day, 0, 0, 0));
-
-    return date.toISOString();
+      return {
+        ...prev,
+        startTime: selectedDate,
+      };
+    });
   };
 
   const mapCategoryToEnglish = (category: string): string => {
@@ -134,7 +138,7 @@ const Index = () => {
       theme: formData.theme,
       title: formData.title,
       description: formData.description,
-      startTime: convertToISOString(formData.startTime),
+      startTime: new Date(formData.startTime).toISOString(),
       category: mapCategoryToEnglish(formData.category),
       movieIds: selectedMovies.map((movie) => movie.id),
     };
@@ -246,11 +250,7 @@ const Index = () => {
                 <Body size="xLarge" style={{ color: '#ADACAF', marginRight: '32px', width: '80px' }}>
                   노출 시작일
                 </Body>
-                <Input
-                  placeholder="큐레이션 노출 시작일을 입력해 주세요"
-                  value={formData.startTime}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleInputChange('startTime', e.target.value)}
-                />
+                <Input placeholder="큐레이션 노출 시작일을 입력해 주세요" value={formData.startTime} type="date" onChange={handleDateChange} />
               </Wrapper>
             </Info>
           </InfoContainer>

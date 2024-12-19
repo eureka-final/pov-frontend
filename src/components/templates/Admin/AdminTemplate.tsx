@@ -27,10 +27,6 @@ const categories = [
         name: '큐레이션 등록하기',
         target: '/admin/movie/curations/apply',
       },
-      {
-        name: '인기 영화 통계',
-        target: '/admin/movies/statistics',
-      },
     ],
   },
   {
@@ -39,10 +35,6 @@ const categories = [
       {
         name: '리뷰 조회하기',
         target: '/admin/reviews',
-      },
-      {
-        name: '리뷰 숨김처 리하기',
-        target: '/admin/reviews/action',
       },
     ],
   },
