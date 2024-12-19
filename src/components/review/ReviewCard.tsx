@@ -4,7 +4,6 @@ import {
   ReviewListContainer,
   CardContainer,
   Poster,
-  Title,
   CardFlex,
   ReviewCardContainer,
   LikeContainer,
