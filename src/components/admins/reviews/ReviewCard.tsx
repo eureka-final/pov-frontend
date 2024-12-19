@@ -12,7 +12,7 @@ import {
   TitleInfo,
 } from './ReviewCard.styles';
 import { Body, Paragraph, Icon, Heading, Logo, Button } from 'pov-design-system';
-import Profile from '../../common/Profile';
+import Profile from '../../common/Profile/Profile';
 import dompurify from 'dompurify';
 import { Review } from '../../../types/review';
 import { useState } from 'react';
