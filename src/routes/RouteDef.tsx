@@ -2,7 +2,7 @@ import Main from '../pages/Main';
 import Movie from '../pages/Movie';
 import MovieTrending from '../pages/Movie/MovieTrending/Index';
 import MovieSearch from '../pages/Movie/MovieSearch/Index';
-import MovieDetail from '../pages/Movie/MovieDetail/Index'; // Index 대소문자 문제
+import MovieDetail from '../pages/Movie/MovieDetail/Index'; // Index 대소문자 문제 수정
 import MovieReviews from '../pages/Movie/MovieReviews/Index';
 import Review from '../pages/Review';
 import ReviewWrite from '../pages/Review/ReviewWrite/Index';
