@@ -53,7 +53,6 @@ export const ReviewInfo = styled.div`
   position: absolute;
   left: 0;
   bottom: 32px;
-  z-index: 20;
   gap: 16px;
 `;
 
