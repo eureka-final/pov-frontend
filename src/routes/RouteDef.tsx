@@ -1,5 +1,5 @@
 import Main from '../pages/Main';
-import Movie from '../pages/Movie';
+import Movie from '../pages/Movie/Index';
 import MovieTrending from '../pages/Movie/MovieTrending/Index';
 import MovieSearch from '../pages/Movie/MovieSearch/Index';
 import MovieDetail from '../pages/Movie/MovieDetail/Index';
@@ -33,8 +33,6 @@ import MyPage from '../pages/MyPage';
 import Settings from '../pages/MyPage/Settings';
 import NotFound from '../pages/NotFound/Index';
 
-// import React, { lazy, Suspense } from 'react';
-
 // Admin
 import AdminMovie from '../admins/Movie/Index';
 import AdminMovieDetail from '../admins/Movie/MovieDetail/Index';
@@ -47,11 +45,19 @@ import AdminCurationsDetail from '../admins/Movie/curationDetail/Index';
 import AdminCurationUpdate from '../admins/Movie/curationUpdate/Index';
 import AdminReviews from '../admins/reviews/Index';
 import AdminReviewDetail from '../admins/reviews/reviewDetail/Index';
+import MainPageSkeleton from '../pages/Main/MainPageSkeleton';
+
+import { Suspense } from 'react';
+import * as Lazy from './lazy';
 
 const MovieScreens = {
   Main: {
     path: '/',
-    element: <Main />,
+    element: (
+      <Suspense fallback={<MainPageSkeleton />}>
+        <Lazy.MainPage />
+      </Suspense>
+    ),
   },
   Movies: {
     path: '/movie',
