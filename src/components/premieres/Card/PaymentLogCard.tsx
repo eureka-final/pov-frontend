@@ -12,9 +12,11 @@ const PaymentLogCard = (props: PremiereEntry) => {
     <>
       <Card onClick={() => navigate(`/premieres/${props.premiereId}`)}>
         <Heading size="medium">{props.title}</Heading>
-        <Body size="large">{props.approvedAt.replace('T', ' ')} 결제 완료</Body>
+        <Body size="large" css={{ color: theme.teritary }}>
+          {props.approvedAt.replace('T', ' ')} 결제 완료
+        </Body>
         <Heading size="medium" css={{ color: theme.color.green600 }}>
-          {props.amount}원
+          {props.amount.toLocaleString()}원
         </Heading>
       </Card>
     </>
