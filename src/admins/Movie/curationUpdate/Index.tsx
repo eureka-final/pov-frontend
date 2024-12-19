@@ -116,6 +116,27 @@ const Index = () => {
     OTHER: '기타',
   };
 
+  const handleInputChange = (field: string, value: string | number) => {
+    setCuration((prev) => {
+      if (!prev) return prev;
+
+      const keys = field.split('.');
+      const updatedCuration = { ...prev };
+
+      let target: any = updatedCuration;
+      keys.forEach((key, index) => {
+        if (index === keys.length - 1) {
+          target[key] = value;
+        } else {
+          if (!target[key]) target[key] = {};
+          target = target[key];
+        }
+      });
+
+      return updatedCuration;
+    });
+  };
+
   const handleUpdateCuration = () => {
     if (!curation || !curation.readAdminCurationResponse) {
       createToast('수정할 영화 데이터가 없습니다.', 'error');
@@ -198,7 +219,7 @@ const Index = () => {
                 <Input
                   placeholder="큐레이션 제목을 입력해 주세요"
                   value={curation.readAdminCurationResponse.title}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchKeyword(e.target.value)}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleInputChange('readAdminCurationResponse.title', e.target.value)}
                 />
               </Wrapper>
               <Wrapper>
@@ -220,7 +241,7 @@ const Index = () => {
                 <Input
                   placeholder="큐레이션 테마를 입력해 주세요"
                   value={curation.readAdminCurationResponse.theme}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchKeyword(e.target.value)}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleInputChange('readAdminCurationResponse.theme', e.target.value)}
                 />
               </Wrapper>
               <Wrapper>
@@ -230,7 +251,7 @@ const Index = () => {
                 <Input
                   placeholder="큐레이션 설명을 입력해 주세요"
                   value={curation.readAdminCurationResponse.description}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchKeyword(e.target.value)}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleInputChange('readAdminCurationResponse.description', e.target.value)}
                 />
               </Wrapper>
               <Wrapper>
