@@ -10,6 +10,11 @@ export const useJoinClubMutation = () => {
   const { createToast } = useToast();
 
   const { handleError } = useApiError({
+    400: {
+      default: () => {
+        createToast('인원수가 초과했습니다.');
+      },
+    },
     409: {
       default: () => {
         createToast('이미 가입된 멤버입니다.', 'default');

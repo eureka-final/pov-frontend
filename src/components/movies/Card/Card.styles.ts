@@ -18,6 +18,7 @@ export const CardWapper = styled.div`
 `;
 
 export const CardContainer = styled.div`
+  cursor: pointer;
   display: flex;
   flex-direction: column;
   gap: 8px;

@@ -2,6 +2,7 @@ import { Section, NoContentsContainer } from './PaymentLogSection.style';
 import { Body } from 'pov-design-system';
 import PaymentLogCard from '../Card/PaymentLogCard';
 import { usePremieresEntryQuery } from '../../../hooks/queries/usePremieresEntryQuery';
+import { PaymentLogCardContainer } from '../Card/PaymentLogCard.style';
 
 const PaymentLogSection = () => {
   const { premiereEntryData } = usePremieresEntryQuery();
@@ -16,9 +17,11 @@ const PaymentLogSection = () => {
 
   return (
     <Section>
-      {premiereEntryData?.data.entry!.map((item, index) => (
-        <PaymentLogCard key={index} title={item.title} approvedAt={item.approvedAt} amount={item.amount} premiereId={item.premiereId}></PaymentLogCard>
-      ))}
+      <PaymentLogCardContainer>
+        {premiereEntryData?.data.entry!.map((item, index) => (
+          <PaymentLogCard key={index} title={item.title} approvedAt={item.approvedAt} amount={item.amount} premiereId={item.premiereId}></PaymentLogCard>
+        ))}
+      </PaymentLogCardContainer>
     </Section>
   );
 };

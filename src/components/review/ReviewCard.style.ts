@@ -76,7 +76,6 @@ export const Poster = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
-
   align-items: center;
   text-align: center;
 `;

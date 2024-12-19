@@ -1,10 +1,11 @@
 import { useMemo, useRef, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import ReactQuill, { Quill } from 'react-quill';
 import ImageResize from 'quill-image-resize-module-react';
 import 'react-quill/dist/quill.snow.css';
 import { CustomQuillEditorView } from './ReactEditor.style';
 import ReactModule from './ReactModule';
-// import dompurify from 'dompurify';
+import { useToast } from '../../../hooks/common/useToast';
 import { axiosInstance } from '../../../apis/axiosInstance';
 import { Input } from 'pov-design-system';
 import Parchment from 'parchment';
@@ -22,7 +23,9 @@ interface ReactEditorProps {
 const ReactEditor: React.FC<ReactEditorProps> = ({ title, content, onChangeTitle, onChangeContent }) => {
   // 스크립트를 활용하여 javascript와 HTML로 악성 코드를 웹 브라우저에 심어,
   // 사용자 접속시 그 악성코드가 실행되는 것을 XSS, 보안을 위해 sanitize 추가
-  //const sanitizer = dompurify.sanitize;
+  const { movieId } = useParams<{ movieId: string }>();
+
+  const { createToast } = useToast();
 
   const formats: string[] = [
     'header',
@@ -70,7 +73,7 @@ const ReactEditor: React.FC<ReactEditorProps> = ({ title, content, onChangeTitle
       for (let i = 0; i < files.length; i++) {
         if (files[i].size > 2 * 1024 * 1024) {
           // 2MB
-          alert(`파일 사이즈를 2MB 이하로 업로드해주세요.`);
+          createToast(`파일 사이즈를 2MB 이하로 업로드해주세요.`);
           return;
         }
       }
@@ -79,13 +82,13 @@ const ReactEditor: React.FC<ReactEditorProps> = ({ title, content, onChangeTitle
       const totalSize = Array.from(files).reduce((acc, file) => acc + file.size, 0);
       if (totalSize > 10 * 1024 * 1024) {
         // 10MB
-        alert('전체 파일 크기가 10MB를 초과했습니다.');
+        createToast('전체 파일 크기가 10MB를 초과했습니다.');
         return;
       }
 
       // 최대 업로드 개수 제한 검사
       if (files.length > 5) {
-        alert('최대 5개의 파일만 업로드할 수 있습니다.');
+        createToast('최대 5개의 파일만 업로드할 수 있습니다.');
         return;
       }
 
@@ -103,13 +106,27 @@ const ReactEditor: React.FC<ReactEditorProps> = ({ title, content, onChangeTitle
           formData.append('files', files[i]); // 여러 파일 추가
         }
 
+        // reviewImageMutation.mutate(
+        //   { movieId: movieId!, formData },
+        //   {
+        //     onSuccess: (data) => {
+        //       const { imageUrls } = data.data;
+
+        //       if (imageUrls && Array.isArray(imageUrls)) {
+        //         imageUrls.forEach((url) => {
+        //           const index = range.index !== undefined ? range.index : editor.getLength();
+        //           editor.insertEmbed(index, 'image', url);
+        //           editor.setSelection(index + 1, 0); // 커서를 이미지 뒤로 이동
+        //         });
+        //       }
+        //     },
+        //   }
+        // );
+
         try {
-          // Bearer 토큰 설정 (필요 시 동적으로 가져오기)
-          //const accessToken = localStorage.getItem('accessToken'); // 예시: 로컬 스토리지에서 가져옴
-          const res = await axiosInstance.post('https://www.point-of-views.com/api/movies/1/reviews/images', formData, {
+          const res = await axiosInstance.post(`https://www.point-of-views.com/api/movies/${movieId}/reviews/images`, formData, {
             headers: {
               'Content-Type': 'multipart/form-data',
-              // Authorization: `Bearer ${accessToken}`, // 헤더 추가
             },
           });
 
@@ -129,11 +146,11 @@ const ReactEditor: React.FC<ReactEditorProps> = ({ title, content, onChangeTitle
             const { status, data } = err.response;
 
             if (status === 400) {
-              alert(data.message || '지원하지 않는 파일 형식입니다.');
+              createToast(data.message || '지원하지 않는 파일 형식입니다.');
             } else if (status === 413) {
-              alert(data.message || '파일 크기가 제한을 초과했습니다.');
+              createToast(data.message || '파일 크기가 제한을 초과했습니다.');
             } else {
-              alert('이미지 업로드 중 문제가 발생했습니다.');
+              createToast('이미지 업로드 중 문제가 발생했습니다.');
             }
           } else {
             console.error('요청 중 오류 발생:', err);
@@ -158,16 +175,22 @@ const ReactEditor: React.FC<ReactEditorProps> = ({ title, content, onChangeTitle
     []
   );
 
-  // TODO: 제목 글자수 제한 설정
   return (
     <>
       <Input
         id="title"
         name="title"
+        label="필수 입력값입니다"
+        required
         value={title}
         placeholder="제목을 입력해 주세요"
-        supportingText="40자 내로 입력해주세요"
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChangeTitle(e.target.value)}
+        supportingText="85자 내로 입력해주세요"
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+          const newTitle = e.target.value;
+          if (newTitle.length <= 85) {
+            onChangeTitle(newTitle);
+          }
+        }}
       />
 
       <CustomQuillEditorView>
@@ -182,12 +205,8 @@ const ReactEditor: React.FC<ReactEditorProps> = ({ title, content, onChangeTitle
           id="quillContent"
           value={content} // 상태와 연결
           onChange={(html) => onChangeContent(html)}
-          placeholder={'...영화에 대한 리뷰를 남겨주세요!'}
+          placeholder={'...영화에 대한 리뷰를 남겨주세요! 필수 입력값입니다'}
         />
-
-        {/* <div id="content">
-          <div dangerouslySetInnerHTML={{ __html: sanitizer(`${content}`) }} />
-        </div> */}
       </CustomQuillEditorView>
     </>
   );

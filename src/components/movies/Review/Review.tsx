@@ -88,7 +88,7 @@ const Review = ({ reviewers }: ReviewProps) => {
             </Body>
           </Spoiler>
         ) : (
-          <Paragraph size="large">{truncateContents(reviewers.contents, 300)}</Paragraph>
+          <Paragraph>{truncateContents(reviewers.contents, 300)}</Paragraph>
         )}
         <Body size="medium" style={{ color: '#ADACAF' }}>
           {new Date(reviewers.createdAt).toLocaleDateString()}

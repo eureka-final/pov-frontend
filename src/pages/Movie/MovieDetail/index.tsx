@@ -85,7 +85,7 @@ const Index = () => {
       reviewCount: item.goodCount + item.badCount,
       like: item.goodCount,
       unlike: item.badCount,
-      percentage: item.badCount ? (item.goodCount / (item.goodCount + item.badCount)) * 100 : 0,
+      percentage: item.goodCount == 0 && item.badCount == 0 ? 0 : (item.goodCount / (item.goodCount + item.badCount)) * 100,
     }));
 
   const steels =

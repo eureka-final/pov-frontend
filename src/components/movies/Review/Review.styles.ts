@@ -7,6 +7,7 @@ export const ReviewContainer = styled.div`
   background: ${({ theme }) => theme.backgroundElevated};
   border-radius: 8px;
   padding: 20px;
+  cursor: pointer;
   /* @media (min-width: 0px) and (max-width: 600px) {
     min-height: 125px;
   }

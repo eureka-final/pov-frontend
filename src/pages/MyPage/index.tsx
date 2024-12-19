@@ -77,7 +77,7 @@ const index = () => {
           <MemberInfoCard>
             <>
               <div style={{ position: 'absolute', top: '20px', right: '20px', color: theme.teritary }} onClick={() => navigate('/settings')}>
-                <Icon icon="setting" css={{ width: '20px' }} />
+                <Icon icon="setting" css={{ width: '20px', cursor: 'pointer' }} />
               </div>
               <UploadProfileImgButton profileImageUrl={user!.profileImage} handleChangeProfileImage={handlePutProfileImage} />
               <Heading size="large" onClick={() => changeNicknameOpen()}>

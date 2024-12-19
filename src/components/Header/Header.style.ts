@@ -54,7 +54,9 @@ export const LogoItem = styled.div`
   }
 `;
 
-export const NoticeButton = styled.div``;
+export const NoticeButton = styled.div`
+  cursor: pointer; 
+`;
 
 export const LoginButton = styled.div`
   color: ${({ theme }) => theme.secondary};
