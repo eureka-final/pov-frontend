@@ -21,11 +21,15 @@ import { useToast } from '../../../hooks/common/useToast';
 
 import { useState } from 'react';
 import { useLikeMutation, useDisLikeMutation } from '../../../hooks/queries/useLikeMutation';
+import { useAuthStore } from '../../../stores/useAuthStore';
 import { useTheme } from '@emotion/react';
 
 const Index = () => {
   const { movieId, reviewId } = useParams<{ movieId: string; reviewId: string }>();
   const navigate = useNavigate();
+
+  const user = useAuthStore((state) => state.user);
+
   const { createToast } = useToast();
   const theme = useTheme();
   const { isOpen: isSaveOpen, open: saveOpen, close: saveClose } = useOverlay();
@@ -106,14 +110,18 @@ const Index = () => {
                 </Additionals>
               </ReviewInfo>
               <Wrapper>
-                <Menu onClick={() => navigate(`/review/${movieId}/edit/${reviewId}`)}>
-                  <Icon icon="edit" css={{ width: '14px' }} />
-                  <Body size="large">수정하기</Body>
-                </Menu>
-                <Menu onClick={saveOpen}>
-                  <Icon icon="delete" css={{ width: '14px' }} />
-                  <Body size="large">삭제하기</Body>
-                </Menu>
+                {reviewData.data.reviewer == user?.nickname && (
+                  <>
+                    <Menu onClick={() => navigate(`/review/${movieId}/edit/${reviewId}`)}>
+                      <Icon icon="edit" css={{ width: '14px' }} />
+                      <Body size="large">수정하기</Body>
+                    </Menu>
+                    <Menu onClick={saveOpen}>
+                      <Icon icon="delete" css={{ width: '14px' }} />
+                      <Body size="large">삭제하기</Body>
+                    </Menu>
+                  </>
+                )}
               </Wrapper>
             </HeaderContainer>
 
