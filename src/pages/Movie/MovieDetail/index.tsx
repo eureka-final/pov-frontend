@@ -129,7 +129,7 @@ const Index = () => {
                   {likes}
                 </LikeContainer>
                 <LikeContainer>
-                  <Icon icon="reviewline" color="#0DE781" />
+                  <Icon icon="reviewline" color="#0DE781" width="20px" height="20px" />
                   {preference && preference.reduce((acc, item) => acc + item.reviewCount, 0)}
                 </LikeContainer>
               </AdditionalsContainer>
@@ -143,7 +143,7 @@ const Index = () => {
               <Wrapper gap={32} direction="column">
                 <ResponsiveContainer mobDirection="column" pcDirection="row" gap={16}>
                   <Additionals justify="start" onClick={onLike}>
-                    <Icon icon={likeAction ? 'heartfill' : 'heartline'} />
+                    <Icon icon={likeAction ? 'heartfill' : 'heartline'} css={{ width: '20px', color: theme.secondary }} />
                     <Count>{likes}</Count>
                   </Additionals>
                   <Additionals onClick={() => navigate(`/review/${movieId}/write`)}>

@@ -24,6 +24,7 @@ const Progress = styled.div<{ width?: number }>`
   text-align: center;
   background-color: #1bd27d;
   color: #111;
+  border-radius: 24px;
 `;
 
 const Count = styled.div`
@@ -41,7 +42,7 @@ interface Progess {
 const ProgressBar = ({ percentage, like, unlike }: Progess) => {
   return (
     <Container>
-      <Heading size="large" style={{ color: '#1BD27D' }}>{`${percentage}%`}</Heading>
+      <Heading size="xLarge" style={{ color: '#1BD27D' }}>{`${percentage.toFixed(1)}%`}</Heading>
       <Bar>
         <Progress width={percentage} />
       </Bar>

@@ -31,9 +31,9 @@ const FallbackUI = ({ error, resetErrorBoundary }: { error: any; resetErrorBound
   };
 
   return (
-    <Heading css={containerStyling}>
+    <Heading size="xxLarge" css={containerStyling}>
       <Logo icon="type5" />
-      <Heading css={headingStyling} size="small">
+      <Heading size="xLarge" css={headingStyling}>
         {errorMessage.HEADING}
       </Heading>
       <Body css={textStyling}>{errorMessage.BODY}</Body>

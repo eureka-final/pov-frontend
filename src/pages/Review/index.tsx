@@ -1,12 +1,14 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Badge } from 'pov-design-system';
 import { BadgeWrapper } from './Review.style';
 import ReviewList from '../../components/review/ReviewList';
 import MyReviewList from '../../components/review/MyReviewList';
 import ClubReviewList from '../../components/review/ClubReviewList';
 import { ReviewPagePadded } from './index.styled';
+import { useAuthStore } from '../../stores/useAuthStore';
 
 const Index = () => {
+  const user = useAuthStore((state) => state.user);
   const [sections, setSections] = useState([
     { text: '모든 리뷰', click: true },
     { text: '내 리뷰', click: false },
@@ -26,6 +28,12 @@ const Index = () => {
     // 클릭한 섹션에 따라 ReviewList를 뿌려주기 위해 현재 sections 값 할당
     setSectionsType(sections[index].text);
   };
+
+  useEffect(() => {
+    if (!user) {
+      setSections([{ text: '모든 리뷰', click: true }]);
+    }
+  }, []);
 
   return (
     <ReviewPagePadded>

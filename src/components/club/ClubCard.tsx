@@ -1,11 +1,13 @@
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { CardContainer, CardFlex, ReviewCardContainer, TitleInfo, FlexWrapper } from './ClubCard.style';
-import { Body, Input, Icon, Heading, Logo, Badge } from 'pov-design-system';
+import { Body, Input, Icon, Heading, Logo, Badge, Paragraph } from 'pov-design-system';
 import { useClubsQuery } from '../../hooks/queries/useClubsQuery';
+import { useTheme } from '@emotion/react';
 
 function ClubCard() {
   const navigate = useNavigate();
+  const theme = useTheme();
   const { clubsData } = useClubsQuery();
 
   const [searchKeyword, setSearchKeyword] = useState('');
@@ -32,13 +34,15 @@ function ClubCard() {
             <CardFlex>
               <ReviewCardContainer>
                 <Heading size="large">{club.clubName}</Heading>
-                <Body size="large">{club.clubDescription}</Body>
+                <Paragraph size="large" css={{ color: theme.teritary }}>
+                  {club.clubDescription}
+                </Paragraph>
                 <FlexWrapper>
-                  <Body>
+                  <Body size="large">
                     {club.participant}/{club.maxParticipants}
                   </Body>
-                  <Body>·</Body>
-                  <Body>북마크 {club.clubMovieCount}개</Body>
+                  <Body size="large">·</Body>
+                  <Body size="large">북마크 {club.clubMovieCount}개</Body>
                 </FlexWrapper>
               </ReviewCardContainer>
             </CardFlex>
