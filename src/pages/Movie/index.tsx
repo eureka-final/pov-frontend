@@ -6,6 +6,8 @@ import { useMoviesQuery } from '../../hooks/queries/useMoviesQuery';
 import { useInView } from 'react-intersection-observer';
 import { useEffect, useState } from 'react';
 import MoviePageSkeleton from './MoviePageSkeleton';
+import { Skeleton } from 'pov-design-system';
+import { SectionContainer } from '../../components/movies/Section/Section.styles';
 
 const Index = () => {
   const user = useAuthStore((state) => state.user);
@@ -34,9 +36,12 @@ const Index = () => {
     // 초기 로딩 시 스켈레톤 12개 렌더링
     return (
       <>
-        {Array.from({ length: pageSize }).map((_, index) => (
-          <MoviePageSkeleton key={`initial-skeleton-${index}`} />
-        ))}
+        <SectionContainer>
+          <Skeleton width="100%" height="30px" />
+          {Array.from({ length: pageSize }).map((_, index) => (
+            <MoviePageSkeleton key={`initial-skeleton-${index}`} />
+          ))}
+        </SectionContainer>
       </>
     );
   }

@@ -7,7 +7,6 @@ export const SectionContainer = styled.section`
   width: 100%;
 
   margin-top: 24px;
-  margin-bottom: 48px;
 
   &:last-child {
     margin-bottom: 0;
