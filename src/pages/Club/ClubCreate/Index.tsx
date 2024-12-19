@@ -55,7 +55,7 @@ const Index = () => {
   const handleClose = () => {
     saveClose();
     navigate(`/club`);
-    createToast('클럽 만들기 성공!', 'success');
+    createToast('클럽이 생성되었어요.', 'success');
   };
 
   return (

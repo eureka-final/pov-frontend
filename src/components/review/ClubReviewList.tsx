@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { ClubContainer, ClubReviewListContainer, ClubItem } from './ReviewCard.style';
+import { ClubContainer, ClubItem, ClubReviewListContainer } from './ReviewCard.style';
 import { Avatar } from 'pov-design-system';
 import { useJoinClubReviewsQuery, useClubReviewsQuery } from '../../hooks/queries/useReviewsQuery';
 import ClubReviewCard, { EmptyClubReviewCard } from './ClubReviewCard';

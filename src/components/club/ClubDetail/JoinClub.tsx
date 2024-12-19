@@ -67,10 +67,10 @@ const JoinClub = () => {
   const handleCopy = (text: string) => {
     navigator.clipboard.writeText(text).then(
       () => {
-        createToast('초대 URL이 복사되었습니다!', 'default');
+        createToast('초대 URL이 복사되었어요.', 'default');
       },
       () => {
-        createToast('URL 복사에 실패했습니다.', 'error');
+        createToast('URL 복사에 실패했어요.', 'error');
       }
     );
   };
@@ -82,7 +82,7 @@ const JoinClub = () => {
         onSuccess: () => {
           saveClose();
           navigate('/club');
-          createToast('클럽 삭제 성공!', 'success');
+          createToast('클럽이 삭제되었어요.', 'success');
         },
       }
     );
@@ -95,7 +95,7 @@ const JoinClub = () => {
         onSuccess: () => {
           saveLeaveClose();
           window.location.href = `/club/${clubId}/detail`;
-          createToast('클럽 탈퇴 성공!', 'success');
+          createToast('클럽에서 탈퇴했어요.', 'success');
         },
       }
     );

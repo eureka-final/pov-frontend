@@ -55,7 +55,7 @@ const Index = () => {
   const handleClose = () => {
     saveClose();
     navigate(`/club/${clubId}/detail`);
-    createToast('클럽 수정 성공!', 'success');
+    createToast('클럽 정보가 수정되었어요.', 'success');
   };
 
   return (

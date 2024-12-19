@@ -53,8 +53,8 @@ const MovieScreens = {
     path: '/',
     element: <Main />,
   },
-  Movie: {
-    path: '/movie',
+  Movies: {
+    path: '/movies',
     element: <Movie />,
   },
   MovieTrending: {

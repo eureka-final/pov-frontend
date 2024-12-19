@@ -67,7 +67,7 @@ const Index = () => {
         onSuccess: () => {
           saveClose();
           navigate(`/review/${movieId}/detail/${reviewId}`);
-          createToast('리뷰 수정 성공!', 'success');
+          createToast('리뷰가 수정되었어요.', 'success');
         },
       }
     );

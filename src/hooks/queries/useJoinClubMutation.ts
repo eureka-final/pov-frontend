@@ -5,19 +5,17 @@ import { useApiError } from './useApiError';
 
 import { postJoin, postPrivateJoin } from '../../apis/club/postJoin';
 
-
 export const useJoinClubMutation = () => {
   const queryClient = useQueryClient();
   const { createToast } = useToast();
 
-  const { handleError } = useApiError({ 
+  const { handleError } = useApiError({
     409: {
       default: () => {
         createToast('이미 가입된 멤버입니다.', 'default');
       },
     },
   });
-
 
   const joinMutation = useMutation({
     mutationFn: postJoin,
@@ -36,14 +34,13 @@ export const useJoinPrivateClubMutation = (query: string) => {
   const queryClient = useQueryClient();
   const { createToast } = useToast();
 
-  const { handleError } = useApiError({ 
+  const { handleError } = useApiError({
     409: {
       default: () => {
         createToast('이미 가입된 멤버입니다.', 'default');
       },
     },
   });
-
 
   const joinPrivateMutation = useMutation({
     mutationFn: postPrivateJoin,

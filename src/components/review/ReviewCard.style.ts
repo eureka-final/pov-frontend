@@ -13,6 +13,23 @@ export const ClubContainer = styled.div`
   margin-top: 16px;
 `;
 
+export const PopularReviewListContainer = styled.div`
+  gap: 16px; /* 카드 간격 */
+  margin-top: 16px;
+
+  @media (min-width: 0px) and (max-width: 600px) {
+    display: flex;
+    padding-bottom: 48px;
+    flex-direction: column;
+  }
+
+  @media (min-width: 600px) {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin-bottom: 64px;
+  }
+`;
+
 export const ClubReviewListContainer = styled.div`
   gap: 16px; /* 카드 간격 */
   margin-top: 16px;
@@ -24,9 +41,9 @@ export const ClubReviewListContainer = styled.div`
   }
 
   @media (min-width: 600px) {
-    width: calc(1200px - 32px * 2);
+    width: calc(1200px - 116px * 2);
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3열로 구성 */
+    grid-template-columns: repeat(2, 1fr);
     margin-bottom: 64px;
   }
 `;

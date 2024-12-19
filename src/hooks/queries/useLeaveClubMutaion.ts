@@ -6,10 +6,10 @@ import { useApiError } from './useApiError';
 export const useLeaveClubMutaion = () => {
   const queryClient = useQueryClient();
   const { createToast } = useToast();
-  const { handleError } = useApiError({ 
+  const { handleError } = useApiError({
     400: {
       default: () => {
-        createToast('탈퇴 전에 그룹장을 다른 멤버한테 위임해주세요.');
+        createToast('탈퇴 전에 그룹장을 다른 멤버에게 위임해주세요.');
       },
     },
   });
@@ -22,8 +22,7 @@ export const useLeaveClubMutaion = () => {
     onError: (error) => {
       handleError(error);
     },
-  }
-  );
+  });
 
   return leaveClubMutation;
 };
