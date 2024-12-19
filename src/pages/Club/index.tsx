@@ -1,13 +1,15 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Badge, Body } from 'pov-design-system';
 import { BadgeWrapper, Wrapper, ClubBtn } from '../Review/Review.style';
 import ClubList from '../../components/club/ClubList';
 import MyClubList from '../../components/club/MyClubList';
 import { ReviewPagePadded } from '../Review/index.styled';
+import { useAuthStore } from '../../stores/useAuthStore';
 
 const Index = () => {
   const navigate = useNavigate();
+  const user = useAuthStore((state) => state.user);
 
   const [sections, setSections] = useState([
     { text: '모든 클럽', click: true },
@@ -31,6 +33,12 @@ const Index = () => {
   const handleClubCreate = () => {
     navigate('/club/create');
   };
+
+  useEffect(() => {
+    if (!user) {
+      setSections([{ text: '모든 클럽', click: true }]);
+    }
+  }, []);
 
   return (
     <ReviewPagePadded>

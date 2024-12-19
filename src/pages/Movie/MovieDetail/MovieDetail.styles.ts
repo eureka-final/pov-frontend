@@ -122,6 +122,8 @@ export const LikeContainer = styled.div<{ justify?: string }>`
   gap: 8px;
   cursor: pointer;
   color: ${({ theme }) => theme.color.green600};
+  font-size: 14px;
+  font-weight: 600;
 `;
 
 export const Section = styled.div`

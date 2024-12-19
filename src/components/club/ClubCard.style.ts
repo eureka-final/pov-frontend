@@ -28,7 +28,7 @@ export const CardContainer = styled.div`
   flex-direction: column;
   justify-content: space-between;
 
-  padding: 24px;
+  padding: 32px;
   gap: 16px;
   border-radius: 8px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
@@ -53,6 +53,7 @@ export const FlexWrapper = styled.span`
   display: flex;
   margin-top: 16px;
   gap: 8px;
+  color: ${({ theme }) => theme.secondary};
 `;
 
 export const Poster = styled.div`
