@@ -51,24 +51,16 @@ export const ReviewInfo = styled.div`
   display: flex;
   flex-direction: column;
   position: absolute;
-  bottom: 55px;
-  left: 24px;
+  left: 0;
+  bottom: 32px;
   z-index: 20;
   gap: 16px;
-  @media (min-width: 0px) and (max-width: 600px) {
-    left: 24px;
-  }
-
-  @media (min-width: 600px) {
-    left: 76px;
-  }
 `;
 
 export const Wrapper = styled.div`
-  position: absolute;
   z-index: 30;
 
-  @media (min-width: 0px) and (max-width: 600px) {
+  /* @media (min-width: 0px) and (max-width: 600px) {
     top: 60%;
     right: 5%;
   }
@@ -76,7 +68,7 @@ export const Wrapper = styled.div`
   @media (min-width: 600px) {
     top: 55%;
     right: 20%;
-  }
+  } */
 `;
 
 export const MenuWrapper = styled.div`
@@ -90,12 +82,24 @@ export const MenuWrapper = styled.div`
   top: 30px;
 `;
 
+export const ClubMenu = styled.div`
+  cursor: pointer;
+  position: absolute;
+  bottom: 48px;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  gap: 0;
+`;
+
 export const Menu = styled.div`
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 8px;
   white-space: nowrap;
+  color: ${({ theme }) => theme.teritary};
 `;
 
 export const LinkWrapper = styled.div`
@@ -111,6 +115,7 @@ export const FlexWrapper = styled.div`
   display: flex;
   margin-top: 16px;
   gap: 8px;
+  color: ${({ theme }) => theme.teritary};
 `;
 
 export const ModalContainer = styled.div`
