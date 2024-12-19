@@ -175,12 +175,13 @@ const ReactEditor: React.FC<ReactEditorProps> = ({ title, content, onChangeTitle
     []
   );
 
-  // TODO: 제목 글자수 제한 설정
   return (
     <>
       <Input
         id="title"
         name="title"
+        label="필수 입력값입니다"
+        required
         value={title}
         placeholder="제목을 입력해 주세요"
         supportingText="85자 내로 입력해주세요"
@@ -204,7 +205,7 @@ const ReactEditor: React.FC<ReactEditorProps> = ({ title, content, onChangeTitle
           id="quillContent"
           value={content} // 상태와 연결
           onChange={(html) => onChangeContent(html)}
-          placeholder={'...영화에 대한 리뷰를 남겨주세요!'}
+          placeholder={'...영화에 대한 리뷰를 남겨주세요! 필수 입력값입니다'}
         />
       </CustomQuillEditorView>
     </>
