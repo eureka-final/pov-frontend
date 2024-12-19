@@ -61,6 +61,7 @@ export const NoticeButton = styled.div`
 export const LoginButton = styled.div`
   color: ${({ theme }) => theme.secondary};
   cursor: pointer;
+  white-space: nowrap;
 `;
 
 export const FlexWrapper = styled.span`
@@ -78,7 +79,8 @@ export const SearchButton = styled.div`
   background-color: #aa6fff;
   color: white;
   border-radius: 12px;
-
+  white-space: nowrap;
+  
   &:hover {
     background-color: #9549ff;
   }
