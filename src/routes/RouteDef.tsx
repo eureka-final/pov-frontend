@@ -1,4 +1,3 @@
-import Main from '../pages/Main';
 import Movie from '../pages/Movie';
 import MovieTrending from '../pages/Movie/MovieTrending/Index';
 import MovieSearch from '../pages/Movie/MovieSearch/Index';
@@ -32,8 +31,6 @@ import SignUp from '../pages/SignUp/Index';
 import MyPage from '../pages/MyPage';
 import Settings from '../pages/MyPage/Settings';
 import NotFound from '../pages/NotFound/Index';
-
-// import React, { lazy, Suspense } from 'react';
 
 // Admin
 import AdminMovie from '../admins/Movie/Index';
