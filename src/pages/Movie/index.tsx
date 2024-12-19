@@ -4,15 +4,23 @@ import { useAuthStore } from '../../stores/useAuthStore';
 import { constants } from '../../constants/constants';
 import { useMoviesQuery } from '../../hooks/queries/useMoviesQuery';
 import { useInView } from 'react-intersection-observer';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import MoviePageSkeleton from './MoviePageSkeleton';
 
 const Index = () => {
   const user = useAuthStore((state) => state.user);
+
   const { ref, inView } = useInView();
   const pageSize = 2;
+  const [heading, setHeading] = useState<string>('');
 
-  const heading = `${user?.nickname}${constants.movies.main.topic.recommendation}`;
+  useEffect(() => {
+    if (user) {
+      setHeading(`${user?.nickname}${constants.movies.main.topic.recommendation}`);
+    } else {
+      setHeading('추천 영화');
+    }
+  });
 
   const { moviesData, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } = useMoviesQuery();
 
