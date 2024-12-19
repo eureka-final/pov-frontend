@@ -22,7 +22,6 @@ import {
   PosterImg,
   StillCutImage,
   ProductionGridContainer,
-  ReviewCardGridContainer,
 } from './MovieDetail.styles';
 import ResponsiveContainer from '../../../components/styles/ResponsiveContainer';
 import ProgressBar from '../../../components/styles/ProgressBar';
