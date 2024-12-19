@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import NavigationTabs from '../common/NavigationTabs';
-import { Logo, Input, Icon, Heading, Body } from 'pov-design-system';
+import { Logo, Input, Icon, Heading } from 'pov-design-system';
 import { HeaderWrapper, LeftWrapper, RightWrapper, NoticeButton, LoginButton, LogoItem, FlexWrapper, SearchButton } from './Header.style';
 import { useAuthStore } from '../../stores/useAuthStore';
 import { useNavigate } from 'react-router-dom';
