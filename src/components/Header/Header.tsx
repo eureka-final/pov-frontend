@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import NavigationTabs from '../common/NavigationTabs';
 import { Logo, Input, Icon, Heading, Body } from 'pov-design-system';
-import { HeaderWrapper, LeftWrapper, RightWrapper, NoticeButton, LoginButton, LogoItem, FlexWrapper } from './Header.style';
+import { HeaderWrapper, LeftWrapper, RightWrapper, NoticeButton, LoginButton, LogoItem, FlexWrapper, SearchButton } from './Header.style';
 import { useAuthStore } from '../../stores/useAuthStore';
 import { useNavigate } from 'react-router-dom';
 import HeaderProfile from '../common/Profile/HeaderProfile';
@@ -41,9 +41,11 @@ function Header() {
                 onChange={onChange} // 입력 핸들러 연결
                 icon={<Icon icon="search" color="#ADACAF" />} // 아이콘 추가
               />
-              <Body size="large" onClick={onSubmit} style={{ cursor: 'pointer' }}>
-                검색
-              </Body>
+              <SearchButton>
+                <Heading size="small" onClick={onSubmit} style={{ cursor: 'pointer' }}>
+                  검색
+                </Heading>
+              </SearchButton>
             </FlexWrapper>
           </form>
         </LeftWrapper>

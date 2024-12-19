@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 
 export const Container = styled.div`
   width: 100%;
+  padding-bottom: 40px;
 `;
 
 export const HeaderContainer = styled.div<{ src: string }>`

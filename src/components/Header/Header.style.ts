@@ -55,7 +55,7 @@ export const LogoItem = styled.div`
 `;
 
 export const NoticeButton = styled.div`
-  cursor: pointer; 
+  cursor: pointer;
 `;
 
 export const LoginButton = styled.div`
@@ -66,5 +66,20 @@ export const LoginButton = styled.div`
 export const FlexWrapper = styled.span`
   display: flex;
   align-items: center;
-  gap: 8px; 
+  gap: 8px;
+`;
+
+export const SearchButton = styled.div`
+  margin-left: 8px;
+  padding: 8px 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #aa6fff;
+  color: white;
+  border-radius: 12px;
+
+  &:hover {
+    background-color: #9549ff;
+  }
 `;
