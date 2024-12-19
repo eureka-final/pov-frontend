@@ -4,6 +4,7 @@ import {
   ReviewListContainer,
   CardContainer,
   Poster,
+  Title,
   CardFlex,
   ReviewCardContainer,
   LikeContainer,
@@ -81,7 +82,7 @@ function ReviewCard({ reviewId, movieId, thumbnail, movieTitle, reviewer, profil
           <Poster>
             <img src={thumbnail.replace('/w154/', '/w92/')} alt={movieTitle} style={{ borderRadius: '4px' }} />
             <Body size="medium" css={{ color: theme.teritary }}>
-              {movieTitle}
+              {movieTitle.length > 10 ? `${movieTitle.substring(0, 10)}...` : movieTitle}
             </Body>
           </Poster>
           <ReviewCardContainer>
