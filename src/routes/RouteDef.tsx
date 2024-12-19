@@ -1,4 +1,3 @@
-import Main from '../pages/Main';
 import Movie from '../pages/Movie/Index';
 import MovieTrending from '../pages/Movie/MovieTrending/Index';
 import MovieSearch from '../pages/Movie/MovieSearch/Index';
