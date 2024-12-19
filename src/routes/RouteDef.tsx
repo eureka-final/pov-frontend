@@ -65,19 +65,11 @@ const MovieScreens = {
     path: '/movie/search',
     element: <MovieSearch />,
   },
-  // MovieDetail: {
-  //   path: '/movie/:movieId/detail',
-  //   element: <MovieDetail />,
-  // },
-  // MovieDetails: {
-  //   path: '/movies/:movieId/detail',
-  //   element: <MovieDetailPage />,
-  // },
   MovieDetails: {
     path: '/movie/:movieId/detail',
     element: <MovieDetail />,
   },
-  MovieReview: {
+  MovieReviews: {
     path: '/movie/:movieId/reviews',
     element: <MovieReviews />,
   },
