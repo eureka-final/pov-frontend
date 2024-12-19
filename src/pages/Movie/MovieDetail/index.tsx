@@ -205,16 +205,18 @@ const Index = () => {
               </HeadingContainer>
               <ScrollContainer>{steels && steels.map((item, index) => <StillCutImage key={index + item.url} src={item.url} />)}</ScrollContainer>
             </Section>
-            <Section>
-              <HeadingContainer>
-                <Heading size="xLarge">{constants.movies.detail.heading.videos}</Heading>
-              </HeadingContainer>
-              <ScrollContainer>
-                {movieData.data.videos.map((item, index) => (
-                  <div key={item + index} />
-                ))}
-              </ScrollContainer>
-            </Section>
+            {movieData.data.videos.length !== 0 && (
+              <Section>
+                <HeadingContainer>
+                  <Heading size="xLarge">{constants.movies.detail.heading.videos}</Heading>
+                </HeadingContainer>
+                <ScrollContainer>
+                  {movieData.data.videos.map((item, index) => (
+                    <div key={item + index} />
+                  ))}
+                </ScrollContainer>
+              </Section>
+            )}
           </PaddedContainer>
         </Container>
       )}
