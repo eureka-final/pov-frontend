@@ -48,10 +48,19 @@ import AdminCurationUpdate from '../admins/Movie/curationUpdate/Index';
 import AdminReviews from '../admins/reviews/Index';
 import AdminReviewDetail from '../admins/reviews/reviewDetail/Index';
 
+import MainPageSkeleton from '../pages/Main/MainPageSkeleton';
+
+import { Suspense } from 'react';
+import * as Lazy from './lazy';
+
 const MovieScreens = {
   Main: {
     path: '/',
-    element: <Main />,
+    element: (
+      <Suspense fallback={<MainPageSkeleton />}>
+        <Lazy.MainPage />
+      </Suspense>
+    ),
   },
   Movies: {
     path: '/movie',

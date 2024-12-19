@@ -18,7 +18,6 @@ export const CardWapper = styled.div`
 `;
 
 export const CardContainer = styled.div`
-  cursor: pointer;
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -70,7 +69,7 @@ export const Info = styled.div`
 export const Count = styled.span``;
 
 export const MarginTop = styled.div`
-  margin-top: 60px;
+  margin-top: 37px;
 `;
 
 export const LikeContainer = styled.div`
