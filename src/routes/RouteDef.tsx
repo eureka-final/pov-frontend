@@ -65,7 +65,7 @@ const MovieScreens = {
     path: '/movie/search',
     element: <MovieSearch />,
   },
-  MovieDetail: {
+  MovieDetails: {
     path: '/movie/:movieId/detail',
     element: <MovieDetail />,
   },
