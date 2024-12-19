@@ -1,4 +1,4 @@
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { useForm, FormProvider } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -18,7 +18,6 @@ import { Heading, Body, Button, useOverlay, Modal } from 'pov-design-system';
 const signInSteps = ['nickname', 'birth', 'favorGenres', 'success'];
 
 const Index = () => {
-  const navigate = useNavigate();
   const location = useLocation();
   const { Step, Funnel, setStep } = useFunnel(signInSteps[0]);
   const setLoggedIn = useAuthStore((state) => state.setLoggedIn);

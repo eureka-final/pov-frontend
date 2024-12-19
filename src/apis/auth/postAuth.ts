@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { axiosInstance } from '../axiosInstance';
 import { ACCESS_TOKEN_KEY } from '../../constants/api';
 import { User } from '../../types/user';
