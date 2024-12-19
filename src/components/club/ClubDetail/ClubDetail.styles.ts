@@ -17,8 +17,10 @@ export const HeaderContainer = styled.div<{ src: string }>`
 
 export const BackgroundLayer = styled.div<{ src: string }>`
   width: 100%;
-  height: 100%;
+  height: 520px;
   position: absolute;
+  top: 0;
+  left: 0;
   background: ${({ src }) => (src ? `url(${src})` : '#ffffff')};
   background-size: cover;
   background-position: center;
@@ -27,7 +29,6 @@ export const BackgroundLayer = styled.div<{ src: string }>`
   mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
   z-index: 1;
 `;
-
 
 export const Layar = styled.div`
   display: flex;
@@ -50,32 +51,24 @@ export const ReviewInfo = styled.div`
   display: flex;
   flex-direction: column;
   position: absolute;
-  bottom: 55px;
-  left: 24px;
+  left: 0;
+  bottom: 32px;
   z-index: 20;
   gap: 16px;
-  @media (min-width: 0px) and (max-width: 600px) {
-    left: 24px;
-  }
-
-  @media (min-width: 600px) {
-    left: 76px;
-  }
 `;
 
 export const Wrapper = styled.div`
-  position: absolute;
   z-index: 30;
 
-  @media (min-width: 0px) and (max-width: 600px) {
+  /* @media (min-width: 0px) and (max-width: 600px) {
     top: 60%;
     right: 5%;
   }
 
   @media (min-width: 600px) {
-    top: 55%; 
-    right: 20%; 
-  }
+    top: 55%;
+    right: 20%;
+  } */
 `;
 
 export const MenuWrapper = styled.div`
@@ -89,12 +82,24 @@ export const MenuWrapper = styled.div`
   top: 30px;
 `;
 
+export const ClubMenu = styled.div`
+  cursor: pointer;
+  position: absolute;
+  bottom: 48px;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  gap: 0;
+`;
+
 export const Menu = styled.div`
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 8px;
   white-space: nowrap;
+  color: ${({ theme }) => theme.teritary};
 `;
 
 export const LinkWrapper = styled.div`
@@ -110,6 +115,7 @@ export const FlexWrapper = styled.div`
   display: flex;
   margin-top: 16px;
   gap: 8px;
+  color: ${({ theme }) => theme.teritary};
 `;
 
 export const ModalContainer = styled.div`
@@ -132,7 +138,6 @@ export const Additionals = styled.div<{ justify?: string }>`
   gap: 4px;
 `;
 
-
 export const ReviewContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -142,13 +147,14 @@ export const ReviewContainer = styled.div`
   padding: 20px;
 `;
 
-
 export const Section = styled.div`
   gap: 10px;
-  margin-bottom: 46px;
+  margin-bottom: 48px;
 `;
 
 export const SectionWrapper = styled.div`
+  width: 100%;
+  margin-bottom: 16px;
   display: flex;
   justify-content: space-between;
 `;

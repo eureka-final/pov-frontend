@@ -3,7 +3,8 @@ export const constants = {
     main: {
       topic: {
         recommendation: '님을 위한 추천 영화',
-        search: '(으)로 검색한 결과입니다.'
+        search: '에 대한 검색 결과에요.',
+        trending: `POV's 선정 영화 🎞️ 이런 영화 어때요?`
       },
       genres: {
         action: '액션',
@@ -20,7 +21,7 @@ export const constants = {
       heading: {
         review: '리뷰',
         production: '제작 및 출연',
-        steel: '스틸 컷',
+        steel: '스틸컷',
         videos: '관련 영상',
       },
       body: {

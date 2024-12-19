@@ -8,7 +8,7 @@ export const useEditClubMutation = () => {
 
   const { createToast } = useToast();
 
-  const { handleError } = useApiError({ 
+  const { handleError } = useApiError({
     400: {
       default: () => {
         createToast('올바른 형식을 입력하세요.');
@@ -25,22 +25,20 @@ export const useEditClubMutation = () => {
     onError: (error) => {
       handleError(error);
     },
-  }
-  );
+  });
 
   return editClubMutation;
 };
-
 
 export const useChangeLeaderMutation = () => {
   const queryClient = useQueryClient();
 
   const { createToast } = useToast();
 
-  const { handleError } = useApiError({ 
+  const { handleError } = useApiError({
     403: {
       default: () => {
-        createToast('클럽장만 위임할 수 있습니다.');
+        createToast('클럽장만 위임할 수 있어요.');
       },
     },
   });
@@ -54,8 +52,7 @@ export const useChangeLeaderMutation = () => {
     onError: (error) => {
       handleError(error);
     },
-  }
-  );
+  });
 
   return leaderChangeMutation;
 };

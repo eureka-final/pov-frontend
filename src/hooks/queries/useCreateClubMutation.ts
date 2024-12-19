@@ -6,8 +6,9 @@ import { useToast } from '../common/useToast';
 export const useCreateClubMutation = () => {
   const { createToast } = useToast();
 
-  const { handleError } = useApiError({ 
-    400: { // 커스텀 에러
+  const { handleError } = useApiError({
+    400: {
+      // 커스텀 에러
       default: () => {
         createToast('올바른 형식을 입력하세요.');
       },
@@ -22,8 +23,7 @@ export const useCreateClubMutation = () => {
     onError: (error) => {
       handleError(error);
     },
-  }
-  );
+  });
 
   return createClubMutation;
 };
@@ -37,10 +37,9 @@ export const useInviteCodeMutation = () => {
       console.log('성공적으로 전송:', data);
     },
     onError: () => {
-      createToast('초대코드 생성 실패');
+      createToast('초대코드 생성에 실패했어요.');
     },
-  }
-  );
+  });
 
   return inviteCodeMutation;
 };

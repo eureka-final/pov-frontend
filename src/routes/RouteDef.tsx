@@ -1,11 +1,14 @@
 import Main from '../pages/Main';
 import Movie from '../pages/Movie';
+import MovieTrending from '../pages/Movie/MovieTrending/Index';
 import MovieSearch from '../pages/Movie/MovieSearch/Index';
-import MovieDetail from '../pages/Movie/MovieDetail';
+import MovieDetail from '../pages/Movie/MovieDetail/Index';
 import MovieReviews from '../pages/Movie/MovieReviews/Index';
 import Review from '../pages/Review';
 import ReviewWrite from '../pages/Review/ReviewWrite/Index';
 import ReviewEdit from '../pages/Review/ReviewEdit/Index';
+
+// Club
 import Club from '../pages/Club';
 import ClubCreate from '../pages/Club/ClubCreate/Index';
 import ClubDetail from '../pages/Club/ClubDetail/Index';
@@ -19,6 +22,8 @@ import Payments from '../pages/Premieres/Payments/Index';
 import Success from '../pages/Premieres/Payments/Success/Index';
 import Fail from '../pages/Premieres/Payments/Fail/Index';
 import ReviewDetail from '../pages/Review/ReviewDetail/Index';
+
+// Auth
 import Login from '../pages/Login/Index';
 import OauthNaver from '../pages/Oauth/Naver/Index';
 import OauthGoogle from '../pages/Oauth/Google/Index';
@@ -30,25 +35,42 @@ import NotFound from '../pages/NotFound/Index';
 
 // import React, { lazy, Suspense } from 'react';
 
+// Admin
+import AdminMovie from '../admins/Movie/Index';
+import AdminMovieDetail from '../admins/Movie/MovieDetail/Index';
+import AdminMovieUpdate from '../admins/Movie/detailUpdate/Index';
+import TMDBMovies from '../admins/Movie/tmdbMovies/Index';
+import TMDBMoviesApply from '../admins/Movie/tmdbApply/Index';
+import AdminCurations from '../admins/Movie/curations/Index';
+import AdminCurationsApply from '../admins/Movie/curationsApply/Index';
+import AdminCurationsDetail from '../admins/Movie/curationDetail/Index';
+import AdminCurationUpdate from '../admins/Movie/curationUpdate/Index';
+import AdminReviews from '../admins/reviews/Index';
+import AdminReviewDetail from '../admins/reviews/reviewDetail/Index';
+
 const MovieScreens = {
   Main: {
     path: '/',
     element: <Main />,
   },
-  Movie: {
+  Movies: {
     path: '/movie',
     element: <Movie />,
+  },
+  MovieTrending: {
+    path: '/movie/trending',
+    element: <MovieTrending />,
   },
   MovieSearch: {
     path: '/movie/search',
     element: <MovieSearch />,
   },
-  MovieDetail: {
+  MovieDetails: {
     path: '/movie/:movieId/detail',
     element: <MovieDetail />,
   },
   MovieReviews: {
-    path: '/movie/reviews',
+    path: '/movie/:movieId/reviews',
     element: <MovieReviews />,
   },
 };
@@ -167,6 +189,53 @@ const NotFoundScreens = {
   },
 };
 
+const AdminScreens = {
+  Movie: {
+    path: '/admin/movies',
+    element: <AdminMovie />,
+  },
+  MovieDetail: {
+    path: '/admin/movie/detail/:id',
+    element: <AdminMovieDetail />,
+  },
+  MovieUpdate: {
+    path: '/admin/movie/update/:id',
+    element: <AdminMovieUpdate />,
+  },
+  TMDBMovie: {
+    path: '/admin/movie/tmdb',
+    element: <TMDBMovies />,
+  },
+  TMDBApply: {
+    path: '/admin/movie/tmdb/apply/:id',
+    element: <TMDBMoviesApply />,
+  },
+  AdminCurations: {
+    path: '/admin/movie/curations',
+    element: <AdminCurations />,
+  },
+  AdminCurationsApply: {
+    path: '/admin/movie/curations/apply',
+    element: <AdminCurationsApply />,
+  },
+  AdminCurationsDetail: {
+    path: '/admin/movie/curations/detail/:id',
+    element: <AdminCurationsDetail />,
+  },
+  AdminCurationUpdate: {
+    path: '/admin/movie/curations/detail/update/:id',
+    element: <AdminCurationUpdate />,
+  },
+  AdminReviews: {
+    path: '/admin/reviews',
+    element: <AdminReviews />,
+  },
+  AdminReviewDetail: {
+    path: '/admin/reviews/detail/:id',
+    element: <AdminReviewDetail />,
+  },
+};
+
 export const AppRouteDef = {
   ...MovieScreens,
   ...ReviewScreens,
@@ -174,5 +243,6 @@ export const AppRouteDef = {
   ...PremieresScreens,
   ...AuthScreens,
   ...MemberScreens,
+  ...AdminScreens,
   ...NotFoundScreens,
 };

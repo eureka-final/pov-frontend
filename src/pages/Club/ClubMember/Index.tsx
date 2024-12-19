@@ -34,7 +34,7 @@ function Index() {
       {
         onSuccess: () => {
           saveClose();
-          createToast('클럽장 변경 성공!', 'success');
+          createToast('클럽장이 변경되었어요.', 'success');
           refetch();
         },
       }

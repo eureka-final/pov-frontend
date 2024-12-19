@@ -8,8 +8,9 @@ const detailHeaderRoutes = [
   { path: '/login', title: '로그인하기' },
   { path: '/oauth/naver', title: '' },
   { path: '/oauth/google', title: '' },
-  { path: '/movie/detail', title: '영화 상세정보' },
-  { path: '/premieres/:premiereId', title: '시사회 이벤트 자세히 보기' },
+  { path: '/movie/:movieId/detail', title: '' },
+  { path: '/club/:clubId/detail', title: '' },
+  { path: '/review/:movieId/detail/:reviewId', title: '' },
   { path: '/settings', title: '설정' },
 ];
 

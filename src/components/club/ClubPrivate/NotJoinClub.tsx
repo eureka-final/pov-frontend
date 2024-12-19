@@ -16,7 +16,6 @@ import {
 } from '../../../components/club/ClubDetail/ClubDetail.styles';
 import { useJoinPrivateClubMutation } from '../../../hooks/queries/useJoinClubMutation';
 import { useToast } from '../../../hooks/common/useToast';
-// import Profile from '../../../components/common/Profile';
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
@@ -44,14 +43,11 @@ const NotJoinClub = () => {
       {
         onSuccess: () => {
           saveClose();
-          //window.location.href = `/club/${clubId}/detail`;
-          createToast('클럽 가입 성공!', 'success');
+          createToast('클럽 가입에 성공했어요.', 'success');
         },
       }
     );
   };
-
-  // const leader = clubsData?.data.members.memberList.find((member) => member.isLeader);
 
   return (
     <Basic>
@@ -77,7 +73,6 @@ const NotJoinClub = () => {
                     </Badge>
                   ))}
                 </Additionals>
-                {/* {leader && <Profile name={leader.nickname} avatarUrl={leader.profileImage} />} */}
               </ReviewInfo>
             </HeaderContainer>
             <JoinContainer>

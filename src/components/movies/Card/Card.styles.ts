@@ -1,4 +1,11 @@
 import styled from '@emotion/styled';
+import { Heading } from 'pov-design-system';
+
+export const InfoContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+`;
 
 export const CardWapper = styled.div`
   display: flex;
@@ -10,21 +17,59 @@ export const CardWapper = styled.div`
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 `;
 
-export const InfoContainer = styled.div`
+export const CardContainer = styled.div`
   display: flex;
-  align-items: center;
-  gap: 4px;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 24px;
+
+  @media (min-width: 0px) and (max-width: 600px) {
+    width: 100%;
+    min-width: 148px;
+  }
+
+  @media (min-width: 600px) {
+    min-width: 168px;
+    width: 100%;
+  }
+`;
+
+export const SingleLineHeading = styled(Heading)`
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 100%; /* 부모 요소에 따라 너비 조정 */
+  margin-bottom: 4px;
+`;
+
+export const ThumbnailImage = styled.img`
+  width: 100%;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-bottom: 8px;
+  aspect-ratio: 9 / 15;
+
+  @media (min-width: 0px) and (max-width: 600px) {
+    max-height: 380px;
+  }
+
+  @media (min-width: 600px) {
+    width: 100%;
+    /* height: 380px; */
+  }
 `;
 
 export const Info = styled.div`
+  margin-top: 4px;
   display: flex;
-  gap: 10px;
+  gap: 20px;
 `;
 
 export const Count = styled.span``;
 
 export const MarginTop = styled.div`
-  margin-top: 35px;
+  margin-top: 60px;
 `;
 
 export const LikeContainer = styled.div`

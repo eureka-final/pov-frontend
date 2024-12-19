@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import Padded from '../../components/templates/Padded/Padded';
 import { Badge } from 'pov-design-system';
 import { BadgeWrapper } from './Review.style';
 import ReviewList from '../../components/review/ReviewList';
 import MyReviewList from '../../components/review/MyReviewList';
 import ClubReviewList from '../../components/review/ClubReviewList';
+import { ReviewPagePadded } from './index.styled';
 
 const Index = () => {
   const [sections, setSections] = useState([
@@ -28,10 +28,10 @@ const Index = () => {
   };
 
   return (
-    <Padded>
+    <ReviewPagePadded>
       <BadgeWrapper>
         {sections.map((section, index) => (
-          <Badge key={index} variant="section" click={section.click} onClick={() => handleBadgeClick(index)} css={{ cursor: 'pointer' }}>
+          <Badge size="large" key={index} variant="section" click={section.click} onClick={() => handleBadgeClick(index)} css={{ cursor: 'pointer' }}>
             {section.text}
           </Badge>
         ))}
@@ -39,7 +39,7 @@ const Index = () => {
       {sectionsType === '모든 리뷰' && <ReviewList />}
       {sectionsType === '내 리뷰' && <MyReviewList />}
       {sectionsType === '클럽 리뷰' && <ClubReviewList />}
-    </Padded>
+    </ReviewPagePadded>
   );
 };
 

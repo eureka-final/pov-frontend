@@ -10,20 +10,22 @@ import {
   FlexBetween,
   Spoiler,
   SpoMore,
-  ReadMore,
   TitleInfo,
 } from './ReviewCard.style';
 import { Body, Paragraph, Icon, Heading, Logo, Button } from 'pov-design-system';
-import Profile from '../common/Profile';
+import Profile from '../common/Profile/Profile';
 import dompurify from 'dompurify';
 import { Review } from '../../types/review';
 import { useState } from 'react';
 import { useLikeMutation, useDisLikeMutation } from '../../hooks/queries/useLikeMutation';
+import { useTheme } from '@emotion/react';
+import useWindowSize from '../../hooks/utils/useWindowSize';
 
 function ReviewCard({ reviewId, movieId, thumbnail, movieTitle, reviewer, profileImage, title, spoiler, contents, createdAt, isLiked, likeAmount }: Review) {
   const navigate = useNavigate();
+  const windowSize = useWindowSize();
   const sanitizer = dompurify.sanitize;
-
+  const theme = useTheme();
   const truncateContents = (text: string | undefined, maxLength: number) => {
     if (!text) return '';
     if (text.length > maxLength) {
@@ -32,7 +34,6 @@ function ReviewCard({ reviewId, movieId, thumbnail, movieTitle, reviewer, profil
         <>
           <div dangerouslySetInnerHTML={{ __html: sanitizer(truncatedText).replace(/<img[^>]*>/g, '') }} />
           <span>...</span>
-          <ReadMore>더보기</ReadMore>
         </>
       );
     }
@@ -78,29 +79,37 @@ function ReviewCard({ reviewId, movieId, thumbnail, movieTitle, reviewer, profil
           }}
         >
           <Poster>
-            <img src={thumbnail.replace('/w154/', '/w92/')} alt={movieTitle} />
-            <Body size="small">{movieTitle}</Body>
+            <img src={thumbnail.replace('/w154/', '/w92/')} alt={movieTitle} style={{ borderRadius: '4px' }} />
+            <Body size="medium" css={{ color: theme.teritary }}>
+              {movieTitle}
+            </Body>
           </Poster>
           <ReviewCardContainer>
             <Profile name={reviewer} avatarUrl={profileImage} />
-            <Paragraph>{title}</Paragraph>
+            <Paragraph size="xLarge">{title}</Paragraph>
 
             {spoiler ? (
               <Spoiler>
-                <Body size="large">스포일러가 있어요!</Body>
-                <Body size="large">
+                <Body size="xLarge" css={{ color: theme.teritary }}>
+                  스포일러가 있어요!
+                </Body>
+                <Body size="xLarge">
                   <SpoMore>더보기</SpoMore>
                 </Body>
               </Spoiler>
             ) : (
-              <Body size="large">{truncateContents(contents, 300)}</Body>
+              <Paragraph size="large" css={{ color: theme.teritary }}>
+                {windowSize.width! > 600 && truncateContents(contents, 208)}
+              </Paragraph>
             )}
+            <Body size="large" css={{ color: theme.teritary }}>
+              {new Date(createdAt).toLocaleDateString()}
+            </Body>
           </ReviewCardContainer>
         </CardFlex>
         <FlexBetween>
-          <Body>{new Date(createdAt).toLocaleDateString()}</Body>
           <LikeContainer onClick={onLike}>
-            <Icon icon={likeAction ? 'heartfill' : 'heartline'} /> {likes}
+            <Icon icon={likeAction ? 'heartfill' : 'heartline'} css={{ width: '16px' }} /> {likes}
           </LikeContainer>
         </FlexBetween>
       </CardContainer>

@@ -14,12 +14,14 @@ import {
 import { useClubDetailQuery } from '../../../hooks/queries/useClubsQuery';
 import { useJoinClubMutation } from '../../../hooks/queries/useJoinClubMutation';
 import { useToast } from '../../../hooks/common/useToast';
-import Profile from '../../../components/common/Profile';
+import Profile from '../../common/Profile/Profile';
+import { useTheme } from '@emotion/react';
 
 const NotJoinClub = () => {
   const { clubId } = useParams<{ clubId: string }>();
   const { isOpen: isSaveOpen, open: saveOpen, close: saveClose } = useOverlay();
   const { createToast } = useToast();
+  const theme = useTheme();
 
   const { clubsData } = useClubDetailQuery(clubId!);
 
@@ -44,18 +46,20 @@ const NotJoinClub = () => {
     <Basic>
       {clubsData && (
         <>
+          <BackgroundLayer src={clubsData.data.clubImage}></BackgroundLayer>
           <Container>
             <HeaderContainer src={clubsData.data.clubImage}>
-              <BackgroundLayer src={clubsData.data.clubImage}></BackgroundLayer>
               <ReviewInfo>
-                <Heading size="xLarge">{clubsData.data.clubName}</Heading>
-                <Body size="large">{clubsData.data.clubDescription}</Body>
+                <Heading size="xxLarge">{clubsData.data.clubName}</Heading>
+                <Body size="xLarge" css={{ color: theme.teritary }}>
+                  {clubsData.data.clubDescription}
+                </Body>
                 <FlexWrapper>
-                  <Body>
+                  <Body size="large">
                     {clubsData.data.participant}/{clubsData.data.maxParticipants}
                   </Body>
-                  <Body>·</Body>
-                  <Body>북마크 {clubsData.data.movieCount}개</Body>
+                  <Body size="large">·</Body>
+                  <Body size="large">북마크 {clubsData.data.movieCount}개</Body>
                 </FlexWrapper>
                 <Additionals>
                   {clubsData.data.clubFavorGenres.map((item, index) => (

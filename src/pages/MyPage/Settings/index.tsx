@@ -1,11 +1,19 @@
 import { Heading, Body, Button, Modal, useOverlay } from 'pov-design-system';
-import { Section, Header, Label, RowWrapper, ButtonWrapper, TextButton } from './index.styles';
+import { Section, Header, Label, RowWrapper, ButtonWrapper, TextButton, WordWrapText, ModalContentWrapper } from './index.styles';
 import ThemeToggle from '../../../components/common/Toggle/ThemeToggle';
 import NoticeToggle from '../../../components/common/Toggle/NoticeToggle';
 import { useClearUser } from '../../../stores/useAuthStore';
 import { deleteMember } from '../../../apis/member/deleteMember';
-import { postLogoutApi } from '../../../apis/auth/logoutApi';
 import { useToast } from '../../../hooks/common/useToast';
+import { postLogout } from '../../../apis/auth/postAuth';
+
+const signOutInfo = `
+POV는 원활한 서비스 운영 및 유지를 위해
+탈퇴 후에도 회원 정보를 30일간 유지하고 있어요.
+탈퇴 처리 후 7일이 지나기 전에 해당 계정으로
+다시 로그인하는 경우, 기존 회원정보가 원래대로 복구돼요.
+위 안내 사항을 확인하신 후 탈퇴를 진행해주세요.
+`;
 
 const index = () => {
   const { isOpen: isLogoutConfirmOpen, open: logoutConfirmOpen, close: logoutConfirmClose } = useOverlay();
@@ -13,8 +21,9 @@ const index = () => {
   const { isOpen: isSignOutConfirmOpen, open: signOutConfirmOpen, close: signOutConfirmClose } = useOverlay();
   const { isOpen: isSignOutOpen, open: signOutOpen, close: signOutClose } = useOverlay();
   const { createToast } = useToast();
+
   const handleLogoutClick = async () => {
-    const response = await postLogoutApi();
+    const response = await postLogout();
     logoutConfirmClose();
     if (response) {
       useClearUser();
@@ -92,16 +101,19 @@ const index = () => {
       </Modal>
 
       {/* 회원탈퇴 확인 모달 */}
-      <Modal isOpen={isSignOutConfirmOpen} closeModal={signOutConfirmClose}>
-        <Heading css={{ marginBottom: '24px' }}>정말 탈퇴하시겠어요?</Heading>
-        <ButtonWrapper>
-          <Button variant="secondary" size="small" onClick={signOutConfirmClose}>
-            취소하기
-          </Button>
-          <Button variant="primary" size="small" onClick={handleSignOutClick}>
-            탈퇴하기
-          </Button>
-        </ButtonWrapper>
+      <Modal css={{ padding: '24px' }} isOpen={isSignOutConfirmOpen} closeModal={signOutConfirmClose}>
+        <ModalContentWrapper>
+          <Heading css={{ marginTop: '8px' }}>탈퇴하기 전에 확인해주세요.</Heading>
+          <WordWrapText size="large">{signOutInfo}</WordWrapText>
+          <ButtonWrapper>
+            <Button css={{ width: '100%' }} variant="secondary" size="small" onClick={signOutConfirmClose}>
+              취소하기
+            </Button>
+            <Button css={{ width: '100%' }} variant="primary" size="small" onClick={handleSignOutClick}>
+              탈퇴하기
+            </Button>
+          </ButtonWrapper>
+        </ModalContentWrapper>
       </Modal>
 
       {/* 회원탈퇴 완료 모달 */}

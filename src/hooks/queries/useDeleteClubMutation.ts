@@ -14,10 +14,9 @@ export const useDeleteClubMutation = () => {
     },
     onError: () => {
       // 에러 핸들링
-      createToast('삭제에 실패했습니다. 잠시 후 다시 시도해주세요.');
+      createToast('삭제에 실패했어요. 잠시 후 다시 시도해주세요.');
     },
-  }
-  );
+  });
 
   return deleteClubMutation;
 };
