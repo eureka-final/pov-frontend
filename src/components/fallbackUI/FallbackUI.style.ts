@@ -7,6 +7,9 @@ export const containerStyling = css({
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
 });
 
 export const headingStyling = css({
@@ -16,7 +19,7 @@ export const headingStyling = css({
 export const textStyling = css({
   width: '300px',
   marginTop: themes.dark.spacer.spacing3,
-
+  fontSize: '16px',
   textAlign: 'center',
 });
 

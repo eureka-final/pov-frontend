@@ -74,19 +74,19 @@ interface HttpErrorMessage {
 
 export const HTTP_ERROR_MESSAGE: Record<number, HttpErrorMessage> = {
   [HTTP_STATUS_CODE.NOT_FOUND]: {
-    HEADING: '페이지를 다시 탐색해주세요.',
-    BODY: '요청하신 페이지를 찾을 수 없습니다.',
+    HEADING: '요청하신 페이지를 찾을 수 없습니다.',
+    BODY: '페이지를 다시 탐색해주세요.',
     BUTTON: '홈으로 가기',
   },
   [HTTP_STATUS_CODE.UNAUTHORIZED]: {
-    HEADING: '인증이 만료되었습니다.',
-    BODY: '로그인을 해주세요',
-    BUTTON: '로그인',
+    HEADING: '인증이 만료되었어요.',
+    BODY: '로그인을 해주세요.',
+    BUTTON: '로그인하러 가기',
   },
   [HTTP_STATUS_CODE.FORBIDDEN]: {
     HEADING: '접근 권한이 없습니다.',
-    BODY: '로그인을 해주세요',
-    BUTTON: '로그인',
+    BODY: '로그인을 해주세요.',
+    BUTTON: '로그인하러 가기',
   },
   [HTTP_STATUS_CODE.INTERNAL_SERVER_ERROR]: {
     HEADING: '현재 페이지를 표시할 수 없습니다.',
