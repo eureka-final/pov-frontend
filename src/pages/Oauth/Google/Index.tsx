@@ -47,8 +47,6 @@ const Index = () => {
 
           if (response.data.memberInfo.role === 'USER') window.location.href = '/';
           if (response.data.memberInfo.role === 'ADMIN') window.location.href = '/admin/movies';
-          if (response.data.memberInfo.role === 'USER') window.location.href = '/';
-          if (response.data.memberInfo.role === 'ADMIN') window.location.href = '/admin/movies';
         } else {
           // 회원 정보가 존재하지 않는 경우 회원가입으로 이동
           navigate('/signup', {
