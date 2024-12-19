@@ -1,15 +1,15 @@
 import AdminTemplate from '../../components/templates/Admin/AdminTemplate';
 import { Container, Header, List } from './Index.styles';
-import { Heading, Body, Input, Icon } from 'pov-design-system';
+import { Heading, Body } from 'pov-design-system';
 import { useInView } from 'react-intersection-observer';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 // import debounce from 'lodash.debounce';
 import ReviewCard, { ReviewCardEmpty } from '../../components/admins/reviews/ReviewCard';
 import ReviewPageSkeleton from '../../components/review/ReviewPageSkeleton';
 import { useReviewsQuery } from '../../hooks/queries/useReviewsQuery';
 
 const Index = () => {
-  const [searchKeyword, setSearchKeyword] = useState<string>('');
+  // const [searchKeyword, setSearchKeyword] = useState<string>('');
   // const [debouncedKeyword, setDebouncedKeyword] = useState<string>('');
   const pageSize = 10;
   const { reviewsData, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } = useReviewsQuery();
@@ -56,7 +56,7 @@ const Index = () => {
             작성된 모든 리뷰를 조회하고 숨김 처리할 수 있습니다.
           </Body>
         </Header>
-        <Input placeholder="검색어를 입력해 주세요" value={searchKeyword} icon={<Icon icon="search" color="#ADACAF" />} />
+        {/* <Input placeholder="검색어를 입력해 주세요" value={searchKeyword} icon={<Icon icon="search" color="#ADACAF" />} /> */}
         <List>
           {/* 리뷰 데이터 렌더링 */}
           {reviewsData.map((review) => (

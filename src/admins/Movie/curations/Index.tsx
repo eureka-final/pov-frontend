@@ -13,7 +13,7 @@ const Index = () => {
   const { curationsData } = useCurationsQuery();
   const [curations, setCurations] = useState<Curation[]>([]);
 
-  const handleCurationClick = (id: string) => {
+  const handleCurationClick = (id: number) => {
     navigate(`/admin/movie/curations/detail/${id}`, { state: { curationId: id } });
   };
 
