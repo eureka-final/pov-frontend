@@ -4,12 +4,14 @@ export const Container = styled.div`
   display: flex;
   align-items: center;
   margin-top: 2rem;
+  gap: 26px;
 `;
 
 export const Label = styled.div`
   flex: 0 0 6%; /* Label의 고정 너비 */
   text-align: left;
   margin-right: 20px;
+  white-space: nowrap;
 `;
 
 export const Keywords = styled.span`
@@ -25,5 +27,5 @@ export const BadgeContainer = styled.span`
 `;
 
 export const inputStyling = css({
-  width: '890px',
+  width: '880px',
 });

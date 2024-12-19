@@ -2,15 +2,18 @@ import styled from '@emotion/styled';
 import { Body } from 'pov-design-system';
 
 export const MyPageWrapper = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: column;
-  @media (min-width: 600px) {
-    padding: 0 192px;
-  }
+  align-items: center;
 `;
 
 export const Section = styled.section`
   margin-bottom: 48px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 export const MemberInfoCard = styled.div`
@@ -26,9 +29,11 @@ export const MemberInfoCard = styled.div`
   background-color: ${({ theme }) => theme.backgroundElevated};
 
   @media screen and (min-width: 0px) and (max-width: 600px) {
+    width: 100%;
   }
 
   @media screen and (min-width: 600px) {
+    width: calc(1200px - (32px + 192px) * 2);
   }
 `;
 
@@ -53,6 +58,19 @@ export const MemberInfoContentLabel = styled(Body)`
 
 export const MemberInfoContentText = styled(Body)`
   color: ${({ theme }) => theme.primary};
+`;
+
+export const PremiereHeaderSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  @media screen and (min-width: 0px) and (max-width: 600px) {
+    width: 100%;
+  }
+
+  @media screen and (min-width: 600px) {
+    width: calc(1200px - (32px + 192px) * 2);
+  }
 `;
 
 export const PremiereCard = styled.div`

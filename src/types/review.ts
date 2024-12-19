@@ -96,3 +96,7 @@ export interface ReviewFormData {
   keywords: string[];
   spoiler: boolean;
 }
+
+export interface ReviewImageForm {
+  formData: FormData;
+}

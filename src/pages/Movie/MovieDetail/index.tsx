@@ -85,7 +85,7 @@ const Index = () => {
       reviewCount: item.goodCount + item.badCount,
       like: item.goodCount,
       unlike: item.badCount,
-      percentage: item.badCount ? (item.goodCount / (item.goodCount + item.badCount)) * 100 : 0,
+      percentage: item.goodCount == 0 && item.badCount == 0 ? 0 : (item.goodCount / (item.goodCount + item.badCount)) * 100,
     }));
 
   const steels =
@@ -205,16 +205,18 @@ const Index = () => {
               </HeadingContainer>
               <ScrollContainer>{steels && steels.map((item, index) => <StillCutImage key={index + item.url} src={item.url} />)}</ScrollContainer>
             </Section>
-            <Section>
-              <HeadingContainer>
-                <Heading size="xLarge">{constants.movies.detail.heading.videos}</Heading>
-              </HeadingContainer>
-              <ScrollContainer>
-                {movieData.data.videos.map((item, index) => (
-                  <div key={item + index} />
-                ))}
-              </ScrollContainer>
-            </Section>
+            {movieData.data.videos.length !== 0 && (
+              <Section>
+                <HeadingContainer>
+                  <Heading size="xLarge">{constants.movies.detail.heading.videos}</Heading>
+                </HeadingContainer>
+                <ScrollContainer>
+                  {movieData.data.videos.map((item, index) => (
+                    <div key={item + index} />
+                  ))}
+                </ScrollContainer>
+              </Section>
+            )}
           </PaddedContainer>
         </Container>
       )}

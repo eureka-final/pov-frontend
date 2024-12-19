@@ -13,5 +13,6 @@ export const HomeContainer = styled.section`
     width: calc(1200px - 32px * 2);
   }
 
-  margin-top: 24px;
+  margin: 24px 0;
+  overflow-y: auto;
 `;

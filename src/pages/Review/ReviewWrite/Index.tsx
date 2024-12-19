@@ -150,7 +150,11 @@ const Index = () => {
       <Modal isOpen={isSaveOpen} closeModal={saveClose}>
         <div>
           <Heading size="medium">영화를 평가해주세요.</Heading>
-          <Body>이 영화에 대한 전반적인 평가는 어떠신가요?</Body>
+          <Body>
+            이 영화에 대한 전반적인 평가는 어떠신가요? <span style={{ color: 'red', marginRight: '5px' }}>*</span>
+            필수 입력값입니다
+          </Body>
+
           <ButtonContainer>
             <Item onClick={() => setPreference('bad')} isSelected={preference === 'bad'}>
               <Logo icon="type5" />

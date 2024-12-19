@@ -69,7 +69,7 @@ export const Info = styled.div`
 export const Count = styled.span``;
 
 export const MarginTop = styled.div`
-  margin-top: 60px;
+  margin-top: 37px;
 `;
 
 export const LikeContainer = styled.div`

@@ -9,13 +9,17 @@ const PaymentLogCard = (props: PremiereEntry) => {
   const navigate = useNavigate();
 
   return (
-    <Card onClick={() => navigate(`/premieres/${props.premiereId}`)}>
-      <Heading size="medium">{props.title}</Heading>
-      <Body size="large">{props.approvedAt}</Body>
-      <Heading size="medium" css={{ color: theme.color.green600 }}>
-        {props.amount}
-      </Heading>
-    </Card>
+    <>
+      <Card onClick={() => navigate(`/premieres/${props.premiereId}`)}>
+        <Heading size="medium">{props.title}</Heading>
+        <Body size="large" css={{ color: theme.teritary }}>
+          {props.approvedAt.replace('T', ' ')} 결제 완료
+        </Body>
+        <Heading size="medium" css={{ color: theme.color.green600 }}>
+          {props.amount.toLocaleString()}원
+        </Heading>
+      </Card>
+    </>
   );
 };
 

@@ -8,6 +8,7 @@ import {
   MemberInfoContentLabel,
   MemberInfoContentText,
   ButtonWrapper,
+  PremiereHeaderSection,
 } from './index.styles';
 import UploadProfileImgButton from '../../components/common/UploadProfileImgButton/UploadProfileImgButton';
 import { useAuthStore } from '../../stores/useAuthStore';
@@ -77,7 +78,7 @@ const index = () => {
           <MemberInfoCard>
             <>
               <div style={{ position: 'absolute', top: '20px', right: '20px', color: theme.teritary }} onClick={() => navigate('/settings')}>
-                <Icon icon="setting" css={{ width: '20px' }} />
+                <Icon icon="setting" css={{ width: '20px', cursor: 'pointer' }} />
               </div>
               <UploadProfileImgButton profileImageUrl={user!.profileImage} handleChangeProfileImage={handlePutProfileImage} />
               <Heading size="large" onClick={() => changeNicknameOpen()}>
@@ -101,8 +102,10 @@ const index = () => {
           </MemberInfoCard>
         </Section>
         <Section>
-          <Heading size="large">시사회 결제 내역</Heading>
-          <PaymentLogSection />
+          <PremiereHeaderSection>
+            <Heading size="large">시사회 결제 내역</Heading>
+            <PaymentLogSection />
+          </PremiereHeaderSection>
         </Section>
       </MyPageWrapper>
       {/* 닉네임 변경 모달 */}
