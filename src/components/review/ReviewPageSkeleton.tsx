@@ -13,7 +13,6 @@ const ReviewPageSkeleton = () => {
             <ReviewCardContainer>
               <Skeleton width="100%" />
               <Skeleton width="100%" height="100px" />
-              <Skeleton width="100%" />
             </ReviewCardContainer>
           </CardFlex>
         </CardContainer>
