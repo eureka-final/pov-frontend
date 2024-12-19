@@ -13,7 +13,7 @@ const NavigationTabs = () => {
     },
     {
       text: '영화',
-      tabId: 'movies',
+      tabId: 'movie',
     },
     {
       text: '리뷰',
