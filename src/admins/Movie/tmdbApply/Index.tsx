@@ -131,9 +131,18 @@ const Index = () => {
     },
   ]);
 
+  const formatISODate = (isoDate: string): string => {
+    const date = new Date(isoDate);
+
+    const formattedDate = date.toISOString().split('T')[0];
+    return formattedDate;
+  };
+
   const handleSubmit = () => {
+    const requestData = movie.data;
+    requestData.released = formatISODate(movie.data.released);
     createMovieMutation.mutate(
-      { ...movie.data },
+      { ...requestData },
       {
         onSuccess: () => {
           createToast('영화 등록 성공', 'success');
