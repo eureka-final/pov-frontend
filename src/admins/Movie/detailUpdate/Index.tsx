@@ -21,7 +21,7 @@ const Index = () => {
       backdrop: '',
       title: '',
       released: '',
-      genres: [],
+      genre: [],
       movieLikeCount: 0,
       preferenceCounts: [],
       plot: '',
