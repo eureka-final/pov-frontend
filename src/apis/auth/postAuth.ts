@@ -7,7 +7,6 @@ import { User } from '../../types/user';
 export const postSignUp = async (user: User) => {
   try {
     const response = await axiosInstance.post('/api/auth/signup', user);
-    console.log(response);
 
     // Access Token을 Session Storage에 저장
     const headers = response.headers;
@@ -18,12 +17,7 @@ export const postSignUp = async (user: User) => {
     return response.data;
   } catch (error) {
     console.error(error);
-
-    if (axios.isAxiosError(error)) {
-      const status = error.response?.status;
-      return status;
-    }
-    return '알 수 없는 오류가 발생했습니다.';
+    throw error;
   }
 };
 
