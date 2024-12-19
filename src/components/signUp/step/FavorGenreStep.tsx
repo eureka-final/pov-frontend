@@ -19,23 +19,13 @@ const FavorGenreStep = ({ onSubmit, onPrev }: FavorGenreStepProps) => {
     formState: { errors },
   } = useFormContext();
 
-  const handleChangeGenres = (selectedGenrse: string[]) => {
+  const handleButtonDisabled = (selectedGenrse: string[]) => {
     if (selectedGenrse.length === 0) {
       setInitButtonDisabled('true');
     } else {
       setInitButtonDisabled('false');
     }
   };
-
-  // useEffect(() => {
-  //   console.log(getValues('favorGenres'));
-  //   if (initButtonDisabled === 'init') {
-  //     setInitButtonDisabled('true');
-  //   }
-  //   if (initButtonDisabled === 'true') {
-  //     setInitButtonDisabled('false');
-  //   }
-  // }, [getValues('favorGenres')]);
 
   return (
     <SignUpStep
@@ -52,7 +42,7 @@ const FavorGenreStep = ({ onSubmit, onPrev }: FavorGenreStepProps) => {
             value={field.value || []} // favorGenres 필드의 value 전달
             onChange={(selectedGenres) => {
               field.onChange(selectedGenres);
-              handleChangeGenres(selectedGenres);
+              handleButtonDisabled(selectedGenres);
             }}
           />
         )}

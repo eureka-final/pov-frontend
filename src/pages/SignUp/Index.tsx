@@ -30,7 +30,6 @@ const Index = () => {
         },
         { message: '유효한 날짜를 입력해주세요.' }
       ),
-    favorGenres: z.array(z.string()).min(1, { message: '최소 1개 이상의 장르를 선택해주세요.' }),
   });
 
   /* useForm으로 User type의 Form 생성 */

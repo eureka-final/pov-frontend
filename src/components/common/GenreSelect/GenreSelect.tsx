@@ -1,6 +1,7 @@
 import { Badge } from 'pov-design-system';
 import { GenreSelectWrapper } from './GenreSelect.style';
 import { GENRES } from '../../../constants/genres';
+import { useToast } from '../../../hooks/common/useToast';
 
 interface GenreSelectProps {
   value: string[];
@@ -8,6 +9,7 @@ interface GenreSelectProps {
 }
 
 const GenreSelect = ({ value, onChange }: GenreSelectProps) => {
+  const { createToast } = useToast();
   const handleBadgeClick = (genre: string) => {
     // 이미 선택된 장르 클릭 시 선택 해제
     if (value.includes(genre)) {
@@ -16,6 +18,8 @@ const GenreSelect = ({ value, onChange }: GenreSelectProps) => {
       // 최대 3개까지 선택 개수 제한
       if (value.length < 3) {
         onChange([...value, genre]);
+      } else {
+        createToast('장르는 최대 3개까지만 선택할 수 있어요.');
       }
     }
   };
