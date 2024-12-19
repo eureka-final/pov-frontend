@@ -11,7 +11,9 @@ import { useToast } from '../../../hooks/common/useToast';
 const Index = () => {
   const location = useLocation();
   const { review } = location.state || {};
+  //@ts-ignore
   const [likes, setLikes] = useState(review.likeAmount);
+  //@ts-ignore
   const [likeAction, setLikeAction] = useState<boolean | null>(review.isLiked);
   const blindReviewMutation = useBlindReviewMutation();
   const { createToast } = useToast();
