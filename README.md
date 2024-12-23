@@ -79,7 +79,7 @@ src/
 │   └── queries/
 ├── pages/
 │   ├── main/
-│   │   └── index.tsx      # pages/{route}/.. 안의 tsx 파일은 index.tsx로 통일
+│   │   └── Index.tsx      # pages/{route}/.. 안의 tsx 파일은 Index.tsx로 통일
 │   ├── login/
 │   │   └── index.tsx      
 │   └── movie/
