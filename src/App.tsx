@@ -7,6 +7,7 @@ import './utils/firebase/initFirebase';
 function App() {
   // 서비스 초기화 시 푸시 알림 권한 요청 및 FCM 연결
   useEffect(() => {
+    console.log('app');
     // requestPermission();
   }, []);
 

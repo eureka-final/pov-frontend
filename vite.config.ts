@@ -1,12 +1,21 @@
 import { defineConfig } from 'vite';
 // import { VitePWA } from 'vite-plugin-pwa';
 // import mkcert from 'vite-plugin-mkcert';
+import tsconfigPaths from 'vite-tsconfig-paths';
+import path from 'path';
 
 import react from '@vitejs/plugin-react';
 import svgr from 'vite-plugin-svgr';
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  resolve: {
+    alias: {
+      'pov-design-system': 'pov-design-system/dist/index.js',
+      '@': path.resolve(__dirname, '/src'),
+      // '@components': path.resolve(__dirname, './src/components'),
+    },
+  },
   plugins: [
     // mkcert(),
     react({
@@ -15,6 +24,7 @@ export default defineConfig({
         plugins: ['@emotion/babel-plugin'],
       },
     }),
+    tsconfigPaths(),
     svgr(),
     // VitePWA({
     //   registerType: 'autoUpdate',
@@ -53,11 +63,6 @@ export default defineConfig({
     //   },
     // }),
   ],
-  resolve: {
-    alias: {
-      'pov-design-system': 'pov-design-system/dist/index.js',
-    },
-  },
   server: {
     /* HTTPS */
     // https: {

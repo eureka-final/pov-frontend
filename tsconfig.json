@@ -1,6 +1,5 @@
 {
   "files": [],
-  "references": [{ "path": "./tsconfig.app.json" }, { "path": "./tsconfig.node.json" }],
   "compilerOptions": {
     "strict": true,
     "moduleResolution": "node",
@@ -8,5 +7,13 @@
     "types": ["@emotion/react"],
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-  },
+    
+    /* 경로 설정 */
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["./src/*"],
+       "@components/*": ["src/components/*"],
+      }
+    },
+    "references": [{ "path": "./tsconfig.app.json" }, { "path": "./tsconfig.node.json" }],
 }
