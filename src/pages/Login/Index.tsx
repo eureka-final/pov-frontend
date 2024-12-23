@@ -1,7 +1,8 @@
-import Padded from '../../components/templates/Padded/Padded';
-import { SignInSection, SignInSectionHeader, SignInButtonWrapper, NaverSignInButton, GoogleSignInButton } from './Index.style';
 import { Logo, Heading, Paragraph } from 'pov-design-system';
-// import { EXCEPTION_POINTS } from '../../constants/api';
+
+import Padded from '@/components/templates/Padded/Padded';
+import { SignInSection, SignInSectionHeader, SignInButtonWrapper, NaverSignInButton, GoogleSignInButton } from '@/pages/Login/Index.style';
+// import { EXCEPTION_POINTS } from '@/constants/api';
 
 // hotfix-02
 const Index = () => {

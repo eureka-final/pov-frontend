@@ -1,4 +1,9 @@
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+import { useTheme } from '@emotion/react';
 import { Heading, Modal, useOverlay, Button, Input, Icon } from 'pov-design-system';
+
 import {
   MyPageWrapper,
   Section,
@@ -9,19 +14,17 @@ import {
   MemberInfoContentText,
   ButtonWrapper,
   PremiereHeaderSection,
-} from './index.styles';
-import UploadProfileImgButton from '../../components/common/UploadProfileImgButton/UploadProfileImgButton';
-import { useAuthStore } from '../../stores/useAuthStore';
-import Genres from '../../components/common/Genres/Genres';
-import { formatDateTime } from '../../utils/formatDateTime';
-import { User } from '../../types/user';
-import { useTheme } from '@emotion/react';
-import { useState } from 'react';
-import { putFavorGenres, putNickname } from '../../apis/member/putMember';
-import GenreSelect from '../../components/common/GenreSelect/GenreSelect';
-import PaymentLogSection from '../../components/premieres/Section/PaymentLogSection';
-import { useNavigate } from 'react-router-dom';
-import { useToast } from '../../hooks/common/useToast';
+} from '@/pages/MyPage/index.styles';
+import UploadProfileImgButton from '@/components/common/UploadProfileImgButton/UploadProfileImgButton';
+import { useAuthStore } from '@/stores/useAuthStore';
+import Genres from '@/components/common/Genres/Genres';
+import GenreSelect from '@/components/common/GenreSelect/GenreSelect';
+import PaymentLogSection from '@/components/premieres/Section/PaymentLogSection';
+
+import { useToast } from '@/hooks/common/useToast';
+import { putFavorGenres, putNickname } from '@/apis/member/putMember';
+import { formatDateTime } from '@/utils/formatDateTime';
+import { User } from '@/types/user';
 
 const Index = () => {
   const theme = useTheme();

@@ -1,16 +1,18 @@
 import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import Padded from '../../../components/templates/Padded/Padded';
+
 import { Heading, Button, Modal, useOverlay } from 'pov-design-system';
-import ClubInfo from '../../../components/club/ClubCreate/ClubInfo';
-import PublicToggle from '../../../components/club/ClubCreate/PublicToggle';
-import { HeadingContainer, ButtonContainer } from '../../Review/ReviewWrite/ReviewWrite.style';
-import { SettingClubImage } from '../../../components/club/ClubCreate/SettingClubImage';
-import { useEditClubMutation } from '../../../hooks/queries/useEditClubMutation';
-import GenreSelect from '../../../components/common/GenreSelect/GenreSelect';
-import { Container, Label } from '../../../components/styles/InputLabel';
-import { useClubDetailQuery } from '../../../hooks/queries/useClubsQuery';
-import { useToast } from '../../../hooks/common/useToast';
+
+import { HeadingContainer, ButtonContainer } from '@/pages/Review/ReviewWrite/ReviewWrite.style';
+import Padded from '@/components/templates/Padded/Padded';
+import ClubInfo from '@/components/club/ClubCreate/ClubInfo';
+import PublicToggle from '@/components/club/ClubCreate/PublicToggle';
+import { SettingClubImage } from '@/components/club/ClubCreate/SettingClubImage';
+import GenreSelect from '@/components/common/GenreSelect/GenreSelect';
+import { Container, Label } from '@/components/styles/InputLabel';
+import { useClubDetailQuery } from '@/hooks/queries/useClubsQuery';
+import { useEditClubMutation } from '@/hooks/queries/useEditClubMutation';
+import { useToast } from '@/hooks/common/useToast';
 
 const Index = () => {
   const { clubId } = useParams<{ clubId: string }>();
