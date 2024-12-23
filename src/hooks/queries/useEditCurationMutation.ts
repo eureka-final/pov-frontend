@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { putCuration } from '../../apis/admin/putCuration';
-import { useApiError } from './useApiError';
-import { useToast } from '../common/useToast';
+import { putCuration } from '@/apis/admin/putCuration';
+import { useApiError } from '@/hooks/queries/useApiError';
+import { useToast } from '@/hooks/common/useToast';
 
 export const useEditCurationMutation = () => {
   const queryClient = useQueryClient();

@@ -1,6 +1,6 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
-import { MoviesAdmin } from '../../types/admins';
-import { getMoviesByAdmin } from '../../apis/admin/getMovies';
+import { MoviesAdmin } from '@/types/admins';
+import { getMoviesByAdmin } from '@/apis/admin/getMovies';
 
 export const useAdminMoviesQuery = (searchKeyword: string) => {
   const { data, isLoading, hasNextPage, fetchNextPage, isFetchingNextPage } = useInfiniteQuery<MoviesAdmin, Error>({

@@ -1,5 +1,5 @@
 import { Heading, SwitchToggle } from 'pov-design-system';
-import { Container, Label } from '../../styles/InputLabel';
+import { Container, Label } from '@/components/styles/InputLabel';
 
 interface isPublicToggleProps {
   isPublic: boolean;

@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react';
-import AdminTemplate from '../../../components/templates/Admin/AdminTemplate';
-import { Container, Header, List, Card, Input, Item } from './Index.styles';
-import { Heading, Body } from 'pov-design-system';
-import { formatDate } from '../../../utils/formatTade';
-import { useCurationsQuery } from '../../../hooks/queries/useCurationsQuery';
-import type { Curation } from '../../../types/curations';
 import { useNavigate } from 'react-router-dom';
+
+import { Heading, Body } from 'pov-design-system';
+
+import { Container, Header, List, Card, Input, Item } from '@/admins/Movie/curations/Index.styles';
+import AdminTemplate from '@/components/templates/Admin/AdminTemplate';
+import { formatDate } from '@/utils/formatTade';
+import { useCurationsQuery } from '@/hooks/queries/useCurationsQuery';
+import type { Curation } from '@/types/curations';
 
 const Index = () => {
   const navigate = useNavigate();

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Heading, Input } from 'pov-design-system';
-import { Container, Label, inputStyling } from '../../styles/InputLabel';
+
+import { Container, Label, inputStyling } from '@/components/styles/InputLabel';
 
 interface ClubInfoProps {
   name: string;

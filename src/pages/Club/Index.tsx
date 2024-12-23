@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+
 import { Badge, Body } from 'pov-design-system';
-import { BadgeWrapper, Wrapper, ClubBtn } from '../Review/Review.style';
-import ClubList from '../../components/club/ClubList';
-import MyClubList from '../../components/club/MyClubList';
-import { ReviewPagePadded } from '../Review/index.styled';
-import { useAuthStore } from '../../stores/useAuthStore';
+
+import { ReviewPagePadded } from '@/pages/Review/index.styled';
+import { BadgeWrapper, Wrapper, ClubBtn } from '@/pages/Review/Review.style';
+import ClubList from '@/components/club/ClubList';
+import MyClubList from '@/components/club/MyClubList';
+import { useAuthStore } from '@/stores/useAuthStore';
 
 const Index = () => {
   const navigate = useNavigate();

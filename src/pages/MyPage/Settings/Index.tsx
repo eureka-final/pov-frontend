@@ -1,11 +1,12 @@
 import { Heading, Body, Button, Modal, useOverlay } from 'pov-design-system';
-import { Section, Header, Label, RowWrapper, ButtonWrapper, TextButton, WordWrapText, ModalContentWrapper } from './index.styles';
-import ThemeToggle from '../../../components/common/Toggle/ThemeToggle';
-import NoticeToggle from '../../../components/common/Toggle/NoticeToggle';
-import { useClearUser } from '../../../stores/useAuthStore';
-import { deleteMember } from '../../../apis/member/deleteMember';
-import { useToast } from '../../../hooks/common/useToast';
-import { postLogout } from '../../../apis/auth/postAuth';
+
+import { Section, Header, Label, RowWrapper, ButtonWrapper, TextButton, WordWrapText, ModalContentWrapper } from '@/pages/MyPage/Settings/index.styles';
+import ThemeToggle from '@/components/common/Toggle/ThemeToggle';
+import NoticeToggle from '@/components/common/Toggle/NoticeToggle';
+import { useClearUser } from '@/stores/useAuthStore';
+import { deleteMember } from '@/apis/member/deleteMember';
+import { postLogout } from '@/apis/auth/postAuth';
+import { useToast } from '@/hooks/common/useToast';
 
 const signOutInfo = `
 POV는 원활한 서비스 운영 및 유지를 위해
@@ -15,7 +16,7 @@ POV는 원활한 서비스 운영 및 유지를 위해
 위 안내 사항을 확인하신 후 탈퇴를 진행해주세요.
 `;
 
-const index = () => {
+const Index = () => {
   const { isOpen: isLogoutConfirmOpen, open: logoutConfirmOpen, close: logoutConfirmClose } = useOverlay();
   const { isOpen: isLogoutOpen, open: logoutOpen, close: logoutClose } = useOverlay();
   const { isOpen: isSignOutConfirmOpen, open: signOutConfirmOpen, close: signOutConfirmClose } = useOverlay();
@@ -135,4 +136,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default Index;

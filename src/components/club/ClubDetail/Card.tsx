@@ -1,6 +1,7 @@
-import { Container, InfoContainer, Info, Count } from './Card.styles';
 import { Heading, Body, Icon } from 'pov-design-system';
-import { Movie } from '../../../types/movie';
+
+import { Container, InfoContainer, Info, Count } from '@/components/club/ClubDetail/Card.styles';
+import { Movie } from '@/types/movie';
 
 //@ts-ignore
 const Card = ({ item }: Movie) => {

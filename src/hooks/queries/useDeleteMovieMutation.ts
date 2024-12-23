@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { deleteMovie } from '../../apis/admin/deleteMovie';
-import { useToast } from '../common/useToast';
+import { deleteMovie } from '@/apis/admin/deleteMovie';
+import { useToast } from '@/hooks/common/useToast';
 
 export const useDeleteMovieMutation = () => {
   const queryClient = useQueryClient();

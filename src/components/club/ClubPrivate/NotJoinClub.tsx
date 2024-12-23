@@ -1,9 +1,9 @@
-import Basic from '../../../components/templates/Basic/Basic';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { useClubPrivateQuery } from '../../../hooks/queries/useClubsQuery';
 
 import { Button, Heading, Badge, Body, useOverlay, Modal } from 'pov-design-system';
+
+import Basic from '@/components/templates/Basic/Basic';
 import {
   Container,
   HeaderContainer,
@@ -13,9 +13,10 @@ import {
   BackgroundLayer,
   ModalContainer,
   JoinContainer,
-} from '../../../components/club/ClubDetail/ClubDetail.styles';
-import { useJoinPrivateClubMutation } from '../../../hooks/queries/useJoinClubMutation';
-import { useToast } from '../../../hooks/common/useToast';
+} from '@/components/club/ClubDetail/ClubDetail.styles';
+import { useJoinPrivateClubMutation } from '@/hooks/queries/useJoinClubMutation';
+import { useClubPrivateQuery } from '@/hooks/queries/useClubsQuery';
+import { useToast } from '@/hooks/common/useToast';
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);

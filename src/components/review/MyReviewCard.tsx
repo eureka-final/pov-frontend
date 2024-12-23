@@ -1,5 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import dompurify from 'dompurify';
+
+import { Body, Paragraph, Icon, Heading, Logo, Button } from 'pov-design-system';
+
 import {
   ReviewListContainer,
   CardContainer,
@@ -12,13 +16,10 @@ import {
   SpoMore,
   ReadMore,
   TitleInfo,
-} from './ReviewCard.style';
-import { Body, Paragraph, Icon, Heading, Logo, Button } from 'pov-design-system';
-import Profile from '../common/Profile/Profile';
-import dompurify from 'dompurify';
-import { Review } from '../../types/review';
-import { useState } from 'react';
-import { useLikeMutation, useDisLikeMutation } from '../../hooks/queries/useLikeMutation';
+} from '@/components/review/ReviewCard.style';
+import Profile from '@/components/common/Profile/Profile';
+import { Review } from '@/types/review';
+import { useLikeMutation, useDisLikeMutation } from '@/hooks/queries/useLikeMutation';
 
 function MyReviewCard({ reviewId, movieId, thumbnail, movieTitle, reviewer, profileImage, title, spoiler, contents, createdAt, isLiked, likeAmount }: Review) {
   const navigate = useNavigate();

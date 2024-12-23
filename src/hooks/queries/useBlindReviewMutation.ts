@@ -1,7 +1,8 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { putReviewBlind } from '../../apis/admin/putReview';
-import { useApiError } from './useApiError';
-import { useToast } from '../common/useToast';
+
+import { putReviewBlind } from '@/apis/admin/putReview';
+import { useApiError } from '@/hooks/queries/useApiError';
+import { useToast } from '@/hooks/common/useToast';
 
 export const useBlindReviewMutation = () => {
   const queryClient = useQueryClient();

@@ -1,11 +1,13 @@
-import Padded from '../../components/templates/Padded/Padded';
-import { Heading, Body } from 'pov-design-system';
-import { Section, AlarmCardWrapper, AlarmCardContainer, NoContentsContainer, TimeText } from './index.style';
-import { useNoticesQuery } from '../../hooks/queries/useNoticesQuery';
-import { putNoticeRead } from '../../apis/notice/putNotice';
 import { useNavigate } from 'react-router-dom';
-import { formatDateTime } from '../../utils/formatDateTime';
-import { useToast } from '../../hooks/common/useToast';
+
+import { Heading, Body } from 'pov-design-system';
+
+import { Section, AlarmCardWrapper, AlarmCardContainer, NoContentsContainer, TimeText } from '@/pages/Notice/index.style';
+import Padded from '@/components/templates/Padded/Padded';
+import { putNoticeRead } from '@/apis/notice/putNotice';
+import { formatDateTime } from '@/utils/formatDateTime';
+import { useNoticesQuery } from '@/hooks/queries/useNoticesQuery';
+import { useToast } from '@/hooks/common/useToast';
 
 interface AlarmCardProps {
   content: string;
@@ -24,7 +26,7 @@ const AlarmCard = ({ content, createdAt, onClick }: AlarmCardProps) => {
   );
 };
 
-const index = () => {
+const Index = () => {
   const { noticesData } = useNoticesQuery();
   const navigate = useNavigate();
   const { createToast } = useToast();
@@ -66,4 +68,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default Index;

@@ -1,9 +1,9 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { useToast } from '../../hooks/common/useToast';
-import { useApiError } from './useApiError';
+import { useApiError } from '@/hooks/queries/useApiError';
+import { useToast } from '@/hooks/common/useToast';
 
-import { postJoin, postPrivateJoin } from '../../apis/club/postJoin';
+import { postJoin, postPrivateJoin } from '@/apis/club/postJoin';
 
 export const useJoinClubMutation = () => {
   const queryClient = useQueryClient();

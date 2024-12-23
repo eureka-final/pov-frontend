@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { useToast } from '../common/useToast';
-import { postLike, postDisLike } from '../../apis/movie/postLike';
+import { postLike, postDisLike } from '@/apis/movie/postLike';
+import { useToast } from '@/hooks/common/useToast';
 
 export const useLikeMovieMutation = () => {
   const queryClient = useQueryClient();

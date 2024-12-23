@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { useToast } from '../common/useToast';
-import { postPayment, postTemp } from '../../apis/premieres/postPayment';
+import { useToast } from '@/hooks/common/useToast';
+import { postPayment, postTemp } from '@/apis/premieres/postPayment';
 
 export const useTempPaymentMutation = () => {
   const queryClient = useQueryClient();

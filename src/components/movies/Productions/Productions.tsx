@@ -1,5 +1,4 @@
-import { Container, Layout, Wrapper } from './Productions.styles';
-// import ImageLayer from '../../styles/ImageLayer';
+import { Container, Layout, Wrapper } from '@/components/movies/Productions/Productions.styles';
 import { Body, Avatar, Heading } from 'pov-design-system';
 
 interface ProductionsProps {
@@ -20,7 +19,6 @@ const Productions = ({ productions }: ProductionsProps) => {
   return (
     <Container>
       <Layout>
-        {/* <ImageLayer src={src} /> */}
         <Avatar src={src.url} />
       </Layout>
       <Wrapper>

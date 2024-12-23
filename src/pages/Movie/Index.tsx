@@ -1,13 +1,18 @@
-import Section from '../../components/movies/Section/Section';
-import { Container, HomeContainer } from './Movie.styles';
-import { useAuthStore } from '../../stores/useAuthStore';
-import { constants } from '../../constants/constants';
-import { useMoviesQuery } from '../../hooks/queries/useMoviesQuery';
-import { useInView } from 'react-intersection-observer';
 import { useEffect, useState } from 'react';
-import MoviePageSkeleton from './MoviePageSkeleton';
+import { useInView } from 'react-intersection-observer';
 import { Skeleton } from 'pov-design-system';
-import { SectionContainer } from '../../components/movies/Section/Section.styles';
+
+import { Container, HomeContainer } from '@/pages/Movie/Movie.styles';
+import MoviePageSkeleton from '@/pages/Movie/MoviePageSkeleton';
+
+import Section from '@/components/movies/Section/Section';
+import { SectionContainer } from '@/components/movies/Section/Section.styles';
+
+import { useAuthStore } from '@/stores/useAuthStore';
+
+import { constants } from '@/constants/constants';
+
+import { useMoviesQuery } from '@/hooks/queries/useMoviesQuery';
 
 const Index = () => {
   const [heading, setHeading] = useState<string>('');

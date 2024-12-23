@@ -1,10 +1,12 @@
 import { useState } from 'react';
-import NavigationTabs from '../common/NavigationTabs';
-import { Logo, Input, Icon, Heading } from 'pov-design-system';
-import { HeaderWrapper, LeftWrapper, RightWrapper, NoticeButton, LoginButton, LogoItem, FlexWrapper, SearchButton } from './Header.style';
-import { useAuthStore } from '../../stores/useAuthStore';
 import { useNavigate } from 'react-router-dom';
-import HeaderProfile from '../common/Profile/HeaderProfile';
+
+import { Logo, Input, Icon, Heading } from 'pov-design-system';
+
+import NavigationTabs from '@/components/common/NavigationTabs';
+import HeaderProfile from '@/components/common/Profile/HeaderProfile';
+import { HeaderWrapper, LeftWrapper, RightWrapper, NoticeButton, LoginButton, LogoItem, FlexWrapper, SearchButton } from '@/components/header/Header.style';
+import { useAuthStore } from '@/stores/useAuthStore';
 
 function Header() {
   const user = useAuthStore((state) => state.user);

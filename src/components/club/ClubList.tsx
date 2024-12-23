@@ -1,6 +1,6 @@
-import ClubCard from './ClubCard';
-import { ReviewListContainer } from './ClubCard.style';
-import { useClubsQuery } from '../../hooks/queries/useClubsQuery';
+import ClubCard from '@/components/club/ClubCard';
+import { ReviewListContainer } from '@/components/club/ClubCard.style';
+import { useClubsQuery } from '@/hooks/queries/useClubsQuery';
 
 function ClubList() {
   const { clubsData } = useClubsQuery();

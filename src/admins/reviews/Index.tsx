@@ -1,12 +1,14 @@
-import AdminTemplate from '../../components/templates/Admin/AdminTemplate';
-import { Container, Header, List } from './Index.styles';
-import { Heading, Body } from 'pov-design-system';
-import { useInView } from 'react-intersection-observer';
 import { useEffect } from 'react';
+import { useInView } from 'react-intersection-observer';
+
+import { Heading, Body } from 'pov-design-system';
+
+import { Container, Header, List } from '@/admins/reviews/Index.styles';
+import AdminTemplate from '@/components/templates/Admin/AdminTemplate';
 // import debounce from 'lodash.debounce';
-import ReviewCard, { ReviewCardEmpty } from '../../components/admins/reviews/ReviewCard';
-import ReviewPageSkeleton from '../../components/review/ReviewPageSkeleton';
-import { useReviewsQuery } from '../../hooks/queries/useReviewsQuery';
+import ReviewCard, { ReviewCardEmpty } from '@/components/admins/reviews/ReviewCard';
+import ReviewPageSkeleton from '@/components/review/ReviewPageSkeleton';
+import { useReviewsQuery } from '@/hooks/queries/useReviewsQuery';
 
 const Index = () => {
   // const [searchKeyword, setSearchKeyword] = useState<string>('');

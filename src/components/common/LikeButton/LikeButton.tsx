@@ -2,7 +2,7 @@ import type { ComponentPropsWithoutRef } from 'react';
 import { useState } from 'react';
 import { Icon } from 'pov-design-system';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { postLike, postDisLike } from '../../../apis/review/postLike';
+import { postLike, postDisLike } from '@/apis/review/postLike';
 
 interface LikeButtonProps extends ComponentPropsWithoutRef<'div'> {
   initialState: boolean;

@@ -1,5 +1,5 @@
 import { Heading, Paragraph, Icon } from 'pov-design-system';
-import { SignUpSection, SignUpSectionHeader, SignUpSectionBody } from './SignUpStep.style';
+import { SignUpSection, SignUpSectionHeader, SignUpSectionBody } from '@/components/signUp/step/SignUpStep.style';
 import { useTheme } from '@emotion/react';
 
 interface SignUpStepProps {

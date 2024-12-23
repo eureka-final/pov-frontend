@@ -1,15 +1,17 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Padded from '../../../components/templates/Padded/Padded';
+
 import { Heading, Button, Modal, useOverlay } from 'pov-design-system';
-import ClubInfo from '../../../components/club/ClubCreate/ClubInfo';
-import PublicToggle from '../../../components/club/ClubCreate/PublicToggle';
-import { HeadingContainer, ButtonContainer } from '../../Review/ReviewWrite/ReviewWrite.style';
-import { SettingClubImage } from '../../../components/club/ClubCreate/SettingClubImage';
-import { useCreateClubMutation } from '../../../hooks/queries/useCreateClubMutation';
-import GenreSelect from '../../../components/common/GenreSelect/GenreSelect';
-import { Container, Label } from '../../../components/styles/InputLabel';
-import { useToast } from '../../../hooks/common/useToast';
+
+import { HeadingContainer, ButtonContainer } from '@/pages/Review/ReviewWrite/ReviewWrite.style';
+import Padded from '@/components/templates/Padded/Padded';
+import ClubInfo from '@/components/club/ClubCreate/ClubInfo';
+import PublicToggle from '@/components/club/ClubCreate/PublicToggle';
+import { SettingClubImage } from '@/components/club/ClubCreate/SettingClubImage';
+import GenreSelect from '@/components/common/GenreSelect/GenreSelect';
+import { Container, Label } from '@/components/styles/InputLabel';
+import { useCreateClubMutation } from '@/hooks/queries/useCreateClubMutation';
+import { useToast } from '@/hooks/common/useToast';
 
 const Index = () => {
   const { isOpen: isSaveOpen, open: saveOpen, close: saveClose } = useOverlay();

@@ -1,12 +1,14 @@
-import { Movie } from '../../../types/movie';
-import { CardContainer, InfoContainer, SingleLineHeading, Info, LikeContainer, ThumbnailImage } from './Card.styles';
-import { Body, Icon } from 'pov-design-system';
-import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import { useLikeMovieMutation, useDisLikeMovieMutation } from '../../../hooks/queries/useLikeMovieMutation';
-import { formatDate } from '../../../utils/formatDateTime';
+import { useNavigate } from 'react-router-dom';
+
 import { useTheme } from '@emotion/react';
+import { Body, Icon } from 'pov-design-system';
+
 import NoPoster from '/public/NoPoster.svg?react';
+import { Movie } from '@/types/movie';
+import { CardContainer, InfoContainer, SingleLineHeading, Info, LikeContainer, ThumbnailImage } from '@/components/movies/Card/Card.styles';
+import { useLikeMovieMutation, useDisLikeMovieMutation } from '@/hooks/queries/useLikeMovieMutation';
+import { formatDate } from '@/utils/formatDateTime';
 
 interface CardProps {
   item: Movie;

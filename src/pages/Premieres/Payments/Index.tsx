@@ -1,10 +1,11 @@
-import { loadTossPayments, TossPaymentsInstance, PaymentWidgetsInstance } from '@tosspayments/tosspayments-sdk';
 import { useEffect, useState, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
-import Padded from '../../../components/templates/Padded/Padded';
+import { loadTossPayments, TossPaymentsInstance, PaymentWidgetsInstance } from '@tosspayments/tosspayments-sdk';
 import { v4 as uuidv4 } from 'uuid';
-import './style.css';
-import { useAuthStore } from '../../../stores/useAuthStore';
+
+import { useAuthStore } from '@/stores/useAuthStore';
+import '@/pages/Premieres/Payments/style.css';
+import Padded from '@/components/templates/Padded/Padded';
 
 interface Amount {
   currency: string;

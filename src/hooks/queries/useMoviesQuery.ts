@@ -1,6 +1,6 @@
 import { useQuery, useInfiniteQuery, UseQueryOptions } from '@tanstack/react-query';
-import { getMovies, getDetailReview, getSearchMovies, getTrendingMovies } from '../../apis/movie/getMovies';
-import { MoviesResponse, MovieDetailResponse, TrendingMoviesResponse } from '../../types/movie';
+import { getMovies, getDetailReview, getSearchMovies, getTrendingMovies } from '@/apis/movie/getMovies';
+import { MoviesResponse, MovieDetailResponse, TrendingMoviesResponse } from '@/types/movie';
 import { useApiError } from './useApiError';
 
 

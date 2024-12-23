@@ -1,12 +1,17 @@
-import { useParams } from 'react-router-dom';
-import { constants } from '../../../constants/constants';
-import { HeadingContainer, Section, Div, PaddedContainer } from './MovieReviews.styles';
-import { Heading, Body } from 'pov-design-system';
-import { useMovieReviewsQuery } from '../../../hooks/queries/useReviewsQuery';
-import Review from '../../../components/movies/Review/Review';
-import ReviewPageSkeleton from '../../../components/review/ReviewPageSkeleton';
-import { useInView } from 'react-intersection-observer';
 import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { useInView } from 'react-intersection-observer';
+
+import { Heading, Body } from 'pov-design-system';
+
+import { HeadingContainer, Section, Div, PaddedContainer } from '@/pages/Movie/MovieReviews/MovieReviews.styles';
+
+import Review from '@/components/movies/Review/Review';
+import ReviewPageSkeleton from '@/components/review/ReviewPageSkeleton';
+
+import { constants } from '@/constants/constants';
+
+import { useMovieReviewsQuery } from '@/hooks/queries/useReviewsQuery';
 
 const Index = () => {
   const { movieId } = useParams<{ movieId: string }>();

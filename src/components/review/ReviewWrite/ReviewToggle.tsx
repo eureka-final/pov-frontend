@@ -1,6 +1,6 @@
-import { Heading, SwitchToggle } from 'pov-design-system';
-import { Container, Label } from '../../styles/InputLabel';
 import { useEffect } from 'react';
+import { Heading, SwitchToggle } from 'pov-design-system';
+import { Container, Label } from '@/components/styles/InputLabel';
 
 interface ReviewToggleProps {
   spoiler: boolean;

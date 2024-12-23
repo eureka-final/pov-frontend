@@ -1,7 +1,7 @@
 import { useMutation } from '@tanstack/react-query';
-import { postMovie } from '../../apis/admin/postMovie';
-import { useApiError } from './useApiError';
-import { useToast } from '../common/useToast';
+import { postMovie } from '@/apis/admin/postMovie';
+import { useApiError } from '@/hooks/queries/useApiError';
+import { useToast } from '@/hooks/common/useToast';
 
 export const useCreateMovieMutation = () => {
   const { createToast } = useToast();

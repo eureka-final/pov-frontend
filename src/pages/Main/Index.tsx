@@ -1,15 +1,19 @@
-import { Container, HomeContainer } from '../Movie/Movie.styles';
-import ClubReviewCard from '../../components/review/ClubReviewCard';
-import { PopularReviewListContainer } from '../../components/review/ReviewCard.style';
-import { useReviewsQuery } from '../../hooks/queries/useReviewsQuery';
-import { useMovieTrendingQuery } from '../../hooks/queries/useMoviesQuery';
-import { Heading, ShowMoreBtn } from 'pov-design-system';
-import { useNavigate } from 'react-router-dom';
-import { SectionWrapper } from '../../components/club/ClubDetail/ClubDetail.styles';
-import { CardContainer } from '../../components/movies/Section/Section.styles';
-import Card from '../../components/movies/Card/Card';
 import { useEffect } from 'react';
-import { requestPermission } from '../../utils/firebase/notificationPermission';
+import { useNavigate } from 'react-router-dom';
+import { Heading, ShowMoreBtn } from 'pov-design-system';
+
+import { Container, HomeContainer } from '@/pages/Movie/Movie.styles';
+
+import { PopularReviewListContainer } from '@/components/review/ReviewCard.style';
+import { SectionWrapper } from '@/components/club/ClubDetail/ClubDetail.styles';
+import { CardContainer } from '@/components/movies/Section/Section.styles';
+import Card from '@/components/movies/Card/Card';
+import ClubReviewCard from '@/components/review/ClubReviewCard';
+
+import { useReviewsQuery } from '@/hooks/queries/useReviewsQuery';
+import { useMovieTrendingQuery } from '@/hooks/queries/useMoviesQuery';
+
+import { requestPermission } from '@/utils/firebase/notificationPermission';
 
 const Index = () => {
   const navigate = useNavigate();

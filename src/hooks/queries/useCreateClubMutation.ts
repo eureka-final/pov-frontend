@@ -1,7 +1,7 @@
 import { useMutation } from '@tanstack/react-query';
-import { postClub, postInviteClub } from '../../apis/club/postClub';
-import { useApiError } from './useApiError';
-import { useToast } from '../common/useToast';
+import { postClub, postInviteClub } from '@/apis/club/postClub';
+import { useApiError } from '@/hooks/queries/useApiError';
+import { useToast } from '@/hooks/common/useToast';
 
 export const useCreateClubMutation = () => {
   const { createToast } = useToast();

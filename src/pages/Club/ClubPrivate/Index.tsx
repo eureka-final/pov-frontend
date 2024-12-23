@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { useClubPrivateQuery } from '../../../hooks/queries/useClubsQuery';
-import JoinClub from '../../../components/club/ClubDetail/JoinClub';
-import NotJoinClub from '../../../components/club/ClubPrivate/NotJoinClub';
+
+import { useClubPrivateQuery } from '@/hooks/queries/useClubsQuery';
+import JoinClub from '@/components/club/ClubDetail/JoinClub';
+import NotJoinClub from '@/components/club/ClubPrivate/NotJoinClub';
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
