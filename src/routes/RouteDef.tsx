@@ -3,7 +3,7 @@ import MovieTrending from '../pages/Movie/MovieTrending/Index';
 import MovieSearch from '../pages/Movie/MovieSearch/Index';
 import MovieDetail from '../pages/Movie/MovieDetail/Index';
 import MovieReviews from '../pages/Movie/MovieReviews/Index';
-import Review from '../pages/Review';
+import Review from '../pages/Review/Index';
 import ReviewWrite from '../pages/Review/ReviewWrite/Index';
 import ReviewEdit from '../pages/Review/ReviewEdit/Index';
 
