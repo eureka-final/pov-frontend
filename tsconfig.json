@@ -2,21 +2,10 @@
   "files": [],
   "compilerOptions": {
     "strict": true,
-    "moduleResolution": "node",
     "typeRoots": ["./node_modules/@types", "./node_modules/pov-design-system"],
     "types": ["@emotion/react"],
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    
-    /* 경로 설정 */
-    "baseUrl": "./",
-    "paths": {
-       "@/*": ["src/*"],
-       "@utils/*": ["src/utils/*"],
-       "@routes/*": ["src/routes/*"],
-       "@components/*": ["src/components/*"],
-       "@hooks/*": ["src/hooks/*"],
-      }
     },
     "references": [{ "path": "./tsconfig.app.json" }, { "path": "./tsconfig.node.json" }],
 }

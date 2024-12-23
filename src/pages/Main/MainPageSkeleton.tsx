@@ -1,9 +1,11 @@
 import { Skeleton } from 'pov-design-system';
-import { SectionContainer } from '../../components/movies/Section/Section.styles';
-import { MarginTop } from '../../components/movies/Card/Card.styles';
-import MoviePageSkeleton from '../Movie/MoviePageSkeleton';
-import { PopularReviewListContainer } from '../../components/review/ReviewCard.style';
-import ReviewPageSkeleton from '../../components/review/ReviewPageSkeleton';
+
+import MoviePageSkeleton from '@/pages/Movie/MoviePageSkeleton';
+
+import { SectionContainer } from '@/components/movies/Section/Section.styles';
+import { MarginTop } from '@/components/movies/Card/Card.styles';
+import { PopularReviewListContainer } from '@/components/review/ReviewCard.style';
+import ReviewPageSkeleton from '@/components/review/ReviewPageSkeleton';
 
 const MainPageSkeleton = () => {
   return (
