@@ -79,29 +79,18 @@ src/
 ├── constants/
 ├── hooks/
 │   └── queries/
-├── pages/
+├── pages/                 # pages/{route}/.. 안의 tsx 파일은 Index.tsx로 통일
 │   ├── Main/
-│   │   └── Index.tsx      # pages/{route}/.. 안의 tsx 파일은 Index.tsx로 통일
 │   ├── Login/
-│   │   └── Index.tsx  
 │   ├── SignUp/
-│   │   └── Index.tsx   
-│   ├── Movie/
-│   │   └── Index.tsx       
+│   ├── Movie/  
 │   ├── Review/
-│   │   └── Index.tsx  
 │   ├── Club/
-│   │   └── Index.tsx  
 │   ├── Premieres/
-│   │   └── Index.tsx  
 │   ├── MyPage/
-│   │   └── Index.tsx  
 │   ├── Notice/
-│   │   └── Index.tsx  
 │   ├── Oauth/
-│   │   └── Index.tsx  
 │   └── NotFound/
-│       └── Index.tsx      
 ├── stories/
 ├── stores/
 ├── utils/
