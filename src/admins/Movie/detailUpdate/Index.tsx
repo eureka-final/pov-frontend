@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react';
-import AdminTemplate from '../../../components/templates/Admin/AdminTemplate';
-import { Container, Header, Card, Info, InfoContainer, Wrapper, Input, ButtonContainer, Badges } from './Detail.styles';
-import { Heading, Body, Button, Badge } from 'pov-design-system';
 import { useLocation } from 'react-router-dom';
-import { useMovieDetailQuery } from '../../../hooks/queries/useMoviesQuery';
-import { MovieDetailResponse } from '../../../types/movie';
-import { useEditMovieMutation } from '../../../hooks/queries/useEditMovieMutation';
-import { useToast } from '../../../hooks/common/useToast';
+
+import { Heading, Body, Button, Badge } from 'pov-design-system';
+
+import { Container, Header, Card, Info, InfoContainer, Wrapper, Input, ButtonContainer, Badges } from '@/admins/Movie/detailUpdate/Detail.styles';
+import AdminTemplate from '@/components/templates/Admin/AdminTemplate';
+import { useMovieDetailQuery } from '@/hooks/queries/useMoviesQuery';
+import { useEditMovieMutation } from '@/hooks/queries/useEditMovieMutation';
+import { useToast } from '@/hooks/common/useToast';
+import { MovieDetailResponse } from '@/types/movie';
 
 const Index = () => {
   const location = useLocation();

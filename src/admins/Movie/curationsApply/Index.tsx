@@ -1,5 +1,9 @@
 import { useState, useRef, useEffect } from 'react';
-import AdminTemplate from '../../../components/templates/Admin/AdminTemplate';
+import { useInView } from 'react-intersection-observer';
+import debounce from 'lodash.debounce';
+
+import { Heading, Body, Button, Badge, Modal, useOverlay } from 'pov-design-system';
+import AdminTemplate from '@/components/templates/Admin/AdminTemplate';
 import {
   Container,
   Header,
@@ -17,15 +21,12 @@ import {
   ModalItem,
   MovieItem,
   MovieList,
-} from './Index.styles';
-import { Heading, Body, Button, Badge, Modal, useOverlay } from 'pov-design-system';
-import { formatDate } from '../../../utils/formatTade';
-import { useAdminMoviesQuery } from '../../../hooks/queries/useAdminMoviesQuery';
-import type { CurationMovie } from '../../../types/admins';
-import debounce from 'lodash.debounce';
-import { useInView } from 'react-intersection-observer';
-import { useCreateCurationMutation } from '../../../hooks/queries/useCreateCuration';
-import { useToast } from '../../../hooks/common/useToast';
+} from '@/admins/Movie/curationsApply/Index.styles';
+import { formatDate } from '@/utils/formatTade';
+import { useAdminMoviesQuery } from '@/hooks/queries/useAdminMoviesQuery';
+import { useCreateCurationMutation } from '@/hooks/queries/useCreateCuration';
+import { useToast } from '@/hooks/common/useToast';
+import type { CurationMovie } from '@/types/admins';
 
 const Index = () => {
   const [searchKeyword, setSearchKeyword] = useState<string>('');

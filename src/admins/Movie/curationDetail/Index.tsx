@@ -1,14 +1,15 @@
-import AdminTemplate from '../../../components/templates/Admin/AdminTemplate';
-import { Container, Header, Card, Info, InfoContainer, Wrapper, ButtonContainer, List, Item } from './Index.styles';
-import { Heading, Body, Button } from 'pov-design-system';
-import { formatDate } from '../../../utils/formatTade';
-import { useLocation } from 'react-router-dom';
-import { useCurationDetailQuery } from '../../../hooks/queries/useCurationsQuery';
-import { AdminCurationData } from '../../../types/curations';
 import { useEffect, useState } from 'react';
-import { useDeleteCurationMutation } from '../../../hooks/queries/useDeleteCurationMutation';
-import { useToast } from '../../../hooks/common/useToast';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
+
+import { Heading, Body, Button } from 'pov-design-system';
+
+import { Container, Header, Card, Info, InfoContainer, Wrapper, ButtonContainer, List, Item } from '@/admins/Movie/curationDetail/Index.styles';
+import AdminTemplate from '@/components/templates/Admin/AdminTemplate';
+import { formatDate } from '@/utils/formatTade';
+import { useCurationDetailQuery } from '@/hooks/queries/useCurationsQuery';
+import { useDeleteCurationMutation } from '@/hooks/queries/useDeleteCurationMutation';
+import { useToast } from '@/hooks/common/useToast';
+import { AdminCurationData } from '@/types/curations';
 
 const Index = () => {
   const navigate = useNavigate();

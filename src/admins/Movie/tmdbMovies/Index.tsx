@@ -1,11 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
-import Card from '../../../components/admins/movies/Card';
-import AdminTemplate from '../../../components/templates/Admin/AdminTemplate';
-import { Container, Header, List } from './Index.styles';
-import { Heading, Body, Input, Icon } from 'pov-design-system';
-import { useTMDBMoviesQuery } from '../../../hooks/queries/useMovieQuery';
-import debounce from 'lodash.debounce';
 import { useInView } from 'react-intersection-observer';
+import debounce from 'lodash.debounce';
+
+import { Heading, Body, Input, Icon } from 'pov-design-system';
+
+import { Container, Header, List } from '@/admins/Movie/tmdbMovies/Index.styles';
+import Card from '@/components/admins/movies/Card';
+import AdminTemplate from '@/components/templates/Admin/AdminTemplate';
+import { useTMDBMoviesQuery } from '@/hooks/queries/useMovieQuery';
 
 const Index = () => {
   const [searchKeyword, setSearchKeyword] = useState<string>('');
