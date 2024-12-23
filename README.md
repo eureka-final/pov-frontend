@@ -30,7 +30,7 @@
 
 <img width="787" alt="image" src="https://github.com/user-attachments/assets/c4cecbd7-9a8f-4331-8de6-c49efd55f240" />
 
-### 팀프로젝트 노션 & 피그마 & 스토리북 & 디자인 시스템 배포
+### 팀프로젝트 노션 & 지라 & 피그마 & 스토리북 & 디자인 시스템
 
 - [Notion Link](https://www.notion.so/shinhm1/13ce7e8fdd12808998d7dc98583a28e4?pvs=4)
 - [JIRA LINK](https://multicampusuplus.atlassian.net/jira/software/projects/POV/summary)
