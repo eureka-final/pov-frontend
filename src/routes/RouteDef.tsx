@@ -8,7 +8,7 @@ import ReviewWrite from '../pages/Review/ReviewWrite/Index';
 import ReviewEdit from '../pages/Review/ReviewEdit/Index';
 
 // Club
-import Club from '../pages/Club';
+import Club from '../pages/Club/Index';
 import ClubCreate from '../pages/Club/ClubCreate/Index';
 import ClubDetail from '../pages/Club/ClubDetail/Index';
 import ClubPrivate from '../pages/Club/ClubPrivate/Index';
