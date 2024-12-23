@@ -3,12 +3,14 @@ import { useParams } from 'react-router-dom';
 import ReactQuill, { Quill } from 'react-quill';
 import ImageResize from 'quill-image-resize-module-react';
 import 'react-quill/dist/quill.snow.css';
-import { CustomQuillEditorView } from './ReactEditor.style';
-import ReactModule from './ReactModule';
-import { useToast } from '../../../hooks/common/useToast';
-import { axiosInstance } from '../../../apis/axiosInstance';
-import { Input } from 'pov-design-system';
 import Parchment from 'parchment';
+
+import { Input } from 'pov-design-system';
+
+import { CustomQuillEditorView } from '@/components/review/ReviewWrite/ReactEditor.style';
+import ReactModule from '@/components/review/ReviewWrite/ReactModule';
+import { useToast } from '@/hooks/common/useToast';
+import { axiosInstance } from '@/apis/axiosInstance';
 
 Quill.register('modules/imageResize', ImageResize);
 Quill.register('parchment', Parchment);

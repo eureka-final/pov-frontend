@@ -1,7 +1,8 @@
 import { Heading } from 'pov-design-system';
-import PremiereSection from '../../components/premieres/Section/PremiereSection';
-import { Section } from '../../components/premieres/Section/PremiereSection.style';
-import { usePermieresQuery } from '../../hooks/queries/usePermieresQuery';
+
+import PremiereSection from '@/components/premieres/Section/PremiereSection';
+import { Section } from '@/components/premieres/Section/PremiereSection.style';
+import { usePermieresQuery } from '@/hooks/queries/usePermieresQuery';
 
 const Index = () => {
   const { premieresData } = usePermieresQuery();

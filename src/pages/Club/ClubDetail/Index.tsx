@@ -1,7 +1,8 @@
 import { useParams } from 'react-router-dom';
-import { useClubDetailQuery } from '../../../hooks/queries/useClubsQuery';
-import JoinClub from '../../../components/club/ClubDetail/JoinClub';
-import NotJoinClub from '../../../components/club/ClubDetail/NotJoinClub';
+
+import JoinClub from '@/components/club/ClubDetail/JoinClub';
+import NotJoinClub from '@/components/club/ClubDetail/NotJoinClub';
+import { useClubDetailQuery } from '@/hooks/queries/useClubsQuery';
 
 const Index = () => {
   const { clubId } = useParams<{ clubId: string }>();

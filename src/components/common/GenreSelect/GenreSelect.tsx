@@ -1,7 +1,7 @@
 import { Badge } from 'pov-design-system';
-import { GenreSelectWrapper } from './GenreSelect.style';
-import { GENRES } from '../../../constants/genres';
-import { useToast } from '../../../hooks/common/useToast';
+import { GenreSelectWrapper } from '@/components/common/GenreSelect/GenreSelect.style';
+import { GENRES } from '@/constants/genres';
+import { useToast } from '@/hooks/common/useToast';
 
 interface GenreSelectProps {
   value: string[];

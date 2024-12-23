@@ -1,6 +1,7 @@
 import { useTheme, SwitchToggle } from 'pov-design-system';
 import { useState, useEffect } from 'react';
-import { ToggleWrapper, Label } from './Toggle.styles';
+import { ToggleWrapper, Label } from '@/components/common/Toggle/Toggle.styles';
+
 const ThemeToggle = () => {
   const { toggleStyle } = useTheme(); // 테마 전환 함수
   const [themeName, setThemeName] = useState<'light' | 'dark'>('dark'); // 초기값 설정

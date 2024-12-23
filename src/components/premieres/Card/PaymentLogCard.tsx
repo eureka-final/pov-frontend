@@ -1,8 +1,10 @@
-import { Heading, Body } from 'pov-design-system';
-import { Card } from './PaymentLogCard.style';
-import { useTheme } from '@emotion/react';
 import { useNavigate } from 'react-router-dom';
-import type { PremiereEntry } from '../../../types/premiere';
+
+import { useTheme } from '@emotion/react';
+import { Heading, Body } from 'pov-design-system';
+
+import { Card } from '@/components/premieres/Card/PaymentLogCard.style';
+import type { PremiereEntry } from '@/types/premiere';
 
 const PaymentLogCard = (props: PremiereEntry) => {
   const theme = useTheme();

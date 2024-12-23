@@ -1,7 +1,7 @@
 import { Heading, Button, Logo, Body } from 'pov-design-system';
 import { useNavigate } from 'react-router-dom';
-import { HTTP_STATUS_CODE, HTTP_ERROR_MESSAGE } from '../../constants/api';
-import { containerStyling, buttonStyling, headingStyling, textStyling } from './FallbackUI.style';
+import { HTTP_STATUS_CODE, HTTP_ERROR_MESSAGE } from '@/constants/api';
+import { containerStyling, buttonStyling, headingStyling, textStyling } from '@/components/fallbackUI/FallbackUI.style';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const FallbackUI = ({ error, resetErrorBoundary }: { error: any; resetErrorBoundary: () => void }) => {

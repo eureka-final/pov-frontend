@@ -1,9 +1,10 @@
-import { useNavigate } from 'react-router-dom';
-import { Body, Paragraph, Heading, Logo, Button, Icon } from 'pov-design-system';
-import Profile from '../common/Profile/Profile';
-// import dompurify from 'dompurify';
 import { useState } from 'react';
-import { useLikeMutation, useDisLikeMutation } from '../../hooks/queries/useLikeMutation';
+import { useNavigate } from 'react-router-dom';
+
+import { useTheme } from '@emotion/react';
+import { Body, Paragraph, Heading, Logo, Button, Icon } from 'pov-design-system';
+
+import Profile from '@/components/common/Profile/Profile';
 import {
   CardContainer,
   Poster,
@@ -16,9 +17,8 @@ import {
   Spoiler,
   SpoMore,
   WordWrapText,
-} from '../club/ClubCard.style';
-import { useTheme } from '@emotion/react';
-// import useWindowSize from '../../hooks/utils/useWindowSize';
+} from '@/components/club/ClubCard.style';
+import { useLikeMutation, useDisLikeMutation } from '@/hooks/queries/useLikeMutation';
 
 interface ReviewCardProps {
   key: string;

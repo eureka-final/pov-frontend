@@ -1,7 +1,7 @@
 import { useMutation } from '@tanstack/react-query';
 import { postReview, postReviewImage } from '../../apis/review/postReview';
-import { useApiError } from './useApiError';
-import { useToast } from '../common/useToast';
+import { useApiError } from '@/hooks/queries/useApiError';
+import { useToast } from '@/hooks/common/useToast';
 
 export const useCreateReviewMutation = () => {
   const { createToast } = useToast();

@@ -1,11 +1,26 @@
-import AdminTemplate from '../../../components/templates/Admin/AdminTemplate';
-import { Container, Header, Card, Info, InfoContainer, Wrapper, Buttons, ImageContainer, HeadingContainer, Div, Layer, List } from './MovieDetail.styles';
-import { Heading, Body, Button, Icon } from 'pov-design-system';
-import ImageLayer from '../../../components/styles/ImageLayer';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useMovieDetailQuery } from '../../../hooks/queries/useMoviesQuery';
-import { useDeleteMovieMutation } from '../../../hooks/queries/useDeleteMovieMutation';
-import { useToast } from '../../../hooks/common/useToast';
+
+import { Heading, Body, Button, Icon } from 'pov-design-system';
+
+import {
+  Container,
+  Header,
+  Card,
+  Info,
+  InfoContainer,
+  Wrapper,
+  Buttons,
+  ImageContainer,
+  HeadingContainer,
+  Div,
+  Layer,
+  List,
+} from '@/admins/Movie/MovieDetail/MovieDetail.styles';
+import AdminTemplate from '@/components/templates/Admin/AdminTemplate';
+import ImageLayer from '@/components/styles/ImageLayer';
+import { useMovieDetailQuery } from '@/hooks/queries/useMoviesQuery';
+import { useDeleteMovieMutation } from '@/hooks/queries/useDeleteMovieMutation';
+import { useToast } from '@/hooks/common/useToast';
 
 const Index = () => {
   const navigate = useNavigate();

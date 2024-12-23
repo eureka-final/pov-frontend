@@ -1,5 +1,5 @@
 import { Badge } from 'pov-design-system';
-import { GenresWrapper } from './Genres.style';
+import { GenresWrapper } from '@/components/common/Genres/Genres.style';
 
 interface GenresProps {
   genres: string[];

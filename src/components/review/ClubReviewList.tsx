@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
-import { ClubContainer, ClubItem, ClubReviewListContainer } from './ReviewCard.style';
-import { Avatar } from 'pov-design-system';
-import { useJoinClubReviewsQuery, useClubReviewsQuery } from '../../hooks/queries/useReviewsQuery';
-import ClubReviewCard, { EmptyClubReviewCard } from './ClubReviewCard';
 import { useInView } from 'react-intersection-observer';
-import ReviewPageSkeleton from './ReviewPageSkeleton';
+
+import { Avatar } from 'pov-design-system';
+
+import { ClubContainer, ClubItem, ClubReviewListContainer } from '@/components/review/ReviewCard.style';
+import { useJoinClubReviewsQuery, useClubReviewsQuery } from '@/hooks/queries/useReviewsQuery';
+import ClubReviewCard, { EmptyClubReviewCard } from '@/components/review/ClubReviewCard';
+import ReviewPageSkeleton from '@/components/review/ReviewPageSkeleton';
 
 function ClubReviewList() {
   const { joinData } = useJoinClubReviewsQuery();

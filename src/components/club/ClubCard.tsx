@@ -1,9 +1,11 @@
-import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import { CardContainer, CardFlex, ReviewCardContainer, TitleInfo, FlexWrapper } from './ClubCard.style';
-import { Body, Input, Icon, Heading, Logo, Badge, Paragraph } from 'pov-design-system';
-import { useClubsQuery } from '../../hooks/queries/useClubsQuery';
+import { useNavigate } from 'react-router-dom';
+
 import { useTheme } from '@emotion/react';
+import { Body, Input, Icon, Heading, Logo, Badge, Paragraph } from 'pov-design-system';
+
+import { CardContainer, CardFlex, ReviewCardContainer, TitleInfo, FlexWrapper } from '@/components/club/ClubCard.style';
+import { useClubsQuery } from '@/hooks/queries/useClubsQuery';
 
 function ClubCard() {
   const navigate = useNavigate();

@@ -1,11 +1,15 @@
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import Section from '../../../components/movies/Section/Section';
-import { Container } from '../Movie.styles';
-import { constants } from '../../../constants/constants';
-import { useSearchMoviesQuery } from '../../../hooks/queries/useMoviesQuery';
 import { useInView } from 'react-intersection-observer';
-import MoviePageSkeleton from '../MoviePageSkeleton';
+
+import { Container } from '@/pages/Movie/Movie.styles';
+import MoviePageSkeleton from '@/pages/Movie/MoviePageSkeleton';
+
+import Section from '@/components/movies/Section/Section';
+
+import { constants } from '@/constants/constants';
+
+import { useSearchMoviesQuery } from '@/hooks/queries/useMoviesQuery';
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);

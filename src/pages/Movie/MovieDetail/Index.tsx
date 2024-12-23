@@ -1,6 +1,12 @@
-import Basic from '../../../components/templates/Basic/Basic';
-import { constants } from '../../../constants/constants';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useState } from 'react';
+
+import { useTheme } from '@emotion/react';
+
 import { Heading, Badge, Body, Icon, ShowMoreBtn, Paragraph } from 'pov-design-system';
+
+import Basic from '@/components/templates/Basic/Basic';
+import { constants } from '@/constants/constants';
 import {
   Container,
   HeaderContainer,
@@ -22,18 +28,17 @@ import {
   PosterImg,
   StillCutImage,
   ProductionGridContainer,
-} from './MovieDetail.styles';
-import ResponsiveContainer from '../../../components/styles/ResponsiveContainer';
-import ProgressBar from '../../../components/styles/ProgressBar';
-import Productions from '../../../components/movies/Productions/Productions';
-import Review from '../../../components/movies/Review/Review';
-import { useMovieDetailQuery } from '../../../hooks/queries/useMoviesQuery';
-import { useNavigate, useParams } from 'react-router-dom';
-import { formatDate } from '../../../utils/formatDateTime';
-import { useTheme } from '@emotion/react';
-import { useState } from 'react';
-import { useLikeMovieMutation, useDisLikeMovieMutation } from '../../../hooks/queries/useLikeMovieMutation';
-import { PopularReviewListContainer } from '../../../components/review/ReviewCard.style';
+} from '@/pages/Movie/MovieDetail/MovieDetail.styles';
+import ResponsiveContainer from '@/components/styles/ResponsiveContainer';
+import ProgressBar from '@/components/styles/ProgressBar';
+import Productions from '@/components/movies/Productions/Productions';
+import Review from '@/components/movies/Review/Review';
+import { PopularReviewListContainer } from '@/components/review/ReviewCard.style';
+
+import { useMovieDetailQuery } from '@/hooks/queries/useMoviesQuery';
+import { useLikeMovieMutation, useDisLikeMovieMutation } from '@/hooks/queries/useLikeMovieMutation';
+
+import { formatDate } from '@/utils/formatDateTime';
 
 const Index = () => {
   const navigate = useNavigate();

@@ -1,7 +1,9 @@
-// import { EXCEPTION_POINTS } from '../../constants/api';
-import { Heading, Button, Logo, Body } from 'pov-design-system';
-import { containerStyling, buttonStyling, headingStyling, textStyling } from '../../components/fallbackUI/FallbackUI.style';
+// import { EXCEPTION_POINTS } from '@/constants/api';
 import { useNavigate } from 'react-router-dom';
+
+import { Heading, Button, Logo, Body } from 'pov-design-system';
+
+import { containerStyling, buttonStyling, headingStyling, textStyling } from '@/components/fallbackUI/FallbackUI.style';
 
 const Index = () => {
   const navigate = useNavigate();

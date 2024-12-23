@@ -1,8 +1,8 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { useToast } from '../common/useToast';
-import { postEntry } from '../../apis/premieres/postEntry';
-import { deleteEntry } from '../../apis/premieres/deleteEntry';
-import { useApiError } from './useApiError';
+import { postEntry } from '@/apis/premieres/postEntry';
+import { deleteEntry } from '@/apis/premieres/deleteEntry';
+import { useApiError } from '@/hooks/queries/useApiError';
+import { useToast } from '@/hooks/common/useToast';
 
 export const useEntryMutation = () => {
   const queryClient = useQueryClient();

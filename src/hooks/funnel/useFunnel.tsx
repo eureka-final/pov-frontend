@@ -1,5 +1,3 @@
-//
-
 import { ReactNode, ReactElement, useState } from 'react';
 
 export interface StepProps {

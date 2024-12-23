@@ -1,29 +1,10 @@
-// import { useEffect } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
-import Padded from '../../../../components/templates/Padded/Padded';
+import Padded from '@/components/templates/Padded/Padded';
 
 export default function Index() {
   const [searchParams] = useSearchParams();
   const errorCode = searchParams.get('code');
   const errorMessage = searchParams.get('message');
-  //  const errorOrderId = searchParams.get('orderId');
-
-  //   useEffect(() => {
-  //     const updatePaymentState = async () => {
-  //       // errorCode에 따라 payment_state 설정
-  //       const newState = errorCode === 'ALREADY_PROCESSED_PAYMENT' ? 'success' : 'fail';
-
-  //       // payment table에 payment_state 정보를 fail로 업데이트
-  //       const { data, error } = await supabase.from('payment').update({ payment_state: newState }).eq('orderId', errorOrderId);
-
-  //       if (error) {
-  //         console.error('Error posting data:', error);
-  //         return;
-  //       }
-  //     };
-
-  //     updatePaymentState();
-  //   }, [errorOrderId]); // errorOrderId가 변경될 때마다 실행
 
   return (
     <Padded>

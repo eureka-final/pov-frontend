@@ -1,7 +1,9 @@
-import { Card, ThumbnailImage } from './PremiereSection.style';
-import { Premieres } from '../../../types/premiere';
-import { Heading, Body } from 'pov-design-system';
 import { useNavigate } from 'react-router-dom';
+
+import { Heading, Body } from 'pov-design-system';
+
+import { Card, ThumbnailImage } from '@/components/premieres/Section/PremiereSection.style';
+import { Premieres } from '@/types/premiere';
 
 const PremiereSection = ({ premiereId, title, thumbnail, startAt }: Premieres) => {
   const navigate = useNavigate();

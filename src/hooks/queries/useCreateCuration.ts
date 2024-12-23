@@ -1,7 +1,7 @@
 import { useMutation } from '@tanstack/react-query';
-import { postCuration } from '../../apis/admin/postCuration';
-import { useApiError } from './useApiError';
-import { useToast } from '../common/useToast';
+import { postCuration } from '@/apis/admin/postCuration';
+import { useApiError } from '@/hooks/queries/useApiError';
+import { useToast } from '@/hooks/common/useToast';
 
 export const useCreateCurationMutation = () => {
   const { createToast } = useToast();

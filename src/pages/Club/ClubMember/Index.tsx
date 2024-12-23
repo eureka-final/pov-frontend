@@ -1,10 +1,12 @@
 import { useParams } from 'react-router-dom';
 import { useState } from 'react';
-import { ReviewListContainer, CardContainer, CardFlex, ReviewCardContainer } from '../../../components/club/ClubCard.style';
+
 import { Body, Input, Icon, Heading, Avatar, useOverlay, Modal, Button } from 'pov-design-system';
-import { useClubMemberQuery } from '../../../hooks/queries/useClubsQuery';
-import { useChangeLeaderMutation } from '../../../hooks/queries/useEditClubMutation';
-import { useToast } from '../../../hooks/common/useToast';
+
+import { ReviewListContainer, CardContainer, CardFlex, ReviewCardContainer } from '@/components/club/ClubCard.style';
+import { useClubMemberQuery } from '@/hooks/queries/useClubsQuery';
+import { useChangeLeaderMutation } from '@/hooks/queries/useEditClubMutation';
+import { useToast } from '@/hooks/common/useToast';
 
 function Index() {
   const { clubId } = useParams<{ clubId: string }>();

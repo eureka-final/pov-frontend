@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
-import { useReviewsQuery } from '../../hooks/queries/useReviewsQuery';
-import ReviewPageSkeleton from './ReviewPageSkeleton';
 import { useInView } from 'react-intersection-observer';
 
-import ReviewCard, { ReviewCardEmpty } from './ReviewCard';
+import ReviewPageSkeleton from '@/components/review/ReviewPageSkeleton';
+import ReviewCard, { ReviewCardEmpty } from '@/components/review/ReviewCard';
+import { useReviewsQuery } from '@/hooks/queries/useReviewsQuery';
 
 function ReviewList() {
   const pageSize = 10;

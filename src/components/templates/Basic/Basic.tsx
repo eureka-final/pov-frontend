@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { Container } from './Basic.styled';
+import { Container } from '@/components/templates/Basic/Basic.styled';
 
 interface BasicProps {
   children: ReactNode;

@@ -1,13 +1,16 @@
 import { Route, Routes } from 'react-router-dom';
-import { AppRouteDef } from './RouteDef';
-import Padded from '../components/templates/Padded/Padded';
-import ToastContainer from '../components/common/ToastContainer/ToastContainer';
-import useRenderHeader from '../hooks/utils/useRenderHeader';
-import { ErrorBoundary } from 'react-error-boundary';
-import { QueryErrorResetBoundary } from '@tanstack/react-query';
-import FallbackUI from '../components/fallbackUI/FallbackUI';
+
 import styled from '@emotion/styled';
-import Area from '../components/templates/Area/Area';
+
+import { QueryErrorResetBoundary } from '@tanstack/react-query';
+import { ErrorBoundary } from 'react-error-boundary';
+
+import { AppRouteDef } from '@/routes/RouteDef';
+import Padded from '@/components/templates/Padded/Padded';
+import ToastContainer from '@/components/common/ToastContainer/ToastContainer';
+import useRenderHeader from '@/hooks/utils/useRenderHeader';
+import FallbackUI from '@/components/fallbackUI/FallbackUI';
+import Area from '@/components/templates/Area/Area';
 
 const ViewArea = styled.div`
   display: flex;

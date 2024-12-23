@@ -1,6 +1,9 @@
-import Basic from '../../../components/templates/Basic/Basic';
+import Basic from '@/components/templates/Basic/Basic';
 import { useParams } from 'react-router-dom';
+
+import { useTheme } from '@emotion/react';
 import { Button, Heading, Badge, Body, useOverlay, Modal } from 'pov-design-system';
+
 import {
   Container,
   HeaderContainer,
@@ -10,12 +13,11 @@ import {
   BackgroundLayer,
   ModalContainer,
   JoinContainer,
-} from '../../../components/club/ClubDetail/ClubDetail.styles';
-import { useClubDetailQuery } from '../../../hooks/queries/useClubsQuery';
-import { useJoinClubMutation } from '../../../hooks/queries/useJoinClubMutation';
-import { useToast } from '../../../hooks/common/useToast';
-import Profile from '../../common/Profile/Profile';
-import { useTheme } from '@emotion/react';
+} from '@/components/club/ClubDetail/ClubDetail.styles';
+import Profile from '@/components/common/Profile/Profile';
+import { useClubDetailQuery } from '@/hooks/queries/useClubsQuery';
+import { useJoinClubMutation } from '@/hooks/queries/useJoinClubMutation';
+import { useToast } from '@/hooks/common/useToast';
 
 const NotJoinClub = () => {
   const { clubId } = useParams<{ clubId: string }>();

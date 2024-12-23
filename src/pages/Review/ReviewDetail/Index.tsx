@@ -1,6 +1,11 @@
-import Basic from '../../../components/templates/Basic/Basic';
+import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import dompurify from 'dompurify';
+
+import { useTheme } from '@emotion/react';
 import { Heading, Body, Paragraph, Icon, Badge, useOverlay, Modal, Button } from 'pov-design-system';
+
+import Basic from '@/components/templates/Basic/Basic';
 import {
   Container,
   HeaderContainer,
@@ -12,17 +17,13 @@ import {
   Wrapper,
   Menu,
   LikeContainer,
-} from './ReviewDetail.styles';
-import Profile from '../../../components/common/Profile/Profile';
-import { useReviewDetailQuery } from '../../../hooks/queries/useReviewsQuery';
-import { useDeleteReviewMutation } from '../../../hooks/queries/useDeleteReviewMutation';
-import dompurify from 'dompurify';
-import { useToast } from '../../../hooks/common/useToast';
-
-import { useState } from 'react';
-import { useLikeMutation, useDisLikeMutation } from '../../../hooks/queries/useLikeMutation';
-import { useAuthStore } from '../../../stores/useAuthStore';
-import { useTheme } from '@emotion/react';
+} from '@/pages/Review/ReviewDetail/ReviewDetail.styles';
+import Profile from '@/components/common/Profile/Profile';
+import { useReviewDetailQuery } from '@/hooks/queries/useReviewsQuery';
+import { useDeleteReviewMutation } from '@/hooks/queries/useDeleteReviewMutation';
+import { useToast } from '@/hooks/common/useToast';
+import { useLikeMutation, useDisLikeMutation } from '@/hooks/queries/useLikeMutation';
+import { useAuthStore } from '@/stores/useAuthStore';
 
 const Index = () => {
   const { movieId, reviewId } = useParams<{ movieId: string; reviewId: string }>();

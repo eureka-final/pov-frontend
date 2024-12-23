@@ -1,13 +1,15 @@
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import AdminTemplate from '../../../components/templates/Admin/AdminTemplate';
-import { Container, Header, Card, Info, InfoContainer, Wrapper, Input, ButtonContainer, Badges } from './Index.styles';
+
 import { Heading, Body, Button, Badge } from 'pov-design-system';
-import { useTMDBMovieDetailQuery } from '../../../hooks/queries/useMovieQuery';
-import { TMDBMovieDetailResponse, Cast, Crew } from '../../../types/movie_admins';
-import { formatDate } from '../../../utils/formatTade';
-import { useCreateMovieMutation } from '../../../hooks/queries/useCreateMovieMutation';
-import { useToast } from '../../../hooks/common/useToast';
+
+import { Container, Header, Card, Info, InfoContainer, Wrapper, Input, ButtonContainer, Badges } from '@/admins/Movie/tmdbApply/Index.styles';
+import AdminTemplate from '@/components/templates/Admin/AdminTemplate';
+import { TMDBMovieDetailResponse, Cast, Crew } from '@/types/movie_admins';
+import { formatDate } from '@/utils/formatTade';
+import { useTMDBMovieDetailQuery } from '@/hooks/queries/useMovieQuery';
+import { useCreateMovieMutation } from '@/hooks/queries/useCreateMovieMutation';
+import { useToast } from '@/hooks/common/useToast';
 
 const Index = () => {
   const location = useLocation();

@@ -1,7 +1,8 @@
-import { Movie } from '../../../types/movie';
-import Card from '../Card/Card';
-import { SectionContainer, CardContainer } from './Section.styles';
 import { Heading } from 'pov-design-system';
+
+import { Movie } from '@/types/movie';
+import Card from '@/components/movies/Card/Card';
+import { SectionContainer, CardContainer } from '@/components/movies/Section/Section.styles';
 
 interface SectionProps {
   items: Movie[];

@@ -1,6 +1,6 @@
 import { useQuery, useInfiniteQuery } from '@tanstack/react-query';
-import { getTMDBMovies, getTMDBMovieDetail } from '../../apis/admin/getMovies';
-import { TMDBMoviesResponse, TMDBMovieDetailResponse } from '../../types/movie_admins';
+import { getTMDBMovies, getTMDBMovieDetail } from '@/apis/admin/getMovies';
+import { TMDBMoviesResponse, TMDBMovieDetailResponse } from '@/types/movie_admins';
 
 export const useTMDBMovieDetailQuery = (movieId: string) => {
   const { data: dbData } = useQuery<TMDBMovieDetailResponse>({

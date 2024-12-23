@@ -1,6 +1,6 @@
 import React from 'react';
 import { Avatar } from 'pov-design-system';
-import { Container, Name } from './Profile.style';
+import { Container, Name } from '@/components/common/Profile/Profile.style';
 
 export interface UserProps {
   name: string;

@@ -1,13 +1,15 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import Padded from '../../../components/templates/Padded/Padded';
-import ReactEditor from '../../../components/review/ReviewWrite/ReactEditor';
+
 import { Heading, Body, Button, Modal, useOverlay, Logo } from 'pov-design-system';
-import Keyword from '../../../components/review/ReviewWrite/Keyword';
-import ReviewToggle from '../../../components/review/ReviewWrite/ReviewToggle';
-import { HeadingContainer, ButtonContainer, Vs, Item } from './ReviewWrite.style';
-import { useCreateReviewMutation } from '../../../hooks/queries/useCreateReviewMutation';
-import { useToast } from '../../../hooks/common/useToast';
+
+import { HeadingContainer, ButtonContainer, Vs, Item } from '@/pages/Review/ReviewWrite/ReviewWrite.style';
+import Padded from '@/components/templates/Padded/Padded';
+import ReactEditor from '@/components/review/ReviewWrite/ReactEditor';
+import Keyword from '@/components/review/ReviewWrite/Keyword';
+import ReviewToggle from '@/components/review/ReviewWrite/ReviewToggle';
+import { useCreateReviewMutation } from '@/hooks/queries/useCreateReviewMutation';
+import { useToast } from '@/hooks/common/useToast';
 
 const Index = () => {
   const { movieId } = useParams<{ movieId: string }>();

@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import { Heading, Body } from 'pov-design-system';
-import { constants } from '../../constants/constants';
+import { constants } from '@/constants/constants';
 
 const Container = styled.div`
   width: 100%;

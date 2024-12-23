@@ -1,7 +1,9 @@
 import { Skeleton } from 'pov-design-system';
-import { CardContainer } from '../../components/movies/Section/Section.styles';
-import { CardWapper } from '../../components/movies/Card/Card.styles';
-import useWindowSize from '../../hooks/utils/useWindowSize';
+
+import { CardContainer } from '@/components/movies/Section/Section.styles';
+import { CardWapper } from '@/components/movies/Card/Card.styles';
+
+import useWindowSize from '@/hooks/utils/useWindowSize';
 
 const MoviePageSkeleton = () => {
   const windowSize = useWindowSize();

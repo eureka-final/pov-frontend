@@ -1,54 +1,57 @@
-import Movie from '../pages/Movie/index';
-import MovieTrending from '../pages/Movie/MovieTrending/Index';
-import MovieSearch from '../pages/Movie/MovieSearch/Index';
-import MovieDetail from '../pages/Movie/MovieDetail';
-import MovieReviews from '../pages/Movie/MovieReviews/Index';
-import Review from '../pages/Review';
-import ReviewWrite from '../pages/Review/ReviewWrite/Index';
-import ReviewEdit from '../pages/Review/ReviewEdit/Index';
+import { Suspense } from 'react';
+import * as Lazy from '@/routes/lazy';
+
+// Movie
+import Movie from '@/pages/Movie/Index';
+import MovieTrending from '@/pages/Movie/MovieTrending/Index';
+import MovieSearch from '@/pages/Movie/MovieSearch/Index';
+import MovieDetail from '@/pages/Movie/MovieDetail/Index';
+import MovieReviews from '@/pages/Movie/MovieReviews/Index';
+import Review from '@/pages/Review/Index';
+import ReviewWrite from '@/pages/Review/ReviewWrite/Index';
+import ReviewEdit from '@/pages/Review/ReviewEdit/Index';
 
 // Club
-import Club from '../pages/Club';
-import ClubCreate from '../pages/Club/ClubCreate/Index';
-import ClubDetail from '../pages/Club/ClubDetail/Index';
-import ClubPrivate from '../pages/Club/ClubPrivate/Index';
-import ClubEdit from '../pages/Club/ClubEdit/Index';
-import ClubMember from '../pages/Club/ClubMember/Index';
-import ClubReview from '../pages/Club/ClubReview/Index';
-import Premieres from '../pages/Premieres';
-import PremiereDetail from '../pages/Premieres/PremiereDetail/Index';
-import Payments from '../pages/Premieres/Payments/Index';
-import Success from '../pages/Premieres/Payments/Success/Index';
-import Fail from '../pages/Premieres/Payments/Fail/Index';
-import ReviewDetail from '../pages/Review/ReviewDetail/Index';
+import Club from '@/pages/Club/Index';
+import ClubCreate from '@/pages/Club/ClubCreate/Index';
+import ClubDetail from '@/pages/Club/ClubDetail/Index';
+import ClubPrivate from '@/pages/Club/ClubPrivate/Index';
+import ClubEdit from '@/pages/Club/ClubEdit/Index';
+import ClubMember from '@/pages/Club/ClubMember/Index';
+import ClubReview from '@/pages/Club/ClubReview/Index';
+
+// Premieres
+import Premieres from '@/pages/Premieres/Index';
+import PremiereDetail from '@/pages/Premieres/PremiereDetail/Index';
+import Payments from '@/pages/Premieres/Payments/Index';
+import Success from '@/pages/Premieres/Payments/Success/Index';
+import Fail from '@/pages/Premieres/Payments/Fail/Index';
+import ReviewDetail from '@/pages/Review/ReviewDetail/Index';
 
 // Auth
-import Login from '../pages/Login/Index';
-import OauthNaver from '../pages/Oauth/Naver/Index';
-import OauthGoogle from '../pages/Oauth/Google/Index';
-import Notice from '../pages/Notice';
-import SignUp from '../pages/SignUp/Index';
-import MyPage from '../pages/MyPage';
-import Settings from '../pages/MyPage/Settings';
-import NotFound from '../pages/NotFound/Index';
+import Login from '@/pages/Login/Index';
+import OauthNaver from '@/pages/Oauth/Naver/Index';
+import OauthGoogle from '@/pages/Oauth/Google/Index';
+import Notice from '@/pages/Notice/Index';
+import SignUp from '@/pages/SignUp/Index';
+import MyPage from '@/pages/MyPage/Index';
+import Settings from '@/pages/MyPage/Settings/Index';
+import NotFound from '@/pages/NotFound/Index';
 
 // Admin
-import AdminMovie from '../admins/Movie/Index';
-import AdminMovieDetail from '../admins/Movie/MovieDetail/Index';
-import AdminMovieUpdate from '../admins/Movie/detailUpdate/Index';
-import TMDBMovies from '../admins/Movie/tmdbMovies/Index';
-import TMDBMoviesApply from '../admins/Movie/tmdbApply/Index';
-import AdminCurations from '../admins/Movie/curations/Index';
-import AdminCurationsApply from '../admins/Movie/curationsApply/Index';
-import AdminCurationsDetail from '../admins/Movie/curationDetail/Index';
-import AdminCurationUpdate from '../admins/Movie/curationUpdate/Index';
-import AdminReviews from '../admins/reviews/Index';
-import AdminReviewDetail from '../admins/reviews/reviewDetail/Index';
+import AdminMovie from '@/admins/Movie/Index';
+import AdminMovieDetail from '@/admins/Movie/MovieDetail/Index';
+import AdminMovieUpdate from '@/admins/Movie/detailUpdate/Index';
+import TMDBMovies from '@/admins/Movie/tmdbMovies/Index';
+import TMDBMoviesApply from '@/admins/Movie/tmdbApply/Index';
+import AdminCurations from '@/admins/Movie/curations/Index';
+import AdminCurationsApply from '@/admins/Movie/curationsApply/Index';
+import AdminCurationsDetail from '@/admins/Movie/curationDetail/Index';
+import AdminCurationUpdate from '@/admins/Movie/curationUpdate/Index';
+import AdminReviews from '@/admins/reviews/Index';
+import AdminReviewDetail from '@/admins/reviews/reviewDetail/Index';
 
-import MainPageSkeleton from '../pages/Main/MainPageSkeleton';
-
-import { Suspense } from 'react';
-import * as Lazy from './lazy';
+import MainPageSkeleton from '@/pages/Main/MainPageSkeleton';
 
 const MovieScreens = {
   Main: {

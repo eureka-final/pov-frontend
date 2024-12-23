@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useAuthStore } from '../../../stores/useAuthStore';
-import { postLogin } from '../../../apis/auth/postAuth';
-import CircularProgress from '../../../components/common/Progress';
-import { LoadingSection, ModalWrapper, ModalBodyWrapper } from '../Index.styles';
+
 import { Heading, Body, Button, useOverlay, Modal } from 'pov-design-system';
+
+import { LoadingSection, ModalWrapper, ModalBodyWrapper } from '@/pages/Oauth/Index.styles';
+import CircularProgress from '@/components/common/Progress';
+import { useAuthStore } from '@/stores/useAuthStore';
+import { postLogin } from '@/apis/auth/postAuth';
 
 const Index = () => {
   const navigate = useNavigate();

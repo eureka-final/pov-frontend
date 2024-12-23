@@ -1,7 +1,11 @@
-import Basic from '../../../components/templates/Basic/Basic';
-import { useNavigate, useParams } from 'react-router-dom';
 import { useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+
+import { useTheme } from '@emotion/react';
+
 import { Icon, Button, Heading, Badge, Body, AvatarList, ShowMoreBtn, useOverlay, Modal } from 'pov-design-system';
+
+import Basic from '@/components/templates/Basic/Basic';
 import {
   Container,
   HeaderContainer,
@@ -18,16 +22,15 @@ import {
   SectionWrapper,
   ClubBookMarkContainer,
   ClubMenu,
-} from './ClubDetail.styles';
-import { PopularReviewListContainer } from '../../../components/review/ReviewCard.style';
-import { useClubDetailQuery } from '../../../hooks/queries/useClubsQuery';
-import { useDeleteClubMutation } from '../../../hooks/queries/useDeleteClubMutation';
-import { useLeaveClubMutaion } from '../../../hooks/queries/useLeaveClubMutaion';
-import { useInviteCodeMutation } from '../../../hooks/queries/useCreateClubMutation';
-import { useToast } from '../../../hooks/common/useToast';
-import { useAuthStore } from '../../../stores/useAuthStore';
-import ClubReviewCard from '../../review/ClubReviewCard';
-import { useTheme } from '@emotion/react';
+} from '@/components/club/ClubDetail/ClubDetail.styles';
+import { PopularReviewListContainer } from '@/components/review/ReviewCard.style';
+import ClubReviewCard from '@/components/review/ClubReviewCard';
+import { useClubDetailQuery } from '@/hooks/queries/useClubsQuery';
+import { useDeleteClubMutation } from '@/hooks/queries/useDeleteClubMutation';
+import { useLeaveClubMutaion } from '@/hooks/queries/useLeaveClubMutaion';
+import { useInviteCodeMutation } from '@/hooks/queries/useCreateClubMutation';
+import { useToast } from '@/hooks/common/useToast';
+import { useAuthStore } from '@/stores/useAuthStore';
 
 const JoinClub = () => {
   const user = useAuthStore((state) => state.user);

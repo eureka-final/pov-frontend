@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { deleteReview } from '../../apis/review/deleteReview';
-import { useToast } from '../common/useToast';
+import { deleteReview } from '@/apis/review/deleteReview';
+import { useToast } from '@/hooks/common/useToast';
 
 export const useDeleteReviewMutation = () => {
   const queryClient = useQueryClient();

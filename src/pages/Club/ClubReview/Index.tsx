@@ -1,5 +1,10 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import { useInView } from 'react-intersection-observer';
+import dompurify from 'dompurify';
+
+import { Body, Paragraph, Heading, Logo, Button } from 'pov-design-system';
+
 import {
   ClubReviewListContainer,
   CardContainer,
@@ -12,14 +17,11 @@ import {
   SpoMore,
   ReadMore,
   TitleInfo,
-} from '../../../components/review/ReviewCard.style';
-import { Body, Paragraph, Heading, Logo, Button } from 'pov-design-system';
-import Profile from '../../../components/common/Profile/Profile';
-import { useClubReviewsQuery } from '../../../hooks/queries/useReviewsQuery';
-import dompurify from 'dompurify';
-import LikeButton from '../../../components/common/LikeButton/LikeButton';
-import { useInView } from 'react-intersection-observer';
-import ReviewPageSkeleton from '../../../components/review/ReviewPageSkeleton';
+} from '@/components/review/ReviewCard.style';
+import Profile from '@/components/common/Profile/Profile';
+import LikeButton from '@/components/common/LikeButton/LikeButton';
+import ReviewPageSkeleton from '@/components/review/ReviewPageSkeleton';
+import { useClubReviewsQuery } from '@/hooks/queries/useReviewsQuery';
 
 function Index() {
   const navigate = useNavigate();

@@ -1,7 +1,8 @@
 import { useRef } from 'react';
 import { Avatar, Icon } from 'pov-design-system';
-import { UploadProfileImgButtonContainer, UploadImgButton } from './UploadProfileImgButton.style';
-import { putProfileImage } from '../../../apis/member/putMember';
+
+import { UploadProfileImgButtonContainer, UploadImgButton } from '@/components/common/UploadProfileImgButton/UploadProfileImgButton.style';
+import { putProfileImage } from '@/apis/member/putMember';
 
 interface UploadProfileImgButtonProps {
   profileImageUrl: string;

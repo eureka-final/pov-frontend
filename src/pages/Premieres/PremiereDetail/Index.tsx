@@ -1,9 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
-import { PremiereContentSection, PremiereBodyImage } from './index.style';
-import { Button } from 'pov-design-system';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useEntryMutation, useCancelEntryMutation } from '../../../hooks/queries/usePermiereMutation';
-import { usePermieresDetailQuery } from '../../../hooks/queries/usePermieresQuery';
+
+import { Button } from 'pov-design-system';
+
+import { PremiereContentSection, PremiereBodyImage } from '@/pages/Premieres/PremiereDetail/index.style';
+import { useEntryMutation, useCancelEntryMutation } from '@/hooks/queries/usePermiereMutation';
+import { usePermieresDetailQuery } from '@/hooks/queries/usePermieresQuery';
 
 const Index = () => {
   const navigate = useNavigate();

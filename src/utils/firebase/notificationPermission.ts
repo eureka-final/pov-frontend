@@ -1,7 +1,7 @@
-import { app } from './initFirebase';
+import { app } from '@/utils/firebase/initFirebase';
 import { getMessaging, getToken } from 'firebase/messaging';
-import { postFcmToken } from '../../apis/member/postMember';
-import { useAuthStore } from '../../stores/useAuthStore';
+import { postFcmToken } from '@/apis/member/postMember';
+import { useAuthStore } from '@/stores/useAuthStore';
 
 /* Firebase messaging 객체 초기화 */
 const messaging = getMessaging(app);

@@ -1,19 +1,20 @@
+import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useForm, FormProvider } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-
 import axios from 'axios';
-import type { User } from '../../types/user';
-import { useAuthStore } from '../../stores/useAuthStore';
-import useFunnel from '../../hooks/funnel/useFunnel';
-import SignUpFunnel from '../../components/signUp/SignUpFunnel';
-import { postSignUp } from '../../apis/auth/postAuth';
-import { HTTP_STATUS_CODE } from '../../constants/api';
-import { useToast } from '../../hooks/common/useToast';
-import { useState } from 'react';
-import { ModalBodyWrapper, ModalWrapper } from '../Oauth/Index.styles';
+
 import { Heading, Body, Button, useOverlay, Modal } from 'pov-design-system';
+
+import { ModalBodyWrapper, ModalWrapper } from '@/pages/Oauth/Index.styles';
+import SignUpFunnel from '@/components/signUp/SignUpFunnel';
+import useFunnel from '@/hooks/funnel/useFunnel';
+import { useToast } from '@/hooks/common/useToast';
+import { postSignUp } from '@/apis/auth/postAuth';
+import type { User } from '@/types/user';
+import { useAuthStore } from '@/stores/useAuthStore';
+import { HTTP_STATUS_CODE } from '@/constants/api';
 
 const signInSteps = ['nickname', 'birth', 'favorGenres', 'success'];
 

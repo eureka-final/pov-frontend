@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react';
+
 import { Badge } from 'pov-design-system';
-import { BadgeWrapper } from './Review.style';
-import ReviewList from '../../components/review/ReviewList';
-import MyReviewList from '../../components/review/MyReviewList';
-import ClubReviewList from '../../components/review/ClubReviewList';
-import { ReviewPagePadded } from './index.styled';
-import { useAuthStore } from '../../stores/useAuthStore';
+
+import { BadgeWrapper } from '@/pages/Review/Review.style';
+import ReviewList from '@/components/review/ReviewList';
+import MyReviewList from '@/components/review/MyReviewList';
+import ClubReviewList from '@/components/review/ClubReviewList';
+import { ReviewPagePadded } from '@/pages/Review/index.styled';
+import { useAuthStore } from '@/stores/useAuthStore';
 
 const Index = () => {
   const user = useAuthStore((state) => state.user);
