@@ -28,7 +28,7 @@ import ReviewDetail from '../pages/Review/ReviewDetail/Index';
 import Login from '../pages/Login/Index';
 import OauthNaver from '../pages/Oauth/Naver/Index';
 import OauthGoogle from '../pages/Oauth/Google/Index';
-import Notice from '../pages/Notice';
+import Notice from '../pages/Notice/Index';
 import SignUp from '../pages/SignUp/Index';
 import MyPage from '../pages/MyPage';
 import Settings from '../pages/MyPage/Settings';
