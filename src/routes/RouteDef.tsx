@@ -1,3 +1,4 @@
+// Movie
 import Movie from '../pages/Movie/Index';
 import MovieTrending from '../pages/Movie/MovieTrending/Index';
 import MovieSearch from '../pages/Movie/MovieSearch/Index';
@@ -30,7 +31,7 @@ import OauthNaver from '../pages/Oauth/Naver/Index';
 import OauthGoogle from '../pages/Oauth/Google/Index';
 import Notice from '../pages/Notice/Index';
 import SignUp from '../pages/SignUp/Index';
-import MyPage from '../pages/MyPage';
+import MyPage from '../pages/MyPage/Index';
 import Settings from '../pages/MyPage/Settings';
 import NotFound from '../pages/NotFound/Index';
 
