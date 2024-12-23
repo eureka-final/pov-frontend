@@ -33,6 +33,7 @@
 ### 팀프로젝트 노션 & 피그마 & 스토리북 & 디자인 시스템 배포
 
 - [Notion Link](https://www.notion.so/shinhm1/13ce7e8fdd12808998d7dc98583a28e4?pvs=4)
+- [JIRA LINK](https://multicampusuplus.atlassian.net/jira/software/projects/POV/summary)
 - [Figma Link](https://www.figma.com/design/LPgTWB5ycZKHceP9pQDOmo/UI?node-id=1-2&p=f&t=NhkTp0IcCRKWKkwa-0)
   - [Design System Figma](https://www.figma.com/design/LPgTWB5ycZKHceP9pQDOmo/UI?node-id=1-3&p=f&t=z7EcT8zy9piFwWlW-0)
 - [Storybook Link](https://673c240da97b5391fe1cbe2f-ryyeqhtkia.chromatic.com/?path=/docs/design-system-avatar--docs)
@@ -69,6 +70,7 @@
 
 ```plaintext
 src/
+├── admins/
 ├── apis/                   
 ├── assets/
 ├── components/
@@ -78,20 +80,40 @@ src/
 ├── hooks/
 │   └── queries/
 ├── pages/
-│   ├── main/
+│   ├── Main/
 │   │   └── Index.tsx      # pages/{route}/.. 안의 tsx 파일은 Index.tsx로 통일
-│   ├── login/
-│   │   └── index.tsx      
-│   └── movie/
-│       └── index.tsx      
+│   ├── Login/
+│   │   └── Index.tsx  
+│   ├── SignUp/
+│   │   └── Index.tsx   
+│   ├── Movie/
+│   │   └── Index.tsx       
+│   ├── Review/
+│   │   └── Index.tsx  
+│   ├── Club/
+│   │   └── Index.tsx  
+│   ├── Premieres/
+│   │   └── Index.tsx  
+│   ├── MyPage/
+│   │   └── Index.tsx  
+│   ├── Notice/
+│   │   └── Index.tsx  
+│   ├── Oauth/
+│   │   └── Index.tsx  
+│   └── NotFound/
+│       └── Index.tsx      
 ├── stories/
 ├── stores/
+├── utils/
 ├── types/                 # 에픽 별로 type 정의
-│   └── movie/              
+│   ├── movie/    
+│   └── ...            
 ├── routes/
+│   ├── AppPages.tsx    
+│   ├── AppScreen.tsx   
+│   └── RouteDef.tsx     
 ├── main.tsx
-├── App.tsx                 
-└── index.tsx                          
+└── App.tsx                          
 ```
 
 <br/>
