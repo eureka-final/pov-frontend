@@ -11,8 +11,11 @@
     /* 경로 설정 */
     "baseUrl": "./",
     "paths": {
-      "@/*": ["./src/*"],
+       "@/*": ["src/*"],
+       "@utils/*": ["src/utils/*"],
+       "@routes/*": ["src/routes/*"],
        "@components/*": ["src/components/*"],
+       "@hooks/*": ["src/hooks/*"],
       }
     },
     "references": [{ "path": "./tsconfig.app.json" }, { "path": "./tsconfig.node.json" }],

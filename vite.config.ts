@@ -12,7 +12,7 @@ export default defineConfig({
   resolve: {
     alias: {
       'pov-design-system': 'pov-design-system/dist/index.js',
-      '@': path.resolve(__dirname, '/src'),
+      '@': path.resolve(__dirname, './src'),
       // '@components': path.resolve(__dirname, './src/components'),
     },
   },
