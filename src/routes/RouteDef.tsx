@@ -1,4 +1,4 @@
-import Movie from '../pages/Movie/index';
+import Movie from '../pages/Movie/Index';
 import MovieTrending from '../pages/Movie/MovieTrending/Index';
 import MovieSearch from '../pages/Movie/MovieSearch/Index';
 import MovieDetail from '../pages/Movie/MovieDetail';
