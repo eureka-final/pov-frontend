@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { putClub, putLeader } from '../../apis/club/putClub';
-import { useApiError } from './useApiError';
-import { useToast } from '../common/useToast';
+import { putClub, putLeader } from '@/apis/club/putClub';
+import { useApiError } from '@/hooks/queries/useApiError';
+import { useToast } from '@/hooks/common/useToast';
 
 export const useEditClubMutation = () => {
   const queryClient = useQueryClient();

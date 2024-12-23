@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { deleteClub } from '../../apis/club/deleteClub';
-import { useToast } from '../common/useToast';
+import { deleteClub } from '@/apis/club/deleteClub';
+import { useToast } from '@/hooks/common/useToast';
 
 export const useDeleteClubMutation = () => {
   const queryClient = useQueryClient();

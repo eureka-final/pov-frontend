@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { putMemberNotice } from '../../apis/member/putMember';
+import { putMemberNotice } from '@/apis/member/putMember';
 
 const useNotificationPermission = () => {
   const [permission, setPermission] = useState<string | null>('');

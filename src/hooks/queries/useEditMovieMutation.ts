@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { putMovie } from '../../apis/admin/putMovie';
-import { useApiError } from './useApiError';
-import { useToast } from '../common/useToast';
+import { putMovie } from '@/apis/admin/putMovie';
+import { useApiError } from '@/hooks/queries/useApiError';
+import { useToast } from '@/hooks/common/useToast';
 
 export const useEditMovieMutation = () => {
   const queryClient = useQueryClient();

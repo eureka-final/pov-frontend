@@ -1,8 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
 
-import { useAuthStore } from '../../stores/useAuthStore';
-import { useToast } from './useToast';
+import { useAuthStore } from '@/stores/useAuthStore';
+import { useToast } from '@/hooks/common/useToast';
 
 export const useTokenError = () => {
   const navigate = useNavigate();

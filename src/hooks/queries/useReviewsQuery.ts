@@ -1,7 +1,7 @@
 import { useQuery, useInfiniteQuery } from '@tanstack/react-query';
 
-import type { ReviewsResponse, ReviewDetailDataResponse, JoinClubResponse, MovieReviewsResponse } from '../../types/review';
-import { getReviews, getMyReviews, getClubReviews, getDetailReview, getJoinClub, getMovieReviews } from '../../apis/review/getReviews';
+import type { ReviewsResponse, ReviewDetailDataResponse, JoinClubResponse, MovieReviewsResponse } from '@/types/review';
+import { getReviews, getMyReviews, getClubReviews, getDetailReview, getJoinClub, getMovieReviews } from '@/apis/review/getReviews';
 
 export const useReviewsQuery = () => {
   const {

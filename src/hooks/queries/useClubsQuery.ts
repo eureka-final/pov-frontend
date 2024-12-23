@@ -1,7 +1,7 @@
 import { useQuery, UseQueryOptions } from '@tanstack/react-query';
-import type { ClubsResponse, ClubDetailDataResponse, ClubMemberDataResponse } from '../../types/club';
-import { getClubs, getMyClubs, getDetailClub, getPrivateClub, getMemberClub } from '../../apis/club/getClubs';
-import { useApiError } from './useApiError';
+import type { ClubsResponse, ClubDetailDataResponse, ClubMemberDataResponse } from '@/types/club';
+import { getClubs, getMyClubs, getDetailClub, getPrivateClub, getMemberClub } from '@/apis/club/getClubs';
+import { useApiError } from '@/hooks/queries/useApiError';
 
 export const useClubsQuery = () => {
 

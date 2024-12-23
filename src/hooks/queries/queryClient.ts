@@ -1,7 +1,7 @@
 import { QueryCache, QueryClient } from '@tanstack/react-query';
 
-import { NETWORK } from '../../constants/api';
-import { useApiError } from "./useApiError";
+import { NETWORK } from '@/constants/api';
+import { useApiError } from "@/hooks/queries/useApiError";
 
 // eslint-disable-next-line react-hooks/rules-of-hooks
 const { handleError } = useApiError();

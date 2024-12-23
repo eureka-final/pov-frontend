@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react';
-import { HTTP_STATUS_CODE } from '../../constants/api';
+import { HTTP_STATUS_CODE } from '@/constants/api';
 
 // 기본 핸들러 정의
 const defaultHandlers = {
