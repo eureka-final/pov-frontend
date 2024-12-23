@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
-import Padded from '../../../../components/templates/Padded/Padded';
-import { useTempPaymentMutation, usePaymentMutation } from '../../../../hooks/queries/usePaymentMutation';
+
+import { useTempPaymentMutation, usePaymentMutation } from '@/hooks/queries/usePaymentMutation';
+import Padded from '@/components/templates/Padded/Padded';
 
 function Index() {
   const [isConfirmed, setIsConfirmed] = useState(false);

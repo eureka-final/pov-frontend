@@ -1,14 +1,15 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import Padded from '../../../components/templates/Padded/Padded';
-import ReactEditor from '../../../components/review/ReviewWrite/ReactEditor';
+
 import { Heading, Body, Button, Modal, useOverlay, Logo } from 'pov-design-system';
-// import Keyword from '../../../components/review/ReviewWrite/Keyword';
-import ReviewToggle from '../../../components/review/ReviewWrite/ReviewToggle';
-import { HeadingContainer, ButtonContainer, Vs, Item } from '../ReviewWrite/ReviewWrite.style';
-import { useEditReviewMutation } from '../../../hooks/queries/useEditReviewMutation';
-import { useReviewDetailQuery } from '../../../hooks/queries/useReviewsQuery';
-import { useToast } from '../../../hooks/common/useToast';
+
+import { HeadingContainer, ButtonContainer, Vs, Item } from '@/pages/Review/ReviewWrite/ReviewWrite.style';
+import Padded from '@/components/templates/Padded/Padded';
+import ReactEditor from '@/components/review/ReviewWrite/ReactEditor';
+import ReviewToggle from '@/components/review/ReviewWrite/ReviewToggle';
+import { useEditReviewMutation } from '@/hooks/queries/useEditReviewMutation';
+import { useReviewDetailQuery } from '@/hooks/queries/useReviewsQuery';
+import { useToast } from '@/hooks/common/useToast';
 
 const Index = () => {
   const { movieId, reviewId } = useParams<{ movieId: string; reviewId: string }>();
@@ -28,30 +29,14 @@ const Index = () => {
   // Keyword 상태
   const [keywords, setKeywords] = useState(reviewData!.data.keywords);
 
-  // const handleKeywordsChange = (selectedKeywords: string[]) => {
-  //   // 부모 상태 업데이트
-  //   setKeywords((prevKeywords) =>
-  //     prevKeywords.map((keyword) => ({
-  //       ...keyword,
-  //       cancel: selectedKeywords.includes(keyword.text),
-  //     }))
-  //   );
-  // };
-
   // ReviewToggle 상태
   const [spoiler, setSpoiler] = useState(reviewData!.data.spoiler || false);
 
   // Modal 상태
   const [preference, setPreference] = useState('');
 
-  // interface Keyword {
-  //   text: string;
-  //   cancel: boolean;
-  // }
   // 데이터 통합 후 요청 전송
   const handleSubmit = () => {
-    // 선택된 키워드만 필터링
-    //const selectedKeywords = keywords.filter((keyword) => keyword.).map((keyword) => keyword.text);
     const requestData = {
       title,
       contents: content,
