@@ -1,7 +1,8 @@
-import SignUpStep from './SignUpStep';
 import { Button } from 'pov-design-system';
-import { SIGN_UP_HEADER_TEXTS } from '../../../constants/texts';
-import { ButtonContainer } from './SignUpStep.style';
+
+import SignUpStep from '@/components/signUp/step/SignUpStep';
+import { ButtonContainer } from '@/components/signUp/step/SignUpStep.style';
+import { SIGN_UP_HEADER_TEXTS } from '@/constants/texts';
 
 interface OnSuccessStepProps {
   onNext: (nextStep: string) => void;

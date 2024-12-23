@@ -1,8 +1,9 @@
-import { Section, NoContentsContainer } from './PaymentLogSection.style';
 import { Body } from 'pov-design-system';
-import PaymentLogCard from '../Card/PaymentLogCard';
-import { usePremieresEntryQuery } from '../../../hooks/queries/usePremieresEntryQuery';
-import { PaymentLogCardContainer } from '../Card/PaymentLogCard.style';
+
+import { Section, NoContentsContainer } from '@/components/premieres/Section/PaymentLogSection.style';
+import PaymentLogCard from '@/components/premieres/Card/PaymentLogCard';
+import { PaymentLogCardContainer } from '@/components/premieres/Card/PaymentLogCard.style';
+import { usePremieresEntryQuery } from '@/hooks/queries/usePremieresEntryQuery';
 
 const PaymentLogSection = () => {
   const { premiereEntryData } = usePremieresEntryQuery();

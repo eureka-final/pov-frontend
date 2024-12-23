@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 import { Heading, Body } from 'pov-design-system';
-import { Container, SideBar, Wrapper, Category } from './Admin.style';
+import { Container, SideBar, Wrapper, Category } from '@/components/templates/Admin/Admin.style';
 import { useNavigate } from 'react-router-dom';
 
 interface BasicProps {

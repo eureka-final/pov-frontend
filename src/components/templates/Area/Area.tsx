@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 import { ResponsiveArea } from './Area.styled';
-import useWindowSize from '../../../hooks/utils/useWindowSize';
+import useWindowSize from '@/hooks/utils/useWindowSize';
 
 interface AreaProps {
   children: ReactNode;

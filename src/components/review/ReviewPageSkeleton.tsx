@@ -1,5 +1,5 @@
 import { Skeleton } from 'pov-design-system';
-import { ReviewListContainer, Poster, CardFlex, ReviewCardContainer, CardContainer } from './ReviewCard.style';
+import { ReviewListContainer, Poster, CardFlex, ReviewCardContainer, CardContainer } from '@/components/review/ReviewCard.style';
 
 const ReviewPageSkeleton = () => {
   return (

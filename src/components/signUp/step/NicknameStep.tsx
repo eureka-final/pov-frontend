@@ -1,9 +1,10 @@
-import { useFormContext } from 'react-hook-form';
-import SignUpStep from './SignUpStep';
-import { Input, Button } from 'pov-design-system';
-import { SIGN_UP_HEADER_TEXTS } from '../../../constants/texts';
-import { ButtonContainer } from './SignUpStep.style';
 import { useEffect, useState } from 'react';
+import { useFormContext } from 'react-hook-form';
+import { Input, Button } from 'pov-design-system';
+
+import SignUpStep from '@/components/signUp/step/SignUpStep';
+import { ButtonContainer } from '@/components/signUp/step/SignUpStep.style';
+import { SIGN_UP_HEADER_TEXTS } from '@/constants/texts';
 
 interface NicknameStepProps {
   onNext: (nextStep: string) => void;

@@ -1,5 +1,5 @@
 import { Toast } from 'pov-design-system';
-import { useToastStore } from '../../../stores/useToastStore';
+import { useToastStore } from '@/stores/useToastStore';
 
 const ToastContainer = () => {
   const { toastList, removeToast } = useToastStore();

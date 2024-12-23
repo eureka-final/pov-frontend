@@ -1,8 +1,9 @@
 import React from 'react';
-import { Avatar } from 'pov-design-system';
-import { Container, HeaderName } from './Profile.style';
-import useWindowSize from '../../../hooks/utils/useWindowSize';
 import { useNavigate } from 'react-router-dom';
+import { Avatar } from 'pov-design-system';
+
+import { Container, HeaderName } from '@/components/common/Profile/Profile.style';
+import useWindowSize from '@/hooks/utils/useWindowSize';
 
 export interface UserProps {
   name: string;

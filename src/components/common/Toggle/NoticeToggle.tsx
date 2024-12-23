@@ -1,8 +1,10 @@
-import { SwitchToggle } from 'pov-design-system';
-import { ToggleWrapper, Label } from './Toggle.styles';
-import useNotificationPermission from '../../../hooks/utils/useNotificationPermission';
 import { useEffect } from 'react';
-import { useToast } from '../../../hooks/common/useToast';
+
+import { SwitchToggle } from 'pov-design-system';
+
+import { ToggleWrapper, Label } from '@/components/common/Toggle/Toggle.styles';
+import useNotificationPermission from '@/hooks/utils/useNotificationPermission';
+import { useToast } from '@/hooks/common/useToast';
 
 const NoticeToggle = () => {
   const { permission, handlePermissionChange, detectPermissionChanges } = useNotificationPermission();

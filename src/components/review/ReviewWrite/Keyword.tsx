@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { Heading, Badge } from 'pov-design-system';
-import { Container, Label, Keywords, BadgeContainer } from '../../styles/InputLabel';
+import { Container, Label, Keywords, BadgeContainer } from '@/components/styles/InputLabel';
 
 interface KeywordProps {
   keywords: { text: string; cancel: boolean }[];

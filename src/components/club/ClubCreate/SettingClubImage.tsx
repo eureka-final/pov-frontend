@@ -1,7 +1,7 @@
 import { useRef, useCallback } from 'react';
 import fileUpload from '/fileUpload.svg';
-import { HiddenInput, UploadButton, ImageBox, PreviewImage } from './SettingClubImage.style';
-import { axiosInstanceMulipart } from '../../../apis/axiosInstance';
+import { HiddenInput, UploadButton, ImageBox, PreviewImage } from '@/components/club/ClubCreate/SettingClubImage.style';
+import { axiosInstanceMulipart } from '@/apis/axiosInstance';
 
 interface ClubImageProps {
   onImgUrl: (value: string) => void;

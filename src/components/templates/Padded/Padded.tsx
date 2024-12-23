@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { Container } from './Padded.styled';
+import { Container } from '@/components/templates/Padded/Padded.styled';
 
 interface PaddedProps {
   children: ReactNode;

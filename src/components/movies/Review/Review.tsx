@@ -1,11 +1,13 @@
-import { useNavigate, useParams } from 'react-router-dom';
-import Profile from '../../common/Profile/Profile';
-import { Additionals, ReviewContainer, Contents, Wrapper } from './Review.styles';
-import { Body, Icon, Paragraph } from 'pov-design-system';
 import { useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import dompurify from 'dompurify';
-import { useLikeMutation, useDisLikeMutation } from '../../../hooks/queries/useLikeMutation';
-import { LikeContainer, Spoiler, SpoMore, ReadMore } from '../../../components/review/ReviewCard.style';
+
+import { Body, Icon, Paragraph } from 'pov-design-system';
+
+import { Additionals, ReviewContainer, Contents, Wrapper } from '@/components/movies/Review/Review.styles';
+import Profile from '@/components/common/Profile/Profile';
+import { useLikeMutation, useDisLikeMutation } from '@/hooks/queries/useLikeMutation';
+import { LikeContainer, Spoiler, SpoMore, ReadMore } from '@/components/review/ReviewCard.style';
 
 interface ReviewProps {
   reviewers: {

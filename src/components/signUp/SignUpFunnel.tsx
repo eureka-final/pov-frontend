@@ -1,11 +1,12 @@
 import React from 'react';
-import { FunnelProps, StepProps } from '../../hooks/funnel/useFunnel';
-import NicknameStep from './step/NicknameStep';
 import { useNavigate } from 'react-router-dom';
-import BirthStep from './step/BirthStep';
-import FavorGenreStep from './step/FavorGenreStep';
-import type { User } from '../../types/user';
-import OnSuccessStep from './step/OnSuccessStep';
+
+import NicknameStep from '@/components/signUp/step/NicknameStep';
+import BirthStep from '@/components/signUp/step/BirthStep';
+import FavorGenreStep from '@/components/signUp/step/FavorGenreStep';
+import OnSuccessStep from '@/components/signUp/step/OnSuccessStep';
+import { FunnelProps, StepProps } from '@/hooks/funnel/useFunnel';
+import type { User } from '@/types/user';
 
 interface SignUpFunnelProps {
   steps: string[];

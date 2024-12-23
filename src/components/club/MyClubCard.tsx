@@ -1,8 +1,10 @@
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import { CardContainer, CardFlex, ReviewCardContainer, TitleInfo, FlexWrapper } from './ClubCard.style';
+
 import { Input, Body, Icon, Heading, Logo, Badge } from 'pov-design-system';
-import { useMyClubsQuery } from '../../hooks/queries/useClubsQuery';
+
+import { CardContainer, CardFlex, ReviewCardContainer, TitleInfo, FlexWrapper } from '@components/club/ClubCard.style';
+import { useMyClubsQuery } from '@/hooks/queries/useClubsQuery';
 
 function MyClubCard() {
   const navigate = useNavigate();

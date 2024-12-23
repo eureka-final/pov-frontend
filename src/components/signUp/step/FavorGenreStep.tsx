@@ -1,11 +1,13 @@
-import { Controller, useFormContext } from 'react-hook-form';
-import SignUpStep from './SignUpStep';
-import { Button } from 'pov-design-system';
-import GenreSelect from '../../../components/common/GenreSelect/GenreSelect';
-import { SIGN_UP_HEADER_TEXTS } from '../../../constants/texts';
-import type { User } from '../../../types/user';
-import { ButtonContainer } from './SignUpStep.style';
 import { useState } from 'react';
+import { Controller, useFormContext } from 'react-hook-form';
+
+import { Button } from 'pov-design-system';
+
+import SignUpStep from '@/components/signUp/step/SignUpStep';
+import GenreSelect from '@/components/common/GenreSelect/GenreSelect';
+import { ButtonContainer } from '@/components/signUp/step/SignUpStep.style';
+import { SIGN_UP_HEADER_TEXTS } from '@/constants/texts';
+import type { User } from '@/types/user';
 
 interface FavorGenreStepProps {
   onSubmit: (data: User) => Promise<void>;

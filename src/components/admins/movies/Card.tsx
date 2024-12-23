@@ -1,7 +1,9 @@
-import ImageLayer from '../../styles/ImageLayer';
+import { useNavigate } from 'react-router-dom';
+
 import styled from '@emotion/styled';
 import { Heading, Body } from 'pov-design-system';
-import { useNavigate } from 'react-router-dom';
+
+import ImageLayer from '@/components/styles/ImageLayer';
 
 interface CardProps {
   item: {
